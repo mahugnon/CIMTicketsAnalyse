@@ -7,6 +7,15 @@ Class {
 	#category : #CIMTicketsDataModel
 }
 
+{ #category : #'as yet unclassified' }
+Tbl >> detectTblFrom: file [
+	^ (self class subclasses
+		select: [ :cl | 
+			cl name asLowercase
+				= (file basename asLowercase copyReplaceAll: '.csv' with: '') ])
+		first
+]
+
 { #category : #utility }
 Tbl >> filFromCSVFile: aFile [
 	(CSVParser parseFileWithHeader: aFile)
@@ -16,6 +25,12 @@ Tbl >> filFromCSVFile: aFile [
 { #category : #initialization }
 Tbl >> initialize [
 	rows := OrderedCollection new
+]
+
+{ #category : #'as yet unclassified' }
+Tbl >> loadTblFromFolder: aFolder [
+	^ aFolder asFileReference visibleFiles
+		collect: [ :file | (self detectTblFrom: file) new filFromCSVFile: file ]
 ]
 
 { #category : #utility }
