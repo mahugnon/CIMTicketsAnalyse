@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_type_correction',
 	#superclass : #Tbl,
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #utility }

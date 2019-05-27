@@ -9,7 +9,7 @@ Class {
 		'version_etat',
 		'version_date_arret'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }

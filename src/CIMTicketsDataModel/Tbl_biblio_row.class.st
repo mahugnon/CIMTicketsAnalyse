@@ -1,3 +1,14 @@
+"
+biblio_id biblio_nom 
+biblio_old 
+biblio_new 
+biblio_date 
+biblio_niveau 
+biblio_modif_id: Foreign key on the Tbl_ft_row
+biblio_version_id: Foreign key on Tbl_version_row 
+biblio_old_str 
+biblio_new_str
+"
 Class {
 	#name : #'Tbl_biblio_row',
 	#superclass : #'Tbl_row',
@@ -13,7 +24,7 @@ Class {
 		'biblio_old_str',
 		'biblio_new_str'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }

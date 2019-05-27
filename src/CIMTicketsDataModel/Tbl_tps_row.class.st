@@ -12,7 +12,7 @@ Class {
 		'tps_test_id',
 		'tps_type'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }

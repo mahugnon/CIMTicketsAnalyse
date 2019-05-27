@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'rows'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -36,4 +36,14 @@ Tbl >> loadTblFromFolder: aFolder [
 { #category : #utility }
 Tbl >> rowClass [
 	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+Tbl >> rows [
+	^ rows
+]
+
+{ #category : #accessing }
+Tbl >> rows: anObject [
+	rows := anObject
 ]

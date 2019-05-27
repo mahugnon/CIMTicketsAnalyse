@@ -27,20 +27,14 @@ Class {
 		'dev_tps_estim_dev',
 		'dev_tps_rest_dev'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #initialization }
 Tbl_dev_row >> convertTpsTotalToDuration [
 	dev_tps_total ifNil: [ ^ self ].
-	(dev_tps_total matchesRegex: '//.*')
-		ifTrue: [ dev_tps_total := self convertDoubleSlashFormat: dev_tps_total ]
-		ifFalse: [ (dev_tps_total asLowercase matchesRegex: '.*h.*')
-				ifTrue: [ dev_tps_total := self convertHourMinuteFormat: dev_tps_total ]
-				ifFalse: [ (dev_tps_total lowercase matchesRegex: '.*heure.*')
-						ifTrue: [ dev_tps_total := self convertHourFormat: dev_tps_total ]
-						ifFalse: [ (dev_tps_total lowercase matchesRegex: '.*min.*')
-								ifTrue: [ dev_tps_total := self convertMinuteFormat: dev_tps_total ] ] ] ]
+	dev_tps_total := AbstractCIMDateFormatConverter
+		convert: dev_tps_total
 ]
 
 { #category : #accessing }

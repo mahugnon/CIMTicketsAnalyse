@@ -49,7 +49,7 @@ Class {
 		'ft_sous_categorie_id',
 		'ft_tnr'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }
