@@ -511,3 +511,10 @@ Tbl_ft_row >> ft_version_souhait [
 Tbl_ft_row >> ft_version_souhait: anObject [
 	ft_version_souhait := anObject
 ]
+
+{ #category : #initialization }
+Tbl_ft_row >> initializeWith: aDictionary [
+	super initializeWith: aDictionary.
+	ft_datecrea ifNil: [ ^ self ].
+	ft_datecrea := ft_datecrea asDate
+]

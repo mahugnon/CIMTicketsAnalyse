@@ -6,5 +6,5 @@ Class {
 
 { #category : #run }
 QueryDurationBetweenOpenAndCloseTicket >> runOn: tickets with: devRows [
-	tickets collect: [ :ticket |  ]
+	tickets collect: [ :ticket | ticket  ]
 ]
