@@ -30,6 +30,19 @@ Class {
 	#category : #CIMTicketsDataModel
 }
 
+{ #category : #initialization }
+Tbl_dev_row >> convertTpsTotalToDuration [
+	dev_tps_total ifNil: [ ^ self ].
+	(dev_tps_total matchesRegex: '//.*')
+		ifTrue: [ dev_tps_total := self convertDoubleSlashFormat: dev_tps_total ]
+		ifFalse: [ (dev_tps_total asLowercase matchesRegex: '.*h.*')
+				ifTrue: [ dev_tps_total := self convertHourMinuteFormat: dev_tps_total ]
+				ifFalse: [ (dev_tps_total lowercase matchesRegex: '.*heure.*')
+						ifTrue: [ dev_tps_total := self convertHourFormat: dev_tps_total ]
+						ifFalse: [ (dev_tps_total lowercase matchesRegex: '.*min.*')
+								ifTrue: [ dev_tps_total := self convertMinuteFormat: dev_tps_total ] ] ] ]
+]
+
 { #category : #accessing }
 Tbl_dev_row >> dev_cim_id [
 	^ dev_cim_id
@@ -268,4 +281,10 @@ Tbl_dev_row >> dev_valid_greg [
 { #category : #accessing }
 Tbl_dev_row >> dev_valid_greg: anObject [
 	dev_valid_greg := anObject
+]
+
+{ #category : #initialization }
+Tbl_dev_row >> initializeWith: aDictionary [
+	super initializeWith: aDictionary.
+	self convertTpsTotalToDuration
 ]
