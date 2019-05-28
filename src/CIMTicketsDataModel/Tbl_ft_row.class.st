@@ -47,10 +47,21 @@ Class {
 		'ft_date_transfert',
 		'ft_createur',
 		'ft_sous_categorie_id',
-		'ft_tnr'
+		'ft_tnr',
+		'dev'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
+
+{ #category : #accessing }
+Tbl_ft_row >> dev [
+	^ dev
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> dev: anObject [
+	dev := anObject
+]
 
 { #category : #accessing }
 Tbl_ft_row >> ft_attinfos [
