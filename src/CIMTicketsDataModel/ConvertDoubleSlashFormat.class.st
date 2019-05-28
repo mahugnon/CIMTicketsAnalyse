@@ -13,7 +13,7 @@ ConvertDoubleSlashFormat class >> supportedFormat [
 ConvertDoubleSlashFormat >> convert: aString [
 	| result |
 	result := '//' split: aString.
-	^ ((result at: 2) asInteger * 28800
+	^ ((result at: 2) asInteger * 27000
 		+ ((result at: 3) asInteger * 3600)
 		+ ((result at: 4) asInteger * 60)) asDuration
 ]

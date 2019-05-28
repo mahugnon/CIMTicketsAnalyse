@@ -12,7 +12,8 @@ AbstractCIMDateFormatConverter class >> convert: aString [
 { #category : #'as yet unclassified' }
 AbstractCIMDateFormatConverter class >> selectConverterFor: aString [
 	^ (self subclasses
-		select: [ :c | aString matchesRegex: c supportedFormat ]) first new
+		detect: [ :c | aString asLowercase matchesRegex: c supportedFormat ])
+		new
 ]
 
 { #category : #utility }
