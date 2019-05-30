@@ -19,8 +19,8 @@ Tbl_semaine_dev_row >> semaine_annee [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_annee: anObject [
-	semaine_annee := anObject
+Tbl_semaine_dev_row >> semaine_annee: arg1 [
+	semaine_annee := arg1
 ]
 
 { #category : #accessing }
@@ -29,8 +29,8 @@ Tbl_semaine_dev_row >> semaine_cpt [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_cpt: anObject [
-	semaine_cpt := anObject
+Tbl_semaine_dev_row >> semaine_cpt: arg1 [
+	semaine_cpt := arg1
 ]
 
 { #category : #accessing }
@@ -39,8 +39,8 @@ Tbl_semaine_dev_row >> semaine_debut [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_debut: anObject [
-	semaine_debut := anObject
+Tbl_semaine_dev_row >> semaine_debut: arg1 [
+	semaine_debut := arg1
 ]
 
 { #category : #accessing }
@@ -49,8 +49,8 @@ Tbl_semaine_dev_row >> semaine_fin [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_fin: anObject [
-	semaine_fin := anObject
+Tbl_semaine_dev_row >> semaine_fin: arg1 [
+	semaine_fin := arg1
 ]
 
 { #category : #accessing }
@@ -59,8 +59,8 @@ Tbl_semaine_dev_row >> semaine_id [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_id: anObject [
-	semaine_id := anObject
+Tbl_semaine_dev_row >> semaine_id: arg1 [
+	semaine_id := arg1
 ]
 
 { #category : #accessing }
@@ -69,8 +69,8 @@ Tbl_semaine_dev_row >> semaine_libelle [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_libelle: anObject [
-	semaine_libelle := anObject
+Tbl_semaine_dev_row >> semaine_libelle: arg1 [
+	semaine_libelle := arg1
 ]
 
 { #category : #accessing }
@@ -79,6 +79,6 @@ Tbl_semaine_dev_row >> semaine_num [
 ]
 
 { #category : #accessing }
-Tbl_semaine_dev_row >> semaine_num: anObject [
-	semaine_num := anObject
+Tbl_semaine_dev_row >> semaine_num: arg1 [
+	semaine_num := arg1
 ]

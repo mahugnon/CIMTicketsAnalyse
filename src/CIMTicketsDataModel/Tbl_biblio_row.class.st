@@ -1,13 +1,5 @@
 "
-biblio_id biblio_nom 
-biblio_old 
-biblio_new 
-biblio_date 
-biblio_niveau 
-biblio_modif_id: Foreign key on the Tbl_ft_row
-biblio_version_id: Foreign key on Tbl_version_row 
-biblio_old_str 
-biblio_new_str
+03'
 "
 Class {
 	#name : #'Tbl_biblio_row',
@@ -33,8 +25,8 @@ Tbl_biblio_row >> biblio_date [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_date: anObject [
-	biblio_date := anObject
+Tbl_biblio_row >> biblio_date: arg1 [
+	biblio_date := arg1
 ]
 
 { #category : #accessing }
@@ -43,8 +35,8 @@ Tbl_biblio_row >> biblio_id [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_id: anObject [
-	biblio_id := anObject
+Tbl_biblio_row >> biblio_id: arg1 [
+	biblio_id := arg1
 ]
 
 { #category : #accessing }
@@ -53,8 +45,8 @@ Tbl_biblio_row >> biblio_modif_id [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_modif_id: anObject [
-	biblio_modif_id := anObject
+Tbl_biblio_row >> biblio_modif_id: arg1 [
+	biblio_modif_id := arg1
 ]
 
 { #category : #accessing }
@@ -63,8 +55,8 @@ Tbl_biblio_row >> biblio_new [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_new: anObject [
-	biblio_new := anObject
+Tbl_biblio_row >> biblio_new: arg1 [
+	biblio_new := arg1
 ]
 
 { #category : #accessing }
@@ -73,8 +65,8 @@ Tbl_biblio_row >> biblio_new_str [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_new_str: anObject [
-	biblio_new_str := anObject
+Tbl_biblio_row >> biblio_new_str: arg1 [
+	biblio_new_str := arg1
 ]
 
 { #category : #accessing }
@@ -83,8 +75,8 @@ Tbl_biblio_row >> biblio_niveau [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_niveau: anObject [
-	biblio_niveau := anObject
+Tbl_biblio_row >> biblio_niveau: arg1 [
+	biblio_niveau := arg1
 ]
 
 { #category : #accessing }
@@ -93,8 +85,8 @@ Tbl_biblio_row >> biblio_nom [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_nom: anObject [
-	biblio_nom := anObject
+Tbl_biblio_row >> biblio_nom: arg1 [
+	biblio_nom := arg1
 ]
 
 { #category : #accessing }
@@ -103,8 +95,8 @@ Tbl_biblio_row >> biblio_old [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_old: anObject [
-	biblio_old := anObject
+Tbl_biblio_row >> biblio_old: arg1 [
+	biblio_old := arg1
 ]
 
 { #category : #accessing }
@@ -113,8 +105,8 @@ Tbl_biblio_row >> biblio_old_str [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_old_str: anObject [
-	biblio_old_str := anObject
+Tbl_biblio_row >> biblio_old_str: arg1 [
+	biblio_old_str := arg1
 ]
 
 { #category : #accessing }
@@ -123,6 +115,6 @@ Tbl_biblio_row >> biblio_version_id [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> biblio_version_id: anObject [
-	biblio_version_id := anObject
+Tbl_biblio_row >> biblio_version_id: arg1 [
+	biblio_version_id := arg1
 ]

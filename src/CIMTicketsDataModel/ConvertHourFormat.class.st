@@ -10,10 +10,10 @@ ConvertHourFormat class >> supportedFormat [
 ]
 
 { #category : #converting }
-ConvertHourFormat >> convert: aString [
-	| result |
-	(aString matchesRegex: '.*h')
-		ifTrue: [ ^ (aString  first asInteger * 3600) asDuration ].
-	result := ' ' split: aString.
-	^ (result first asInteger * 3600) asDuration
+ConvertHourFormat >> convert: arg1 [
+	| tmp1 |
+	(arg1 matchesRegex: '.*h')
+		ifTrue: [ ^ (arg1 first asInteger * 3600) asDuration ].
+	tmp1 := ' ' split: arg1.
+	^ (tmp1 first asInteger * 3600) asDuration
 ]

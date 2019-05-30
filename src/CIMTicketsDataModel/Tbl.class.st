@@ -4,29 +4,43 @@ Class {
 	#instVars : [
 		'rows'
 	],
+	#classInstVars : [
+		'tables'
+	],
 	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }
-Tbl class >> script [ 
-"an Array(a Tbl_biblio a Tbl_cim a Tbl_cim_service a Tbl_dev a Tbl_ft a Tbl_modif a Tbl_semaine_dev a Tbl_tps a Tbl_type_correction a Tbl_version)"
+Tbl class >> script [
+	self fourth rows
+		do: [ :arg1 | 
+			arg1
+				dev_id: (self fifth rows detect: [ :arg2 | arg2 ft_dev_id = arg1 dev_id ]) ]
+]
 
-self fourth rows do: [ :rdev | rdev dev_id: (self fifth rows detect: [:rft | rft ft_dev_id = rdev dev_id])]
+{ #category : #accessing }
+Tbl class >> tables [
+	^ tables
+]
+
+{ #category : #accessing }
+Tbl class >> tables: anObject [
+	tables := anObject
 ]
 
 { #category : #'as yet unclassified' }
-Tbl >> detectTblFrom: file [
+Tbl >> detectTblFrom: arg1 [
 	^ (self class subclasses
-		select: [ :cl | 
-			cl name asLowercase
-				= (file basename asLowercase copyReplaceAll: '.csv' with: '') ])
+		select: [ :arg2 | 
+			arg2 name asLowercase
+				= (arg1 basename asLowercase copyReplaceAll: '.csv' with: '') ])
 		first
 ]
 
 { #category : #utility }
-Tbl >> filFromCSVFile: aFile [
-	(CSVParser parseFileWithHeader: aFile)
-		do: [ :each | rows add: (self rowClass new initializeWith: each) ]
+Tbl >> filFromCSVFile: arg1 [
+	(CSVParser parseFileWithHeader: arg1)
+		do: [ :arg2 | rows add: (self rowClass new initializeWith: arg2) ]
 ]
 
 { #category : #initialization }
@@ -35,9 +49,9 @@ Tbl >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-Tbl >> loadTblFromFolder: aFolder [
-	^ aFolder asFileReference visibleFiles
-		collect: [ :file | (self detectTblFrom: file) new filFromCSVFile: file ]
+Tbl >> loadTblFromFolder: arg1 [
+	^ arg1 asFileReference visibleFiles
+		collect: [ :arg2 | (self detectTblFrom: arg2) new filFromCSVFile: arg2 ]
 ]
 
 { #category : #utility }
@@ -51,6 +65,6 @@ Tbl >> rows [
 ]
 
 { #category : #accessing }
-Tbl >> rows: anObject [
-	rows := anObject
+Tbl >> rows: arg1 [
+	rows := arg1
 ]

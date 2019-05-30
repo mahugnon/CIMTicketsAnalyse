@@ -59,8 +59,8 @@ Tbl_ft_row >> dev [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> dev: anObject [
-	dev := anObject
+Tbl_ft_row >> dev: arg1 [
+	dev := arg1
 ]
 
 { #category : #accessing }
@@ -69,8 +69,8 @@ Tbl_ft_row >> ft_attinfos [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_attinfos: anObject [
-	ft_attinfos := anObject
+Tbl_ft_row >> ft_attinfos: arg1 [
+	ft_attinfos := arg1
 ]
 
 { #category : #accessing }
@@ -79,8 +79,8 @@ Tbl_ft_row >> ft_cc [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_cc: anObject [
-	ft_cc := anObject
+Tbl_ft_row >> ft_cc: arg1 [
+	ft_cc := arg1
 ]
 
 { #category : #accessing }
@@ -89,8 +89,8 @@ Tbl_ft_row >> ft_cim_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_cim_id: anObject [
-	ft_cim_id := anObject
+Tbl_ft_row >> ft_cim_id: arg1 [
+	ft_cim_id := arg1
 ]
 
 { #category : #accessing }
@@ -99,8 +99,8 @@ Tbl_ft_row >> ft_clt_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_clt_id: anObject [
-	ft_clt_id := anObject
+Tbl_ft_row >> ft_clt_id: arg1 [
+	ft_clt_id := arg1
 ]
 
 { #category : #accessing }
@@ -109,8 +109,8 @@ Tbl_ft_row >> ft_compta [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_compta: anObject [
-	ft_compta := anObject
+Tbl_ft_row >> ft_compta: arg1 [
+	ft_compta := arg1
 ]
 
 { #category : #accessing }
@@ -119,8 +119,8 @@ Tbl_ft_row >> ft_constat [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_constat: anObject [
-	ft_constat := anObject
+Tbl_ft_row >> ft_constat: arg1 [
+	ft_constat := arg1
 ]
 
 { #category : #accessing }
@@ -129,8 +129,8 @@ Tbl_ft_row >> ft_contexte [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_contexte: anObject [
-	ft_contexte := anObject
+Tbl_ft_row >> ft_contexte: arg1 [
+	ft_contexte := arg1
 ]
 
 { #category : #accessing }
@@ -139,8 +139,8 @@ Tbl_ft_row >> ft_createur [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_createur: anObject [
-	ft_createur := anObject
+Tbl_ft_row >> ft_createur: arg1 [
+	ft_createur := arg1
 ]
 
 { #category : #accessing }
@@ -149,8 +149,8 @@ Tbl_ft_row >> ft_date_transfert [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_date_transfert: anObject [
-	ft_date_transfert := anObject
+Tbl_ft_row >> ft_date_transfert: arg1 [
+	ft_date_transfert := arg1
 ]
 
 { #category : #accessing }
@@ -159,8 +159,8 @@ Tbl_ft_row >> ft_datecrea [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_datecrea: anObject [
-	ft_datecrea := anObject
+Tbl_ft_row >> ft_datecrea: arg1 [
+	ft_datecrea := arg1
 ]
 
 { #category : #accessing }
@@ -169,8 +169,8 @@ Tbl_ft_row >> ft_ddedevis [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_ddedevis: anObject [
-	ft_ddedevis := anObject
+Tbl_ft_row >> ft_ddedevis: arg1 [
+	ft_ddedevis := arg1
 ]
 
 { #category : #accessing }
@@ -179,8 +179,8 @@ Tbl_ft_row >> ft_delaicommentaire [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_delaicommentaire: anObject [
-	ft_delaicommentaire := anObject
+Tbl_ft_row >> ft_delaicommentaire: arg1 [
+	ft_delaicommentaire := arg1
 ]
 
 { #category : #accessing }
@@ -189,8 +189,8 @@ Tbl_ft_row >> ft_delaiexpir [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_delaiexpir: anObject [
-	ft_delaiexpir := anObject
+Tbl_ft_row >> ft_delaiexpir: arg1 [
+	ft_delaiexpir := arg1
 ]
 
 { #category : #accessing }
@@ -199,8 +199,8 @@ Tbl_ft_row >> ft_delaiprevu [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_delaiprevu: anObject [
-	ft_delaiprevu := anObject
+Tbl_ft_row >> ft_delaiprevu: arg1 [
+	ft_delaiprevu := arg1
 ]
 
 { #category : #accessing }
@@ -209,8 +209,8 @@ Tbl_ft_row >> ft_delaireel [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_delaireel: anObject [
-	ft_delaireel := anObject
+Tbl_ft_row >> ft_delaireel: arg1 [
+	ft_delaireel := arg1
 ]
 
 { #category : #accessing }
@@ -219,8 +219,8 @@ Tbl_ft_row >> ft_delaisouhait [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_delaisouhait: anObject [
-	ft_delaisouhait := anObject
+Tbl_ft_row >> ft_delaisouhait: arg1 [
+	ft_delaisouhait := arg1
 ]
 
 { #category : #accessing }
@@ -229,8 +229,8 @@ Tbl_ft_row >> ft_deplacement [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_deplacement: anObject [
-	ft_deplacement := anObject
+Tbl_ft_row >> ft_deplacement: arg1 [
+	ft_deplacement := arg1
 ]
 
 { #category : #accessing }
@@ -239,8 +239,8 @@ Tbl_ft_row >> ft_dev_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_dev_id: anObject [
-	ft_dev_id := anObject
+Tbl_ft_row >> ft_dev_id: arg1 [
+	ft_dev_id := arg1
 ]
 
 { #category : #accessing }
@@ -249,8 +249,8 @@ Tbl_ft_row >> ft_devis_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_devis_id: anObject [
-	ft_devis_id := anObject
+Tbl_ft_row >> ft_devis_id: arg1 [
+	ft_devis_id := arg1
 ]
 
 { #category : #accessing }
@@ -259,8 +259,8 @@ Tbl_ft_row >> ft_dossier_list [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_dossier_list: anObject [
-	ft_dossier_list := anObject
+Tbl_ft_row >> ft_dossier_list: arg1 [
+	ft_dossier_list := arg1
 ]
 
 { #category : #accessing }
@@ -269,8 +269,8 @@ Tbl_ft_row >> ft_etat [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_etat: anObject [
-	ft_etat := anObject
+Tbl_ft_row >> ft_etat: arg1 [
+	ft_etat := arg1
 ]
 
 { #category : #accessing }
@@ -279,8 +279,8 @@ Tbl_ft_row >> ft_etatcommentaire [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_etatcommentaire: anObject [
-	ft_etatcommentaire := anObject
+Tbl_ft_row >> ft_etatcommentaire: arg1 [
+	ft_etatcommentaire := arg1
 ]
 
 { #category : #accessing }
@@ -289,8 +289,8 @@ Tbl_ft_row >> ft_facture_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_facture_id: anObject [
-	ft_facture_id := anObject
+Tbl_ft_row >> ft_facture_id: arg1 [
+	ft_facture_id := arg1
 ]
 
 { #category : #accessing }
@@ -299,8 +299,8 @@ Tbl_ft_row >> ft_hist_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_hist_id: anObject [
-	ft_hist_id := anObject
+Tbl_ft_row >> ft_hist_id: arg1 [
+	ft_hist_id := arg1
 ]
 
 { #category : #accessing }
@@ -309,8 +309,8 @@ Tbl_ft_row >> ft_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_id: anObject [
-	ft_id := anObject
+Tbl_ft_row >> ft_id: arg1 [
+	ft_id := arg1
 ]
 
 { #category : #accessing }
@@ -319,8 +319,8 @@ Tbl_ft_row >> ft_lienft_list [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_lienft_list: anObject [
-	ft_lienft_list := anObject
+Tbl_ft_row >> ft_lienft_list: arg1 [
+	ft_lienft_list := arg1
 ]
 
 { #category : #accessing }
@@ -329,8 +329,8 @@ Tbl_ft_row >> ft_modif_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_modif_id: anObject [
-	ft_modif_id := anObject
+Tbl_ft_row >> ft_modif_id: arg1 [
+	ft_modif_id := arg1
 ]
 
 { #category : #accessing }
@@ -339,8 +339,8 @@ Tbl_ft_row >> ft_nbretour [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_nbretour: anObject [
-	ft_nbretour := anObject
+Tbl_ft_row >> ft_nbretour: arg1 [
+	ft_nbretour := arg1
 ]
 
 { #category : #accessing }
@@ -349,8 +349,8 @@ Tbl_ft_row >> ft_nbretour_test [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_nbretour_test: anObject [
-	ft_nbretour_test := anObject
+Tbl_ft_row >> ft_nbretour_test: arg1 [
+	ft_nbretour_test := arg1
 ]
 
 { #category : #accessing }
@@ -359,8 +359,8 @@ Tbl_ft_row >> ft_nonlu [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_nonlu: anObject [
-	ft_nonlu := anObject
+Tbl_ft_row >> ft_nonlu: arg1 [
+	ft_nonlu := arg1
 ]
 
 { #category : #accessing }
@@ -369,8 +369,8 @@ Tbl_ft_row >> ft_numordre [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_numordre: anObject [
-	ft_numordre := anObject
+Tbl_ft_row >> ft_numordre: arg1 [
+	ft_numordre := arg1
 ]
 
 { #category : #accessing }
@@ -379,8 +379,8 @@ Tbl_ft_row >> ft_objet [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_objet: anObject [
-	ft_objet := anObject
+Tbl_ft_row >> ft_objet: arg1 [
+	ft_objet := arg1
 ]
 
 { #category : #accessing }
@@ -389,8 +389,8 @@ Tbl_ft_row >> ft_priorite [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_priorite: anObject [
-	ft_priorite := anObject
+Tbl_ft_row >> ft_priorite: arg1 [
+	ft_priorite := arg1
 ]
 
 { #category : #accessing }
@@ -399,8 +399,8 @@ Tbl_ft_row >> ft_propo [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_propo: anObject [
-	ft_propo := anObject
+Tbl_ft_row >> ft_propo: arg1 [
+	ft_propo := arg1
 ]
 
 { #category : #accessing }
@@ -409,8 +409,8 @@ Tbl_ft_row >> ft_refclt [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_refclt: anObject [
-	ft_refclt := anObject
+Tbl_ft_row >> ft_refclt: arg1 [
+	ft_refclt := arg1
 ]
 
 { #category : #accessing }
@@ -419,8 +419,8 @@ Tbl_ft_row >> ft_resultsouhait [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_resultsouhait: anObject [
-	ft_resultsouhait := anObject
+Tbl_ft_row >> ft_resultsouhait: arg1 [
+	ft_resultsouhait := arg1
 ]
 
 { #category : #accessing }
@@ -429,8 +429,8 @@ Tbl_ft_row >> ft_sous_categorie_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_sous_categorie_id: anObject [
-	ft_sous_categorie_id := anObject
+Tbl_ft_row >> ft_sous_categorie_id: arg1 [
+	ft_sous_categorie_id := arg1
 ]
 
 { #category : #accessing }
@@ -439,8 +439,8 @@ Tbl_ft_row >> ft_test [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_test: anObject [
-	ft_test := anObject
+Tbl_ft_row >> ft_test: arg1 [
+	ft_test := arg1
 ]
 
 { #category : #accessing }
@@ -449,8 +449,8 @@ Tbl_ft_row >> ft_test_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_test_id: anObject [
-	ft_test_id := anObject
+Tbl_ft_row >> ft_test_id: arg1 [
+	ft_test_id := arg1
 ]
 
 { #category : #accessing }
@@ -459,8 +459,8 @@ Tbl_ft_row >> ft_theme_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_theme_id: anObject [
-	ft_theme_id := anObject
+Tbl_ft_row >> ft_theme_id: arg1 [
+	ft_theme_id := arg1
 ]
 
 { #category : #accessing }
@@ -469,8 +469,8 @@ Tbl_ft_row >> ft_tnr [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_tnr: anObject [
-	ft_tnr := anObject
+Tbl_ft_row >> ft_tnr: arg1 [
+	ft_tnr := arg1
 ]
 
 { #category : #accessing }
@@ -479,8 +479,8 @@ Tbl_ft_row >> ft_typcorr_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_typcorr_id: anObject [
-	ft_typcorr_id := anObject
+Tbl_ft_row >> ft_typcorr_id: arg1 [
+	ft_typcorr_id := arg1
 ]
 
 { #category : #accessing }
@@ -489,8 +489,8 @@ Tbl_ft_row >> ft_type [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_type: anObject [
-	ft_type := anObject
+Tbl_ft_row >> ft_type: arg1 [
+	ft_type := arg1
 ]
 
 { #category : #accessing }
@@ -499,8 +499,8 @@ Tbl_ft_row >> ft_version_id [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_version_id: anObject [
-	ft_version_id := anObject
+Tbl_ft_row >> ft_version_id: arg1 [
+	ft_version_id := arg1
 ]
 
 { #category : #accessing }
@@ -509,8 +509,8 @@ Tbl_ft_row >> ft_version_news [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_version_news: anObject [
-	ft_version_news := anObject
+Tbl_ft_row >> ft_version_news: arg1 [
+	ft_version_news := arg1
 ]
 
 { #category : #accessing }
@@ -519,13 +519,13 @@ Tbl_ft_row >> ft_version_souhait [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> ft_version_souhait: anObject [
-	ft_version_souhait := anObject
+Tbl_ft_row >> ft_version_souhait: arg1 [
+	ft_version_souhait := arg1
 ]
 
 { #category : #initialization }
-Tbl_ft_row >> initializeWith: aDictionary [
-	super initializeWith: aDictionary.
+Tbl_ft_row >> initializeWith: arg1 [
+	super initializeWith: arg1.
 	ft_datecrea ifNil: [ ^ self ].
 	ft_datecrea := ft_datecrea asDate
 ]

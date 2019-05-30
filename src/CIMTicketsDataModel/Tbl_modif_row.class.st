@@ -17,8 +17,8 @@ Tbl_modif_row >> modif_dispo [
 ]
 
 { #category : #accessing }
-Tbl_modif_row >> modif_dispo: anObject [
-	modif_dispo := anObject
+Tbl_modif_row >> modif_dispo: arg1 [
+	modif_dispo := arg1
 ]
 
 { #category : #accessing }
@@ -27,8 +27,8 @@ Tbl_modif_row >> modif_id [
 ]
 
 { #category : #accessing }
-Tbl_modif_row >> modif_id: anObject [
-	modif_id := anObject
+Tbl_modif_row >> modif_id: arg1 [
+	modif_id := arg1
 ]
 
 { #category : #accessing }
@@ -37,8 +37,8 @@ Tbl_modif_row >> modif_integration [
 ]
 
 { #category : #accessing }
-Tbl_modif_row >> modif_integration: anObject [
-	modif_integration := anObject
+Tbl_modif_row >> modif_integration: arg1 [
+	modif_integration := arg1
 ]
 
 { #category : #accessing }
@@ -47,8 +47,8 @@ Tbl_modif_row >> modif_nom [
 ]
 
 { #category : #accessing }
-Tbl_modif_row >> modif_nom: anObject [
-	modif_nom := anObject
+Tbl_modif_row >> modif_nom: arg1 [
+	modif_nom := arg1
 ]
 
 { #category : #accessing }
@@ -57,6 +57,6 @@ Tbl_modif_row >> modif_version_id [
 ]
 
 { #category : #accessing }
-Tbl_modif_row >> modif_version_id: anObject [
-	modif_version_id := anObject
+Tbl_modif_row >> modif_version_id: arg1 [
+	modif_version_id := arg1
 ]

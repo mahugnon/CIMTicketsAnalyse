@@ -10,9 +10,9 @@ ConvertHourMinuteFormat class >> supportedFormat [
 ]
 
 { #category : #converting }
-ConvertHourMinuteFormat >> convert: aString [
-	| result |
-	result := 'H' split: aString.
-	^ (result first asInteger * 3600 + (result second asInteger * 60))
+ConvertHourMinuteFormat >> convert: arg1 [
+	| tmp1 |
+	tmp1 := 'H' split: arg1.
+	^ (tmp1 first asInteger * 3600 + (tmp1 second asInteger * 60))
 		asDuration
 ]

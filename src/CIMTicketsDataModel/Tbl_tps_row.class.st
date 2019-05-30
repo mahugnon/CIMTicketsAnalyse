@@ -21,8 +21,8 @@ Tbl_tps_row >> tps_cim_id [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_cim_id: anObject [
-	tps_cim_id := anObject
+Tbl_tps_row >> tps_cim_id: arg1 [
+	tps_cim_id := arg1
 ]
 
 { #category : #accessing }
@@ -31,8 +31,8 @@ Tbl_tps_row >> tps_commentaire [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_commentaire: anObject [
-	tps_commentaire := anObject
+Tbl_tps_row >> tps_commentaire: arg1 [
+	tps_commentaire := arg1
 ]
 
 { #category : #accessing }
@@ -41,8 +41,8 @@ Tbl_tps_row >> tps_date [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_date: anObject [
-	tps_date := anObject
+Tbl_tps_row >> tps_date: arg1 [
+	tps_date := arg1
 ]
 
 { #category : #accessing }
@@ -51,8 +51,8 @@ Tbl_tps_row >> tps_dev_id [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_dev_id: anObject [
-	tps_dev_id := anObject
+Tbl_tps_row >> tps_dev_id: arg1 [
+	tps_dev_id := arg1
 ]
 
 { #category : #accessing }
@@ -61,8 +61,8 @@ Tbl_tps_row >> tps_id [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_id: anObject [
-	tps_id := anObject
+Tbl_tps_row >> tps_id: arg1 [
+	tps_id := arg1
 ]
 
 { #category : #accessing }
@@ -71,8 +71,8 @@ Tbl_tps_row >> tps_order [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_order: anObject [
-	tps_order := anObject
+Tbl_tps_row >> tps_order: arg1 [
+	tps_order := arg1
 ]
 
 { #category : #accessing }
@@ -81,8 +81,8 @@ Tbl_tps_row >> tps_temps [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_temps: anObject [
-	tps_temps := anObject
+Tbl_tps_row >> tps_temps: arg1 [
+	tps_temps := arg1
 ]
 
 { #category : #accessing }
@@ -91,8 +91,8 @@ Tbl_tps_row >> tps_test_id [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_test_id: anObject [
-	tps_test_id := anObject
+Tbl_tps_row >> tps_test_id: arg1 [
+	tps_test_id := arg1
 ]
 
 { #category : #accessing }
@@ -101,6 +101,6 @@ Tbl_tps_row >> tps_type [
 ]
 
 { #category : #accessing }
-Tbl_tps_row >> tps_type: anObject [
-	tps_type := anObject
+Tbl_tps_row >> tps_type: arg1 [
+	tps_type := arg1
 ]

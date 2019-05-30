@@ -18,8 +18,8 @@ Tbl_cim_service_row >> base_jour [
 ]
 
 { #category : #accessing }
-Tbl_cim_service_row >> base_jour: anObject [
-	base_jour := anObject
+Tbl_cim_service_row >> base_jour: arg1 [
+	base_jour := arg1
 ]
 
 { #category : #accessing }
@@ -28,8 +28,8 @@ Tbl_cim_service_row >> cim_equipe [
 ]
 
 { #category : #accessing }
-Tbl_cim_service_row >> cim_equipe: anObject [
-	cim_equipe := anObject
+Tbl_cim_service_row >> cim_equipe: arg1 [
+	cim_equipe := arg1
 ]
 
 { #category : #accessing }
@@ -38,8 +38,8 @@ Tbl_cim_service_row >> cim_id [
 ]
 
 { #category : #accessing }
-Tbl_cim_service_row >> cim_id: anObject [
-	cim_id := anObject
+Tbl_cim_service_row >> cim_id: arg1 [
+	cim_id := arg1
 ]
 
 { #category : #accessing }
@@ -48,8 +48,8 @@ Tbl_cim_service_row >> cim_libelle [
 ]
 
 { #category : #accessing }
-Tbl_cim_service_row >> cim_libelle: anObject [
-	cim_libelle := anObject
+Tbl_cim_service_row >> cim_libelle: arg1 [
+	cim_libelle := arg1
 ]
 
 { #category : #accessing }
@@ -58,8 +58,8 @@ Tbl_cim_service_row >> cim_service [
 ]
 
 { #category : #accessing }
-Tbl_cim_service_row >> cim_service: anObject [
-	cim_service := anObject
+Tbl_cim_service_row >> cim_service: arg1 [
+	cim_service := arg1
 ]
 
 { #category : #accessing }
@@ -68,15 +68,12 @@ Tbl_cim_service_row >> cim_typ_coll [
 ]
 
 { #category : #accessing }
-Tbl_cim_service_row >> cim_typ_coll: anObject [
-	cim_typ_coll := anObject
+Tbl_cim_service_row >> cim_typ_coll: arg1 [
+	cim_typ_coll := arg1
 ]
 
 { #category : #initialization }
-Tbl_cim_service_row >> initializeWith: aDictionary [
-	aDictionary
-		keysDo: [ :key | 
-			self
-				perform: (key asLowercase , ':') asSymbol
-				with: (aDictionary at: key) ]
+Tbl_cim_service_row >> initializeWith: arg1 [
+	arg1
+		keysDo: [ :arg2 | self perform: (arg2 asLowercase , ':') asSymbol with: (arg1 at: arg2) ]
 ]

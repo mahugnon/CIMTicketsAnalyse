@@ -43,7 +43,7 @@ TestConverter >> testFindConverterFor7H [
 TestConverter >> testconverterFor18Heures [
 	self
 		assert: (AbstractCIMDateFormatConverter convert: '18 heures')
-		equals: ((18 * 3600) asDuration)
+		equals: (18 * 3600) asDuration
 ]
 
 { #category : #tests }
@@ -64,12 +64,12 @@ TestConverter >> testconverterFor5commas5Jours [
 TestConverter >> testconverterFor7H [
 	self
 		assert: (AbstractCIMDateFormatConverter convert: '7H')
-		equals: ((7 * 3600) asDuration)
+		equals: (7 * 3600) asDuration
 ]
 
 { #category : #tests }
 TestConverter >> testconverterFor7heures [
 	self
 		assert: (AbstractCIMDateFormatConverter convert: '7 Heures')
-		equals: ((7 * 3600) asDuration)
+		equals: (7 * 3600) asDuration
 ]

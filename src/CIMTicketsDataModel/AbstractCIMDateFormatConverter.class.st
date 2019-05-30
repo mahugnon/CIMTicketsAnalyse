@@ -5,14 +5,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-AbstractCIMDateFormatConverter class >> convert: aString [
-	^ (self selectConverterFor: aString) convert: aString
+AbstractCIMDateFormatConverter class >> convert: arg1 [
+	^ (self selectConverterFor: arg1) convert: arg1
 ]
 
 { #category : #'as yet unclassified' }
-AbstractCIMDateFormatConverter class >> selectConverterFor: aString [
+AbstractCIMDateFormatConverter class >> selectConverterFor: arg1 [
 	^ (self subclasses
-		detect: [ :c | aString asLowercase matchesRegex: c supportedFormat ])
+		detect: [ :arg2 | arg1 asLowercase matchesRegex: arg2 supportedFormat ])
 		new
 ]
 
@@ -22,6 +22,6 @@ AbstractCIMDateFormatConverter class >> supportedFormat [
 ]
 
 { #category : #converting }
-AbstractCIMDateFormatConverter >> convert: aString [
+AbstractCIMDateFormatConverter >> convert: arg1 [
 	^ self subclassResponsibility
 ]

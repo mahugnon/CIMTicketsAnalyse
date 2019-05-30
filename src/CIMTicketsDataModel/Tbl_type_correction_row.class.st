@@ -16,8 +16,8 @@ Tbl_type_correction_row >> typcorr_actif [
 ]
 
 { #category : #accessing }
-Tbl_type_correction_row >> typcorr_actif: anObject [
-	typcorr_actif := anObject
+Tbl_type_correction_row >> typcorr_actif: arg1 [
+	typcorr_actif := arg1
 ]
 
 { #category : #accessing }
@@ -26,8 +26,8 @@ Tbl_type_correction_row >> typcorr_id [
 ]
 
 { #category : #accessing }
-Tbl_type_correction_row >> typcorr_id: anObject [
-	typcorr_id := anObject
+Tbl_type_correction_row >> typcorr_id: arg1 [
+	typcorr_id := arg1
 ]
 
 { #category : #accessing }
@@ -36,8 +36,8 @@ Tbl_type_correction_row >> typcorr_libelle [
 ]
 
 { #category : #accessing }
-Tbl_type_correction_row >> typcorr_libelle: anObject [
-	typcorr_libelle := anObject
+Tbl_type_correction_row >> typcorr_libelle: arg1 [
+	typcorr_libelle := arg1
 ]
 
 { #category : #accessing }
@@ -46,6 +46,6 @@ Tbl_type_correction_row >> typcorr_visibilite [
 ]
 
 { #category : #accessing }
-Tbl_type_correction_row >> typcorr_visibilite: anObject [
-	typcorr_visibilite := anObject
+Tbl_type_correction_row >> typcorr_visibilite: arg1 [
+	typcorr_visibilite := arg1
 ]

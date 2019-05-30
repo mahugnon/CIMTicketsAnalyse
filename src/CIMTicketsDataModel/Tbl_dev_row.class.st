@@ -43,8 +43,8 @@ Tbl_dev_row >> dev_cim_id [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_cim_id: anObject [
-	dev_cim_id := anObject
+Tbl_dev_row >> dev_cim_id: arg1 [
+	dev_cim_id := arg1
 ]
 
 { #category : #accessing }
@@ -53,8 +53,8 @@ Tbl_dev_row >> dev_com_cim [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_com_cim: anObject [
-	dev_com_cim := anObject
+Tbl_dev_row >> dev_com_cim: arg1 [
+	dev_com_cim := arg1
 ]
 
 { #category : #accessing }
@@ -63,8 +63,8 @@ Tbl_dev_row >> dev_com_clt [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_com_clt: anObject [
-	dev_com_clt := anObject
+Tbl_dev_row >> dev_com_clt: arg1 [
+	dev_com_clt := arg1
 ]
 
 { #category : #accessing }
@@ -73,8 +73,8 @@ Tbl_dev_row >> dev_com_fact [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_com_fact: anObject [
-	dev_com_fact := anObject
+Tbl_dev_row >> dev_com_fact: arg1 [
+	dev_com_fact := arg1
 ]
 
 { #category : #accessing }
@@ -83,8 +83,8 @@ Tbl_dev_row >> dev_comm_estim [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_comm_estim: anObject [
-	dev_comm_estim := anObject
+Tbl_dev_row >> dev_comm_estim: arg1 [
+	dev_comm_estim := arg1
 ]
 
 { #category : #accessing }
@@ -93,8 +93,8 @@ Tbl_dev_row >> dev_comm_tps_requis [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_comm_tps_requis: anObject [
-	dev_comm_tps_requis := anObject
+Tbl_dev_row >> dev_comm_tps_requis: arg1 [
+	dev_comm_tps_requis := arg1
 ]
 
 { #category : #accessing }
@@ -103,8 +103,8 @@ Tbl_dev_row >> dev_fin [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_fin: anObject [
-	dev_fin := anObject
+Tbl_dev_row >> dev_fin: arg1 [
+	dev_fin := arg1
 ]
 
 { #category : #accessing }
@@ -113,8 +113,8 @@ Tbl_dev_row >> dev_id [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_id: anObject [
-	dev_id := anObject
+Tbl_dev_row >> dev_id: arg1 [
+	dev_id := arg1
 ]
 
 { #category : #accessing }
@@ -123,8 +123,8 @@ Tbl_dev_row >> dev_ordre [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_ordre: anObject [
-	dev_ordre := anObject
+Tbl_dev_row >> dev_ordre: arg1 [
+	dev_ordre := arg1
 ]
 
 { #category : #accessing }
@@ -133,8 +133,8 @@ Tbl_dev_row >> dev_semaine_clt [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_semaine_clt: anObject [
-	dev_semaine_clt := anObject
+Tbl_dev_row >> dev_semaine_clt: arg1 [
+	dev_semaine_clt := arg1
 ]
 
 { #category : #accessing }
@@ -143,8 +143,8 @@ Tbl_dev_row >> dev_semaine_id [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_semaine_id: anObject [
-	dev_semaine_id := anObject
+Tbl_dev_row >> dev_semaine_id: arg1 [
+	dev_semaine_id := arg1
 ]
 
 { #category : #accessing }
@@ -153,8 +153,8 @@ Tbl_dev_row >> dev_total [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_total: anObject [
-	dev_total := anObject
+Tbl_dev_row >> dev_total: arg1 [
+	dev_total := arg1
 ]
 
 { #category : #accessing }
@@ -163,8 +163,8 @@ Tbl_dev_row >> dev_total_clt [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_total_clt: anObject [
-	dev_total_clt := anObject
+Tbl_dev_row >> dev_total_clt: arg1 [
+	dev_total_clt := arg1
 ]
 
 { #category : #accessing }
@@ -173,8 +173,8 @@ Tbl_dev_row >> dev_total_fact [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_total_fact: anObject [
-	dev_total_fact := anObject
+Tbl_dev_row >> dev_total_fact: arg1 [
+	dev_total_fact := arg1
 ]
 
 { #category : #accessing }
@@ -183,8 +183,8 @@ Tbl_dev_row >> dev_tps_clt [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_clt: anObject [
-	dev_tps_clt := anObject
+Tbl_dev_row >> dev_tps_clt: arg1 [
+	dev_tps_clt := arg1
 ]
 
 { #category : #accessing }
@@ -193,8 +193,8 @@ Tbl_dev_row >> dev_tps_clt_commentaire [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_clt_commentaire: anObject [
-	dev_tps_clt_commentaire := anObject
+Tbl_dev_row >> dev_tps_clt_commentaire: arg1 [
+	dev_tps_clt_commentaire := arg1
 ]
 
 { #category : #accessing }
@@ -203,8 +203,8 @@ Tbl_dev_row >> dev_tps_estim [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_estim: anObject [
-	dev_tps_estim := anObject
+Tbl_dev_row >> dev_tps_estim: arg1 [
+	dev_tps_estim := arg1
 ]
 
 { #category : #accessing }
@@ -213,8 +213,8 @@ Tbl_dev_row >> dev_tps_estim_dev [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_estim_dev: anObject [
-	dev_tps_estim_dev := anObject
+Tbl_dev_row >> dev_tps_estim_dev: arg1 [
+	dev_tps_estim_dev := arg1
 ]
 
 { #category : #accessing }
@@ -223,8 +223,8 @@ Tbl_dev_row >> dev_tps_fact [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_fact: anObject [
-	dev_tps_fact := anObject
+Tbl_dev_row >> dev_tps_fact: arg1 [
+	dev_tps_fact := arg1
 ]
 
 { #category : #accessing }
@@ -233,8 +233,8 @@ Tbl_dev_row >> dev_tps_requis [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_requis: anObject [
-	dev_tps_requis := anObject
+Tbl_dev_row >> dev_tps_requis: arg1 [
+	dev_tps_requis := arg1
 ]
 
 { #category : #accessing }
@@ -243,8 +243,8 @@ Tbl_dev_row >> dev_tps_rest_dev [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_rest_dev: anObject [
-	dev_tps_rest_dev := anObject
+Tbl_dev_row >> dev_tps_rest_dev: arg1 [
+	dev_tps_rest_dev := arg1
 ]
 
 { #category : #accessing }
@@ -253,8 +253,8 @@ Tbl_dev_row >> dev_tps_total [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_tps_total: anObject [
-	dev_tps_total := anObject
+Tbl_dev_row >> dev_tps_total: arg1 [
+	dev_tps_total := arg1
 ]
 
 { #category : #accessing }
@@ -263,8 +263,8 @@ Tbl_dev_row >> dev_typ_fact [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_typ_fact: anObject [
-	dev_typ_fact := anObject
+Tbl_dev_row >> dev_typ_fact: arg1 [
+	dev_typ_fact := arg1
 ]
 
 { #category : #accessing }
@@ -273,12 +273,12 @@ Tbl_dev_row >> dev_valid_greg [
 ]
 
 { #category : #accessing }
-Tbl_dev_row >> dev_valid_greg: anObject [
-	dev_valid_greg := anObject
+Tbl_dev_row >> dev_valid_greg: arg1 [
+	dev_valid_greg := arg1
 ]
 
 { #category : #initialization }
-Tbl_dev_row >> initializeWith: aDictionary [
-	super initializeWith: aDictionary.
+Tbl_dev_row >> initializeWith: arg1 [
+	super initializeWith: arg1.
 	self convertTpsTotalToDuration
 ]

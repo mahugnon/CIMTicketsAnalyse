@@ -18,8 +18,8 @@ Tbl_version_row >> version_comm [
 ]
 
 { #category : #accessing }
-Tbl_version_row >> version_comm: anObject [
-	version_comm := anObject
+Tbl_version_row >> version_comm: arg1 [
+	version_comm := arg1
 ]
 
 { #category : #accessing }
@@ -28,8 +28,8 @@ Tbl_version_row >> version_date_arret [
 ]
 
 { #category : #accessing }
-Tbl_version_row >> version_date_arret: anObject [
-	version_date_arret := anObject
+Tbl_version_row >> version_date_arret: arg1 [
+	version_date_arret := arg1
 ]
 
 { #category : #accessing }
@@ -38,8 +38,8 @@ Tbl_version_row >> version_etat [
 ]
 
 { #category : #accessing }
-Tbl_version_row >> version_etat: anObject [
-	version_etat := anObject
+Tbl_version_row >> version_etat: arg1 [
+	version_etat := arg1
 ]
 
 { #category : #accessing }
@@ -48,8 +48,8 @@ Tbl_version_row >> version_id [
 ]
 
 { #category : #accessing }
-Tbl_version_row >> version_id: anObject [
-	version_id := anObject
+Tbl_version_row >> version_id: arg1 [
+	version_id := arg1
 ]
 
 { #category : #accessing }
@@ -58,8 +58,8 @@ Tbl_version_row >> version_libelle [
 ]
 
 { #category : #accessing }
-Tbl_version_row >> version_libelle: anObject [
-	version_libelle := anObject
+Tbl_version_row >> version_libelle: arg1 [
+	version_libelle := arg1
 ]
 
 { #category : #accessing }
@@ -68,6 +68,6 @@ Tbl_version_row >> version_list [
 ]
 
 { #category : #accessing }
-Tbl_version_row >> version_list: anObject [
-	version_list := anObject
+Tbl_version_row >> version_list: arg1 [
+	version_list := arg1
 ]
