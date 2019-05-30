@@ -14,7 +14,8 @@ Class {
 		'biblio_modif_id',
 		'biblio_version_id',
 		'biblio_old_str',
-		'biblio_new_str'
+		'biblio_new_str',
+		'tickets'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -117,4 +118,14 @@ Tbl_biblio_row >> biblio_version_id [
 { #category : #accessing }
 Tbl_biblio_row >> biblio_version_id: arg1 [
 	biblio_version_id := arg1
+]
+
+{ #category : #accessing }
+Tbl_biblio_row >> tickets [
+	^ tickets
+]
+
+{ #category : #accessing }
+Tbl_biblio_row >> tickets: anObject [
+	tickets := anObject
 ]

@@ -48,7 +48,8 @@ Class {
 		'ft_createur',
 		'ft_sous_categorie_id',
 		'ft_tnr',
-		'dev'
+		'dev',
+		'typeCorrection'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -528,4 +529,14 @@ Tbl_ft_row >> initializeWith: arg1 [
 	super initializeWith: arg1.
 	ft_datecrea ifNil: [ ^ self ].
 	ft_datecrea := ft_datecrea asDate
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> typeCorrection [
+	^ typeCorrection
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> typeCorrection: anObject [
+	typeCorrection := anObject
 ]
