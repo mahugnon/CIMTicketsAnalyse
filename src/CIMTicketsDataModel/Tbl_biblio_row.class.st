@@ -120,6 +120,14 @@ Tbl_biblio_row >> biblio_version_id: arg1 [
 	biblio_version_id := arg1
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl_biblio_row >> renameUsing: aCollection [
+	biblio_nom := aCollection
+		detect: [ :elt | elt value includes: biblio_nom ]
+		ifFound: [ :elt | biblio_nom := elt key ]
+		ifNone: [ biblio_nom ]
+]
+
 { #category : #accessing }
 Tbl_biblio_row >> tickets [
 	^ tickets

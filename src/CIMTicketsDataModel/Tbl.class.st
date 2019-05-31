@@ -18,6 +18,34 @@ Tbl class >> script [
 				dev_id: (self fifth rows detect: [ :arg2 | arg2 ft_dev_id = arg1 dev_id ]) ]
 ]
 
+{ #category : #initialization }
+Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
+	Tbl tables: (Tbl new loadTblFromFolder: ficheNavettePath).
+	Tbl tables fifth rows
+		do: [ :ticket | 
+			ticket
+				dev:
+					(Tbl tables fourth rows
+						detect: [ :dev | dev dev_id = ticket ft_dev_id ]
+						ifNone: [ nil ]) ].
+	Tbl tables fifth rows
+		do: [ :ticket | 
+			ticket
+				typeCorrection:
+					(Tbl tables ninth rows
+						detect: [ :dev | dev typcorr_id = ticket ft_typcorr_id ]
+						ifNone: [ nil ]) ].
+	Tbl tables first rows
+		do: [ :bib | 
+			bib
+				tickets:
+					(Tbl tables fifth rows
+						detect: [ :ticket | ticket ft_modif_id = bib biblio_modif_id ]
+						ifNone: [ nil ]) ].
+	Tbl tables first
+		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)
+]
+
 { #category : #accessing }
 Tbl class >> tables [
 	^ tables
