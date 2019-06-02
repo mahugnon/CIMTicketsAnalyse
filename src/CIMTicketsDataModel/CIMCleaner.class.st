@@ -8,18 +8,18 @@ Class {
 CIMCleaner >> group: aCollection with: bibliothequeFolder [
 	| files |
 	files := self izyProtectFilesFrom: bibliothequeFolder.
-	^files keys
+	^ files keys
 		collect: [ :key | 
 			key
 				->
 					(aCollection
 						select: [ :o | 
 							((files at: key)
-								select: [ :each | each matchesRegex: '.*' , o trim , '.*' ])
-								notEmpty ]) ]
+								select:
+									[ :each | each matchesRegex: '.*' , o trim , '.*' ]) notEmpty ]) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utils }
 CIMCleaner >> izyProtectFilesFrom: aFolder [
 	^ (aFolder asFileReference directories
 		collect: [ :dir | 
