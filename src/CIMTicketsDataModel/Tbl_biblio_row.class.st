@@ -123,7 +123,9 @@ Tbl_biblio_row >> biblio_version_id: arg1 [
 { #category : #'as yet unclassified' }
 Tbl_biblio_row >> renameUsing: aCollection [
 	biblio_nom := aCollection
-		detect: [ :elt | elt value includes: biblio_nom ]
+		detect: [ :elt | 
+			(elt value reject: [ :e | e isNil ])
+				anySatisfy: [ :e | e asLowercase = biblio_nom asLowercase ] ]
 		ifFound: [ :elt | biblio_nom := elt key ]
 		ifNone: [ biblio_nom ]
 ]
