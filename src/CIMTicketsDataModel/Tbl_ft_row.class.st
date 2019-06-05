@@ -552,6 +552,11 @@ Tbl_ft_row >> isEvolution [
 	^ self typeCorrection isEvolution
 ]
 
+{ #category : #testing }
+Tbl_ft_row >> isMisc [
+	^ self typeCorrection isMisc
+]
+
 { #category : #accessing }
 Tbl_ft_row >> typeCorrection [
 	^ typeCorrection
@@ -560,4 +565,9 @@ Tbl_ft_row >> typeCorrection [
 { #category : #accessing }
 Tbl_ft_row >> typeCorrection: anObject [
 	typeCorrection := anObject
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> year [
+	^ self ft_datecrea year
 ]
