@@ -542,6 +542,16 @@ Tbl_ft_row >> initializeWith: arg1 [
 	ft_datecrea := ft_datecrea asDate
 ]
 
+{ #category : #testing }
+Tbl_ft_row >> isBug [
+	^ self typeCorrection isBug
+]
+
+{ #category : #testing }
+Tbl_ft_row >> isEvolution [
+	^ self typeCorrection isEvolution
+]
+
 { #category : #accessing }
 Tbl_ft_row >> typeCorrection [
 	^ typeCorrection

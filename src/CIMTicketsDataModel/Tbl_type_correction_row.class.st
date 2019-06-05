@@ -12,13 +12,13 @@ Class {
 
 { #category : #testing }
 Tbl_type_correction_row >> isBug [
-	^ self libelleForEvolution
+	^ self libelleForBug 
 		anySatisfy: [ :lib | self typcorr_libelle beginsWith: lib ]
 ]
 
 { #category : #testing }
 Tbl_type_correction_row >> isEvolution [
-	^ self libelleForBug
+	^ self libelleForEvolution 
 		anySatisfy: [ :lib | self typcorr_libelle beginsWith: lib ]
 ]
 

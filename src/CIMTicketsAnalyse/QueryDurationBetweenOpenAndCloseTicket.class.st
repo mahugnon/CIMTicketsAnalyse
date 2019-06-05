@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryDurationBetweenOpenAndCloseTicket,
-	#superclass : #Object,
+	#superclass : #CIMAbstractQuery,
 	#category : #CIMTicketsAnalyse
 }
 
