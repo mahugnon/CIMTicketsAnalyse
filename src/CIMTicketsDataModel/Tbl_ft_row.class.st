@@ -49,10 +49,21 @@ Class {
 		'ft_sous_categorie_id',
 		'ft_tnr',
 		'dev',
-		'typeCorrection'
+		'typeCorrection',
+		'bibliotheques'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
+
+{ #category : #accessing }
+Tbl_ft_row >> bibliotheques [
+	^ bibliotheques
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> bibliotheques: anObject [
+	bibliotheques := anObject
+]
 
 { #category : #accessing }
 Tbl_ft_row >> dev [

@@ -10,6 +10,33 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #testing }
+Tbl_type_correction_row >> isBug [
+	^ self libelleForEvolution
+		anySatisfy: [ :lib | self typcorr_libelle beginsWith: lib ]
+]
+
+{ #category : #testing }
+Tbl_type_correction_row >> isEvolution [
+	^ self libelleForBug
+		anySatisfy: [ :lib | self typcorr_libelle beginsWith: lib ]
+]
+
+{ #category : #testing }
+Tbl_type_correction_row >> isMisc [
+	^ self isBug not & self isEvolution not
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_type_correction_row >> libelleForBug [
+	^ {'CORRECTION' . 'REGRESSION' . 'RUN/Anomalie' . 'ANOMALIE'}
+]
+
+{ #category : #accessing }
+Tbl_type_correction_row >> libelleForEvolution [
+	^ {'EVOLUTION' . 'RUN/Evolution' . 'Roadmap'}
+]
+
 { #category : #accessing }
 Tbl_type_correction_row >> typcorr_actif [
 	^ typcorr_actif
