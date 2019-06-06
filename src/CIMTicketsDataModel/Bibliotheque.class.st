@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMBibliotheque,
+	#name : #Bibliotheque,
 	#superclass : #Object,
 	#instVars : [
 		'name',
@@ -9,21 +9,21 @@ Class {
 }
 
 { #category : #accessing }
-CIMBibliotheque >> name [
+Bibliotheque >> name [
 	^ name
 ]
 
 { #category : #accessing }
-CIMBibliotheque >> name: anObject [
+Bibliotheque >> name: anObject [
 	name := anObject
 ]
 
 { #category : #accessing }
-CIMBibliotheque >> tickets [
+Bibliotheque >> tickets [
 	^ tickets
 ]
 
 { #category : #accessing }
-CIMBibliotheque >> tickets: anObject [
+Bibliotheque >> tickets: anObject [
 	tickets := anObject
 ]

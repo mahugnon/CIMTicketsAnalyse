@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMBibliotheques,
+	#name : #Bibliotheques,
 	#superclass : #Object,
 	#instVars : [
 		'bibliotheques'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-CIMBibliotheques class >> createFrom: anAssociation [
+Bibliotheques class >> createFrom: anAssociation [
 	^ self new
 		bibliotheques:
 			(anAssociation
@@ -19,17 +19,17 @@ CIMBibliotheques class >> createFrom: anAssociation [
 ]
 
 { #category : #accessing }
-CIMBibliotheques >> bibliotheques [
+Bibliotheques >> bibliotheques [
 	^ bibliotheques
 ]
 
 { #category : #accessing }
-CIMBibliotheques >> bibliotheques: anObject [
+Bibliotheques >> bibliotheques: anObject [
 	bibliotheques := anObject
 ]
 
 { #category : #initialization }
-CIMBibliotheques >> initialize [
+Bibliotheques >> initialize [
 	super initialize.
 	bibliotheques := OrderedCollection new
 ]
