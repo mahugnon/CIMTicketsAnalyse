@@ -558,6 +558,11 @@ Tbl_ft_row >> isMisc [
 ]
 
 { #category : #accessing }
+Tbl_ft_row >> totalTps [
+	^ dev dev_tps_total
+]
+
+{ #category : #accessing }
 Tbl_ft_row >> typeCorrection [
 	^ typeCorrection
 ]
