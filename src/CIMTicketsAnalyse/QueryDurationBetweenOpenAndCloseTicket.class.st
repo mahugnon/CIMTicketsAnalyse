@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #run }
-QueryDurationBetweenOpenAndCloseTicket >> runOn: tickets [
-	^ tickets
+QueryDurationBetweenOpenAndCloseTicket >> runOn: aCollection [
+	^ aCollection
 		collect: [ :ticket | 
 			ticket ft_numordre
 				->

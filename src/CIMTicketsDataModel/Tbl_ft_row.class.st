@@ -558,6 +558,11 @@ Tbl_ft_row >> isMisc [
 ]
 
 { #category : #accessing }
+Tbl_ft_row >> month [
+	^ ft_datecrea month
+]
+
+{ #category : #accessing }
 Tbl_ft_row >> totalTps [
 	^ dev dev_tps_total
 ]
