@@ -15,7 +15,19 @@ Tbl class >> script [
 	self fourth rows
 		do: [ :arg1 | 
 			arg1
-				dev_id: (self fifth rows detect: [ :arg2 | arg2 ft_dev_id = arg1 dev_id ]) ]
+				dev_id: (self fifth rows detect: [ :arg2 | arg2 ft_dev_id = arg1 dev_id ]) ].
+	EvolutionBugPresenter new
+		drawEvolutionCorrectionForTickets: Tbl tables fifth rows
+		timeQuery: QueryTicketPerYear
+		title: 'EVBug'.
+	QueryAvgTimeOnTicketsGroupedByTime new
+		runOn:
+			(QueryTicketPerMonth new
+				runOn: (QueryBugs new runOn: Tbl tables fifth rows)).
+	QueryAvgTimeToOpenCloseTicketsGroupedByTime new
+		runOn:
+			(QueryTicketPerMonth new
+				runOn: (QueryEvolutions new runOn: Tbl tables fifth rows))
 ]
 
 { #category : #initialization }
@@ -42,8 +54,14 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 					(Tbl tables fifth rows
 						detect: [ :ticket | ticket ft_modif_id = bib biblio_modif_id ]
 						ifNone: [ nil ]) ].
-	Tbl tables first
-		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)
+	Tbl tables fifth rows
+		do: [ :ticket | 
+			"	Tbl tables first
+		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)"
+			ticket
+				bibliotheques:
+					(Tbl tables first rows
+						select: [ :bib | ticket ft_modif_id = bib biblio_modif_id ]) ]
 ]
 
 { #category : #accessing }

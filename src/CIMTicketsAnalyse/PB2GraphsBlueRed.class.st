@@ -34,6 +34,7 @@ PB2GraphsBlueRed >> draw [
 	| b ds |
 	b := RTGrapher new.
 	ds := RTData new.
+	"ds barShape color: Color blue."
 	ds connectColor: Color blue.
 	ds points: data1 keys.
 	ds y: [ :year | data1 at: year ].

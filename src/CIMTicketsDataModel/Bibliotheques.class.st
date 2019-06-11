@@ -33,3 +33,14 @@ Bibliotheques >> initialize [
 	super initialize.
 	bibliotheques := OrderedCollection new
 ]
+
+{ #category : #'as yet unclassified' }
+Bibliotheques >> updateWith: aDictionary [
+	bibliotheques := aDictionary
+		collect: [ :elt | 
+			Bibliotheque new
+				name: elt key;
+				tickets:
+					((elt value collect: [ :e | e tickets ])
+						reject: [ :ticket | ticket isNil ]) ]
+]
