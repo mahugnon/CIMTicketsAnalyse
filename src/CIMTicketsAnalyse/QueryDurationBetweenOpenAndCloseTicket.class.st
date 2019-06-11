@@ -5,12 +5,8 @@ Class {
 }
 
 { #category : #run }
-QueryDurationBetweenOpenAndCloseTicket >> runOn: aCollection [
-	^ aCollection
-		collect: [ :ticket | 
-			ticket ft_numordre
-				->
-					(ticket dev dev_fin isNil
-						ifFalse: [ ticket dev dev_fin asDate - ticket ft_datecrea ]
-						ifTrue: [ 0 asDuration ]) ]
+QueryDurationBetweenOpenAndCloseTicket >> runOn: aTicket [
+	^ aTicket dev dev_fin isNil
+		ifFalse: [ aTicket dev dev_fin asDate - aTicket ft_datecrea ]
+		ifTrue: [ 0 asDuration ]
 ]
