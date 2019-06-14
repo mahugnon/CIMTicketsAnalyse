@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'bibliotheques'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #'instance creation' }
@@ -34,13 +34,13 @@ Bibliotheques >> initialize [
 	bibliotheques := OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Bibliotheques >> updateWith: aDictionary [
-	bibliotheques := aDictionary
-		collect: [ :elt | 
+	bibliotheques := aDictionary keys
+		collect: [ :key | 
 			Bibliotheque new
-				name: elt key;
+				name: key;
 				tickets:
-					((elt value collect: [ :e | e tickets ])
+					(((aDictionary at: key) value collect: [ :e | e tickets ])
 						reject: [ :ticket | ticket isNil ]) ]
 ]

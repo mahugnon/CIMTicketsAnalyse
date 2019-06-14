@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMAbstractQuery,
 	#superclass : #Object,
-	#category : #CIMTicketsAnalyse
+	#category : #'CIMTicketsAnalyse-Queries'
 }
 
 { #category : #running }

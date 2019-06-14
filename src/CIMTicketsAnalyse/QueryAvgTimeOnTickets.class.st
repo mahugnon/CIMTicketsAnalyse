@@ -1,7 +1,7 @@
 Class {
 	#name : #QueryAvgTimeOnTickets,
 	#superclass : #CIMAbstractQuery,
-	#category : #CIMTicketsAnalyse
+	#category : #'CIMTicketsAnalyse-Queries'
 }
 
 { #category : #running }
