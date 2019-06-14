@@ -6,7 +6,8 @@ Class {
 
 { #category : #running }
 QueryAvgTimeOnTicketsGroupedByTime >> runOn: aDictionary [
-	^ aDictionary keys
+	^ (aDictionary keys
 		collect:
-			[ :key | key -> (QueryAvgTimeOnTickets new runOn: (aDictionary at: key)) ]
+			[ :key | key -> (QueryAvgTimeOnTickets new runOn: (aDictionary at: key)) ])
+		asDictionary
 ]
