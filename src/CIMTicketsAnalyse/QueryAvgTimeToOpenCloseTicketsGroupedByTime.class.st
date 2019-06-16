@@ -6,8 +6,9 @@ Class {
 
 { #category : #running }
 QueryAvgTimeToOpenCloseTicketsGroupedByTime >> runOn: aDictionary [
-	^ aDictionary keys
+	^ (aDictionary keys
 		collect: [ :key | 
 			key
-				-> (QueryAvgTimeToOpenCloseTicket new runOn: (aDictionary at: key)) ]
+				-> (QueryAvgTimeToOpenCloseTicket new runOn: (aDictionary at: key)) ])
+		asDictionary
 ]

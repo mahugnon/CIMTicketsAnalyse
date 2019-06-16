@@ -6,9 +6,13 @@ Class {
 
 { #category : #running }
 QueryAvgTimeToOpenCloseTicket >> runOn: aCollection [
-	^ (aCollection
-		inject: 0 asDuration
+	| tickets |
+	tickets := (aCollection
+		select: [ :ticket | ticket dev dev_fin isNotNil ])
+		reject: [ :t | t dev dev_fin = '0201-11-24' ].
+	^ ((tickets
+		inject: 0
 		into:
 			[ :sum :aTicket | sum + (QueryDurationBetweenOpenAndCloseTicket new runOn: aTicket) ])
-		/ aCollection size
+		/ tickets size) asFloat
 ]

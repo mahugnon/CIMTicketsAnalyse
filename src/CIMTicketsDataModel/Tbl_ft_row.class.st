@@ -50,7 +50,8 @@ Class {
 		'ft_tnr',
 		'dev',
 		'typeCorrection',
-		'bibliotheques'
+		'bibliotheques',
+		'timeDev'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -560,6 +561,16 @@ Tbl_ft_row >> isMisc [
 { #category : #accessing }
 Tbl_ft_row >> month [
 	^ ft_datecrea month
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> timeDev [
+	^ timeDev
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> timeDev: anObject [
+	timeDev := anObject
 ]
 
 { #category : #accessing }
