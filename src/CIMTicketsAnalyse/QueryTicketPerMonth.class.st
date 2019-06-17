@@ -6,6 +6,6 @@ Class {
 
 { #category : #running }
 QueryTicketPerMonth >> runOn: aCollection [
-	^ ((aCollection groupedBy: [ :ticket | ticket month ]) associations
+	^ (((aCollection groupedBy: [ :ticket | self month: ticket ]) associations reject: [ :assoc | assoc key isNil ])
 		sorted: [ :a :b | a key <= b key ]) asOrderedDictionary
 ]

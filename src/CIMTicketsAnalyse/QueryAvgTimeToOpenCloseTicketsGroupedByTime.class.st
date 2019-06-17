@@ -10,5 +10,5 @@ QueryAvgTimeToOpenCloseTicketsGroupedByTime >> runOn: aDictionary [
 		collect: [ :key | 
 			key
 				-> (QueryAvgTimeToOpenCloseTicket new runOn: (aDictionary at: key)) ])
-		asDictionary
+		asOrderedDictionary
 ]

@@ -37,6 +37,13 @@ Tbl_dev_row >> convertTpsTotalToDuration [
 		convert: dev_tps_total
 ]
 
+{ #category : #API }
+Tbl_dev_row >> dateClosing [
+	^ self dev_fin
+	ifNil: [ nil ]
+	ifNotNil: [ :str | str asDate]
+]
+
 { #category : #accessing }
 Tbl_dev_row >> dev_cim_id [
 	^ dev_cim_id
@@ -281,4 +288,11 @@ Tbl_dev_row >> dev_valid_greg: arg1 [
 Tbl_dev_row >> initializeWith: arg1 [
 	super initializeWith: arg1.
 	self convertTpsTotalToDuration
+]
+
+{ #category : #API }
+Tbl_dev_row >> monthClosing [
+	^ self dateClosing
+	ifNil: [ nil ]
+	ifNotNil: [ :dt | dt month]
 ]

@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #accessing }
+Tbl class >> allTickets [
+	^ self tableTickets rows
+]
+
+{ #category : #accessing }
 Tbl class >> script [
 	self fourth rows
 		do: [ :arg1 | 
@@ -62,6 +67,11 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 				bibliotheques:
 					(Tbl tables first rows
 						select: [ :bib | ticket ft_modif_id = bib biblio_modif_id ]) ]
+]
+
+{ #category : #accessing }
+Tbl class >> tableTickets [
+	^ tables fifth
 ]
 
 { #category : #accessing }

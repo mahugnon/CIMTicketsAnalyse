@@ -66,6 +66,11 @@ Tbl_ft_row >> bibliotheques: anObject [
 	bibliotheques := anObject
 ]
 
+{ #category : #api }
+Tbl_ft_row >> dateClosing [
+	^ dev dateClosing
+]
+
 { #category : #accessing }
 Tbl_ft_row >> dev [
 	^ dev
@@ -561,6 +566,16 @@ Tbl_ft_row >> isMisc [
 { #category : #accessing }
 Tbl_ft_row >> month [
 	^ ft_datecrea month
+]
+
+{ #category : #API }
+Tbl_ft_row >> monthClosing [
+	^ self dev monthClosing
+]
+
+{ #category : #API }
+Tbl_ft_row >> monthCreation [
+	^ self ft_datecrea month
 ]
 
 { #category : #accessing }

@@ -14,6 +14,7 @@ LineChart >> draw: aDictionary [
 	ds points: aDictionary keys.
 	ds y: [ :year | aDictionary at: year ].
 	b add: ds.
+	b maxY: 10.
 	b axisX
 		numberOfLabels: aDictionary size;
 		labelRotation: -45;
