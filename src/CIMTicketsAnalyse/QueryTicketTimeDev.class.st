@@ -8,5 +8,5 @@ Class {
 QueryTicketTimeDev >> runOn: aTicket [
 	^ (aTicket timeDev select: [ :t | t isDevelopment ])
 		inject: 0
-		into: [ :sum :aTimeDv | sum + aTimeDv totalSeconds ]
+		into: [ :sum :aTimeDv | sum + aTimeDv tps_temps totalSeconds ]
 ]
