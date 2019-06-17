@@ -6,6 +6,8 @@ Class {
 
 { #category : #running }
 QueryAvgTicketsTimeDev >> runOn: aCollection [
-	^ ((QueryAvgTicketsTimeDev new runOn: aCollection)
+	^ ((aCollection
+		inject: 0
+		into: [ :sum :ticket | sum + (QueryTicketTimeDev new runOn: ticket) ])
 		/ aCollection size) asFloat
 ]
