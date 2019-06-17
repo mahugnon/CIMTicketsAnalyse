@@ -15,6 +15,22 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #'as yet unclassified' }
+Tbl_tps_row >> convertTpsTempsToDuration [
+	tps_temps := AbstractCIMDateFormatConverter convert: tps_temps
+]
+
+{ #category : #initialization }
+Tbl_tps_row >> initializeWith: arg1 [
+	super initializeWith: arg1.
+	self convertTpsTempsToDuration
+]
+
+{ #category : #testing }
+Tbl_tps_row >> isDevelopment [
+	^ tps_type = '0'
+]
+
 { #category : #accessing }
 Tbl_tps_row >> tps_cim_id [
 	^ tps_cim_id
@@ -103,4 +119,14 @@ Tbl_tps_row >> tps_type [
 { #category : #accessing }
 Tbl_tps_row >> tps_type: arg1 [
 	tps_type := arg1
+]
+
+{ #category : #accessing }
+Tbl_tps_row >> typeTps [
+	^ typeTps
+]
+
+{ #category : #accessing }
+Tbl_tps_row >> typeTps: anObject [
+	typeTps := anObject
 ]
