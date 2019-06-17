@@ -66,9 +66,14 @@ Tbl_ft_row >> bibliotheques: anObject [
 	bibliotheques := anObject
 ]
 
-{ #category : #api }
+{ #category : #API }
 Tbl_ft_row >> dateClosing [
 	^ dev dateClosing
+]
+
+{ #category : #API }
+Tbl_ft_row >> dateOpening [
+	^ dev ft_datecrea
 ]
 
 { #category : #accessing }
@@ -603,21 +608,16 @@ Tbl_ft_row >> typeCorrection: anObject [
 	typeCorrection := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #API }
 Tbl_ft_row >> updateBibliothequesWith: aCollection [
 	self
 		bibliotheques: (aCollection select: [ :bib | bib biblio_modif_id = ft_modif_id ])
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #API }
 Tbl_ft_row >> updateDevWith: aCollection [
 	self
 		dev: (aCollection select: [ :aDev | aDev dev_cim_id = ft_dev_id ])
-]
-
-{ #category : #'as yet unclassified' }
-Tbl_ft_row >> updateWith: aDataBase [
-	
 ]
 
 { #category : #accessing }
