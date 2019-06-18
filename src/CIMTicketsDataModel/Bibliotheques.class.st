@@ -7,6 +7,15 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #'instance creation' }
+Bibliotheques class >> createFrom: aCollection [
+	^ self new
+		updateWith:
+			(((aCollection collect: #bibliotheques) flatten groupedBy: #biblio_nom)
+				associations select: [ :assoc | assoc key matchesRegex: 'cwm.*' ])
+				asDictionary
+]
+
 { #category : #accessing }
 Bibliotheques >> bibliotheques [
 	^ bibliotheques

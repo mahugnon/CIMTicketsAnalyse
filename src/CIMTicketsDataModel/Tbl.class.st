@@ -5,7 +5,8 @@ Class {
 		'rows'
 	],
 	#classInstVars : [
-		'tables'
+		'tables',
+		'avgTimeDevOnPerBibliotheque'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -18,6 +19,19 @@ Tbl class >> allBibliotheques [
 { #category : #accessing }
 Tbl class >> allTickets [
 	^ self tableTickets rows
+]
+
+{ #category : #accessing }
+Tbl class >> avgTimeDevOnPerBibliotheque [
+	avgTimeDevOnPerBibliotheque
+		ifNil: [ ^ QueryAvgTimeDevOnPerBibliotheque new
+				runOn: (Bibliotheques createFrom: Tbl allTickets) bibliotheques ].
+	^ avgTimeDevOnPerBibliotheque
+]
+
+{ #category : #accessing }
+Tbl class >> avgTimeDevOnPerBibliotheque: anObject [
+	avgTimeDevOnPerBibliotheque := anObject
 ]
 
 { #category : #accessing }
