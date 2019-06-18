@@ -10,6 +10,7 @@ QueryAvgTimeToOpenCloseTicket >> runOn: aCollection [
 	tickets := (aCollection
 		select: [ :ticket | ticket dateClosing isNotNil ])
 		reject: [ :t | t dev dev_fin = '0201-11-24' ].
+	tickets ifEmpty: [ ^ 0 ].
 	^ ((tickets
 		inject: 0
 		into:

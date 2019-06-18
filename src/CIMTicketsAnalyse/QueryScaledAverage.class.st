@@ -6,8 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 QueryScaledAverage >> computeAverage: aDictionary [
-	^ (aDictionary
-		at: (aDictionary keys at: (aDictionary size / 2 + 1) asInteger))
+	^ (aDictionary keys at: (aDictionary size / 2 + 1) asInteger)
 		-> (aDictionary sum / aDictionary size) asFloat
 ]
 
@@ -24,5 +23,5 @@ QueryScaledAverage >> runOn: aDictionary [
 			(count % 5 = 0 or: [ count = aDictionary size ])
 				ifTrue: [ result add: (self computeAverage: scaleHoleder).
 					scaleHoleder := Dictionary new ] ].
-	^ result asDictionary
+	^ result asOrderedDictionary
 ]
