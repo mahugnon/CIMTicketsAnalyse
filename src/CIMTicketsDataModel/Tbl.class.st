@@ -10,6 +10,11 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #'as yet unclassified' }
+Tbl class >> allBibliotheques [
+	^ self tables first rows
+]
+
 { #category : #accessing }
 Tbl class >> allTickets [
 	^ self tableTickets rows
@@ -17,17 +22,13 @@ Tbl class >> allTickets [
 
 { #category : #accessing }
 Tbl class >> script [
-	self fourth rows
-		do: [ :arg1 | 
-			arg1
-				dev_id: (self fifth rows detect: [ :arg2 | arg2 ft_dev_id = arg1 dev_id ]) ].
 	EvolutionBugPresenter new
 		drawEvolutionCorrectionForTickets: Tbl tables fifth rows
 		timeQuery: QueryTicketPerYear
 		title: 'EVBug'.
 	QueryAvgTimeOnTicketsGroupedByTime new
 		runOn:
-			(QueryTicketPerMonth new
+			(QueryTicketPerMonthClosing new
 				runOn: (QueryBugs new runOn: Tbl tables fifth rows)).
 	QueryAvgTimeToOpenCloseTicketsGroupedByTime new
 		runOn:

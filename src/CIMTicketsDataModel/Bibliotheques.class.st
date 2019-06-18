@@ -7,17 +7,6 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
-{ #category : #'instance creation' }
-Bibliotheques class >> createFrom: anAssociation [
-	^ self new
-		bibliotheques:
-			(anAssociation
-				collect: [ :b | 
-					CIMBibliotheque new
-						name: b key;
-						tickets: (b value collectAsSet: #tickets) ])
-]
-
 { #category : #accessing }
 Bibliotheques >> bibliotheques [
 	^ bibliotheques
