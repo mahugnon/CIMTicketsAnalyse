@@ -6,7 +6,7 @@ Class {
 
 { #category : #tests }
 TestScaledAverage >> testScaledAverge [
-	| dic |
+	| dic scaledAvg |
 	dic := Dictionary new
 		at: 1 put: 1;
 		at: 2 put: 2;
@@ -20,7 +20,10 @@ TestScaledAverage >> testScaledAverge [
 		at: 10 put: 10;
 		at: 11 put: 11;
 		yourself.
-	self assert: (QueryScaledAverage new runOn: dic) size equals: 3.
-	self assert: ((QueryScaledAverage new runOn: dic) includes: 8).
-	self assert: ((QueryScaledAverage new runOn: dic) includes: 11)
+	scaledAvg := QueryScaledAverage new runOn: dic.
+	self assert: scaledAvg size equals: 7.
+	self assert: (scaledAvg at: 3) equals: 3.
+	self assert: (scaledAvg at: 4) equals: 4.
+	self assert: (scaledAvg at: 5) equals: 5.
+	self assert: (scaledAvg at: 9) equals: 9.
 ]

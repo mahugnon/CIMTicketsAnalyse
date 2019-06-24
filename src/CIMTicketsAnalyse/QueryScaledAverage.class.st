@@ -4,24 +4,24 @@ Class {
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
-{ #category : #'as yet unclassified' }
-QueryScaledAverage >> computeAverage: aDictionary [
-	^ (aDictionary keys at: (aDictionary size / 2 + 1) asInteger)
-		-> (aDictionary sum / aDictionary size) asFloat
-]
-
 { #category : #running }
 QueryScaledAverage >> runOn: aDictionary [
-	| result scaleHoleder count |
+	| result |
 	result := OrderedCollection new.
-	count := 0.
-	scaleHoleder := Dictionary new.
+	1 to: (aDictionary size - 4) do: [ :i ||k v|
+		k := aDictionary keys at: (i+2).
+		v := (aDictionary values copyFrom: i to: i+4) average.
+		result add: (k -> v).
+	].
+	
+	
+	"scaleHolder := Dictionary new.
 	aDictionary
 		keysDo: [ :key | 
 			count := count + 1.
-			scaleHoleder at: key put: (aDictionary at: key).
+			scaleHolder at: key put: (aDictionary at: key).
 			(count % 5 = 0 or: [ count = aDictionary size ])
-				ifTrue: [ result add: (self computeAverage: scaleHoleder).
-					scaleHoleder := Dictionary new ] ].
+				ifTrue: [ result add: (self computeAverage: scaleHolder).
+					scaleHolder := Dictionary new ] ]."
 	^ result asOrderedDictionary
 ]

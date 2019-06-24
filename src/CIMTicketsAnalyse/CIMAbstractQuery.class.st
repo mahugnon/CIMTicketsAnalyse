@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #running }
+CIMAbstractQuery class >> runOn: aCollection [
+	^ self new runOn: aCollection
+]
+
+{ #category : #running }
 CIMAbstractQuery >> runOn: aCollection [
 	^ self subclassResponsibility
 ]
