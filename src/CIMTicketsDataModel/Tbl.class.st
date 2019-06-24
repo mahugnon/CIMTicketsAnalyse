@@ -34,6 +34,11 @@ Tbl class >> avgTimeDevOnPerBibliotheque: anObject [
 	avgTimeDevOnPerBibliotheque := anObject
 ]
 
+{ #category : #accesing }
+Tbl class >> dev [
+	^tables fourth
+]
+
 { #category : #accessing }
 Tbl class >> script [
 	EvolutionBugPresenter new
@@ -99,12 +104,12 @@ Tbl class >> tables: anObject [
 	tables := anObject
 ]
 
-{ #category : #'as yet unclassified' }
-Tbl >> detectTblFrom: arg1 [
+{ #category : #utility }
+Tbl >> detectTblFrom: aCsvFile [
 	^ (self class subclasses
-		select: [ :arg2 | 
-			arg2 name asLowercase
-				= (arg1 basename asLowercase copyReplaceAll: '.csv' with: '') ])
+		select: [ :aTblSub | 
+			aTblSub name asLowercase
+				= (aCsvFile basename asLowercase copyReplaceAll: '.csv' with: '') ])
 		first
 ]
 
@@ -119,10 +124,10 @@ Tbl >> initialize [
 	rows := OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
-Tbl >> loadTblFromFolder: arg1 [
-	^ arg1 asFileReference visibleFiles
-		collect: [ :arg2 | (self detectTblFrom: arg2) new filFromCSVFile: arg2 ]
+{ #category : #utility }
+Tbl >> loadTblFromFolder: csvFolder [
+	^ csvFolder asFileReference visibleFiles
+		collect: [ :aCsvFile | (self detectTblFrom: aCsvFile) new filFromCSVFile: aCsvFile ]
 ]
 
 { #category : #utility }
