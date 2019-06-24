@@ -1,6 +1,6 @@
 Class {
 	#name : #ConvertJoursFormat,
-	#superclass : #AbstractCIMDateFormatConverter,
+	#superclass : #CIMDateFormatConverter,
 	#category : #'CIMTicketsDataModel-converters'
 }
 

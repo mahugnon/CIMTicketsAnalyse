@@ -104,6 +104,11 @@ Tbl class >> tables: anObject [
 	tables := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl >> convertFieldToCimDate [
+	^ self subclassResponsibility
+]
+
 { #category : #utility }
 Tbl >> detectTblFrom: aCsvFile [
 	^ (self class subclasses

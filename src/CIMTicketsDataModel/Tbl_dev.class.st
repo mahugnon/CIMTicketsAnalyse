@@ -4,6 +4,11 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #'as yet unclassified' }
+Tbl_dev >> convertFieldToCimDate [
+	self rows do: [ :row | row formatToCIMDate ]
+]
+
 { #category : #utility }
 Tbl_dev >> rowClass [
 	^ Tbl_dev_row

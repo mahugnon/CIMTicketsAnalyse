@@ -33,7 +33,7 @@ Class {
 { #category : #initialization }
 Tbl_dev_row >> convertTpsTotalToDuration [
 	dev_tps_total ifNil: [ ^ self ].
-	dev_tps_total := AbstractCIMDateFormatConverter
+	dev_tps_total := CIMDateFormatConverter
 		convert: dev_tps_total
 ]
 

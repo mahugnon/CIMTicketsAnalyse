@@ -17,7 +17,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 Tbl_tps_row >> convertTpsTempsToDuration [
-	tps_temps := AbstractCIMDateFormatConverter convert: tps_temps
+	tps_temps := CIMDateFormatConverter convert: tps_temps
 ]
 
 { #category : #initialization }
