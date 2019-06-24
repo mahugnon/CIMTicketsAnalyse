@@ -280,10 +280,12 @@ Tbl_dev_row >> dev_valid_greg: arg1 [
 { #category : #formatting }
 Tbl_dev_row >> formatFieldsToCIMDate [
 	"dev_tps_total := CIMDateFormatConverter convert: dev_tps_total."
-	dev_tps_estim_dev := CIMDateFormatConverter
-		convert: dev_tps_estim_dev.
-	dev_tps_estim_dev := CIMDateFormatConverter
-		convert: dev_tps_estim_dev
+dev_tps_estim_dev isString ifTrue: [ dev_tps_estim_dev := CIMDateFormatConverter
+		convert: dev_tps_estim_dev ].
+	
+	dev_tps_estim isString
+		ifTrue: [ dev_tps_estim := CIMDateFormatConverter
+				convert: dev_tps_estim ]
 ]
 
 { #category : #initialization }

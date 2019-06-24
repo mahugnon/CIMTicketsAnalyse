@@ -25,23 +25,65 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawScaledAvgTimeSpentBugsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryScaledAverage
+				runOn:
+					(QueryAvgTimeOnTicketsGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawScaledAvgTimeSpentEvolutionTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryScaledAverage
+				runOn:
+					(QueryAvgTimeOnTicketsGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawScaledAvgTimeToOpenCloseBugsTicketsPerMonth [
 	^ LineChart new
 		draw:
-			(QueryScaledAverage new runOn: (QueryAvgTimeToOpenCloseTicketsGroupedByTime new
+			(QueryScaledAverage
 				runOn:
-					(QueryTicketPerMonthClosing new
-						runOn: (QueryBugs new runOn: Tbl allTickets))))
+					(QueryAvgTimeToOpenCloseTicketsGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))))
 ]
 
 { #category : #drawing }
 MainPresenter >> drawScaledAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 	^ LineChart new
 		draw:
-			(QueryScaledAverage new
+			(QueryScaledAverage
 				runOn:
-					(QueryAvgTimeToOpenCloseTicketsGroupedByTime new
+					(QueryAvgTimeToOpenCloseTicketsGroupedByTime
 						runOn:
 							(QueryTicketPerMonthClosing new
-								runOn: (QueryEvolutions new runOn: Tbl allTickets))))
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
 ]
