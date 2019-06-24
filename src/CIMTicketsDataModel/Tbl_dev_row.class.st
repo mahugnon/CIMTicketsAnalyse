@@ -30,13 +30,6 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
-{ #category : #initialization }
-Tbl_dev_row >> convertTpsTotalToDuration [
-	dev_tps_total ifNil: [ ^ self ].
-	dev_tps_total := CIMDateFormatConverter
-		convert: dev_tps_total
-]
-
 { #category : #API }
 Tbl_dev_row >> dateClosing [
 	^ self dev_fin
@@ -282,6 +275,15 @@ Tbl_dev_row >> dev_valid_greg [
 { #category : #accessing }
 Tbl_dev_row >> dev_valid_greg: arg1 [
 	dev_valid_greg := arg1
+]
+
+{ #category : #formatting }
+Tbl_dev_row >> formatFieldsToCIMDate [
+	"dev_tps_total := CIMDateFormatConverter convert: dev_tps_total."
+	dev_tps_estim_dev := CIMDateFormatConverter
+		convert: dev_tps_estim_dev.
+	dev_tps_estim_dev := CIMDateFormatConverter
+		convert: dev_tps_estim_dev
 ]
 
 { #category : #initialization }

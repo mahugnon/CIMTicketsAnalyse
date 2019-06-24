@@ -6,6 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 CIMDateFormatConverter class >> convert: aTableField [
+	aTableField ifNil: [ ^ self ].
 	^ (self selectConverterFor: aTableField) convert: aTableField
 ]
 

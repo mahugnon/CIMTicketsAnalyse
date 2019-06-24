@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 Tbl_dev >> convertFieldToCimDate [
-	self rows do: [ :row | row formatToCIMDate ]
+	self rows do: [ :row | row formatFieldsToCIMDate ]
 ]
 
 { #category : #utility }
