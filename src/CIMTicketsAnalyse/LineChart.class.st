@@ -6,15 +6,23 @@ Class {
 
 { #category : #'drawing-general' }
 LineChart >> draw: aDictionary [
-	| b ds |
+	| b ds linearRegression |
+	linearRegression := QueryLinearRegression runOn: aDictionary.
 	b := RTGrapher new.
 	ds := RTData new.
 	"ds barShape color: Color blue."
 	ds connectColor: Color blue.
 	ds points: aDictionary keys.
-	ds y: [ :year | aDictionary at: year ].
+	ds y: [ :key | aDictionary at: key ].
 	b add: ds.
-	b maxY: 10.
+	ds := RTData new.
+	ds connectColor: Color red.
+	ds points: aDictionary keys.
+	ds
+		y: [ :key | 
+			key asSeconds * (linearRegression at: 'slope')
+				+ (linearRegression at: 'intercept') ].
+	b add: ds.
 	b axisX
 		numberOfLabels: aDictionary size;
 		labelRotation: -45;
