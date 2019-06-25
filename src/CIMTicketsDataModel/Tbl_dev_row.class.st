@@ -37,6 +37,11 @@ Tbl_dev_row >> dateClosing [
 	ifNotNil: [ :str | str asDate]
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl_dev_row >> devTpsTotalMinusEstim [
+	^ dev_tps_total - dev_tps_estim
+]
+
 { #category : #accessing }
 Tbl_dev_row >> dev_cim_id [
 	^ dev_cim_id

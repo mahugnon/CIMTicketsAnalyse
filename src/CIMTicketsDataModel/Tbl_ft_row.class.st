@@ -86,6 +86,11 @@ Tbl_ft_row >> dev: arg1 [
 	dev := arg1
 ]
 
+{ #category : #API }
+Tbl_ft_row >> devTpsTotalMinusEstim [
+	^ dev devTpsTotalMinusEstim
+]
+
 { #category : #accessing }
 Tbl_ft_row >> ft_attinfos [
 	^ ft_attinfos
@@ -596,6 +601,11 @@ Tbl_ft_row >> timeDev: anObject [
 { #category : #accessing }
 Tbl_ft_row >> totalTps [
 	^ dev dev_tps_total
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_ft_row >> tpsEstim [
+	^ dev dev_tps_estim
 ]
 
 { #category : #accessing }
