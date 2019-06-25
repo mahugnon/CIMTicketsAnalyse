@@ -14,7 +14,7 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 			spec
 				package: 'CIMTicketsDataModel';
 				package: 'CIMTicketsAnalyse'
-					with: #('CIMTicketsDataModel' 'PolyMath') ]
+					with: [ spec requires: #('CIMTicketsDataModel' 'PolyMath') ] ]
 ]
 
 { #category : #baselines }
