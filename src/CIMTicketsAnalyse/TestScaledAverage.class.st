@@ -20,7 +20,7 @@ TestScaledAverage >> testScaledAverge [
 		at: 10 put: 10;
 		at: 11 put: 11;
 		yourself.
-	scaledAvg := QueryScaledAverage new runOn: dic.
+	scaledAvg := QueryMovingAverage new runOn: dic.
 	self assert: scaledAvg size equals: 7.
 	self assert: (scaledAvg at: 3) equals: 3.
 	self assert: (scaledAvg at: 4) equals: 4.

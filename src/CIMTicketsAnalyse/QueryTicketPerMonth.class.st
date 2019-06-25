@@ -1,3 +1,10 @@
+"
+I group tickets per month. I have two options: 
+ - You can choose to fill month gap between two month in original data 
+ - You can choose to  order result
+Ex: QueryTicketPerMonthClosing new fillGaps: true ; runOn: (QueryClosed runOn: (QueryEvolutions runOn: aTicketsCollection)).
+
+"
 Class {
 	#name : #QueryTicketPerMonth,
 	#superclass : #CIMAbstractQuery,

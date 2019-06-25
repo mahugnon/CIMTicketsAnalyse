@@ -25,10 +25,26 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawMovingAvgTimeDevEvolutionTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeDevGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawScaledAvgTimeSpentBugsTicketsPerMonth [
 	^ LineChart new
 		draw:
-			(QueryScaledAverage
+			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeOnTicketsGroupedByTime
 						runOn:
@@ -44,7 +60,7 @@ MainPresenter >> drawScaledAvgTimeSpentBugsTicketsPerMonth [
 MainPresenter >> drawScaledAvgTimeSpentEvolutionTicketsPerMonth [
 	^ LineChart new
 		draw:
-			(QueryScaledAverage
+			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeOnTicketsGroupedByTime
 						runOn:
@@ -60,7 +76,7 @@ MainPresenter >> drawScaledAvgTimeSpentEvolutionTicketsPerMonth [
 MainPresenter >> drawScaledAvgTimeToOpenCloseBugsTicketsPerMonth [
 	^ LineChart new
 		draw:
-			(QueryScaledAverage
+			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeToOpenCloseTicketsGroupedByTime
 						runOn:
@@ -76,7 +92,7 @@ MainPresenter >> drawScaledAvgTimeToOpenCloseBugsTicketsPerMonth [
 MainPresenter >> drawScaledAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 	^ LineChart new
 		draw:
-			(QueryScaledAverage
+			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeToOpenCloseTicketsGroupedByTime
 						runOn:

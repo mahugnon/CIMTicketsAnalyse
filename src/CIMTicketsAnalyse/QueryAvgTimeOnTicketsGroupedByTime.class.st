@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryAvgTimeOnTicketsGroupedByTime,
-	#superclass : #CIMAbstractQuery,
+	#superclass : #TimeSerieQueries,
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
@@ -8,6 +8,6 @@ Class {
 QueryAvgTimeOnTicketsGroupedByTime >> runOn: aDictionary [
 	^ (aDictionary keys
 		collect:
-			[ :key | key -> (QueryAvgTimeOnTickets new runOn: (aDictionary at: key)) ])
+			[ :key | key -> (QueryAvgTimeOnTickets  runOn: (aDictionary at: key)) ])
 		asOrderedDictionary
 ]

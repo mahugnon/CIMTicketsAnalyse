@@ -1,3 +1,6 @@
+"
+I am a tool to clean CIM data
+"
 Class {
 	#name : #QueryCleanData,
 	#superclass : #CIMAbstractQuery,

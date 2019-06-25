@@ -1,11 +1,11 @@
 Class {
-	#name : #QueryScaledAverage,
-	#superclass : #CIMAbstractQuery,
+	#name : #QueryMovingAverage,
+	#superclass : #TimeSerieQueries,
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
 { #category : #running }
-QueryScaledAverage >> runOn: aDictionary [
+QueryMovingAverage >> runOn: aDictionary [
 	| result |
 	result := OrderedCollection new.
 	1 to: (aDictionary size - 4) do: [ :i ||k v|

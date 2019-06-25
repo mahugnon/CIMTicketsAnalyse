@@ -1,14 +1,13 @@
 Class {
 	#name : #QueryAvgTimeToOpenCloseTicketsGroupedByTime,
-	#superclass : #CIMAbstractQuery,
+	#superclass : #TimeSerieQueries,
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
 { #category : #running }
 QueryAvgTimeToOpenCloseTicketsGroupedByTime >> runOn: aDictionary [
 	^ (aDictionary keys
-		collect: [ :key | 
-			key
-				-> (QueryAvgTimeToOpenCloseTicket new runOn: (aDictionary at: key)) ])
+		collect:
+			[ :key | key -> (QueryAvgTimeToOpenCloseTicket runOn: (aDictionary at: key)) ])
 		asOrderedDictionary
 ]
