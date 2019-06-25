@@ -29,6 +29,30 @@ MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawAvgTimeTestBugsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryAvgTimeTestGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn: (QueryBugs runOn: (QueryCleanData new runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeTestEvolutionsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryAvgTimeTestGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn: (QueryCleanData runOn: (QueryEvolutions new runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeToOpenCloseBugsTicketsPerMonth [
 	^ LineChart new
 		draw:
@@ -71,6 +95,38 @@ MainPresenter >> drawMovingAvgTimeDevEvolutionTicketsPerMonth [
 			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeDevGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeTestGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeTestGroupedByTime
 						runOn:
 							(QueryTicketPerMonthClosing new
 								fillGaps: true;
