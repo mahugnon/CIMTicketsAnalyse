@@ -5,6 +5,30 @@ Class {
 }
 
 { #category : #drawing }
+MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryAvgTimeDevGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn: (QueryCleanData runOn: (QueryBugs new runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryAvgTimeDevGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn: (QueryCleanData runOn: (QueryEvolutions new runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeToOpenCloseBugsTicketsPerMonth [
 	^ LineChart new
 		draw:
@@ -22,6 +46,22 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 				runOn:
 					(QueryTicketPerMonthClosing new
 						runOn: (QueryEvolutions new runOn: Tbl allTickets)))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeDevBugsTicketsPerMonth [
+	^ LineChart new
+		draw:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeDevGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))))
 ]
 
 { #category : #drawing }
