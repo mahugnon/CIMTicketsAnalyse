@@ -5,6 +5,33 @@ Class {
 }
 
 { #category : #drawing }
+MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
+	^ DevTpsTotalMinusTpsEstimChart new
+		draw:
+			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn:
+									(QueryRejectNilEstimation runOn: (QueryBugs new runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
+MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
+	^ DevTpsTotalMinusTpsEstimChart  new 
+		draw:
+			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn:
+									(QueryRejectNilEstimation
+										runOn: (QueryEvolutions new runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
 	^ LineChart new
 		draw:
