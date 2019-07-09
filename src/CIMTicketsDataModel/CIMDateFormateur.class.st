@@ -1,11 +1,16 @@
 Class {
-	#name : #EngToFrenchDateMapper,
+	#name : #CIMDateFormateur,
 	#superclass : #Object,
 	#category : #'CIMTicketsDataModel-Utils'
 }
 
+{ #category : #accessing }
+CIMDateFormateur class >> format: aDuration [
+	^ aDuration days asString , 'j' , aDuration hours asString,'h'
+]
+
 { #category : #'operators-mapping' }
-EngToFrenchDateMapper class >> map: anEngMonth [
+CIMDateFormateur class >> map: anEngMonth [
 	| months monthYear |
 	months := {('January' -> 'Janvier').
 	('February' -> 'Février').

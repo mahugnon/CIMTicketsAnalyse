@@ -30,14 +30,14 @@ LineChart >> draw: aDictionary [
 	b add: ds.
 	b shouldUseNiceLabels: true.
 	b axisY
-		labelConversion: [ :v | v asDuration asString ];
-		title: 'temps en jj:hh:mm:ss'.
+		labelConversion: [ :v | CIMDateFormateur format: v asDuration ];
+		title: 'temps en jj:hh'.
 	b axisX
 		labelRotation: -45;
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > aDictionary keys size ])
 				ifTrue: [ '' ]
-				ifFalse: [ EngToFrenchDateMapper map: (aDictionary keys at: v) asString ] ].
+				ifFalse: [ CIMDateFormateur map: (aDictionary keys at: v) asString ] ].
 	b legend.
 	^ b
 ]
