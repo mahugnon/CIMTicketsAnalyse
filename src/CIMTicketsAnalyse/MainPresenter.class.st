@@ -178,18 +178,23 @@ MainPresenter >> drawMovingAvgTimeDevBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeDevEvolutionTicketsPerMonth [
-	^ LineChart new title: 'Moyenne temps de developpement sur les tickets Evolutions par mois';
+	| data |
+	data := QueryTicketPerMonthClosing new
+		fillGaps: true;
+		ordered: true;
+		runOn:
+			(QueryClosed
+				runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))).
+	^ LineChart new
+		title: 'Moyenne temps de developpement sur les tickets Evolutions par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeDevGroupedByTime
 						runOn:
-							(QueryTicketPerMonthClosing new
-								fillGaps: true;
-								ordered: true;
-								runOn:
-									(QueryClosed
-										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+							(data associations
+								reject: [ :ass | ass key = (Date asMonth: 9 inYear: 2015) ])
+								asOrderedDictionary))
 ]
 
 { #category : #drawing }
