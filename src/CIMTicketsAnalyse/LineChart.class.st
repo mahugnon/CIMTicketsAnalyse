@@ -9,7 +9,7 @@ Class {
 
 { #category : #'drawing-general' }
 LineChart >> draw: aDictionary [
-	| b ds linearRegression deco |
+	| b ds linearRegression |
 	linearRegression := QueryLinearRegression runOn: aDictionary.
 	b := RTGrapher new.
 	ds := RTData new.
@@ -37,7 +37,7 @@ LineChart >> draw: aDictionary [
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > aDictionary keys size ])
 				ifTrue: [ '' ]
-				ifFalse: [ (aDictionary keys at: v) asString ] ].
+				ifFalse: [ EngToFrenchDateMapper map: (aDictionary keys at: v) asString ] ].
 	b legend.
 	^ b
 ]
