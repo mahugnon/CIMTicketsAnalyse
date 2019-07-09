@@ -83,6 +83,36 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonth [
+	^ LineChart new
+		title: 'Moyenne temps passé sur les tickets Bugs par mois';
+		draw:
+			(QueryAvgTimeOnTicketsGroupedByTime
+				runOn:
+					(QueryTicketPerMonthClosing new
+						fillGaps: true;
+						ordered: true;
+						runOn:
+							(QueryClosed
+								runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonth [
+	^ LineChart new
+		title: 'Moyenne temps passé sur les tickets Evolutions par mois';
+		draw:
+			(QueryAvgTimeOnTicketsGroupedByTime
+				runOn:
+					(QueryTicketPerMonthClosing new
+						fillGaps: true;
+						ordered: true;
+						runOn:
+							(QueryClosed
+								runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeTestBugsTicketsPerMonth [
 	^ LineChart new title: 'AvgTimeTestBugsTicketsPerMonth';
 		draw:
@@ -120,7 +150,8 @@ MainPresenter >> drawAvgTimeToOpenCloseBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
-	^ LineChart new title: 'AvgTimeToOpenCloseEvolutionTicketsPerMonth';
+	^ LineChart new
+		title: 'Moyenne de temps pour fermer un Tickets Evolution par mois';
 		draw:
 			(QueryAvgTimeToOpenCloseTicketsGroupedByTime new
 				runOn:
@@ -130,7 +161,8 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeDevBugsTicketsPerMonth [
-	^ LineChart new title: 'MovingAvgTimeDevBugsTicketsPerMonth';
+	^ LineChart new
+		title: 'Moyenne temps de developpement sur les tickets Bugs par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -146,7 +178,7 @@ MainPresenter >> drawMovingAvgTimeDevBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeDevEvolutionTicketsPerMonth [
-	^ LineChart new title: 'MovingAvgTimeDevEvolutionTicketsPerMonth';
+	^ LineChart new title: 'Moyenne temps de developpement sur les tickets Evolutions par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -180,7 +212,7 @@ MainPresenter >> drawMovingAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
 	^ LineChart new
-		title: 'drawMovingAvgTimeSpentBugsTicketsPerMonth';
+		title: 'Moyenne temps passé sur les tickets Bugs par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -197,7 +229,7 @@ MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 	^ LineChart new
-		title: 'MovingAvgTimeSpentEvolutionTicketsPerMonth';
+		title: 'Moyenne temps passé sur les tickets Evolutions par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -214,7 +246,7 @@ MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
 	^ LineChart new
-		title: 'MovingAvgTimeTestBugsTicketsPerMonth';
+		title: 'Moyenne de temps pour tester par Tickets Bugs par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -231,7 +263,7 @@ MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
 	^ LineChart new
-		title: 'MovingAvgTimeTestEvolutionTicketsPerMonth';
+		title: 'Moyenne de temps pour tester par Tickets Evolution par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -248,7 +280,7 @@ MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 	^ LineChart new
-		title: 'MovingAvgTimeToOpenCloseBugsTicketsPerMonth';
+			title: 'Moyenne de temps pour fermer un Tickets Bugs par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -265,7 +297,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 	^ LineChart new
-		title: 'MovingAvgTimeToOpenCloseEvolutionTicketsPerMonth';
+		title: 'Moyenne de temps pour fermer un Tickets Evolution par mois';
 		draw:
 			(QueryMovingAverage
 				runOn:

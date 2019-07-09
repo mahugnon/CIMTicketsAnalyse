@@ -9,7 +9,7 @@ Class {
 
 { #category : #'drawing-general' }
 LineChart >> draw: aDictionary [
-	| b ds linearRegression |
+	| b ds linearRegression deco |
 	linearRegression := QueryLinearRegression runOn: aDictionary.
 	b := RTGrapher new.
 	ds := RTData new.
@@ -20,7 +20,7 @@ LineChart >> draw: aDictionary [
 	ds label: title.
 	b add: ds.
 	ds := RTData new.
-	ds connectColor: Color red.
+	ds connectColor: Color lightBrown.
 	ds points: aDictionary keys.
 	ds
 		y: [ :key | 
@@ -28,17 +28,17 @@ LineChart >> draw: aDictionary [
 				+ (linearRegression at: 'intercept') ];
 		label: 'Droite de regression'.
 	b add: ds.
+	b shouldUseNiceLabels: true.
+	b axisY
+		labelConversion: [ :v | v asDuration asString ];
+		title: 'temps en jj:hh:mm:ss'.
 	b axisX
-		numberOfLabels: aDictionary size;
 		labelRotation: -45;
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > aDictionary keys size ])
 				ifTrue: [ '' ]
 				ifFalse: [ (aDictionary keys at: v) asString ] ].
-	b axisY
-		title: title;
-		noDecimal.
-	b legend right.
+	b legend.
 	^ b
 ]
 
