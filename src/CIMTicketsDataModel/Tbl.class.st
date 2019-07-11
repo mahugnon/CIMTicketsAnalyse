@@ -69,7 +69,7 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 		do: [ :ticket | 
 			ticket
 				typeCorrection:
-					(Tbl tables ninth rows
+					((Tbl tables at: 10) rows
 						detect: [ :dev | dev typcorr_id = ticket ft_typcorr_id ]
 						ifNone: [ nil ]) ].
 	Tbl tables first rows
