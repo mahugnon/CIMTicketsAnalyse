@@ -1,16 +1,11 @@
 Class {
-	#name : #CIMDateFormateur,
+	#name : #CIMDateFormater,
 	#superclass : #Object,
 	#category : #'CIMTicketsDataModel-Utils'
 }
 
-{ #category : #accessing }
-CIMDateFormateur class >> format: aDuration [
-	^ aDuration days asString , 'j' , aDuration hours asString,'h'
-]
-
 { #category : #'operators-mapping' }
-CIMDateFormateur class >> map: anEngMonth [
+CIMDateFormater class >> map: anEngMonth [
 	| months monthYear |
 	months := {('January' -> 'Janvier').
 	('February' -> 'Février').
@@ -26,4 +21,14 @@ CIMDateFormateur class >> map: anEngMonth [
 	('December' -> 'Décembre')} asDictionary.
 	monthYear := ' ' split: anEngMonth .
 	^ (months at: monthYear first), ' ', monthYear second
+]
+
+{ #category : #accessing }
+CIMDateFormater >> format: aDuration [
+	^ aDuration days asString , 'j' , aDuration hours asString,'h'
+]
+
+{ #category : #accessing }
+CIMDateFormater >> title [
+	^ 'Temps en Jours heure'
 ]

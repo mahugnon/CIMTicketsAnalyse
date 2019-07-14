@@ -216,8 +216,8 @@ MainPresenter >> drawMovingAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne temps passé sur les tickets Bugs par mois';
+	^ BugsChart new
+		yFormateur: CIMHourFormater new;
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -233,8 +233,9 @@ MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne temps passé sur les tickets Evolutions par mois';
+	^ EvolutionChart new
+		yTranslation: 16160.221023768798;
+		yFormateur: CIMHourFormater new;
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -250,8 +251,8 @@ MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne de temps pour tester par Tickets Bugs par mois';
+	^ BugsChart new
+		yFormateur: CIMMinuteFormater new;
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -267,8 +268,9 @@ MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne de temps pour tester par Tickets Evolution par mois';
+	^ EvolutionChart new
+		yFormateur: CIMMinuteFormater new;
+		yTranslation: 2391.1500956546124;
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -284,8 +286,10 @@ MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
-	^ LineChart new
-			title: 'Moyenne de temps pour fermer un Tickets Bugs par mois';
+	^ BugsChart new
+		minY: 6e6;
+		maxY: 1.6e7;
+		yFormateur: CIMDayFormater new;
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -301,8 +305,10 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne de temps pour fermer un Tickets Evolution par mois';
+	^ EvolutionChart new
+		yTranslation: 3.6260740891732275e6;
+		maxY: 1.6e7;
+		yFormateur: CIMDayFormater new;
 		draw:
 			(QueryMovingAverage
 				runOn:

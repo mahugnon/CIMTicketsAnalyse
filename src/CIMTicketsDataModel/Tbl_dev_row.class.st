@@ -30,11 +30,6 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
-{ #category : #utility }
-Tbl_dev_row >> convertTpsTotalToDuration [
-	dev_tps_total := CIMDateFormatConverter convert: dev_tps_total
-]
-
 { #category : #API }
 Tbl_dev_row >> dateClosing [
 	^ self dev_fin
