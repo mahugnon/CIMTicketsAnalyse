@@ -39,7 +39,9 @@ Tbl_devIzy_row >> date_sortie [
 
 { #category : #accessing }
 Tbl_devIzy_row >> date_sortie: anObject [
-	date_sortie := anObject
+	date_sortie := anObject isNil
+		ifFalse: [ Date readFrom: anObject readStream pattern: 'dd/mm/yyyy' ]
+		ifTrue: [ anObject ]
 ]
 
 { #category : #accessing }
