@@ -69,7 +69,7 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 		do: [ :ticket | 
 			ticket
 				typeCorrection:
-					((Tbl tables at: 10) rows
+					(Tbl tables ninth rows
 						detect: [ :dev | dev typcorr_id = ticket ft_typcorr_id ]
 						ifNone: [ nil ]) ].
 	Tbl tables first rows
@@ -132,7 +132,8 @@ Tbl >> initialize [
 { #category : #utility }
 Tbl >> loadTblFromFolder: csvFolder [
 	^ csvFolder asFileReference visibleFiles
-		collect: [ :aCsvFile | (self detectTblFrom: aCsvFile) new filFromCSVFile: aCsvFile ]
+		collect:
+			[ :aCsvFile | (self detectTblFrom: aCsvFile) new filFromCSVFile: aCsvFile ]
 ]
 
 { #category : #utility }
