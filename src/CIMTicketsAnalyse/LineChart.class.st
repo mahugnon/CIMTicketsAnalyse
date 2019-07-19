@@ -6,7 +6,8 @@ Class {
 		'minY',
 		'maxY',
 		'yFormateur',
-		'yTranslation'
+		'yTranslation',
+		'perDev'
 	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
@@ -17,32 +18,40 @@ LineChart >> cimColor [
 ]
 
 { #category : #'drawing-general' }
-LineChart >> draw: aDictionary [
-	| b ds linearRegression |
-	linearRegression := QueryLinearRegression runOn: aDictionary.
-	b := RTGrapher new.
+LineChart >> developeurDataSetOn: aDictionary [
+	| ds |
 	ds := RTData new.
-	"ds barShape color: Color blue."
-	ds connectColor: self cimColor.
-	ds points: aDictionary keys.
-	ds y: [ :key | (aDictionary at: key) - yTranslation ].
-	ds label: title.
-	b add: ds.
-	b minXFromDataSets.
-	b maxXFromDataSets.
-	ds := RTData new.
-	ds connectColor: Color lightBrown.
+	ds connectColor: (Color fromString: '#1BB330').
 	ds points: aDictionary keys.
 	ds
 		y: [ :key | 
-			key asSeconds * (linearRegression at: 'slope')
-				+ (linearRegression at: 'intercept') - yTranslation ];
-		label: 'Droite de regression'.
+			QueryNumberOfDeveloppeurForAmonth new
+				runOn: (Tbl tables at: 12) rows
+				for: key ];
+		label: 'Nombre developpeurs'.
+	^ ds
+]
+
+{ #category : #'drawing-general' }
+LineChart >> draw: aDictionary [
+	| b ds |
+	"ds barShape color: Color blue."
+	b := RTGrapher new.
+	self isperDev
+		ifTrue: [ b := RTDoubleGrapher new.
+			b addRight: (self developeurDataSetOn: aDictionary).
+			b axisYRight color: (Color fromString:'#4A9CFF')  ].
+	ds := RTData new.
+	ds connectColor: self cimColor.
+	ds points: aDictionary keys.
+	ds y: [ :key | aDictionary at: key ].
+	ds label: title.
 	b add: ds.
+	b add: (self linearRegressionDataSetOn: aDictionary).
 	minY ifNotNil: [ b maxY: minY ].
 	maxY ifNotNil: [ b maxY: maxY ].
 	b axisY
-		numberOfLabels: (aDictionary size / 12) asInteger;
+		numberOfLabels: (aDictionary size / 30) asInteger;
 		labelConversion: [ :v | yFormateur format: v asDuration ];
 		title: yFormateur title.
 	b axisX
@@ -52,14 +61,36 @@ LineChart >> draw: aDictionary [
 			(v < 1 or: [ v > aDictionary keys size ])
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (aDictionary keys at: v) asString ] ].
-	b legend.
+
+	"b legend."
 	^ b
 ]
 
 { #category : #initialization }
 LineChart >> initialize [
 	super initialize.
-	yTranslation := 0
+	yTranslation := 0.
+	perDev := false
+]
+
+{ #category : #'as yet unclassified' }
+LineChart >> isperDev [
+	^ perDev
+]
+
+{ #category : #'drawing-general' }
+LineChart >> linearRegressionDataSetOn: aDictionary [
+	| ds linearRegression |
+	linearRegression := QueryLinearRegression runOn: aDictionary.
+	ds := RTData new.
+	ds connectColor: Color lightBrown.
+	ds points: aDictionary keys.
+	ds
+		y: [ :key | 
+			key asSeconds * (linearRegression at: 'slope')
+				+ (linearRegression at: 'intercept') ];
+		label: 'Droite de regression'.
+	^ ds
 ]
 
 { #category : #accessing }
@@ -80,6 +111,11 @@ LineChart >> minY [
 { #category : #accessing }
 LineChart >> minY: anObject [
 	minY := anObject
+]
+
+{ #category : #'as yet unclassified' }
+LineChart >> perDev: aBoolean [
+	perDev := aBoolean
 ]
 
 { #category : #accessing }

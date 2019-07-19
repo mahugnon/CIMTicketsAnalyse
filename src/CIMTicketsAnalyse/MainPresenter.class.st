@@ -46,7 +46,8 @@ MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonth [
-	^ LineChart new title: 'AvgTimeDevEvolutionsTicketsPerMonth';
+	^ EvolutionChart new
+		yFormateur: CIMDayFormater new;
 		draw:
 			(QueryAvgTimeDevGroupedByTime new
 				runOn:
@@ -57,15 +58,32 @@ MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonthPerDev [
+	^ EvolutionChart new
+		yFormateur: CIMHourFormater new;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryAvgTimeDevGroupedByTime new
+						runOn:
+							(QueryTicketPerMonthClosing new
+								runOn:
+									(QueryClosed
+										runOn: (QueryCleanData runOn: (QueryEvolutions new runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
-	^ LineChart new title: 'AvgTimeDevEvolutionsTicketsPerMonth';
+	^ BugsChart new
+		yFormateur: CIMHourFormater new;
 		draw:
 			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
 				runOn:
 					(QueryTicketPerMonthClosing new
 						runOn:
 							(QueryClosed
-								runOn: (QueryRejectNilEstimation runOn: (QueryBugs new runOn: Tbl allTickets)))))
+								runOn:
+									(QueryRejectNilEstimation runOn: (QueryBugs new runOn: Tbl allTickets)))))
 ]
 
 { #category : #drawing }
@@ -84,8 +102,8 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne temps passé sur les tickets Bugs par mois';
+	^ BugsChart new
+		yFormateur: CIMHourFormater new;
 		draw:
 			(QueryAvgTimeOnTicketsGroupedByTime
 				runOn:
@@ -98,9 +116,26 @@ MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonthPerDev [
+	^ BugsChart new
+		yFormateur: CIMMinuteFormater new;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryAvgTimeOnTicketsGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonth [
-	^ LineChart new
-		title: 'Moyenne temps passé sur les tickets Evolutions par mois';
+	^ EvolutionChart new
+		yFormateur: CIMHourFormater new;
 		draw:
 			(QueryAvgTimeOnTicketsGroupedByTime
 				runOn:
@@ -110,6 +145,23 @@ MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonth [
 						runOn:
 							(QueryClosed
 								runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonthPerDev [
+	^ EvolutionChart new
+		yFormateur: CIMHourFormater new;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryAvgTimeOnTicketsGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
 ]
 
 { #category : #drawing }
@@ -199,8 +251,7 @@ MainPresenter >> drawMovingAvgTimeDevEvolutionTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
-	^ LineChart new
-		title: 'MovingAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth';
+	^ EvolutionChart new
 		draw:
 			(QueryMovingAverage
 				runOn:
@@ -232,6 +283,26 @@ MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonthPerDev [
+	^ BugsChart new
+		yFormateur: CIMHourFormater new;
+		perDev: true;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryMovingAverage
+						runOn:
+							(QueryAvgTimeOnTicketsGroupedByTime
+								runOn:
+									(QueryTicketPerMonthClosing new
+										fillGaps: true;
+										ordered: true;
+										runOn:
+											(QueryClosed
+												runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 	^ EvolutionChart new
 		yTranslation: 16160.221023768798;
@@ -247,6 +318,26 @@ MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 								runOn:
 									(QueryClosed
 										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonthPerDev [
+	^ EvolutionChart new
+		yFormateur: CIMHourFormater new;
+		perDev: true;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryMovingAverage
+						runOn:
+							(QueryAvgTimeOnTicketsGroupedByTime
+								runOn:
+									(QueryTicketPerMonthClosing new
+										fillGaps: true;
+										ordered: true;
+										runOn:
+											(QueryClosed
+												runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))))
 ]
 
 { #category : #drawing }
@@ -267,6 +358,25 @@ MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonthPerDev [
+	^ BugsChart new
+		yFormateur: CIMMinuteFormater new;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryMovingAverage
+						runOn:
+							(QueryAvgTimeTestGroupedByTime
+								runOn:
+									(QueryTicketPerMonthClosing new
+										fillGaps: true;
+										ordered: true;
+										runOn:
+											(QueryClosed
+												runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
 	^ EvolutionChart new
 		yFormateur: CIMMinuteFormater new;
@@ -282,6 +392,23 @@ MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
 								runOn:
 									(QueryClosed
 										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonthPerDev [
+	^ EvolutionChart new
+		yFormateur: CIMMinuteFormater new;
+		draw:
+		(QueryTimePerDev runOn:	(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeTestGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))))
 ]
 
 { #category : #drawing }
@@ -304,9 +431,27 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonthPerDev [
+	^ BugsChart new
+		yFormateur: CIMDayFormater new;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryMovingAverage
+						runOn:
+							(QueryAvgTimeToOpenCloseTicketsGroupedByTime
+								runOn:
+									(QueryTicketPerMonthClosing new
+										fillGaps: true;
+										ordered: true;
+										runOn:
+											(QueryClosed
+												runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 	^ EvolutionChart new
-		yTranslation: 3.6260740891732275e6;
 		maxY: 1.6e7;
 		yFormateur: CIMDayFormater new;
 		draw:
@@ -320,4 +465,24 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 								runOn:
 									(QueryClosed
 										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonthPerDev [
+	^ EvolutionChart new
+		yFormateur: CIMDayFormater new;
+		perDev: true;
+		draw:
+			(QueryTimePerDev
+				runOn:
+					(QueryMovingAverage
+						runOn:
+							(QueryAvgTimeToOpenCloseTicketsGroupedByTime
+								runOn:
+									(QueryTicketPerMonthClosing new
+										fillGaps: true;
+										ordered: true;
+										runOn:
+											(QueryClosed
+												runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))))
 ]

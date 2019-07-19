@@ -90,5 +90,6 @@ TestQueries >> setUp [
 
 { #category : #tests }
 TestQueries >> testQueryNumberofDeveloperForAmonth [
-self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Date asMonth: 7 inYear:2007)  ) equals: 2
+self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Date asMonth: 7 inYear:2007)  ) equals: 2.
+self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Date asMonth: 9 inYear:2011)  ) equals: 4
 ]
