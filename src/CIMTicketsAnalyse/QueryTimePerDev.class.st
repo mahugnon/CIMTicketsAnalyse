@@ -8,7 +8,6 @@ Class {
 QueryTimePerDev >> runOn: aDictionary [
 	"I receive a time serie dictionary"
 
-	1 halt.
 	^ (aDictionary keys
 		collect: [ :key | 
 			key
