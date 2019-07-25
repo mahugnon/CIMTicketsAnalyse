@@ -9,7 +9,11 @@ DevChart >> draw: aDictionary [
 	| b ds |
 	b := RTGrapher new.
 	ds := RTData new.
-	"ds barShape color: Color blue."
+	ds dotShape ellipse
+		color: [ :key | 
+			(aDictionary at: key) = aDictionary median
+				ifTrue: [ Color red ]
+				ifFalse: [ Color fromString: '#7D4EBF' ] ].
 	ds connectColor: (Color fromString: '#7D4EBF').
 	ds points: aDictionary keys.
 	ds y: [ :month | aDictionary at: month ].
@@ -17,10 +21,11 @@ DevChart >> draw: aDictionary [
 	ds interaction popup
 		text: [ :elt | 
 			'Month: ' , elt key asString , String cr , 'Ticket per dev: '
-				, (aDictionary at: elt key) asString ].
+				, (aDictionary at: elt key) asFloat asString , String cr
+				, 'Median: ' , aDictionary median asString ].
 	b add: ds.
 	b add: (self linearRegressionDataSetOn: aDictionary).
-		b axisY
+	b axisY
 		numberOfLabels: (aDictionary size / 30) asInteger;
 		title: 'Ticket per developeur'.
 	b axisX

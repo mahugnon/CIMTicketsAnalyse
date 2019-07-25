@@ -245,6 +245,23 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawMovingAvgTicketBugsPerDev [
+	^ DevChart new
+		draw:
+			(QueryMovingAverage new
+				runOn:
+					(QueryNumberOfDevInterventionPerMonth new
+						devs: (Tbl tables at: 12) rows;
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawMovingAvgTicketPerDev [
 	^ DevChart new
 		draw:
