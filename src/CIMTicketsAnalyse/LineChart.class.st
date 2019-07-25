@@ -40,12 +40,16 @@ LineChart >> draw: aDictionary [
 	self isperDev
 		ifTrue: [ b := RTDoubleGrapher new.
 			b addRight: (self developeurDataSetOn: aDictionary).
-			b axisYRight color: (Color fromString:'#4A9CFF')  ].
+			b axisYRight color: (Color fromString: '#4A9CFF') ].
 	ds := RTData new.
 	ds connectColor: self cimColor.
 	ds points: aDictionary keys.
 	ds y: [ :key | aDictionary at: key ].
 	ds label: title.
+	ds interaction popup
+		text: [ :elt | 
+			'Month: ' , elt key asString , String cr , 'Temps : '
+				, (aDictionary at: elt key) asDuration asString ].
 	b add: ds.
 	b add: (self linearRegressionDataSetOn: aDictionary).
 	minY ifNotNil: [ b maxY: minY ].
