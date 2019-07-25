@@ -32,6 +32,21 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth 
 ]
 
 { #category : #drawing }
+MainPresenter >> drawAvgTicketPerDev [
+	^ DevChart new
+		draw:
+			(QueryNumberOfDevInterventionPerMonth new
+				devs: (Tbl tables at: 12) rows;
+				runOn:
+					(QueryTicketPerMonthClosing new
+						fillGaps: true;
+						ordered: true;
+						runOn:
+							(QueryClosed
+								runOn: (QueryBugsEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
 	^ LineChart new
 		title: 'AvgTimeDevBugsTicketsPerMonth';
@@ -227,6 +242,23 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 				runOn:
 					(QueryTicketPerMonthClosing new
 						runOn: (QueryEvolutions new runOn: Tbl allTickets)))
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTicketPerDev [
+	^ DevChart new
+		draw:
+			(QueryMovingAverage new
+				runOn:
+					(QueryNumberOfDevInterventionPerMonth new
+						devs: (Tbl tables at: 12) rows;
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn: (QueryBugsEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))))
 ]
 
 { #category : #drawing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #DevChart,
-	#superclass : #Object,
+	#superclass : #LineChart,
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
@@ -10,7 +10,7 @@ DevChart >> draw: aDictionary [
 	b := RTGrapher new.
 	ds := RTData new.
 	"ds barShape color: Color blue."
-	ds connectColor: Color blue.
+	ds connectColor: (Color fromString: '#7D4EBF').
 	ds points: aDictionary keys.
 	ds y: [ :month | aDictionary at: month ].
 	ds label: 'Ticket per dev'.
@@ -19,16 +19,16 @@ DevChart >> draw: aDictionary [
 			'Month: ' , elt key asString , String cr , 'Ticket per dev: '
 				, (aDictionary at: elt key) asString ].
 	b add: ds.
+	b add: (self linearRegressionDataSetOn: aDictionary).
+		b axisY
+		numberOfLabels: (aDictionary size / 30) asInteger;
+		title: 'Ticket per developeur'.
 	b axisX
-		numberOfLabels: aDictionary size;
+		numberOfLabels: (aDictionary size / 6) asInteger;
 		labelRotation: -45;
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > aDictionary keys size ])
-				ifTrue: [ ''	"for 0" ]
-				ifFalse: [ (aDictionary keys at: v) asString ] ].
-	b axisY
-		title: 'Number of Evolution or Bugs';
-		noDecimal.
-	b legend below.
-	b
+				ifTrue: [ '' ]
+				ifFalse: [ CIMDateFormater map: (aDictionary keys at: v) asString ] ].
+	^ b
 ]

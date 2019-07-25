@@ -65,8 +65,6 @@ LineChart >> draw: aDictionary [
 			(v < 1 or: [ v > aDictionary keys size ])
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (aDictionary keys at: v) asString ] ].
-
-	"b legend."
 	^ b
 ]
 
@@ -135,14 +133,4 @@ LineChart >> yFormateur [
 { #category : #accessing }
 LineChart >> yFormateur: anObject [
 	yFormateur := anObject
-]
-
-{ #category : #accessing }
-LineChart >> yTranslation [
-	^ yTranslation
-]
-
-{ #category : #accessing }
-LineChart >> yTranslation: anObject [
-	yTranslation := anObject
 ]
