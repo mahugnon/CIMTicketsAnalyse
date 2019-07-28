@@ -4,36 +4,26 @@ Class {
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
+{ #category : #'as yet unclassified' }
+DevChart >> cimColor [
+	^ Color fromString: '#7D4EBF'
+]
+
 { #category : #'drawing-general' }
-DevChart >> draw: aDictionary [
-	| b ds |
-	b := RTGrapher new.
-	ds := RTData new.
-	ds dotShape ellipse
-		color: [ :key | 
-			(aDictionary at: key) = aDictionary median
-				ifTrue: [ Color red ]
-				ifFalse: [ Color fromString: '#7D4EBF' ] ].
-	ds connectColor: (Color fromString: '#7D4EBF').
-	ds points: aDictionary keys.
-	ds y: [ :month | aDictionary at: month ].
-	ds label: 'Ticket per dev'.
-	ds interaction popup
-		text: [ :elt | 
-			'Month: ' , elt key asString , String cr , 'Ticket per dev: '
-				, (aDictionary at: elt key) asFloat asString , String cr
-				, 'Median: ' , aDictionary median asString ].
-	b add: ds.
-	b add: (self linearRegressionDataSetOn: aDictionary).
-	b axisY
-		numberOfLabels: (aDictionary size / 30) asInteger;
-		title: 'Ticket per developeur'.
-	b axisX
-		numberOfLabels: (aDictionary size / 6) asInteger;
-		labelRotation: -45;
-		labelConversion: [ :v | 
-			(v < 1 or: [ v > aDictionary keys size ])
-				ifTrue: [ '' ]
-				ifFalse: [ CIMDateFormater map: (aDictionary keys at: v) asString ] ].
-	^ b
+DevChart >> convertYAxis [
+	^ [ :v | v ]
+]
+
+{ #category : #initialization }
+DevChart >> initialize [
+	super initialize.
+	label := ''.
+	title := 'Ticket per dev'
+]
+
+{ #category : #'drawing-general' }
+DevChart >> popupTextOn: anObject [
+	^ 'Month: ' , anObject key asString , String cr , 'Ticket per dev: '
+		, (timeSerie at: anObject key) asFloat asString , String cr
+		, 'Median: ' , timeSerie median asString
 ]

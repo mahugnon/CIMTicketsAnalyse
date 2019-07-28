@@ -12,5 +12,5 @@ BugsChart >> cimColor [
 { #category : #initialization }
 BugsChart >> initialize [
 	super initialize.
-	title := 'Bugs'
+	label := 'Bugs'
 ]

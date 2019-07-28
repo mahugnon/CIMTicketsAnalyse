@@ -2,12 +2,14 @@ Class {
 	#name : #LineChart,
 	#superclass : #Object,
 	#instVars : [
-		'title',
 		'minY',
 		'maxY',
 		'yFormateur',
 		'yTranslation',
-		'perDev'
+		'perDev',
+		'timeSerie',
+		'label',
+		'title'
 	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
@@ -15,6 +17,11 @@ Class {
 { #category : #'as yet unclassified' }
 LineChart >> cimColor [
 	^ self subclassResponsibility
+]
+
+{ #category : #'drawing-general' }
+LineChart >> convertYAxis [
+	^ [ :v | yFormateur format: (v + yTranslation) asDuration ]
 ]
 
 { #category : #'drawing-general' }
@@ -33,38 +40,36 @@ LineChart >> developeurDataSetOn: aDictionary [
 ]
 
 { #category : #'drawing-general' }
-LineChart >> draw: aDictionary [
+LineChart >> draw [
 	| b ds |
-	"ds barShape color: Color blue."
 	b := RTGrapher new.
 	self isperDev
 		ifTrue: [ b := RTDoubleGrapher new.
-			b addRight: (self developeurDataSetOn: aDictionary).
+			b addRight: (self developeurDataSetOn: timeSerie).
 			b axisYRight color: (Color fromString: '#4A9CFF') ].
 	ds := RTData new.
 	ds connectColor: self cimColor.
-	ds points: aDictionary keys.
-	ds y: [ :key | aDictionary at: key ].
-	ds label: title.
-	ds interaction popup
-		text: [ :elt | 
-			'Month: ' , elt key asString , String cr , 'Temps : '
-				, (aDictionary at: elt key) asDuration asString ].
+	ds points: timeSerie keys.
+	ds y: [ :key | (timeSerie at: key) - yTranslation ].
+	ds label: label.
+	ds interaction popup text: [ :elt | self popupTextOn: elt ].
 	b add: ds.
-	b add: (self linearRegressionDataSetOn: aDictionary).
+	b add: (self linearRegressionDataSetOn: timeSerie).
 	minY ifNotNil: [ b maxY: minY ].
 	maxY ifNotNil: [ b maxY: maxY ].
 	b axisY
-		numberOfLabels: (aDictionary size / 30) asInteger;
-		labelConversion: [ :v | yFormateur format: v asDuration ];
-		title: yFormateur title.
+		numberOfLabels: (timeSerie size / 30) asInteger;
+		labelConversion: self convertYAxis;
+		title: title.
 	b axisX
-		numberOfLabels: (aDictionary size / 6) asInteger;
+		numberOfLabels: (timeSerie size / 6) asInteger;
 		labelRotation: -45;
 		labelConversion: [ :v | 
-			(v < 1 or: [ v > aDictionary keys size ])
+			(v < 1 or: [ v > timeSerie keys size ])
 				ifTrue: [ '' ]
-				ifFalse: [ CIMDateFormater map: (aDictionary keys at: v) asString ] ].
+				ifFalse: [ CIMDateFormater map: (timeSerie keys at: v) asString ] ].
+
+	"b legend."
 	^ b
 ]
 
@@ -90,7 +95,7 @@ LineChart >> linearRegressionDataSetOn: aDictionary [
 	ds
 		y: [ :key | 
 			key asSeconds * (linearRegression at: 'slope')
-				+ (linearRegression at: 'intercept') ];
+				+ (linearRegression at: 'intercept') - yTranslation];
 		label: 'Droite de regression'.
 	^ ds
 ]
@@ -120,9 +125,16 @@ LineChart >> perDev: aBoolean [
 	perDev := aBoolean
 ]
 
+{ #category : #'drawing-general' }
+LineChart >> popupTextOn: anObject [
+	^ 'Month: ' , anObject key asString , String cr , 'Ticket per dev: '
+		, (yFormateur format: (timeSerie at: anObject key) asDuration) asString
+		, String cr , 'Median: ' , timeSerie median asString
+]
+
 { #category : #accessing }
-LineChart >> title: aString [ 
-	title := aString
+LineChart >> timeSerie: anObject [
+	timeSerie := anObject
 ]
 
 { #category : #accessing }
@@ -132,5 +144,16 @@ LineChart >> yFormateur [
 
 { #category : #accessing }
 LineChart >> yFormateur: anObject [
-	yFormateur := anObject
+	yFormateur := anObject.
+	title := yFormateur title
+]
+
+{ #category : #accessing }
+LineChart >> yTranslation [
+	^ yTranslation
+]
+
+{ #category : #accessing }
+LineChart >> yTranslation: anObject [
+	yTranslation := anObject
 ]

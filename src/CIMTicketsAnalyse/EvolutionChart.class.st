@@ -12,5 +12,5 @@ EvolutionChart >> cimColor [
 { #category : #initialization }
 EvolutionChart >> initialize [
 	super initialize.
-	title := 'Evolution'
+	label := 'Evolution'
 ]
