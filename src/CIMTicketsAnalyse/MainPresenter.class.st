@@ -110,6 +110,7 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonth [
 	^ BugsChart new
 		yFormateur: CIMHourFormater new;
+		maxY: 162271.2;
 		timeSerie:
 			(QueryAvgTimeOnTicketsGroupedByTime
 				runOn:
@@ -362,6 +363,7 @@ MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonthPerDev [
 MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 	^ EvolutionChart new
 		yTranslation: 16160.221023768798;
+		maxY: 114964.9740659338;
 		yFormateur: CIMHourFormater new;
 		timeSerie:
 			(QueryMovingAverage
