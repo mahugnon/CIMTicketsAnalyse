@@ -8,5 +8,8 @@ Class {
 QueryAvgTimeOnTickets >> runOn: aCollection [
 	aCollection isEmptyOrNil
 		ifTrue: [ ^ 0 asDuration totalSeconds ]
-		ifFalse: [ ^ (QueryTimeOnTickets runOn: aCollection) totalSeconds asFloat ]
+		ifFalse: [ ^ ((aCollection
+				inject: 0 asDuration
+				into: [ :sum :ticket | sum + (ticket totalTps ifNil: [ 0 asDuration ]) ])
+				/ aCollection size) totalSeconds asFloat ]
 ]

@@ -6,8 +6,9 @@ Class {
 
 { #category : #running }
 QueryAvgNumberOfBibliothequeModifiedGroupedByTime >> runOn: aDictionary [
-	^ aDictionary keys
+	^ (aDictionary keys
 		collect: [ :key | 
 			key
-				-> (QueryAvgNumberOfBibliothequesModified runOn: (aDictionary at: key)) ]
+				-> (QueryAvgNumberOfBibliothequesModified runOn: (aDictionary at: key)) ])
+		asOrderedDictionary
 ]

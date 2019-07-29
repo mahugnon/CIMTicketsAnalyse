@@ -1,6 +1,6 @@
 Class {
 	#name : #BugsChart,
-	#superclass : #LineChart,
+	#superclass : #CIMAbstractChart,
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 

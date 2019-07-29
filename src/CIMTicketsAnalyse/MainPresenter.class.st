@@ -245,8 +245,23 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 ]
 
 { #category : #'as yet unclassified' }
+MainPresenter >> drawMovingAvgOfBibliothequePerTicketsPerMonth [
+	^ BibChart new
+		timeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgNumberOfBibliothequeModifiedGroupedByTime new
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+		draw
+]
+
+{ #category : #'as yet unclassified' }
 MainPresenter >> drawMovingAvgTicketBugsPerDev [
-	^ DevChart new
+	^ CIMChart new
 		timeSerie:
 			(QueryMovingAverage new
 				runOn:

@@ -11,6 +11,9 @@ QueryAvgTimeToOpenCloseTicket >> runOn: aCollection [
 		select: [ :ticket | ticket dateClosing isNotNil ])
 		reject: [ :t | t dev dev_fin = '0201-11-24' ].
 	tickets ifEmpty: [ ^ 0 ].
-	^ ((QueryTimeToOpenCloseTicket runOn: tickets) / tickets size)
-		asFloat
+	^ ((tickets
+		inject: 0
+		into:
+			[ :sum :aTicket | sum + (QueryDurationBetweenOpenAndCloseTicket new runOn: aTicket) ])
+		/ tickets size) asFloat
 ]

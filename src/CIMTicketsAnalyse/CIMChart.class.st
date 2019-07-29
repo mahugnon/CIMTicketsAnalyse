@@ -1,28 +1,28 @@
 Class {
-	#name : #DevChart,
-	#superclass : #LineChart,
+	#name : #CIMChart,
+	#superclass : #CIMAbstractChart,
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
 { #category : #'as yet unclassified' }
-DevChart >> cimColor [
+CIMChart >> cimColor [
 	^ Color fromString: '#7D4EBF'
 ]
 
 { #category : #'drawing-general' }
-DevChart >> convertYAxis [
+CIMChart >> convertYAxis [
 	^ [ :v | v ]
 ]
 
 { #category : #initialization }
-DevChart >> initialize [
+CIMChart >> initialize [
 	super initialize.
-	label := ''.
+	label := 'Number of ticket'.
 	title := 'Ticket per dev'
 ]
 
 { #category : #'drawing-general' }
-DevChart >> popupTextOn: anObject [
+CIMChart >> popupTextOn: anObject [
 	^ 'Month: ' , anObject key asString , String cr , 'Ticket per dev: '
 		, (timeSerie at: anObject key) asFloat asString , String cr
 		, 'Median: ' , timeSerie median asString
