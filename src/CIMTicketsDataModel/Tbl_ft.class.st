@@ -14,6 +14,11 @@ Tbl_ft >> filFromCSVFile: aCsvFile [
 			(date ifNil: [ Date new ] ifNotNil: [ date ]) year > 2003 ]
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl_ft >> keepInterestingBibliotheques [
+	^ self rows do: [ :row | row keepInterestingBibliotheques ]
+]
+
 { #category : #utility }
 Tbl_ft >> rowClass [
 	^ Tbl_ft_row

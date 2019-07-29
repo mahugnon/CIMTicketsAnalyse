@@ -573,6 +573,11 @@ Tbl_ft_row >> isMisc [
 	^ self typeCorrection isMisc
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl_ft_row >> keepInterestingBibliotheques [
+	^ bibliotheques := bibliotheques select: #isInterestingBibliotheque
+]
+
 { #category : #accessing }
 Tbl_ft_row >> month [
 	^ ft_datecrea month
