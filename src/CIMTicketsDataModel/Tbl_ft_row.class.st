@@ -575,7 +575,7 @@ Tbl_ft_row >> isMisc [
 
 { #category : #'as yet unclassified' }
 Tbl_ft_row >> keepInterestingBibliotheques [
-	^ bibliotheques := bibliotheques select: #isInterestingBibliotheque
+	^ bibliotheques select: #isInterestingBibliotheque
 ]
 
 { #category : #accessing }
@@ -591,6 +591,11 @@ Tbl_ft_row >> monthClosing [
 { #category : #API }
 Tbl_ft_row >> monthCreation [
 	^ self ft_datecrea month
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_ft_row >> numberOfBibliotheques [
+	^ bibliotheques size
 ]
 
 { #category : #accessing }

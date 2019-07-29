@@ -1,7 +1,7 @@
 Class {
 	#name : #QueryAvgTimeDevTpsTotalMinusEstimOnTicket,
 	#superclass : #CIMAbstractQuery,
-	#category : #'CIMTicketsAnalyse-Queries'
+	#category : #'CIMTicketsAnalyse-Queries-Dev'
 }
 
 { #category : #running }

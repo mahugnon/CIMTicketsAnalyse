@@ -1,7 +1,7 @@
 Class {
 	#name : #QueryAvgTimeDevGroupedByTime,
 	#superclass : #TimeSerieQueries,
-	#category : #'CIMTicketsAnalyse-Queries'
+	#category : #'CIMTicketsAnalyse-Queries-Dev'
 }
 
 { #category : #running }

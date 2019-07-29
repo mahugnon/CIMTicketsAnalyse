@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'devs'
 	],
-	#category : #'CIMTicketsAnalyse-Queries'
+	#category : #'CIMTicketsAnalyse-Queries-Dev'
 }
 
 { #category : #accessing }

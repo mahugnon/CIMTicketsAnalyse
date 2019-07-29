@@ -4,7 +4,7 @@ I computer the number of developpeur for a given month . I take as parameter  aM
 Class {
 	#name : #QueryNumberOfDeveloppeurForAmonth,
 	#superclass : #CIMAbstractQuery,
-	#category : #'CIMTicketsAnalyse-Queries'
+	#category : #'CIMTicketsAnalyse-Queries-Dev'
 }
 
 { #category : #running }
