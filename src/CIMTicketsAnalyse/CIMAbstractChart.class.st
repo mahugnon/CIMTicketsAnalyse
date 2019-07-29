@@ -68,7 +68,7 @@ CIMAbstractChart >> draw [
 			(v < 1 or: [ v > timeSerie keys size ])
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie keys at: v) asString ] ].
-	b legend.
+	"b legend."
 	^ b
 ]
 

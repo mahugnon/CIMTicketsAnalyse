@@ -277,6 +277,23 @@ MainPresenter >> drawMovingAvgTicketBugsPerDev [
 		draw
 ]
 
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawMovingAvgTicketPerDev [
+	^ CIMChart new
+		perDev: true;
+		timeSerie:
+			(QueryMovingAverage new
+				runOn:
+					(QueryNumberOfDevInterventionPerMonth new
+						devs: (Tbl tables at: 12) rows;
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+		draw
+]
+
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeDevBugsTicketsPerMonth [
 	^ BugsChart new
