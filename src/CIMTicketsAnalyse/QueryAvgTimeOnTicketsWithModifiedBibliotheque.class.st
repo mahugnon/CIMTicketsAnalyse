@@ -6,7 +6,9 @@ Class {
 
 { #category : #running }
 QueryAvgTimeOnTicketsWithModifiedBibliotheque >> runOn: aCollection [
-	^ ((QueryAvgTimeOnTickets runOn: aCollection)
-		/ (QueryAvgNumberOfBibliothequesModified runOn: aCollection))
-		asFloat
+	| avgBib |
+	avgBib := QueryAvgNumberOfBibliothequesModified runOn: aCollection.
+	^ avgBib = 0
+		ifTrue: [ QueryAvgTimeOnTickets runOn: aCollection ]
+		ifFalse: [ ((QueryAvgTimeOnTickets runOn: aCollection) / avgBib) asFloat ]
 ]
