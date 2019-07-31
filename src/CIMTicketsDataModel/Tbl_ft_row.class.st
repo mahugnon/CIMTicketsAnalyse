@@ -51,7 +51,8 @@ Class {
 		'dev',
 		'typeCorrection',
 		'bibliotheques',
-		'timeDev'
+		'timeDev',
+		'versions'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -638,6 +639,16 @@ Tbl_ft_row >> updateBibliothequesWith: aCollection [
 Tbl_ft_row >> updateDevWith: aCollection [
 	self
 		dev: (aCollection select: [ :aDev | aDev dev_cim_id = ft_dev_id ])
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> versions [
+	^ versions
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> versions: anObject [
+	versions := anObject
 ]
 
 { #category : #accessing }

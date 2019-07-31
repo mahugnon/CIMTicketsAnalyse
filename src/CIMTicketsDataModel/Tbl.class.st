@@ -86,7 +86,13 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 			ticket
 				bibliotheques:
 					(Tbl tables first rows
-						select: [ :bib | ticket ft_modif_id = bib biblio_modif_id ]) ]
+						select: [ :bib | ticket ft_modif_id = bib biblio_modif_id ]) ].
+	Tbl tables fifth rows
+		do: [ :ticket | 
+			ticket
+				versions:
+					((Tbl tables at: 10) rows
+						select: [ :version | ticket ft_version_id = version version_id ]) ]
 ]
 
 { #category : #accessing }
