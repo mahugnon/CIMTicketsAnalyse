@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMAbstractChart,
+	#name : #LineChart,
 	#superclass : #Object,
 	#instVars : [
 		'minY',
@@ -15,17 +15,17 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CIMAbstractChart >> cimColor [
-	^ self subclassResponsibility
+LineChart >> cimColor [
+	^ Color blue
 ]
 
 { #category : #'drawing-general' }
-CIMAbstractChart >> convertYAxis [
+LineChart >> convertYAxis [
 	^ [ :v | yFormateur format: (v + yTranslation) asDuration ]
 ]
 
 { #category : #'drawing-general' }
-CIMAbstractChart >> developeurDataSetOn: aDictionary [
+LineChart >> developeurDataSetOn: aDictionary [
 	| ds |
 	ds := RTData new.
 	ds connectColor: (Color fromString: '#1BB330').
@@ -40,7 +40,7 @@ CIMAbstractChart >> developeurDataSetOn: aDictionary [
 ]
 
 { #category : #'drawing-general' }
-CIMAbstractChart >> draw [
+LineChart >> draw [
 	| b ds |
 	b := RTGrapher new.
 	self isperDev
@@ -54,7 +54,8 @@ CIMAbstractChart >> draw [
 	ds label: label.
 	ds interaction popup text: [ :elt | self popupTextOn: elt ].
 	b add: ds.
-	b add: (self linearRegressionDataSetOn: timeSerie).
+	b
+		add: (self linearRegressionDataSetOn: timeSerie color: Color lightBrown).
 	minY ifNotNil: [ b maxY: minY ].
 	maxY ifNotNil: [ b maxY: maxY ].
 	b axisY
@@ -73,86 +74,86 @@ CIMAbstractChart >> draw [
 ]
 
 { #category : #initialization }
-CIMAbstractChart >> initialize [
+LineChart >> initialize [
 	super initialize.
 	yTranslation := 0.
 	perDev := false
 ]
 
 { #category : #'as yet unclassified' }
-CIMAbstractChart >> isperDev [
+LineChart >> isperDev [
 	^ perDev
 ]
 
 { #category : #'drawing-general' }
-CIMAbstractChart >> linearRegressionDataSetOn: aDictionary [
+LineChart >> linearRegressionDataSetOn: aDictionary color: aColor [
 	| ds linearRegression |
 	linearRegression := QueryLinearRegression runOn: aDictionary.
 	ds := RTData new.
-	ds connectColor: Color lightBrown.
+	ds connectColor: aColor.
 	ds points: aDictionary keys.
 	ds
 		y: [ :key | 
 			key asSeconds * (linearRegression at: 'slope')
-				+ (linearRegression at: 'intercept') - yTranslation];
+				+ (linearRegression at: 'intercept') - yTranslation ];
 		label: 'Droite de regression'.
 	^ ds
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> maxY [
+LineChart >> maxY [
 	^ maxY
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> maxY: anObject [
+LineChart >> maxY: anObject [
 	maxY := anObject
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> minY [
+LineChart >> minY [
 	^ minY
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> minY: anObject [
+LineChart >> minY: anObject [
 	minY := anObject
 ]
 
 { #category : #'as yet unclassified' }
-CIMAbstractChart >> perDev: aBoolean [
+LineChart >> perDev: aBoolean [
 	perDev := aBoolean
 ]
 
 { #category : #'drawing-general' }
-CIMAbstractChart >> popupTextOn: anObject [
+LineChart >> popupTextOn: anObject [
 	^ 'Month: ' , anObject key asString , String cr , 'Duration : '
 		, (yFormateur format: (timeSerie at: anObject key) asDuration) asString
 		, String cr , 'Median: ' , timeSerie median asString
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> timeSerie: anObject [
+LineChart >> timeSerie: anObject [
 	timeSerie := anObject
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> yFormateur [
+LineChart >> yFormateur [
 	^ yFormateur
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> yFormateur: anObject [
+LineChart >> yFormateur: anObject [
 	yFormateur := anObject.
 	title := yFormateur title
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> yTranslation [
+LineChart >> yTranslation [
 	^ yTranslation
 ]
 
 { #category : #accessing }
-CIMAbstractChart >> yTranslation: anObject [
+LineChart >> yTranslation: anObject [
 	yTranslation := anObject
 ]

@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 TimeResolutionChart >> drawOn: aCollection withTimeQuery: aTimeQuery andTicketTypeQuery: aTicketQuery [
-	CIMAbstractChart new
+	LineChart new
 		draw:
 			(QueryAvgTimeOnTicketsGroupedByTime new
 				runOn: (aTimeQuery new runOn: (aTicketQuery new runOn: aCollection)))

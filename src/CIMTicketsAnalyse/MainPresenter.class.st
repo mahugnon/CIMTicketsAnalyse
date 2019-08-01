@@ -106,6 +106,31 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 		draw
 ]
 
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawAvgTimeSpentAndTimeEstim [
+	^ DoubleChart new
+		yFormateur: CIMHourFormater new;
+		timeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeOnTicketsGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+		secondTimeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTimeDevTpsEstimOnTicketGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+		draw
+]
+
 { #category : #drawing }
 MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonth [
 	^ BugsChart new

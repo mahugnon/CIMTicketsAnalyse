@@ -88,6 +88,13 @@ Tbl_ft_row >> dev: arg1 [
 ]
 
 { #category : #API }
+Tbl_ft_row >> devTpsEstim [
+	dev dev_tps_estim = String empty
+		ifTrue: [ ^ 0 asDuration ].
+	^ dev dev_tps_estim
+]
+
+{ #category : #API }
 Tbl_ft_row >> devTpsTotalMinusEstim [
 	^ dev devTpsTotalMinusEstim
 ]
