@@ -52,10 +52,28 @@ Class {
 		'typeCorrection',
 		'bibliotheques',
 		'timeDev',
-		'versions'
+		'versions',
+		'dependenceModel',
+		'associatedFiles'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
+
+{ #category : #adding }
+Tbl_ft_row >> addAssociatedFile: aCollection [
+	associatedFiles ifNil: [ associatedFiles := Set new ].
+	associatedFiles addAll: aCollection
+]
+
+{ #category : #API }
+Tbl_ft_row >> analyseContat [
+	CIMConstatAnalyser new analyse: self
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> associatedFiles [
+	^ associatedFiles
+]
 
 { #category : #accessing }
 Tbl_ft_row >> bibliotheques [
@@ -75,6 +93,16 @@ Tbl_ft_row >> dateClosing [
 { #category : #API }
 Tbl_ft_row >> dateOpening [
 	^ dev ft_datecrea
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> dependenceModel [
+	^ dependenceModel
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> dependenceModel: anObject [
+	dependenceModel := anObject
 ]
 
 { #category : #accessing }
@@ -560,6 +588,11 @@ Tbl_ft_row >> ft_version_souhait: arg1 [
 ]
 
 { #category : #initialization }
+Tbl_ft_row >> initialize [
+	associatedFiles := Set new
+]
+
+{ #category : #initialization }
 Tbl_ft_row >> initializeWith: arg1 [
 	super initializeWith: arg1.
 	ft_datecrea ifNil: [ ^ self ].
@@ -581,7 +614,7 @@ Tbl_ft_row >> isMisc [
 	^ self typeCorrection isMisc
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #API }
 Tbl_ft_row >> keepInterestingBibliotheques [
 	^ bibliotheques select: #isInterestingBibliotheque
 ]
@@ -601,7 +634,7 @@ Tbl_ft_row >> monthCreation [
 	^ self ft_datecrea month
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #API }
 Tbl_ft_row >> numberOfBibliotheques [
 	^ bibliotheques size
 ]
@@ -621,7 +654,7 @@ Tbl_ft_row >> totalTps [
 	^ dev dev_tps_total
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #API }
 Tbl_ft_row >> tpsEstim [
 	^ dev dev_tps_estim
 ]

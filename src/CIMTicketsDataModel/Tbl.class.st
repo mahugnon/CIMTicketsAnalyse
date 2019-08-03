@@ -21,6 +21,20 @@ Tbl class >> allTickets [
 	^ self tableTickets rows
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl class >> associateToTicketFileIn: aFolder [
+	| folderReference |
+	folderReference := aFolder asFileReference.
+	^ Tbl tableTickets
+		addAssociatedFiles:
+			(QueryTicketsAndAssociatedFileFromMooseModel
+				runOn:
+					((PWBCommitCommentExtractor
+						extractCommitCommentFromFolder: folderReference
+						inModel: (PWBFamixImporter importFromFolder: folderReference))
+						allWithType: FamixPWBTicket))
+]
+
 { #category : #accessing }
 Tbl class >> avgTimeDevOnPerBibliotheque [
 	avgTimeDevOnPerBibliotheque
@@ -37,22 +51,6 @@ Tbl class >> avgTimeDevOnPerBibliotheque: anObject [
 { #category : #accesing }
 Tbl class >> dev [
 	^tables fourth
-]
-
-{ #category : #accessing }
-Tbl class >> script [
-	EvolutionBugPresenter new
-		drawEvolutionCorrectionForTickets: Tbl tables fifth rows
-		timeQuery: QueryTicketPerYear
-		title: 'EVBug'.
-	QueryAvgTimeOnTicketsGroupedByTime new
-		runOn:
-			(QueryTicketPerMonthClosing new
-				runOn: (QueryBugs new runOn: Tbl tables fifth rows)).
-	QueryAvgTimeToOpenCloseTicketsGroupedByTime new
-		runOn:
-			(QueryTicketPerMonth new
-				runOn: (QueryEvolutions new runOn: Tbl tables fifth rows))
 ]
 
 { #category : #initialization }
