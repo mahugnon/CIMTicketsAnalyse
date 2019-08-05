@@ -8,6 +8,20 @@ Class {
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 	<script:
 		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth open'>
+	^ self
+		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryBugs
+]
+
+{ #category : #drawing }
+MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
+	<script:
+		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth open'>
+	^ self
+		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryEvolutions
+]
+
+{ #category : #drawing }
+MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 	| timeSeries data1 data2 |
 	timeSeries := (QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime
 		new
@@ -16,7 +30,8 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 				runOn:
 					(QueryClosed
 						runOn:
-							(QueryRejectNilEstimation runOn: (QueryBugs new runOn: Tbl allTickets)))))
+							(QueryRejectNilEstimation
+								runOn: (selectQuery new runOn: Tbl allTickets)))))
 		reject: [ :serie | serie asString = '-125526.52173913' ].
 	data1 := ((timeSeries keys
 		select: [ :ech | ech < (Date asMonth: 05 inYear: 2013) ])
@@ -31,20 +46,6 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 		withRegressionIntervall:
 			{data1.
 			data2}
-]
-
-{ #category : #drawing }
-MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
-	^ DrawMultiLinearRegressionOnChart  new 
-		draw:
-			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
-				runOn:
-					(QueryTicketPerMonthClosing new
-						runOn:
-							(QueryClosed
-								runOn:
-									(QueryRejectNilEstimation
-										runOn: (QueryEvolutions new runOn: Tbl allTickets)))))
 ]
 
 { #category : #drawing }

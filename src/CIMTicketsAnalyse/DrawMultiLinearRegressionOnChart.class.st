@@ -1,8 +1,21 @@
 Class {
 	#name : #DrawMultiLinearRegressionOnChart,
 	#superclass : #PB2GraphsBlueRed,
+	#instVars : [
+		'charColor'
+	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
+
+{ #category : #accessing }
+DrawMultiLinearRegressionOnChart >> charColor [
+	^ charColor
+]
+
+{ #category : #accessing }
+DrawMultiLinearRegressionOnChart >> charColor: anObject [
+	charColor := anObject
+]
 
 { #category : #'drawing-general' }
 DrawMultiLinearRegressionOnChart >> draw: aDictionary [
