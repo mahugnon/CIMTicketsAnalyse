@@ -6,34 +6,39 @@ Class {
 
 { #category : #'drawing-general' }
 DevTpsTotalMinusTpsEstimChart >> draw: aDictionary [
-	| datas b ds linearRegressionLowMonth linearRegressionUpMonth |
+	| datas b ds firstLinearRegression secondLinearRegression firstX |
+	firstX := aDictionary keys first asSeconds.
 	datas := QuerySplitTicketsTimeSerie new
-		month: 3544812000;
+		month: ('05/01/2013' asDate asSeconds) ;
 		runOn: aDictionary.
-	linearRegressionLowMonth := QueryLinearRegression runOn: datas first.
-	linearRegressionUpMonth := QueryLinearRegression runOn: datas second.
+	firstLinearRegression := QueryLinearRegression runOn: datas first.
+	secondLinearRegression := QueryLinearRegression runOn: datas second.
 	b := RTGrapher new.
 	ds := RTData new.
 	"ds barShape color: Color blue."
 	ds connectColor: Color blue.
 	ds points: aDictionary keys.
 	ds y: [ :key | aDictionary at: key ].
+	ds x: [ :key | key asSeconds - firstX].
 	b add: ds.
 	ds := RTData new.
 	ds connectColor: Color green.
-	ds points: aDictionary keys.
+
+	ds points: (aDictionary keys select: [ :m | m < ('05/01/2013' asDate) ]).
+	ds x: [ :key | key asSeconds - firstX].
 	ds
 		y: [ :key | 
-			key asSeconds * (linearRegressionLowMonth at: 'slope')
-				+ (linearRegressionLowMonth at: 'intercept') ].
+			key asSeconds * (firstLinearRegression at: 'slope')
+				+ (firstLinearRegression at: 'intercept') ].
 	b add: ds.
 	ds := RTData new.
 	ds connectColor: Color red.
-	ds points: aDictionary keys.
+	ds points: (aDictionary keys select: [ :m | m > ('05/01/2013' asDate) ]).
 	ds
 		y: [ :key | 
-			key asSeconds * (linearRegressionUpMonth at: 'slope')
-				+ (linearRegressionUpMonth at: 'intercept') ].
+			key asSeconds * (secondLinearRegression at: 'slope')
+				+ (secondLinearRegression at: 'intercept') ].
+	ds x: [ :key | key asSeconds - firstX].
 	b add: ds.
 	b axisX
 		numberOfLabels: aDictionary size;
@@ -42,5 +47,6 @@ DevTpsTotalMinusTpsEstimChart >> draw: aDictionary [
 			(v < 1 or: [ v > aDictionary keys size ])
 				ifTrue: [ ''	"for 0" ]
 				ifFalse: [ (aDictionary keys at: v) asString ] ].
+	b view @ RTZoomableView.
 	^ b
 ]

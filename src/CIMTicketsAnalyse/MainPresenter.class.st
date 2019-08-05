@@ -6,6 +6,7 @@ Class {
 
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
+	<script: 'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth open'>
 	^ DevTpsTotalMinusTpsEstimChart new
 		draw:
 			((QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
@@ -14,7 +15,8 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 						runOn:
 							(QueryClosed
 								runOn:
-									(QueryRejectNilEstimation runOn: (QueryBugs new runOn: Tbl allTickets))))) reject:[:serie| serie asString  = '-125526.52173913'] )
+									(QueryRejectNilEstimation runOn: (QueryBugs new runOn: Tbl allTickets)))))
+				reject: [ :serie | serie asString = '-125526.52173913' ])
 ]
 
 { #category : #drawing }
@@ -286,6 +288,24 @@ MainPresenter >> drawMovingAvgOfBibliothequePerTicketsPerMonth [
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawMovingAvgTicketBugsPerDev [
+	<script: 'MainPresenter new drawMovingAvgTicketBugsPerDev open'>
+	^ self drawMovingAvgTicketPerDev: QueryBugs
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawMovingAvgTicketEvolutionPerDev [
+	<script: 'MainPresenter new drawMovingAvgTicketEvolutionPerDev open'>
+	^ self drawMovingAvgTicketPerDev: QueryEvolutions 
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawMovingAvgTicketPerDev [
+	<script: 'MainPresenter new drawMovingAvgTicketPerDev open'>
+	^ self drawMovingAvgTicketPerDev: QueryClosed
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawMovingAvgTicketPerDev: selectQuery [
 	^ CIMChart new
 		timeSerie:
 			(QueryMovingAverage new
@@ -298,24 +318,7 @@ MainPresenter >> drawMovingAvgTicketBugsPerDev [
 								ordered: true;
 								runOn:
 									(QueryClosed
-										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))));
-		draw
-]
-
-{ #category : #'as yet unclassified' }
-MainPresenter >> drawMovingAvgTicketPerDev [
-	^ CIMChart new
-		perDev: true;
-		timeSerie:
-			(QueryMovingAverage new
-				runOn:
-					(QueryNumberOfDevInterventionPerMonth new
-						devs: (Tbl tables at: 12) rows;
-						runOn:
-							(QueryTicketPerMonthClosing new
-								fillGaps: true;
-								ordered: true;
-								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+										runOn: (selectQuery runOn: (QueryCleanData runOn: Tbl allTickets))))));
 		draw
 ]
 
