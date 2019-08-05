@@ -1,11 +1,11 @@
 Class {
-	#name : #DevTpsTotalMinusTpsEstimChart,
+	#name : #DrawMultiLinearRegressionOnChart,
 	#superclass : #PB2GraphsBlueRed,
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
 { #category : #'drawing-general' }
-DevTpsTotalMinusTpsEstimChart >> draw: aDictionary [
+DrawMultiLinearRegressionOnChart >> draw: aDictionary [
 	| datas b ds firstLinearRegression secondLinearRegression firstX |
 	firstX := aDictionary keys first asSeconds.
 	datas := QuerySplitTicketsTimeSerie new
@@ -40,6 +40,45 @@ DevTpsTotalMinusTpsEstimChart >> draw: aDictionary [
 				+ (secondLinearRegression at: 'intercept') ].
 	ds x: [ :key | key asSeconds - firstX].
 	b add: ds.
+	b axisX
+		numberOfLabels: aDictionary size;
+		labelRotation: -45;
+		labelConversion: [ :v | 
+			(v < 1 or: [ v > aDictionary keys size ])
+				ifTrue: [ ''	"for 0" ]
+				ifFalse: [ (aDictionary keys at: v) asString ] ].
+	b view @ RTZoomableView.
+	^ b
+]
+
+{ #category : #'as yet unclassified' }
+DrawMultiLinearRegressionOnChart >> draw: aDictionary withRegressionIntervall: aCollection [
+	"I plot data serie with many linear regressions. The second argument should be a collection of dictionaries"
+
+	| b ds regressionLinesColors firstX |
+	firstX := aDictionary keys first asSeconds.
+	b := RTGrapher new.
+	ds := RTData new.
+	ds connectColor: Color blue.
+	ds points: aDictionary keys.
+	ds y: [ :key | aDictionary at: key ].
+	ds x: [ :key | key asSeconds - firstX ].
+	b add: ds.
+	regressionLinesColors := RTCPQualitative new
+		colors: aCollection size + 2.
+	1 to: aCollection size do: [ :i | 
+		| linearRegression dic |
+		dic := aCollection at: i.
+		ds := RTData new.
+		ds connectColor: (regressionLinesColors at: i).
+		linearRegression := QueryLinearRegression runOn: dic.
+		ds points: dic keys.
+		ds x: [ :key | key asSeconds - firstX ].
+		ds
+			y: [ :key | 
+				key asSeconds * (linearRegression at: 'slope')
+					+ (linearRegression at: 'intercept') ].
+		b add: ds ].
 	b axisX
 		numberOfLabels: aDictionary size;
 		labelRotation: -45;

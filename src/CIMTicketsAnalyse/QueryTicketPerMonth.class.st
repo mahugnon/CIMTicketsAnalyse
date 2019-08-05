@@ -18,7 +18,7 @@ Class {
 { #category : #running }
 QueryTicketPerMonth >> fillGap: aCollection [
 	"aCollection of associations: month->value
-	 if there is a gap between two monthes, create a new key with emty value for the missing month"
+	 if there is a gap between two monthes, create a new key with empty value for the missing month"
 	| months dict |
 	dict := aCollection asDictionary. 
 	months := dict keys.
