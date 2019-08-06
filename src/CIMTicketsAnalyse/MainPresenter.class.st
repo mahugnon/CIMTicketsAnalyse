@@ -33,17 +33,15 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 							(QueryRejectNilEstimation
 								runOn: (selectQuery new runOn: Tbl allTickets)))))
 		reject: [ :serie | serie asString = '-125526.52173913' ].
-	data1 := ((timeSeries keys
-		select: [ :ech | ech < (Date asMonth: 05 inYear: 2013) ])
-		collect: [ :month | month -> (timeSeries at: month) ])
-		asOrderedDictionary.
-	data2 := ((timeSeries keys
-		select: [ :ech | ech >= (Date asMonth: 05 inYear: 2013) ])
-		collect: [ :month | month -> (timeSeries at: month) ])
-		asOrderedDictionary.
+	data1 := QueryCutTimeSerie new
+		cut: timeSeries
+		before: (Date asMonth: 05 inYear: 2013).
+	data2 := QueryCutTimeSerie new
+		cut: timeSeries
+		after: (Date asMonth: 05 inYear: 2013).
 	^ DrawMultiLinearRegressionOnChart new
-		draw: timeSeries
-		withRegressionIntervall:
+		timeSerie: timeSeries;
+		drawWithRegressionIntervall:
 			{data1.
 			data2}
 ]
@@ -292,6 +290,14 @@ MainPresenter >> drawBugsMultiRegressionLineForMovingAvgTicketPerDev [
 	<script:
 		'MainPresenter new drawBugsMultiRegressionLineForMovingAvgTicketPerDev open'>
 	^ self drawMultiRegressionLineForMovingAvgTicketPerDev: QueryBugs
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawEvolutionsMultiRegressionLineForMovingAvgTicketPerDev [
+	<script:
+		'MainPresenter new drawBugsMultiRegressionLineForMovingAvgTicketPerDev open'>
+	^ self
+		drawMultiRegressionLineForMovingAvgTicketPerDev: QueryEvolutions
 ]
 
 { #category : #'as yet unclassified' }
@@ -696,8 +702,8 @@ MainPresenter >> drawMultiRegressionLineForMovingAvgTicketPerDev: selectQuery [
 		cut: dataSet
 		after: (Date asMonth: 05 inYear: 2014).
 	^ DrawMultiLinearRegressionOnChart new
-		draw: dataSet
-		withRegressionIntervall:
+		timeSerie: dataSet;
+		drawWithRegressionIntervall:
 			{data1.
 			data2.
 			data3}

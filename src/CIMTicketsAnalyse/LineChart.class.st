@@ -127,7 +127,7 @@ LineChart >> perDev: aBoolean [
 
 { #category : #'drawing-general' }
 LineChart >> popupTextOn: anObject [
-	^ 'Month: ' , anObject key asString , String cr , 'Duration : '
+	^ 'Month: ' , anObject key asString , String cr , 'value : '
 		, (yFormateur format: (timeSerie at: anObject key) asDuration) asString
 		, String cr , 'Median: ' , timeSerie median asString
 ]
