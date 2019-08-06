@@ -6,7 +6,7 @@ Ex: QueryTicketPerMonthClosing new fillGaps: true ; runOn: (QueryClosed runOn: (
 
 "
 Class {
-	#name : #QueryTicketPerMonth,
+	#name : #QueryPerMonth,
 	#superclass : #CIMAbstractQuery,
 	#instVars : [
 		'fillGaps',
@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : #running }
-QueryTicketPerMonth >> fillGap: aCollection [
+QueryPerMonth >> fillGap: aCollection [
 	"aCollection of associations: month->value
 	 if there is a gap between two monthes, create a new key with empty value for the missing month"
 	| months dict |
@@ -27,28 +27,28 @@ QueryTicketPerMonth >> fillGap: aCollection [
 ]
 
 { #category : #accessing }
-QueryTicketPerMonth >> fillGaps: boolean [
+QueryPerMonth >> fillGaps: boolean [
 	fillGaps := boolean 
 ]
 
 { #category : #initialization }
-QueryTicketPerMonth >> initialize [
+QueryPerMonth >> initialize [
 	fillGaps := false.
 	ordered := true
 ]
 
 { #category : #running }
-QueryTicketPerMonth >> month: aTicket [
+QueryPerMonth >> month: aTicket [
 	self subclassResponsibility 
 ]
 
 { #category : #accessing }
-QueryTicketPerMonth >> ordered: boolean [
+QueryPerMonth >> ordered: boolean [
 	ordered := boolean
 ]
 
 { #category : #running }
-QueryTicketPerMonth >> runOn: aCollection [
+QueryPerMonth >> runOn: aCollection [
 	| result |
 	result := (aCollection asOrderedCollection groupedBy: [ :ticket | self month: ticket ]) associations reject: [ :assoc | assoc key isNil ].
 	fillGaps ifTrue: [ result := self fillGap: result ].

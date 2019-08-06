@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+QueryCleanData >> rejectVersionWithNilDateArret: aCollection [
+	^ aCollection reject: [ :version | version version_date_arret isNil ]
+]
+
+{ #category : #'as yet unclassified' }
 QueryCleanData >> rejectWrongClosingDate: aCollection [
 	^ aCollection
 		select: [ :ft | 

@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryTicketPerMonthCreation,
-	#superclass : #QueryTicketPerMonth,
+	#superclass : #QueryPerMonth,
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 

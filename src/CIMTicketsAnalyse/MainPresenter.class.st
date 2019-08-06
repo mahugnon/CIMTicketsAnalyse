@@ -125,6 +125,7 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawAvgTimeSpentAndTimeEstim [
+<script: 'MainPresenter new drawAvgTimeSpentAndTimeEstim open'>
 	^ DoubleChart new
 		yFormateur: CIMHourFormater new;
 		timeSerie:
@@ -287,6 +288,13 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 ]
 
 { #category : #'as yet unclassified' }
+MainPresenter >> drawBugsMultiRegressionLineForMovingAvgTicketPerDev [
+	<script:
+		'MainPresenter new drawBugsMultiRegressionLineForMovingAvgTicketPerDev open'>
+	^ self drawMultiRegressionLineForMovingAvgTicketPerDev: QueryBugs
+]
+
+{ #category : #'as yet unclassified' }
 MainPresenter >> drawMovingAvgOfBibliothequePerTicketsPerMonth [
 	^ BibChart new
 		timeSerie:
@@ -316,7 +324,7 @@ MainPresenter >> drawMovingAvgTicketEvolutionPerDev [
 { #category : #'as yet unclassified' }
 MainPresenter >> drawMovingAvgTicketPerDev [
 	<script: 'MainPresenter new drawMovingAvgTicketPerDev open'>
-	^ self drawMovingAvgTicketPerDev: QueryClosed
+	^ self drawMovingAvgTicketPerDev: QueryBugsEvolutions
 ]
 
 { #category : #'as yet unclassified' }
@@ -661,4 +669,41 @@ MainPresenter >> drawMovingTimeSpentTicketsPerMonth [
 						ordered: true;
 						runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets))));
 		draw
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawMultiRegressionLineForMovingAvgTicketPerDev: selectQuery [
+	| dataSet data1 data2 data3 |
+	dataSet := QueryMovingAverage new
+		runOn:
+			(QueryNumberOfDevInterventionPerMonth new
+				devs: (Tbl tables at: 12) rows;
+				runOn:
+					(QueryTicketPerMonthClosing new
+						fillGaps: true;
+						ordered: true;
+						runOn:
+							(QueryClosed
+								runOn: (selectQuery runOn: (QueryCleanData runOn: Tbl allTickets))))).
+	data1 := QueryCutTimeSerie new
+		cut: dataSet
+		before: (Date asMonth: 07 inYear: 2007).
+	data2 := QueryCutTimeSerie new
+		cut: dataSet
+		between: (Date asMonth: 07 inYear: 2007)
+		and: (Date asMonth: 05 inYear: 2014).
+	data3 := QueryCutTimeSerie new
+		cut: dataSet
+		after: (Date asMonth: 05 inYear: 2014).
+	^ DrawMultiLinearRegressionOnChart new
+		draw: dataSet
+		withRegressionIntervall:
+			{data1.
+			data2.
+			data3}
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawReleaseRate [
+	"To implement"
 ]
