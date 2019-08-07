@@ -15,6 +15,6 @@ QueryTimePerDev >> runOn: aDictionary [
 					((aDictionary at: key)
 						/
 							(QueryNumberOfDeveloppeurForAmonth new
-								runOn: (Tbl tables at: 12) rows
+								runOn: (Tbl izyDevs) rows
 								for: key)) ]) asOrderedDictionary
 ]

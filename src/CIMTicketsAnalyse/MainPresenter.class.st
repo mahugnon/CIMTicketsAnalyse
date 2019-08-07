@@ -342,7 +342,7 @@ MainPresenter >> drawMovingAvgTicketPerDev: selectQuery [
 			(QueryMovingAverage new
 				runOn:
 					(QueryNumberOfDevInterventionPerMonth new
-						devs: (Tbl tables at: 12) rows;
+						devs: (Tbl izyDevs) rows;
 						runOn:
 							(QueryTicketPerMonthClosing new
 								fillGaps: true;
@@ -685,7 +685,7 @@ MainPresenter >> drawMultiRegressionLineForMovingAvgTicketPerDev: selectQuery [
 	dataSet := QueryMovingAverage new
 		runOn:
 			(QueryNumberOfDevInterventionPerMonth new
-				devs: (Tbl tables at: 12) rows;
+				devs: (Tbl izyDevs) rows;
 				runOn:
 					(QueryTicketPerMonthClosing new
 						fillGaps: true;

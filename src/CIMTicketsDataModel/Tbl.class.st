@@ -53,6 +53,16 @@ Tbl class >> dev [
 	^tables fourth
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl class >> izyDevs [
+	^ tables at: 12
+]
+
+{ #category : #'as yet unclassified' }
+Tbl class >> izyReleases [
+	^ tables at: 10
+]
+
 { #category : #initialization }
 Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 	Tbl tables: (Tbl new loadTblFromFolder: ficheNavettePath).

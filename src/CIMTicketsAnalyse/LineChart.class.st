@@ -33,7 +33,7 @@ LineChart >> developeurDataSetOn: aDictionary [
 	ds
 		y: [ :key | 
 			QueryNumberOfDeveloppeurForAmonth new
-				runOn: (Tbl tables at: 12) rows
+				runOn: (Tbl izyDevs) rows
 				for: key ];
 		label: 'Nombre developpeurs'.
 	^ ds
