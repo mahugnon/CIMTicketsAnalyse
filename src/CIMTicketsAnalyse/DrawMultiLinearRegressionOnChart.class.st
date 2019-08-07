@@ -27,7 +27,7 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 		ds connectColor: (regressionLinesColors at: i).
 		linearRegression := QueryLinearRegression runOn: dic.
 		ds points: dic keys.
-		ds x: [ :key | key - firstX ].
+		ds x: [ :key | key asSeconds - firstX ].
 		ds
 			y: [ :key | 
 				key asSeconds * (linearRegression at: 'slope')

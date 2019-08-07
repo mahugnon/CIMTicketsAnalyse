@@ -23,15 +23,16 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth 
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 	| timeSeries data1 data2 |
-	timeSeries := (QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime
-		new
+	timeSeries := (QueryMovingAverage
 		runOn:
-			(QueryTicketPerMonthClosing new
+			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
 				runOn:
-					(QueryClosed
+					(QueryTicketPerMonthClosing new
 						runOn:
-							(QueryRejectNilEstimation
-								runOn: (selectQuery new runOn: Tbl allTickets)))))
+							(QueryClosed
+								runOn:
+									(QueryRejectNilEstimation
+										runOn: (selectQuery new runOn: Tbl allTickets))))))
 		reject: [ :serie | serie asString = '-125526.52173913' ].
 	data1 := QueryCutTimeSerie new
 		cut: timeSeries
@@ -123,8 +124,8 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawAvgTimeSpentAndTimeEstim [
-<script: 'MainPresenter new drawAvgTimeSpentAndTimeEstim open'>
-	^ DoubleChart new
+	<script: 'MainPresenter new drawAvgTimeSpentAndTimeEstim open'>
+	^ DoubleChart  new
 		yFormateur: CIMHourFormater new;
 		timeSerie:
 			(QueryMovingAverage
@@ -336,6 +337,7 @@ MainPresenter >> drawMovingAvgTicketPerDev [
 { #category : #'as yet unclassified' }
 MainPresenter >> drawMovingAvgTicketPerDev: selectQuery [
 	^ CIMChart new
+		perDev: true;
 		timeSerie:
 			(QueryMovingAverage new
 				runOn:
