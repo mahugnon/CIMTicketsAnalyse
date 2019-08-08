@@ -29,10 +29,8 @@ Tbl class >> associateToTicketFileIn: aFolder [
 		addAssociatedFiles:
 			(QueryTicketsAndAssociatedFileFromMooseModel
 				runOn:
-					((PWBCommitCommentExtractor
-						extractCommitCommentFromFolder: folderReference
-						inModel: (PWBFamixImporter importFromFolder: folderReference))
-						allWithType: FamixPWBTicket))
+					(PWBCommitCommentExtractor
+						extractCommitCommentFromFolder: folderReference))
 ]
 
 { #category : #accessing }
@@ -116,6 +114,11 @@ Tbl class >> tables [
 { #category : #accessing }
 Tbl class >> tables: anObject [
 	tables := anObject
+]
+
+{ #category : #'as yet unclassified' }
+Tbl class >> tps [
+	^ tables eighth
 ]
 
 { #category : #'as yet unclassified' }
