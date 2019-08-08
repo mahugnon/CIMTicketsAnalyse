@@ -21,18 +21,6 @@ Tbl class >> allTickets [
 	^ self tableTickets rows
 ]
 
-{ #category : #'as yet unclassified' }
-Tbl class >> associateToTicketFileIn: aFolder [
-	| folderReference |
-	folderReference := aFolder asFileReference.
-	^ Tbl tableTickets
-		addAssociatedFiles:
-			(QueryTicketsAndAssociatedFileFromMooseModel
-				runOn:
-					(PWBCommitCommentExtractor
-						extractCommitCommentFromFolder: folderReference))
-]
-
 { #category : #accessing }
 Tbl class >> avgTimeDevOnPerBibliotheque [
 	avgTimeDevOnPerBibliotheque

@@ -5,17 +5,25 @@ Class {
 }
 
 { #category : #adding }
-Tbl_ft >> addAssociatedFiles: aDictionary [
-	aDictionary
-		keysDo: [ :key | 
+Tbl_ft >> addAssociatedFiles: aCollection [
+	aCollection
+		do: [ :aCommitComment | 
 			rows
-				detect: [ :row | row ft_numordre asInteger = key ]
-				ifFound: [ :founded | founded addAssociatedFile: (aDictionary at: key) ] ]
+				detect: [ :row | row ft_numordre = aCommitComment ticketNumber ]
+				ifFound: [ :founded | founded addAssociatedFile: aCommitComment fileName ] ]
 ]
 
 { #category : #'as yet unclassified' }
 Tbl_ft >> analyseContat [
 	self rows do: [ :ft | ft analyseContat ]
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_ft >> associateToTicketFileIn: aFolder [
+	| folderReference |
+	folderReference := aFolder asFileReference.
+	^ self
+		addAssociatedFiles: (QueryAllCommitComment runOn: folderReference)
 ]
 
 { #category : #utility }

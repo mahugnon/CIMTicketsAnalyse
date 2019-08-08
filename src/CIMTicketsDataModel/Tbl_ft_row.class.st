@@ -76,6 +76,11 @@ Tbl_ft_row >> associatedFiles [
 ]
 
 { #category : #accessing }
+Tbl_ft_row >> associatedFiles: anObject [
+	^ associatedFiles := anObject
+]
+
+{ #category : #accessing }
 Tbl_ft_row >> bibliotheques [
 	^ bibliotheques
 ]
