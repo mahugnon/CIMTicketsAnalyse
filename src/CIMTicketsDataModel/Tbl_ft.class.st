@@ -9,7 +9,8 @@ Tbl_ft >> addAssociatedFiles: aCollection [
 	aCollection
 		do: [ :aCommitComment | 
 			rows
-				detect: [ :row | row ft_numordre = aCommitComment ticketNumber ]
+				detect:
+					[ :row | row ft_numordre asInteger = aCommitComment ticketNumber asInteger ]
 				ifFound: [ :founded | founded addAssociatedFile: aCommitComment fileName ] ]
 ]
 

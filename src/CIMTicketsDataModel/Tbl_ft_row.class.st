@@ -60,9 +60,9 @@ Class {
 }
 
 { #category : #adding }
-Tbl_ft_row >> addAssociatedFile: aCollection [
+Tbl_ft_row >> addAssociatedFile: aString [
 	associatedFiles ifNil: [ associatedFiles := Set new ].
-	associatedFiles addAll: aCollection
+	associatedFiles add: aString
 ]
 
 { #category : #API }
