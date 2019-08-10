@@ -15,6 +15,18 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+LineChart class >> chartFor: aSelectQuery [
+	self subclasses
+		detect: [ :chart | chart selectQuery = aSelectQuery ]
+		ifFound: [ :chart | ^ chart new ]
+]
+
+{ #category : #'as yet unclassified' }
+LineChart class >> selectQuery [
+	
+]
+
+{ #category : #'as yet unclassified' }
 LineChart >> cimColor [
 	^ Color blue
 ]

@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+EvolutionChart class >> selectQuery [
+	^ QueryEvolutions
+]
+
+{ #category : #'as yet unclassified' }
 EvolutionChart >> cimColor [
 	^ Color blue
 ]

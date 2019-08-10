@@ -1,6 +1,9 @@
 Class {
 	#name : #MainPresenter,
 	#superclass : #Object,
+	#instVars : [
+		'model'
+	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
@@ -49,16 +52,7 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
-	^ BugsChart new
-		yFormateur: CIMDayFormater new;
-		timeSerie:
-			(QueryAvgTimeDevGroupedByTime new
-				runOn:
-					(QueryTicketPerMonthClosing new
-						runOn:
-							(QueryClosed
-								runOn: (QueryCleanData runOn: (QueryBugs new runOn: Tbl allTickets)))));
-		draw
+	^ self drawAvgTimeDevTicketsPerMonth: QueryBugs
 ]
 
 { #category : #drawing }
@@ -77,17 +71,15 @@ MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonthPerDev [
-	^ EvolutionChart new
-		yFormateur: CIMHourFormater new;
-		timeSerie:
-			(QueryTimePerDev
-				runOn:
-					(QueryAvgTimeDevGroupedByTime new
-						runOn:
-							(QueryTicketPerMonthClosing new
-								runOn:
-									(QueryClosed
-										runOn: (QueryCleanData runOn: (QueryEvolutions new runOn: Tbl allTickets))))));
+	<script: 'MainPresenter new drawAvgTimeDevEvolutionsTicketsPerMonthPerDev open'>
+	^ self drawAvgTimeDevTicketsPerMonth: QueryEvolutions
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeDevTicketsPerMonth: selectQuery [
+	^ (LineChart chartFor: selectQuery)
+		yFormateur: CIMDayFormater new;
+		timeSerie: (MainPresenterModel new avgTimeDevTicketsPerMonth: selectQuery);
 		draw
 ]
 
@@ -185,18 +177,8 @@ MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonthPerDev [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonth [
-	^ EvolutionChart new
-		yFormateur: CIMHourFormater new;
-		timeSerie:
-			(QueryAvgTimeOnTicketsGroupedByTime
-				runOn:
-					(QueryTicketPerMonthClosing new
-						fillGaps: true;
-						ordered: true;
-						runOn:
-							(QueryClosed
-								runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))));
-		draw
+	<script: 'MainPresenter new drawAvgTimeSpentEvolutionTicketsPerMonth open'>
+	^ self drawAvgTimeSpentTicketsPerMonth: QueryEvolutions
 ]
 
 { #category : #drawing }
@@ -214,6 +196,15 @@ MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonthPerDev [
 								runOn:
 									(QueryClosed
 										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeSpentTicketsPerMonth: selectQuery [
+	^ (LineChart chartFor: selectQuery)
+		yFormateur: CIMHourFormater new;
+		maxY: 162271.2;
+		timeSerie: (MainPresenterModel new avgTimeSpentTicketsPerMonth: selectQuery);
 		draw
 ]
 
@@ -607,22 +598,9 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonthPerDev [
-	^ BugsChart new
-		yFormateur: CIMDayFormater new;
-		timeSerie:
-			(QueryTimePerDev
-				runOn:
-					(QueryMovingAverage
-						runOn:
-							(QueryAvgTimeToOpenCloseTicketsGroupedByTime
-								runOn:
-									(QueryTicketPerMonthClosing new
-										fillGaps: true;
-										ordered: true;
-										runOn:
-											(QueryClosed
-												runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))))));
-		draw
+	<script:
+		'MainPresenter new drawMovingAvgTimeToOpenCloseBugsTicketsPerMonthPerDev open'>
+	^ self drawMovingAvgTimeToOpenCloseTicketsPerMonthPerDev: QueryBugs
 ]
 
 { #category : #drawing }
@@ -646,72 +624,52 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonthPerDev [
+	<script:
+		'MainPresenter new drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonthPerDev open'>
+	^ self
+		drawMovingAvgTimeToOpenCloseTicketsPerMonthPerDev: QueryEvolutions
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
 	^ EvolutionChart new
 		yFormateur: CIMDayFormater new;
 		perDev: true;
 		timeSerie:
-			(QueryTimePerDev
-				runOn:
-					(QueryMovingAverage
-						runOn:
-							(QueryAvgTimeToOpenCloseTicketsGroupedByTime
-								runOn:
-									(QueryTicketPerMonthClosing new
-										fillGaps: true;
-										ordered: true;
-										runOn:
-											(QueryClosed
-												runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))));
+			(MainPresenterModel new
+				movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery);
 		draw
 ]
 
 { #category : #drawing }
 MainPresenter >> drawMovingTimeSpentTicketsPerMonth [
+	<script: 'MainPresenter new drawMovingTimeSpentTicketsPerMonth open'>
 	^ EvolutionChart new
 		yFormateur: CIMHourFormater new;
-		timeSerie:
-			(QueryTimeOnTicketsGroupedByTime
-				runOn:
-					(QueryTicketPerMonthClosing new
-						fillGaps: true;
-						ordered: true;
-						runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets))));
+		timeSerie: model timeSpentTicketsPerMonth;
 		draw
 ]
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawMultiRegressionLineForMovingAvgTicketPerDev: selectQuery [
-	| dataSet data1 data2 data3 |
-	dataSet := QueryMovingAverage new
-		runOn:
-			(QueryNumberOfDevInterventionPerMonth new
-				devs: (Tbl izyDevs) rows;
-				runOn:
-					(QueryTicketPerMonthClosing new
-						fillGaps: true;
-						ordered: true;
-						runOn:
-							(QueryClosed
-								runOn: (selectQuery runOn: (QueryCleanData runOn: Tbl allTickets))))).
-	data1 := QueryCutTimeSerie new
-		cut: dataSet
-		before: (Date asMonth: 07 inYear: 2007).
-	data2 := QueryCutTimeSerie new
-		cut: dataSet
-		between: (Date asMonth: 07 inYear: 2007)
-		and: (Date asMonth: 05 inYear: 2014).
-	data3 := QueryCutTimeSerie new
-		cut: dataSet
-		after: (Date asMonth: 05 inYear: 2014).
+	| dataSet |
+	dataSet := model
+		multiRegressionLineForMovingAvgTicketPerDevDataSet: selectQuery.
 	^ DrawMultiLinearRegressionOnChart new
-		timeSerie: dataSet;
+		timeSerie: dataSet first;
 		drawWithRegressionIntervall:
-			{data1.
-			data2.
-			data3}
+			{dataSet second.
+			dataSet third.
+			dataSet fourth}
 ]
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawReleaseRate [
 	"To implement"
+]
+
+{ #category : #initialization }
+MainPresenter >> initialize [ 
+super initialize .
+model := MainPresenterModel new 
 ]

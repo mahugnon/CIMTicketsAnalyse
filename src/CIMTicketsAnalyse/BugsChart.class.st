@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+BugsChart class >> selectQuery [
+	^ QueryBugs
+]
+
+{ #category : #'as yet unclassified' }
 BugsChart >> cimColor [
 	^ Color red
 ]
