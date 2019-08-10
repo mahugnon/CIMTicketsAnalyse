@@ -24,6 +24,14 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth 
 ]
 
 { #category : #drawing }
+MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth [
+	<script:
+		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth open'>
+	^ self
+		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryBugsEvolutions
+]
+
+{ #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 	| timeSeries data1 data2 |
 	timeSeries := (QueryMovingAverage
@@ -672,4 +680,14 @@ MainPresenter >> drawReleaseRate [
 MainPresenter >> initialize [ 
 super initialize .
 model := MainPresenterModel new 
+]
+
+{ #category : #accessing }
+MainPresenter >> model [
+	^ model
+]
+
+{ #category : #accessing }
+MainPresenter >> model: anObject [
+	model := anObject
 ]

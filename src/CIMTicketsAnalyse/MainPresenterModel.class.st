@@ -12,9 +12,7 @@ MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
-				runOn:
-					(QueryClosed
-						runOn: (QueryCleanData runOn: (selectQuery new runOn: self modelData))))
+				runOn: (selectQuery runOn: self datawithCloseDate))
 ]
 
 { #category : #'as yet unclassified' }
@@ -24,14 +22,22 @@ MainPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 			(QueryTicketPerMonthClosing new
 				fillGaps: true;
 				ordered: true;
-				runOn:
-					(QueryClosed
-						runOn: (selecQuery runOn: (QueryCleanData runOn: Tbl allTickets))))
+				runOn: (selecQuery runOn: self datawithCloseDate))
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenterModel >> datawithCloseDate [
+	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
+]
+
+{ #category : #initialization }
+MainPresenterModel >> initialize [
+	modelData := Tbl allTickets
 ]
 
 { #category : #'as yet unclassified' }
 MainPresenterModel >> modelData [
-	^ Tbl allTickets
+	^ modelData
 ]
 
 { #category : #'as yet unclassified' }
@@ -45,9 +51,7 @@ MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery
 							(QueryTicketPerMonthClosing new
 								fillGaps: true;
 								ordered: true;
-								runOn:
-									(QueryClosed
-										runOn: (selectQuery runOn: (QueryCleanData runOn: Tbl allTickets))))))
+								runOn: (selectQuery runOn: self datawithCloseDate))))
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,9 +65,7 @@ MainPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: select
 					(QueryTicketPerMonthClosing new
 						fillGaps: true;
 						ordered: true;
-						runOn:
-							(QueryClosed
-								runOn: (selectQuery runOn: (QueryCleanData runOn: Tbl allTickets))))).
+						runOn: (selectQuery runOn: self datawithCloseDate))).
 	^ {dataSet.
 	(QueryCutTimeSerie new
 		cut: dataSet
@@ -85,6 +87,5 @@ MainPresenterModel >> timeSpentTicketsPerMonth [
 				fillGaps: true;
 				ordered: true;
 				runOn:
-					(QueryBugsEvolutions
-						runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets))))
+					(QueryBugsEvolutions runOn: self datawithCloseDate))
 ]

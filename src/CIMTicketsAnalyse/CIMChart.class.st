@@ -11,7 +11,7 @@ CIMChart >> cimColor [
 
 { #category : #'drawing-general' }
 CIMChart >> convertYAxis [
-	^ [ :v | v ]
+	^ [ :v | v asFloat rounded ]
 ]
 
 { #category : #initialization }
