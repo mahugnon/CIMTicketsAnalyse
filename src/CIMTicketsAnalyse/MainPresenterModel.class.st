@@ -15,24 +15,27 @@ MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 				runOn: (selectQuery runOn: self datawithCloseDate))
 ]
 
+{ #category : #'as yet unclassified' }
+MainPresenterModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
+	^ QueryMovingAverage
+		runOn:
+			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
+				runOn:
+					(QueryTicketPerMonthClosing new
+						runOn:
+							(QueryClosed
+								runOn: (QueryRejectNilEstimation runOn: (selectQuery new runOn: modelData)))))
+]
+
 { #category : #'data sets' }
 MainPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 	^ QueryAvgTimeOnTicketsGroupedByTime
-		runOn:
-			(QueryTicketPerMonthClosing new
-				fillGaps: true;
-				ordered: true;
-				runOn: (selecQuery runOn: self datawithCloseDate))
+		runOn: (self ticketsPerMonth: selecQuery)
 ]
 
 { #category : #'data sets' }
 MainPresenterModel >> datawithCloseDate [
 	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
-]
-
-{ #category : #'data sets' }
-MainPresenterModel >> datawithCloseDate: data [
-	^ QueryClosed runOn: (QueryCleanData runOn: data)
 ]
 
 { #category : #initialization }
@@ -45,6 +48,17 @@ MainPresenterModel >> modelData [
 	^ modelData
 ]
 
+{ #category : #accessing }
+MainPresenterModel >> modelData: anObject [
+	modelData := anObject
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenterModel >> movingAvgTimeSpentTicketsPerMonth: selectQuery [
+	^ QueryMovingAverage
+		runOn: (self avgTimeDevTicketsPerMonth: selectQuery)
+]
+
 { #category : #'data sets' }
 MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
 	^ QueryTimePerDev
@@ -52,11 +66,7 @@ MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery
 			(QueryMovingAverage
 				runOn:
 					(QueryAvgTimeToOpenCloseTicketsGroupedByTime
-						runOn:
-							(QueryTicketPerMonthClosing new
-								fillGaps: true;
-								ordered: true;
-								runOn: (selectQuery runOn: self datawithCloseDate))))
+						runOn: (self ticketsPerMonth: selectQuery)))
 ]
 
 { #category : #'data sets' }
@@ -66,11 +76,7 @@ MainPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: select
 		runOn:
 			(QueryNumberOfDevInterventionPerMonth new
 				devs: Tbl izyDevs rows;
-				runOn:
-					(QueryTicketPerMonthClosing new
-						fillGaps: true;
-						ordered: true;
-						runOn: (selectQuery runOn: self datawithCloseDate))).
+				runOn: (self ticketsPerMonth: selectQuery)).
 	^ {dataSet.
 	(QueryCutTimeSerie new
 		cut: dataSet
@@ -91,13 +97,10 @@ MainPresenterModel >> ticketPerFile [
 		nameLime: 200
 ]
 
-{ #category : #'data sets' }
-MainPresenterModel >> timeSpentTicketsPerMonth [
-	^ QueryTimeOnTicketsGroupedByTime
-		runOn:
-			(QueryTicketPerMonthClosing new
-				fillGaps: true;
-				ordered: true;
-				runOn:
-					(QueryBugsEvolutions runOn: self datawithCloseDate))
+{ #category : #'as yet unclassified' }
+MainPresenterModel >> ticketsPerMonth: selectQuery [
+	^ QueryTicketPerMonthClosing new
+		fillGaps: true;
+		ordered: true;
+		runOn: (selectQuery runOn: self datawithCloseDate)
 ]

@@ -86,14 +86,6 @@ LineChart >> draw [
 	^ graphic
 ]
 
-{ #category : #'as yet unclassified' }
-LineChart >> exportChartTo: path [
-	^ RTPNGExporter new
-		builder: graphic build;
-		fileName: path fullName;
-		exportToFile
-]
-
 { #category : #initialization }
 LineChart >> initialize [
 	super initialize.

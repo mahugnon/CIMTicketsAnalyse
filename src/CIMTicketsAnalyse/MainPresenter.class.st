@@ -34,16 +34,8 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 	| timeSeries data1 data2 |
-	timeSeries := (QueryMovingAverage
-		runOn:
-			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
-				runOn:
-					(QueryTicketPerMonthClosing new
-						runOn:
-							(QueryClosed
-								runOn:
-									(QueryRejectNilEstimation
-										runOn: (selectQuery new runOn: Tbl allTickets))))))
+	timeSeries := (model
+		avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery)
 		reject: [ :serie | serie asString = '-125526.52173913' ].
 	data1 := QueryCutTimeSerie new
 		cut: timeSeries
@@ -60,23 +52,24 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawAndExportToFilesTimeSpent: aFolder [
-	<script: 'MainPresenter new drawFilesTimeSpent '>
-	| presenter filenameWithTickets |
+	<script:
+		'MainPresenter new drawAndExportToFilesTimeSpent:''C:\Users\h.houekpetodji\Desktop\utility\fileTicketsChart'' '>
+	| presenter filenameWithTickets dir |
 	filenameWithTickets := model ticketPerFile.
 	presenter := self class new.
 	^ model ticketPerFile keys
 		collect: [ :fileName | 
-			presenter model: (filenameWithTickets at: fileName).
-			ChartComposer new
-				compose:
-					{('Bug' -> presenter drawAvgTimeSpentBugsTicketsPerMonth).
-					('Evolution'
-						-> presenter drawAvgTimeSpentEvolutionTicketsPerMonth).
-					('TotalMinusEstim'
-						-> presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth).
-					('InterventionDev' -> presenter drawMovingAvgTicketPerDev)}
-						asOrderedDictionary
-				title: fileName ]
+			dir := (aFolder , '\' , fileName) asFileReference
+				ensureCreateDirectory.
+			presenter model: (MainPresenterModel new modelData: (filenameWithTickets at: fileName)).
+			presenter drawMovingAvgTimeSpentBugsTicketsPerMonth
+				exportChartTo: (dir / 'Bug.png') fullName.
+			presenter drawAvgTimeSpentEvolutionTicketsPerMonth
+				exportChartTo: (dir / 'Evolution.png') fullName.
+			presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth
+				exportChartTo: (dir / 'TotalMinusEstim.png') fullName.
+			presenter drawMovingAvgTicketPerDev
+				exportChartTo: (dir / 'InterventionDev.png') fullName ]
 ]
 
 { #category : #drawing }
@@ -434,18 +427,8 @@ MainPresenter >> drawMovingAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth
 MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
 	^ BugsChart new
 		yFormateur: CIMHourFormater new;
-		maxY: 114964.9740659338;
-		timeSerie:
-			(QueryMovingAverage
-				runOn:
-					(QueryAvgTimeOnTicketsGroupedByTime
-						runOn:
-							(QueryTicketPerMonthClosing new
-								fillGaps: true;
-								ordered: true;
-								runOn:
-									(QueryClosed
-										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))));
+		"maxY: 114964.9740659338;"
+			timeSerie: (model movingAvgTimeSpentTicketsPerMonth: QueryBugs);
 		draw
 ]
 
@@ -473,21 +456,11 @@ MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonthPerDev [
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
 	^ EvolutionChart new
-		yTranslation: 16160.221023768798;
-		maxY: 114964.9740659338;
 		yFormateur: CIMHourFormater new;
-		timeSerie:
-			(QueryMovingAverage
-				runOn:
-					(QueryAvgTimeOnTicketsGroupedByTime
-						runOn:
-							(QueryTicketPerMonthClosing new
-								fillGaps: true;
-								ordered: true;
-								runOn:
-									(QueryClosed
-										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))));
+		timeSerie: (model movingAvgTimeSpentTicketsPerMonth: QueryEvolutions);
 		draw
+	"yTranslation: 16160.221023768798;
+		maxY: 114964.9740659338;"
 ]
 
 { #category : #drawing }
@@ -665,8 +638,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery 
 		yFormateur: CIMDayFormater new;
 		perDev: true;
 		timeSerie:
-			(MainPresenterModel new
-				movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery);
+			(model movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery);
 		draw
 ]
 
@@ -675,7 +647,7 @@ MainPresenter >> drawMovingTimeSpentTicketsPerMonth [
 	<script: 'MainPresenter new drawMovingTimeSpentTicketsPerMonth open'>
 	^ EvolutionChart new
 		yFormateur: CIMHourFormater new;
-		timeSerie: model timeSpentTicketsPerMonth;
+		timeSerie: (model avgTimeSpentTicketsPerMonth: QueryBugsEvolutions);
 		draw
 ]
 
