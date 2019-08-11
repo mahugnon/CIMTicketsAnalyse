@@ -64,7 +64,7 @@ MainPresenter >> drawAndExportToFilesTimeSpent: aFolder [
 			presenter model: (MainPresenterModel new modelData: (filenameWithTickets at: fileName)).
 			presenter drawMovingAvgTimeSpentBugsTicketsPerMonth
 				exportChartTo: (dir / 'Bug.png') fullName.
-			presenter drawAvgTimeSpentEvolutionTicketsPerMonth
+			presenter drawMovingAvgTimeSpentEvolutionTicketsPerMonth
 				exportChartTo: (dir / 'Evolution.png') fullName.
 			presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth
 				exportChartTo: (dir / 'TotalMinusEstim.png') fullName.
@@ -353,16 +353,7 @@ MainPresenter >> drawMovingAvgTicketPerDev: selectQuery [
 		perDev: true;
 		timeSerie:
 			(QueryMovingAverage new
-				runOn:
-					(QueryNumberOfDevInterventionPerMonth new
-						devs: (Tbl izyDevs) rows;
-						runOn:
-							(QueryTicketPerMonthClosing new
-								fillGaps: true;
-								ordered: true;
-								runOn:
-									(QueryClosed
-										runOn: (selectQuery runOn: (QueryCleanData runOn: Tbl allTickets))))));
+				runOn: (model avgDevInterventionPerMonth: selectQuery));
 		draw
 ]
 

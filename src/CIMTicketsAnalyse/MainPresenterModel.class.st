@@ -7,6 +7,13 @@ Class {
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
+{ #category : #'as yet unclassified' }
+MainPresenterModel >> avgDevInterventionPerMonth: selectQuery [
+	^ QueryNumberOfDevInterventionPerMonth new
+		devs: Tbl izyDevs rows;
+		runOn: (self ticketsPerMonth: selectQuery)
+]
+
 { #category : #'data sets' }
 MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
