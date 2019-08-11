@@ -9,7 +9,8 @@ Class {
 		'perDev',
 		'timeSerie',
 		'label',
-		'title'
+		'title',
+		'graphic'
 	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
@@ -53,36 +54,44 @@ LineChart >> developeurDataSetOn: aDictionary [
 
 { #category : #'drawing-general' }
 LineChart >> draw [
-	| b ds |
-	b := RTGrapher new.
+	|  ds |
+	graphic := RTGrapher new.
 	self isperDev
-		ifTrue: [ b := RTDoubleGrapher new.
-			b addRight: (self developeurDataSetOn: timeSerie).
-			b axisYRight color: (Color fromString: '#4A9CFF') ].
+		ifTrue: [ graphic := RTDoubleGrapher new.
+			graphic addRight: (self developeurDataSetOn: timeSerie).
+			graphic axisYRight color: (Color fromString: '#4A9CFF') ].
 	ds := RTData new.
 	ds connectColor: self cimColor.
 	ds points: timeSerie keys.
 	ds y: [ :key | (timeSerie at: key) - yTranslation ].
 	ds label: label.
 	ds interaction popup text: [ :elt | self popupTextOn: elt ].
-	b add: ds.
-	b
+	graphic add: ds.
+	graphic
 		add: (self linearRegressionDataSetOn: timeSerie color: Color lightBrown).
-	minY ifNotNil: [ b maxY: minY ].
-	maxY ifNotNil: [ b maxY: maxY ].
-	b axisY
+	minY ifNotNil: [ graphic maxY: minY ].
+	maxY ifNotNil: [ graphic maxY: maxY ].
+	graphic axisY
 		numberOfLabels: (timeSerie size / 30) asInteger;
 		labelConversion: self convertYAxis;
 		title: title.
-	b axisX
+	graphic axisX
 		numberOfLabels: (timeSerie size / 6) asInteger;
 		labelRotation: -45;
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > timeSerie keys size ])
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie keys at: v) asString ] ].
-	b legend.
-	^ b
+	"b legend."
+	^ graphic
+]
+
+{ #category : #'as yet unclassified' }
+LineChart >> exportChartTo: path [
+	^ RTPNGExporter new
+		builder: graphic build;
+		fileName: path fullName;
+		exportToFile
 ]
 
 { #category : #initialization }

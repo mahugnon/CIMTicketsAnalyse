@@ -58,6 +58,27 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 			data2}
 ]
 
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawAndExportToFilesTimeSpent: aFolder [
+	<script: 'MainPresenter new drawFilesTimeSpent '>
+	| presenter filenameWithTickets |
+	filenameWithTickets := model ticketPerFile.
+	presenter := self class new.
+	^ model ticketPerFile keys
+		collect: [ :fileName | 
+			presenter model: (filenameWithTickets at: fileName).
+			ChartComposer new
+				compose:
+					{('Bug' -> presenter drawAvgTimeSpentBugsTicketsPerMonth).
+					('Evolution'
+						-> presenter drawAvgTimeSpentEvolutionTicketsPerMonth).
+					('TotalMinusEstim'
+						-> presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth).
+					('InterventionDev' -> presenter drawMovingAvgTicketPerDev)}
+						asOrderedDictionary
+				title: fileName ]
+]
+
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
 	^ self drawAvgTimeDevTicketsPerMonth: QueryBugs

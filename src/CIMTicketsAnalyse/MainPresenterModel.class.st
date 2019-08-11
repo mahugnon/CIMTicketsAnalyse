@@ -7,7 +7,7 @@ Class {
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
 MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
@@ -15,7 +15,7 @@ MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 				runOn: (selectQuery runOn: self datawithCloseDate))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
 MainPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 	^ QueryAvgTimeOnTicketsGroupedByTime
 		runOn:
@@ -25,9 +25,14 @@ MainPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 				runOn: (selecQuery runOn: self datawithCloseDate))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
 MainPresenterModel >> datawithCloseDate [
 	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
+]
+
+{ #category : #'data sets' }
+MainPresenterModel >> datawithCloseDate: data [
+	^ QueryClosed runOn: (QueryCleanData runOn: data)
 ]
 
 { #category : #initialization }
@@ -35,12 +40,12 @@ MainPresenterModel >> initialize [
 	modelData := Tbl allTickets
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
 MainPresenterModel >> modelData [
 	^ modelData
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
 MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
 	^ QueryTimePerDev
 		runOn:
@@ -54,7 +59,7 @@ MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery
 								runOn: (selectQuery runOn: self datawithCloseDate))))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
 MainPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selectQuery [
 	| dataSet |
 	dataSet := QueryMovingAverage new
@@ -79,7 +84,14 @@ MainPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: select
 		after: (Date asMonth: 05 inYear: 2014))} asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'data sets' }
+MainPresenterModel >> ticketPerFile [
+	^ QueryTicketsForInterestionFileNames new
+		runOn: modelData
+		nameLime: 200
+]
+
+{ #category : #'data sets' }
 MainPresenterModel >> timeSpentTicketsPerMonth [
 	^ QueryTimeOnTicketsGroupedByTime
 		runOn:

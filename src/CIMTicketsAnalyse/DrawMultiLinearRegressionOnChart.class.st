@@ -9,15 +9,15 @@ Class {
 
 { #category : #'as yet unclassified' }
 DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
-	| b ds regressionLinesColors firstX |
+	| ds regressionLinesColors firstX |
 	firstX := timeSerie keys first asSeconds.
-	b := RTGrapher new.
+	graphic := RTGrapher new.
 	ds := RTData new connectColor: Color blue.
 	ds points: timeSerie keys.
 	ds y: [ :key | timeSerie at: key ].
 	ds x: [ :key | key asSeconds - firstX ].
 	ds interaction popup text: [ :elt | self popupTextOn: elt ].
-	b add: ds.
+	graphic add: ds.
 	regressionLinesColors := RTCPQualitative new
 		colors: aCollection size + 2.
 	1 to: aCollection size do: [ :i | 
@@ -32,16 +32,16 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 			y: [ :key | 
 				key asSeconds * (linearRegression at: 'slope')
 					+ (linearRegression at: 'intercept') ].
-		b add: ds ].
-	b axisX
+		graphic add: ds ].
+	graphic axisX
 		numberOfLabels: (timeSerie size / 6) asInteger;
 		labelRotation: -45;
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > timeSerie keys size ])
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie keys at: v) asString ] ].
-	b view @ RTZoomableView.
-	^ b
+	graphic view @ RTZoomableView.
+	^ graphic
 ]
 
 { #category : #'drawing-general' }
