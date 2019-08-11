@@ -19,6 +19,6 @@ QueryNumberOfDevInterventionPerMonth >> runOn: aDictionary [
 			key
 				->
 					((aDictionary at: key) size
-						/ (QueryNumberOfDeveloppeurForAmonth new runOn: devs for: key))
-						rounded ]) asOrderedDictionary
+						/ (QueryNumberOfDeveloppeurForAmonth new runOn: devs for: key)) ])
+		asOrderedDictionary
 ]
