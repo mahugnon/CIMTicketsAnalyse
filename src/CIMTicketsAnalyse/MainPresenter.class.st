@@ -52,24 +52,23 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 
 { #category : #'as yet unclassified' }
 MainPresenter >> drawAndExportToFilesTimeSpent: aFolder [
-	<script:
-		'MainPresenter new drawAndExportToFilesTimeSpent:''C:\Users\h.houekpetodji\Desktop\utility\fileTicketsChart'' '>
-	| presenter filenameWithTickets dir |
+	<script: 'MainPresenter new drawFilesTimeSpent '>
+	| presenter filenameWithTickets |
 	filenameWithTickets := model ticketPerFile.
 	presenter := self class new.
 	^ model ticketPerFile keys
 		collect: [ :fileName | 
-			dir := (aFolder , '\' , fileName) asFileReference
-				ensureCreateDirectory.
-			presenter model: (MainPresenterModel new modelData: (filenameWithTickets at: fileName)).
-			presenter drawMovingAvgTimeSpentBugsTicketsPerMonth
-				exportChartTo: (dir / 'Bug.png') fullName.
-			presenter drawMovingAvgTimeSpentEvolutionTicketsPerMonth
-				exportChartTo: (dir / 'Evolution.png') fullName.
-			presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth
-				exportChartTo: (dir / 'TotalMinusEstim.png') fullName.
-			presenter drawMovingAvgTicketPerDev
-				exportChartTo: (dir / 'InterventionDev.png') fullName ]
+			presenter model: (filenameWithTickets at: fileName).
+			ChartComposer new
+				compose:
+					{('Bug' -> presenter drawAvgTimeSpentBugsTicketsPerMonth).
+					('Evolution'
+						-> presenter drawAvgTimeSpentEvolutionTicketsPerMonth).
+					('TotalMinusEstim'
+						-> presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth).
+					('InterventionDev' -> presenter drawMovingAvgTicketPerDev)}
+						asOrderedDictionary
+				title: fileName ]
 ]
 
 { #category : #drawing }
@@ -312,6 +311,27 @@ MainPresenter >> drawEvolutionsMultiRegressionLineForMovingAvgTicketPerDev [
 		'MainPresenter new drawBugsMultiRegressionLineForMovingAvgTicketPerDev open'>
 	^ self
 		drawMultiRegressionLineForMovingAvgTicketPerDev: QueryEvolutions
+]
+
+{ #category : #'as yet unclassified' }
+MainPresenter >> drawFilesTimeSpent [
+	<script: 'MainPresenter new drawFilesTimeSpent '>
+	| presenter filenameWithTickets |
+	filenameWithTickets :=  model ticketPerFile.
+	presenter := self class new.
+	^ model ticketPerFile keys
+		collect: [ :fileName | 
+			presenter model: (MainPresenterModel new modelData: (filenameWithTickets at: fileName)).
+			ChartComposer new
+				compose:
+					{('Bug' -> presenter drawMovingAvgTimeSpentBugsTicketsPerMonth).
+					('Evolution'
+						-> presenter drawMovingAvgTimeSpentEvolutionTicketsPerMonth).
+					('TotalMinusEstim'
+						-> presenter draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth).
+					('InterventionDev' -> presenter drawMovingAvgTicketPerDev)}
+						asOrderedDictionary
+				title: fileName ]
 ]
 
 { #category : #'as yet unclassified' }

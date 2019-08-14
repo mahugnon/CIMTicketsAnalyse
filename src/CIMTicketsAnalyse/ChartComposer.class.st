@@ -10,10 +10,17 @@ ChartComposer >> compose: aDictionary title: aString [
 
 	| composer |
 	composer := RTComposer new.
+	composer gap: 35.
 	aDictionary
 		keysDo: [ :graphName | 
-			(aDictionary at: graphName) view: composer view.
-			composer group: graphName asSymbol ].
+			| g |
+			g := aDictionary at: graphName.
+			g view: composer view.
+			composer group: graphName asSymbol.
+			g build ].
 	composer setGeneralTitle: aString.
+	composer layout: RTHorizontalLineLayout new.
+	composer groups do: [ :g | composer nameGroup: g as: g asString ].
+	composer propagateHighlightToAll.
 	^ composer view
 ]
