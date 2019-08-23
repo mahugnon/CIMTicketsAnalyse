@@ -14,7 +14,7 @@ QueryTicketsForInterestionFileNames >> runOn: aCollection nameLime: aLimit [
 				->
 					(aCollection
 						select: [ :ticket | 
-							ticket associatedFiles isNotNil
-								and: [ ticket associatedFiles includes: fileName ] ]) ])
+							ticket associatedPhysique isNotNil
+								and: [ ticket associatedPhysique includes: fileName ] ]) ])
 		asOrderedDictionary
 ]

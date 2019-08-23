@@ -54,15 +54,16 @@ Class {
 		'timeDev',
 		'versions',
 		'dependenceModel',
-		'associatedFiles'
+		'modules',
+		'associatedPhysiqueFiles'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #adding }
-Tbl_ft_row >> addAssociatedFile: aString [
-	associatedFiles ifNil: [ associatedFiles := Set new ].
-	associatedFiles add: aString
+Tbl_ft_row >> addAssociatedPhysique: aString [
+	associatedPhysiqueFiles ifNil: [ associatedPhysiqueFiles := Set new ].
+	associatedPhysiqueFiles add: aString
 ]
 
 { #category : #API }
@@ -71,13 +72,13 @@ Tbl_ft_row >> analyseContat [
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> associatedFiles [
-	^ associatedFiles
+Tbl_ft_row >> associatedPhysique [
+	^ associatedPhysiqueFiles
 ]
 
 { #category : #accessing }
-Tbl_ft_row >> associatedFiles: anObject [
-	^ associatedFiles := anObject
+Tbl_ft_row >> associatedPhysique: anObject [
+	^ associatedPhysiqueFiles := anObject
 ]
 
 { #category : #accessing }
@@ -594,7 +595,7 @@ Tbl_ft_row >> ft_version_souhait: arg1 [
 
 { #category : #initialization }
 Tbl_ft_row >> initialize [
-	associatedFiles := Set new
+	associatedPhysiqueFiles := Set new
 ]
 
 { #category : #initialization }
@@ -625,6 +626,11 @@ Tbl_ft_row >> keepInterestingBibliotheques [
 ]
 
 { #category : #accessing }
+Tbl_ft_row >> modules [
+	^ modules
+]
+
+{ #category : #accessing }
 Tbl_ft_row >> month [
 	^ ft_datecrea month
 ]
@@ -642,6 +648,12 @@ Tbl_ft_row >> monthCreation [
 { #category : #API }
 Tbl_ft_row >> numberOfBibliotheques [
 	^ bibliotheques size
+]
+
+{ #category : #initialization }
+Tbl_ft_row >> setModules [
+	modules := Set new.
+	bibliotheques do: [ :bib | modules addAll: bib module ]
 ]
 
 { #category : #accessing }

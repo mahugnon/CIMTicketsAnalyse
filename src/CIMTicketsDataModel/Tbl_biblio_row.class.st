@@ -15,7 +15,8 @@ Class {
 		'biblio_version_id',
 		'biblio_old_str',
 		'biblio_new_str',
-		'tickets'
+		'tickets',
+		'module'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -130,6 +131,11 @@ Tbl_biblio_row >> isInterestingBibliotheque [
 	^ self interestingBibliothequeNames includes: biblio_nom
 ]
 
+{ #category : #accessing }
+Tbl_biblio_row >> module [
+	^ module
+]
+
 { #category : #'as yet unclassified' }
 Tbl_biblio_row >> renameUsing: aCollection [
 	biblio_nom := aCollection
@@ -138,6 +144,11 @@ Tbl_biblio_row >> renameUsing: aCollection [
 				anySatisfy: [ :e | e asLowercase = biblio_nom asLowercase ] ]
 		ifFound: [ :elt | biblio_nom := elt key ]
 		ifNone: [ biblio_nom ]
+]
+
+{ #category : #initialization }
+Tbl_biblio_row >> setModule [
+	module := CIMIzyProtectModulesUtility new selectModuleFor: biblio_nom
 ]
 
 { #category : #accessing }

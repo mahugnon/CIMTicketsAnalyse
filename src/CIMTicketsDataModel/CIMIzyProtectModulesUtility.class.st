@@ -1,22 +1,24 @@
 Class {
-	#name : #CIMIzyProtectModulesGenerator,
+	#name : #CIMIzyProtectModulesUtility,
 	#superclass : #Object,
 	#category : #'CIMTicketsDataModel-ModuleCreator'
 }
 
 { #category : #api }
-CIMIzyProtectModulesGenerator >> allModules [
+CIMIzyProtectModulesUtility >> allModules [
 	^ {('408' -> #('cwm_noe_irm.pbl.src')).
 	('AideSocial'
 		-> #('cwm_soc.pbl.src' 'cwm_soc_dw.pbl.src' 'cwm_soc_uo.pbl.src')).
+	('Datawarehouse'
+		-> #('cwm_dwh.pbl.src' 'cwm_dwh_dw.pbl.src' 'cwm_dwh_uo.pbl.src')).
 	('Bordereau'
 		->
-			#('cwm_brd_dw_1.pbl.src' 'cwm_brd_dw_2.pbl.src' 'cwm_brd_uo.pbl.src' 'cwm_xxx_dw.pbl.src' 'cwm_xxx_dw_2.pbl.src' 'cwm_xxx_dw_3.pbl.src')).
+			#('cwm_brd_dw_1.pbl.src' 'Cwm_brd.pbl.src' 'cwm_brd_dw_2.pbl.src' 'cwm_brd_uo.pbl.src' 'cwm_xxx_dw.pbl.src' 'cwm_xxx_dw_2.pbl.src' 'cwm_xxx_dw_3.pbl.src')).
 	('CartierPayant'
 		-> #('cwm_tpy.pbl.src' 'cwm_tpy_dw.pbl.src' 'cwm_tpy_uo.pbl.src')).
 	('Commun'
 		->
-			#('cwm_abc.pbl.src' 'cwm_abc_dw.pbl.src' 'cwm_abc_uo.pbl.src' 'Cwm_app.pbl.src' 'cwm_app_dw.pbl.src' 'cwm_ctr_dw_1.pbl.src' 'cwm_ctr_dw_2.pbl.src' 'cwm_ctr_uo.pbl.src' 'Cwm_fdb.pbl.src' 'cwm_gui.pbl.src' 'cwm_mdb.pbl.src' 'Cwm_org.pbl.src' 'cwm_org_dw.pbl.src' 'cwm_org_uo.pbl.src' 'cwm_output.pbl.src' 'cwm_par.pbl.src' 'Cwm_par_dw.pbl.src' 'cwm_par_uo.pbl.src' 'Cwm_prt.pbl.src' 'cwm_prt_dw.pbl.src' 'cwm_prt_uo.pbl.src' 'Cwm_req.pbl.src' 'cwm_res.pbl.src' 'cwm_res_dw.pbl.src' 'cwm_res_uo.pbl.src' 'cwm_tmp.pbl.src' 'cwm_tmp_dw.pbl.src' 'cwm_tmp_uo.pbl.src' 'cwm_tool.pbl.src' 'cwm_tools_dev.pbl.src' 'cwm_tool_dw.pbl.src' 'cwm_tool_uo.pbl.src' 'Cwm_trs.pbl.src' 'cwm_trs_dw.pbl.src' 'cwm_trs_uo.pbl.src' 'Cwm_trt.pbl.src' 'cwm_trt_dw.pbl.src' 'cwm_trt_uo.pbl.src')).
+			#('cwm_abc.pbl.src' 'cwm_abc_dw.pbl.src' 'cwm_abc_uo.pbl.src' 'Cwm_app.pbl.src' 'cwm_app_dw.pbl.src' 'cwm_ctr_dw_1.pbl.src' 'cwm_ctr_dw_2.pbl.src' 'cwm_ctr_uo.pbl.src' 'Cwm_fdb.pbl.src' 'Cwm_ctr.pbl.src' 'cwm_gui.pbl.src' 'cwm_mdb.pbl.src' 'Cwm_org.pbl.src' 'cwm_org_dw.pbl.src' 'cwm_org_uo.pbl.src' 'cwm_output.pbl.src' 'cwm_par.pbl.src' 'Cwm_par_dw.pbl.src' 'cwm_par_uo.pbl.src' 'Cwm_prt.pbl.src' 'cwm_prt_dw.pbl.src' 'cwm_prt_uo.pbl.src' 'Cwm_req.pbl.src' 'cwm_res.pbl.src' 'cwm_res_dw.pbl.src' 'cwm_res_uo.pbl.src' 'cwm_tmp.pbl.src' 'cwm_tmp_dw.pbl.src' 'cwm_tmp_uo.pbl.src' 'cwm_tool.pbl.src' 'cwm_tools_dev.pbl.src' 'cwm_tool_dw.pbl.src' 'cwm_tool_uo.pbl.src' 'Cwm_trs.pbl.src' 'cwm_trs_dw.pbl.src' 'cwm_trs_uo.pbl.src' 'Cwm_trt.pbl.src' 'cwm_trt_dw.pbl.src' 'cwm_trt_uo.pbl.src')).
 	('Comptabilite'
 		->
 			#('Cwm_cpt.pbl.src' 'cwm_cpt_dw_1.pbl.src' 'cwm_cpt_dw_2.pbl.src' 'cwm_cpt_dw_3.pbl.src' 'cwm_cpt_dw_4.pbl.src' 'cwm_cpt_uo.pbl.src')).
@@ -42,13 +44,13 @@ CIMIzyProtectModulesGenerator >> allModules [
 ]
 
 { #category : #api }
-CIMIzyProtectModulesGenerator >> copyDirectory: sourceLib to: destLib [
+CIMIzyProtectModulesUtility >> copyDirectory: sourceLib to: destLib [
 	^ sourceLib visibleFiles
 		do: [ :file | file copyTo: destLib / file basename ]
 ]
 
 { #category : #api }
-CIMIzyProtectModulesGenerator >> createModulesFrom: sourceFolder to: destinationFolder [
+CIMIzyProtectModulesUtility >> createModulesFrom: sourceFolder to: destinationFolder [
 	| destinationFolderReference |
 	destinationFolderReference := destinationFolder asFileReference
 		ensureCreateDirectory.
@@ -67,7 +69,25 @@ CIMIzyProtectModulesGenerator >> createModulesFrom: sourceFolder to: destination
 ]
 
 { #category : #api }
-CIMIzyProtectModulesGenerator >> getModuleLibrary: moduleName from: libraries [
+CIMIzyProtectModulesUtility >> getModuleLibrary: moduleName from: libraries [
 	^ libraries
 		select: [ :b | (self allModules at: moduleName) includes: b basename ]
+]
+
+{ #category : #'as yet unclassified' }
+CIMIzyProtectModulesUtility >> modulesAsLowercase [
+	^ (self allModules keys
+		collect: [ :key | 
+			key
+				-> ((self allModules at: key) collect: [ :module | module asLowercase ]) ])
+		asOrderedDictionary
+]
+
+{ #category : #api }
+CIMIzyProtectModulesUtility >> selectModuleFor: aLibraryName [
+	| modules |
+	"self haltIf: (aLibraryName ='cwm_brd')."
+	modules := self modulesAsLowercase.
+	^ modules keys
+		select: [ :key | (modules at: key) includes: aLibraryName , '.pbl.src' ]
 ]

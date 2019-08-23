@@ -11,15 +11,15 @@ Tbl_ft >> addAssociatedFiles: aCollection [
 			rows
 				detect:
 					[ :row | row ft_numordre asInteger = aCommitComment ticketNumber asInteger ]
-				ifFound: [ :founded | founded addAssociatedFile: aCommitComment fileName ] ]
+				ifFound: [ :founded | founded addAssociatedPhysique: aCommitComment fileName ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 Tbl_ft >> analyseContat [
 	self rows do: [ :ft | ft analyseContat ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 Tbl_ft >> associateToTicketFileIn: aFolder [
 	| folderReference |
 	folderReference := aFolder asFileReference.
@@ -37,7 +37,7 @@ Tbl_ft >> filFromCSVFile: aCsvFile [
 			(date ifNil: [ Date new ] ifNotNil: [ date ]) year > 2003 ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 Tbl_ft >> keepInterestingBibliotheques [
 	^ self rows do: [ :row | row keepInterestingBibliotheques ]
 ]
@@ -45,4 +45,9 @@ Tbl_ft >> keepInterestingBibliotheques [
 { #category : #utility }
 Tbl_ft >> rowClass [
 	^ Tbl_ft_row
+]
+
+{ #category : #initialization }
+Tbl_ft >> setModules [
+	^ rows do: #setModules
 ]

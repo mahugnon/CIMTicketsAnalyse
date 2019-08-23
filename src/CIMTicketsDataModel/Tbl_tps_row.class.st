@@ -10,7 +10,8 @@ Class {
 		'tps_cim_id',
 		'tps_dev_id',
 		'tps_test_id',
-		'tps_type'
+		'tps_type',
+		'typeSession'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -29,6 +30,11 @@ Tbl_tps_row >> initializeWith: arg1 [
 { #category : #testing }
 Tbl_tps_row >> isDevelopment [
 	^ tps_type = '0'
+]
+
+{ #category : #testing }
+Tbl_tps_row >> isDevelopmentTest [
+	^ tps_type = '0' and:[]
 ]
 
 { #category : #testing }
@@ -124,4 +130,14 @@ Tbl_tps_row >> tps_type [
 { #category : #accessing }
 Tbl_tps_row >> tps_type: arg1 [
 	tps_type := arg1
+]
+
+{ #category : #accessing }
+Tbl_tps_row >> typeSession [
+	^ typeSession
+]
+
+{ #category : #accessing }
+Tbl_tps_row >> typeSession: anObject [
+	typeSession := anObject
 ]

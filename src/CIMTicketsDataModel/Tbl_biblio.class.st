@@ -10,12 +10,12 @@ Tbl_biblio >> groupedByName [
 		select: [ :b | b key matchesRegex: '.*cwm.*' ]) asDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 Tbl_biblio >> interestingBibliotheques [
 	^ rows select: #isInterestingBibliotheque
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 Tbl_biblio >> renameUsing: aCollection [
 	rows do: [ :row | row renameUsing: aCollection ]
 ]
@@ -23,4 +23,9 @@ Tbl_biblio >> renameUsing: aCollection [
 { #category : #utility }
 Tbl_biblio >> rowClass [
 	^ Tbl_biblio_row
+]
+
+{ #category : #initialization }
+Tbl_biblio >> setModules [
+	self rows do: #setModule
 ]

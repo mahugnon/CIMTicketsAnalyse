@@ -6,6 +6,6 @@ Class {
 
 { #category : #running }
 QueryAllTicketsFiles >> runOn: aCollection [
-	^ ((aCollection reject: [ :ticket | ticket associatedFiles isNil ])
-		collect: [ :each | each associatedFiles ]) flatten asBag contents
+	^ ((aCollection reject: [ :ticket | ticket associatedPhysique isNil ])
+		collect: [ :each | each associatedPhysique ]) flatten asBag contents
 ]
