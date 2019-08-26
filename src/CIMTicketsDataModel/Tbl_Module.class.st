@@ -1,11 +1,11 @@
 Class {
-	#name : #CIMIzyProtectModulesUtility,
-	#superclass : #Object,
-	#category : #'CIMTicketsDataModel-ModuleCreator'
+	#name : #'Tbl_Module',
+	#superclass : #Tbl,
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #api }
-CIMIzyProtectModulesUtility >> allModules [
+Tbl_Module >> allModules [
 	^ {('408' -> #('cwm_noe_irm.pbl.src')).
 	('AideSocial'
 		-> #('cwm_soc.pbl.src' 'cwm_soc_dw.pbl.src' 'cwm_soc_uo.pbl.src')).
@@ -44,13 +44,13 @@ CIMIzyProtectModulesUtility >> allModules [
 ]
 
 { #category : #api }
-CIMIzyProtectModulesUtility >> copyDirectory: sourceLib to: destLib [
+Tbl_Module >> copyDirectory: sourceLib to: destLib [
 	^ sourceLib visibleFiles
 		do: [ :file | file copyTo: destLib / file basename ]
 ]
 
 { #category : #api }
-CIMIzyProtectModulesUtility >> createModulesFrom: sourceFolder to: destinationFolder [
+Tbl_Module >> createModulesFrom: sourceFolder to: destinationFolder [
 	| destinationFolderReference |
 	destinationFolderReference := destinationFolder asFileReference
 		ensureCreateDirectory.
@@ -69,13 +69,25 @@ CIMIzyProtectModulesUtility >> createModulesFrom: sourceFolder to: destinationFo
 ]
 
 { #category : #api }
-CIMIzyProtectModulesUtility >> getModuleLibrary: moduleName from: libraries [
+Tbl_Module >> getModuleLibrary: moduleName from: libraries [
 	^ libraries
 		select: [ :b | (self allModules at: moduleName) includes: b basename ]
 ]
 
-{ #category : #'as yet unclassified' }
-CIMIzyProtectModulesUtility >> modulesAsLowercase [
+{ #category : #initialization }
+Tbl_Module >> initialize [
+	super initialize.
+	rows := (self modulesAsLowercase keys
+		collect: [ :moduleNom | 
+			self rowClass new
+				nom: moduleNom;
+				setTickets;
+				setBibliotheques;
+				yourself ]) asOrderedCollection
+]
+
+{ #category : #utility }
+Tbl_Module >> modulesAsLowercase [
 	^ (self allModules keys
 		collect: [ :key | 
 			key
@@ -83,11 +95,16 @@ CIMIzyProtectModulesUtility >> modulesAsLowercase [
 		asOrderedDictionary
 ]
 
+{ #category : #utility }
+Tbl_Module >> rowClass [
+	^ Tbl_Module_row
+]
+
 { #category : #api }
-CIMIzyProtectModulesUtility >> selectModuleFor: aLibraryName [
+Tbl_Module >> selectModuleFor: aLibraryName [
 	| modules |
 	"self haltIf: (aLibraryName ='cwm_brd')."
 	modules := self modulesAsLowercase.
 	^ modules keys
-		select: [ :key | (modules at: key) includes: aLibraryName , '.pbl.src' ]
+		select: [ :key | (modules at: key) includes: aLibraryName ]
 ]

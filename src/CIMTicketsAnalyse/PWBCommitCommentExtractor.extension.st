@@ -3,6 +3,7 @@ Extension { #name : #PWBCommitCommentExtractor }
 { #category : #'*CIMTicketsAnalyse' }
 PWBCommitCommentExtractor class >> extractCommitCommentFromLibrariesFolder: aFolder [
 	| aFolderReference |
+	"Extract commit comment from  libraries folder"
 	aFolderReference := aFolder asFileReference.
 	^ (aFolderReference directories
 		collect: [ :dir | self extractCommitCommentfromFolder: dir ])
@@ -11,6 +12,8 @@ PWBCommitCommentExtractor class >> extractCommitCommentFromLibrariesFolder: aFol
 
 { #category : #'*CIMTicketsAnalyse' }
 PWBCommitCommentExtractor class >> extractCommitCommentfromFolder: aFolder [
+"Extract commit comment from  a library folder
+PowerBuilder sourceFile files folder >> collection of commentInFiles"
 	^ ((aFolder visibleFiles
 		reject: [ :aFile | #(pbg srj DS_Store) includes: aFile extension ])
 		collect: [ :aFile | 

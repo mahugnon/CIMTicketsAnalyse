@@ -6,12 +6,16 @@ Class {
 
 { #category : #adding }
 Tbl_ft >> addAssociatedFiles: aCollection [
+	self flag: 'To be improved'.
 	aCollection
 		do: [ :aCommitComment | 
 			rows
 				detect:
 					[ :row | row ft_numordre asInteger = aCommitComment ticketNumber asInteger ]
-				ifFound: [ :founded | founded addAssociatedPhysique: aCommitComment fileName ] ]
+				ifFound: [ :founded | 
+					founded
+						addAssociatedPhysiqueFile: aCommitComment fileName;
+						addAssociatedPhysiqueModule: aCommitComment directory ] ]
 ]
 
 { #category : #utility }

@@ -55,15 +55,22 @@ Class {
 		'versions',
 		'dependenceModel',
 		'modules',
-		'associatedPhysiqueFiles'
+		'associatedPhysiqueFiles',
+		'modulesFromAssociatedFile'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #adding }
-Tbl_ft_row >> addAssociatedPhysique: aString [
+Tbl_ft_row >> addAssociatedPhysiqueFile: aString [
 	associatedPhysiqueFiles ifNil: [ associatedPhysiqueFiles := Set new ].
 	associatedPhysiqueFiles add: aString
+]
+
+{ #category : #adding }
+Tbl_ft_row >> addAssociatedPhysiqueModule: aString [
+	modulesFromAssociatedFile ifNil: [ modulesFromAssociatedFile := Set new ].
+	modulesFromAssociatedFile add: (Tbl_Module new selectModuleFor:aString)
 ]
 
 { #category : #API }
@@ -631,6 +638,11 @@ Tbl_ft_row >> modules [
 ]
 
 { #category : #accessing }
+Tbl_ft_row >> modulesFromAssociatedFile [
+	^ modulesFromAssociatedFile
+]
+
+{ #category : #accessing }
 Tbl_ft_row >> month [
 	^ ft_datecrea month
 ]
@@ -653,7 +665,11 @@ Tbl_ft_row >> numberOfBibliotheques [
 { #category : #initialization }
 Tbl_ft_row >> setModules [
 	modules := Set new.
-	bibliotheques do: [ :bib | modules addAll: bib module ]
+	bibliotheques
+		do: [ :bib | 
+			bib setModules.
+			modules addAll: bib modules ].
+	^ modules
 ]
 
 { #category : #accessing }

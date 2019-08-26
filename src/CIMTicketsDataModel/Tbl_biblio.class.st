@@ -27,5 +27,5 @@ Tbl_biblio >> rowClass [
 
 { #category : #initialization }
 Tbl_biblio >> setModules [
-	self rows do: #setModule
+	self rows do: #setModules
 ]

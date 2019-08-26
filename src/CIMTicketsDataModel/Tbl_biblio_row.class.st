@@ -16,7 +16,7 @@ Class {
 		'biblio_old_str',
 		'biblio_new_str',
 		'tickets',
-		'module'
+		'modules'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -132,8 +132,8 @@ Tbl_biblio_row >> isInterestingBibliotheque [
 ]
 
 { #category : #accessing }
-Tbl_biblio_row >> module [
-	^ module
+Tbl_biblio_row >> modules [
+	^ modules
 ]
 
 { #category : #'as yet unclassified' }
@@ -147,8 +147,8 @@ Tbl_biblio_row >> renameUsing: aCollection [
 ]
 
 { #category : #initialization }
-Tbl_biblio_row >> setModule [
-	module := CIMIzyProtectModulesUtility new selectModuleFor: biblio_nom
+Tbl_biblio_row >> setModules [
+	modules := Tbl_Module new selectModuleFor: (biblio_nom , '.pbl.src')
 ]
 
 { #category : #accessing }

@@ -1,3 +1,6 @@
+"
+Extract comment from a folder containing PowerBuilder source files
+"
 Class {
 	#name : #QueryAllCommitComment,
 	#superclass : #CIMAbstractQuery,
