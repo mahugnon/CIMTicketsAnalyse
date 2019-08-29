@@ -69,8 +69,10 @@ Tbl_ft_row >> addAssociatedPhysiqueFile: aString [
 
 { #category : #adding }
 Tbl_ft_row >> addAssociatedPhysiqueModule: aString [
-	modulesFromAssociatedFile ifNil: [ modulesFromAssociatedFile := Set new ].
-	modulesFromAssociatedFile add: (Tbl_Module new selectModuleFor:aString)
+	modulesFromAssociatedFile
+		ifNil: [ modulesFromAssociatedFile := Set new ].
+	modulesFromAssociatedFile
+		addAll: (Tbl_Module selectModuleFor: aString)
 ]
 
 { #category : #API }

@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #api }
-Tbl_Module >> allModules [
+Tbl_Module class >> allModules [
 	^ {('408' -> #('cwm_noe_irm.pbl.src')).
 	('AideSocial'
 		-> #('cwm_soc.pbl.src' 'cwm_soc_dw.pbl.src' 'cwm_soc_uo.pbl.src')).
@@ -43,6 +43,24 @@ Tbl_Module >> allModules [
 		asOrderedDictionary
 ]
 
+{ #category : #utility }
+Tbl_Module class >> modulesAsLowercase [
+	^ (self allModules keys
+		collect: [ :key | 
+			key
+				-> ((self allModules at: key) collect: [ :module | module asLowercase ]) ])
+		asOrderedDictionary
+]
+
+{ #category : #api }
+Tbl_Module class >> selectModuleFor: aLibraryName [
+	| modules |
+	"self haltIf: (aLibraryName ='cwm_brd')."
+	modules := self modulesAsLowercase.
+	^ modules keys
+		select: [ :key | (modules at: key) includes: aLibraryName ]
+]
+
 { #category : #api }
 Tbl_Module >> copyDirectory: sourceLib to: destLib [
 	^ sourceLib visibleFiles
@@ -54,7 +72,7 @@ Tbl_Module >> createModulesFrom: sourceFolder to: destinationFolder [
 	| destinationFolderReference |
 	destinationFolderReference := destinationFolder asFileReference
 		ensureCreateDirectory.
-	self allModules
+	self class allModules
 		keysDo: [ :moduleName | 
 			| module |
 			module := (destinationFolderReference / moduleName)
@@ -71,13 +89,13 @@ Tbl_Module >> createModulesFrom: sourceFolder to: destinationFolder [
 { #category : #api }
 Tbl_Module >> getModuleLibrary: moduleName from: libraries [
 	^ libraries
-		select: [ :b | (self allModules at: moduleName) includes: b basename ]
+		select: [ :b | (self class allModules at: moduleName) includes: b basename ]
 ]
 
 { #category : #initialization }
 Tbl_Module >> initialize [
 	super initialize.
-	rows := (self modulesAsLowercase keys
+	rows := (self class modulesAsLowercase keys
 		collect: [ :moduleNom | 
 			self rowClass new
 				nom: moduleNom;
@@ -87,24 +105,6 @@ Tbl_Module >> initialize [
 ]
 
 { #category : #utility }
-Tbl_Module >> modulesAsLowercase [
-	^ (self allModules keys
-		collect: [ :key | 
-			key
-				-> ((self allModules at: key) collect: [ :module | module asLowercase ]) ])
-		asOrderedDictionary
-]
-
-{ #category : #utility }
 Tbl_Module >> rowClass [
 	^ Tbl_Module_row
-]
-
-{ #category : #api }
-Tbl_Module >> selectModuleFor: aLibraryName [
-	| modules |
-	"self haltIf: (aLibraryName ='cwm_brd')."
-	modules := self modulesAsLowercase.
-	^ modules keys
-		select: [ :key | (modules at: key) includes: aLibraryName ]
 ]

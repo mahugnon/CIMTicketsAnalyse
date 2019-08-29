@@ -13,9 +13,8 @@ Tbl_ft >> addAssociatedFiles: aCollection [
 				detect:
 					[ :row | row ft_numordre asInteger = aCommitComment ticketNumber asInteger ]
 				ifFound: [ :founded | 
-					founded
-						addAssociatedPhysiqueFile: aCommitComment fileName;
-						addAssociatedPhysiqueModule: aCommitComment directory ] ]
+					founded addAssociatedPhysiqueFile: aCommitComment fileName.
+					founded addAssociatedPhysiqueModule: aCommitComment directory ] ]
 ]
 
 { #category : #utility }

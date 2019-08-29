@@ -148,7 +148,7 @@ Tbl_biblio_row >> renameUsing: aCollection [
 
 { #category : #initialization }
 Tbl_biblio_row >> setModules [
-	modules := Tbl_Module new selectModuleFor: (biblio_nom , '.pbl.src')
+	modules := Tbl_Module selectModuleFor: biblio_nom , '.pbl.src'
 ]
 
 { #category : #accessing }
