@@ -1,12 +1,16 @@
 Class {
 	#name : #CIMAverageNode,
-	#superclass : #Object,
+	#superclass : #TicketNode,
 	#instVars : [
-		'month',
 		'tickets'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
+
+{ #category : #visiting }
+CIMAverageNode >> acceptBuider: aGuiBuilder [
+	aGuiBuilder buildAverageNode
+]
 
 { #category : #adding }
 CIMAverageNode >> addTicket: aTicket [

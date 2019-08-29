@@ -7,6 +7,11 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #visiting }
+CIMMovingAverageNode >> acceptBuider: aGuiBuilder [
+	aGuiBuilder buildMovingAverageNode
+]
+
 { #category : #initialization }
 CIMMovingAverageNode >> initialize [
 	super initialize.
