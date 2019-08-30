@@ -61,6 +61,11 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #visiting }
+Tbl_ft_row >> acceptBuider: aGuiBuilder [
+	aGuiBuilder buildTicketNode
+]
+
 { #category : #adding }
 Tbl_ft_row >> addAssociatedPhysiqueFile: aString [
 	associatedPhysiqueFiles ifNil: [ associatedPhysiqueFiles := Set new ].

@@ -1,8 +1,9 @@
 Class {
 	#name : #CIMAverageNode,
-	#superclass : #TicketNode,
+	#superclass : #'Tbl_ft_row',
 	#instVars : [
-		'tickets'
+		'tickets',
+		'value'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
