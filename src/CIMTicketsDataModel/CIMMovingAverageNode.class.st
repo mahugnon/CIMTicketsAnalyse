@@ -12,6 +12,16 @@ CIMMovingAverageNode >> acceptBuider: aGuiBuilder [
 	aGuiBuilder buildMovingAverageNode
 ]
 
+{ #category : #accessing }
+CIMMovingAverageNode >> averageNodes [
+	^ averageNodes
+]
+
+{ #category : #accessing }
+CIMMovingAverageNode >> averageNodes: anObject [
+	averageNodes := anObject
+]
+
 { #category : #initialization }
 CIMMovingAverageNode >> initialize [
 	super initialize.

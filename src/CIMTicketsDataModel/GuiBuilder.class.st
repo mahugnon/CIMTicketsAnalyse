@@ -13,5 +13,9 @@ GuiBuilder >> buildMovingAverageNode [
 ]
 
 { #category : #'as yet unclassified' }
+GuiBuilder >> buildTicketGroupNode [
+]
+
+{ #category : #'as yet unclassified' }
 GuiBuilder >> buildTicketNode [
 ]

@@ -50,8 +50,12 @@ QueryPerMonth >> ordered: boolean [
 { #category : #running }
 QueryPerMonth >> runOn: aCollection [
 	| result |
-	result := (aCollection asOrderedCollection groupedBy: [ :ticket | self month: ticket ]) associations reject: [ :assoc | assoc key isNil ].
-	fillGaps ifTrue: [ result := self fillGap: result ].
-	ordered ifTrue: [ result := result sorted: [ :a :b | a key <= b key ]].
-	^ result asOrderedDictionary
+	result := (aCollection asOrderedCollection
+		groupedBy: [ :ticket | self month: ticket ]) associations
+		reject: [ :assoc | assoc key isNil ].
+	fillGaps
+		ifTrue: [ result := self fillGap: result ].
+	ordered
+		ifTrue: [ result := result sorted: [ :a :b | a key <= b key ] ].
+	^ CIMTicketGroupNode groupsFrom: result asOrderedDictionary
 ]

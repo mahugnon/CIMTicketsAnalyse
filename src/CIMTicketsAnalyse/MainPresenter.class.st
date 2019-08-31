@@ -7,6 +7,33 @@ Class {
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
+{ #category : #'as yet unclassified' }
+MainPresenter class >> composerScript [
+| plots presenter data composer builder |
+plots := OrderedCollection new.
+presenter := MainPresenter new.
+data := MainPresenterModel new ticketPerFile.
+data keys collect:[ :fileName| 
+	composer := RTComposer new.
+	presenter model: (MainPresenterModel new modelData: (data at: fileName)).
+	builder := presenter drawMovingAvgTimeSpentBugsTicketsPerMonth.
+	builder view: composer view.
+	builder build.
+	composer group:fileName,'1'. 
+	builder := presenter drawMovingAvgTimeSpentEvolutionTicketsPerMonth.
+	builder view: composer view.
+		
+	builder build.
+	composer group:fileName,'2'. 
+	composer.
+	composer layout: RTHorizontalLineLayout   new.
+composer view
+
+	
+				 ].
+
+]
+
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 	<script:

@@ -1,8 +1,7 @@
 Class {
 	#name : #CIMAverageNode,
-	#superclass : #'Tbl_ft_row',
+	#superclass : #CIMTicketGroupNode,
 	#instVars : [
-		'tickets',
 		'value'
 	],
 	#category : #'CIMTicketsDataModel-Model'
@@ -13,17 +12,18 @@ CIMAverageNode >> acceptBuider: aGuiBuilder [
 	aGuiBuilder buildAverageNode
 ]
 
-{ #category : #adding }
-CIMAverageNode >> addTicket: aTicket [
-	tickets add: aTicket
-]
-
-{ #category : #adding }
-CIMAverageNode >> addTickets: aCollection [
-	tickets addAll: aCollection
-]
-
 { #category : #initialization }
 CIMAverageNode >> initialize [
-	tickets := OrderedCollection new
+	super initialize.
+	value := 0 asDuration totalSeconds
+]
+
+{ #category : #evaluating }
+CIMAverageNode >> value [
+	^ value
+]
+
+{ #category : #accessing }
+CIMAverageNode >> value: anObject [
+	value := anObject
 ]
