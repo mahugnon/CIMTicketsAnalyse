@@ -5,17 +5,15 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-QueryCutTimeSerie >> cut: aDictionary after: aMonth [
-	^ ((aDictionary keys select: [ :key | key > aMonth ])
-		collect: [ :key | key -> (aDictionary at: key) ])
-		asOrderedDictionary
+QueryCutTimeSerie >> cut: aCollection after: aMonth [
+	^ (aCollection select: [ :aNode | aNode time > aMonth ])
+		asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
-QueryCutTimeSerie >> cut: aDictionary before: aMonth [
-	^ ((aDictionary keys select: [ :key | key < aMonth ])
-		collect: [ :key | key -> (aDictionary at: key) ])
-		asOrderedDictionary
+QueryCutTimeSerie >> cut: aCollection before: aMonth [
+	^ (aCollection select: [ :aNode | aNode time < aMonth ])
+		asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }

@@ -10,36 +10,36 @@ Class {
 { #category : #'as yet unclassified' }
 DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 	| ds regressionLinesColors firstX |
-	firstX := timeSerie keys first asSeconds.
+	firstX := timeSerie first time asSeconds.
 	graphic := RTGrapher new.
 	ds := RTData new connectColor: Color blue.
-	ds points: timeSerie keys.
-	ds y: [ :key | timeSerie at: key ].
-	ds x: [ :key | key asSeconds - firstX ].
-	ds interaction popup text: [ :elt | self popupTextOn: elt ].
+	ds points: timeSerie.
+	ds y: [ :node | node value ].
+	ds x: [ :node | node time asSeconds - firstX ].
+	"ds interaction popup text: [ :elt | self popupTextOn: elt ]."
 	graphic add: ds.
 	regressionLinesColors := RTCPQualitative new
 		colors: aCollection size + 2.
 	1 to: aCollection size do: [ :i | 
-		| linearRegression dic |
-		dic := aCollection at: i.
+		| linearRegression data |
+		data := aCollection at: i.
 		ds := RTData new.
 		ds connectColor: (regressionLinesColors at: i).
-		linearRegression := QueryLinearRegression runOn: dic.
-		ds points: dic keys.
-		ds x: [ :key | key asSeconds - firstX ].
+		linearRegression := QueryLinearRegression runOn: data.
+		ds points: data.
+		ds x: [ :node | node time asSeconds - firstX ].
 		ds
-			y: [ :key | 
-				key asSeconds * (linearRegression at: 'slope')
+			y: [ :node | 
+				node time asSeconds * (linearRegression at: 'slope')
 					+ (linearRegression at: 'intercept') ].
 		graphic add: ds ].
 	graphic axisX
 		numberOfLabels: (timeSerie size / 6) asInteger;
 		labelRotation: -45;
 		labelConversion: [ :v | 
-			(v < 1 or: [ v > timeSerie keys size ])
+			(v < 1 or: [ v > timeSerie size ])
 				ifTrue: [ '' ]
-				ifFalse: [ CIMDateFormater map: (timeSerie keys at: v) asString ] ].
+				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
 	graphic view @ RTZoomableView.
 	^ graphic
 ]

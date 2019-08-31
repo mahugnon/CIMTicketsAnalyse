@@ -13,12 +13,15 @@ QueryCleanData >> rejectVersionWithNilDateArret: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
-QueryCleanData >> rejectWrongClosingDate: aCollection [
-	^ aCollection
-		select: [ :ft | 
-			ft monthClosing
-				ifNotNil: [ :date | date year >= 2000 ]
-				ifNil: [ true ] ]
+QueryCleanData >> rejectWrongClosingDate: aTicketGroupNode [
+	^ aTicketGroupNode
+		tickets:
+			(aTicketGroupNode tickets
+				select: [ :ft | 
+					ft monthClosing
+						ifNotNil: [ :date | date year >= 2000 ]
+						ifNil: [ true ] ]);
+		yourself
 ]
 
 { #category : #running }

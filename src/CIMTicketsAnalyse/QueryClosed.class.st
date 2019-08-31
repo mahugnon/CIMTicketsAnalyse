@@ -5,6 +5,9 @@ Class {
 }
 
 { #category : #running }
-QueryClosed >> runOn: aCollection [
-	^ aCollection reject: [ :ticket | ticket monthClosing isNil ]
+QueryClosed >> runOn: aTicketGroupNode [
+	^ aTicketGroupNode
+		tickets:
+			(aTicketGroupNode tickets
+				reject: [ :ticket | ticket monthClosing isNil ])
 ]

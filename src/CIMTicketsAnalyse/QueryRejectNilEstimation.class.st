@@ -5,15 +5,21 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-QueryRejectNilEstimation >> rejectWrongEstimDate: aCollection [
-	^ aCollection
-		select: [ :ft | ft tpsEstim ~= '' and: [ ft tpsEstim isNotNil ] ]
+QueryRejectNilEstimation >> rejectWrongEstimDate: aTicketGroupNode [
+	^ aTicketGroupNode
+		tickets:
+			(aTicketGroupNode tickets
+				select: [ :ft | ft tpsEstim ~= '' and: [ ft tpsEstim isNotNil ] ]);
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
-QueryRejectNilEstimation >> rejectWrongTotalDate: aCollection [
-	^ aCollection
-		select: [ :ft | ft totalTps ~= '' and: [ ft totalTps isNotNil ] ]
+QueryRejectNilEstimation >> rejectWrongTotalDate: aTicketGroupNode [
+	^ aTicketGroupNode
+		tickets:
+			(aTicketGroupNode tickets
+				select: [ :ft | ft totalTps ~= '' and: [ ft totalTps isNotNil ] ]);
+		yourself
 ]
 
 { #category : #running }

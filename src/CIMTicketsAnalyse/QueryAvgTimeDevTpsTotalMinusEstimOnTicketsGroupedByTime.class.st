@@ -10,7 +10,7 @@ QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime >> runOn: aCollection [
 		collect: [ :ticketGroupNode | 
 			CIMAverageNode new
 				time: ticketGroupNode time;
-				addTickets: ticketGroupNode tickets;
+				tickets: ticketGroupNode tickets;
 				value:
 					(QueryAvgTimeDevTpsTotalMinusEstimOnTicket
 						runOn: ticketGroupNode tickets);

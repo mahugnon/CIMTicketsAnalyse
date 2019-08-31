@@ -6,6 +6,9 @@ Class {
 
 { #category : #running }
 QueryBugsEvolutions >> runOn: aCollection [
-	^ aCollection
-		select: [ :ticket | ticket isEvolution or: [ ticket isBug ] ]
+	^ CIMTicketGroupNode new
+		addTickets:
+			(aCollection
+				select: [ :ticket | ticket isEvolution or: [ ticket isBug ] ]);
+		yourself
 ]

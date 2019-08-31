@@ -14,7 +14,7 @@ CIMTicketGroupNode class >> groupsFrom: aDictionary [
 		collect: [ :key | 
 			self new
 				time: key;
-				addTickets: (aDictionary at: key);
+				tickets: (aDictionary at: key);
 				yourself ]) asOrderedCollection
 ]
 
@@ -26,11 +26,6 @@ CIMTicketGroupNode >> acceptBuider: aGuiBuilder [
 { #category : #adding }
 CIMTicketGroupNode >> addTicket: aTicket [
 	tickets add: aTicket
-]
-
-{ #category : #adding }
-CIMTicketGroupNode >> addTickets: aCollection [
-	tickets addAll: aCollection
 ]
 
 { #category : #initialization }
@@ -52,6 +47,11 @@ CIMTicketGroupNode >> size [
 { #category : #accessing }
 CIMTicketGroupNode >> tickets [
 	^ tickets
+]
+
+{ #category : #accessing }
+CIMTicketGroupNode >> tickets: anObject [
+	tickets := anObject
 ]
 
 { #category : #accessing }
