@@ -10,7 +10,7 @@ QueryAvgTimeDevGroupedByTime >> runOn: aCollection [
 		collect: [ :aCIMGroupNode | 
 			CIMAverageNode new
 				time: aCIMGroupNode time;
-				value: (QueryAvgTicketsTimeDev runOn: aCIMGroupNode tickets);
-				addTickets: aCIMGroupNode tickets;
+				value: (QueryAvgTicketsTimeDev runOn: aCIMGroupNode tickets) value;
+				tickets: aCIMGroupNode tickets;
 				yourself ]) asOrderedCollection
 ]

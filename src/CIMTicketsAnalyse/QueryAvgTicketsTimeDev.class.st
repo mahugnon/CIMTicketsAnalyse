@@ -10,7 +10,8 @@ QueryAvgTicketsTimeDev >> runOn: aCollection [
 		value:
 			(aCollection
 				ifEmpty: [ 0 ]
-				ifNotEmpty: ((QueryTicketsTimeDev runOn: aCollection) / aCollection size) asFloat);
-		addTickets: aCollection;
+				ifNotEmpty: [ ((QueryTicketsTimeDev runOn: aCollection) / aCollection size)
+						asFloat ]);
+		tickets: aCollection;
 		yourself
 ]

@@ -38,23 +38,23 @@ LineChart >> convertYAxis [
 ]
 
 { #category : #'drawing-general' }
-LineChart >> developeurDataSetOn: aDictionary [
+LineChart >> developeurDataSetOn: aCollection [
 	| ds |
 	ds := RTData new.
 	ds connectColor: (Color fromString: '#1BB330').
-	ds points: aDictionary keys.
+	ds points: (aCollection collect: #time).
 	ds
-		y: [ :key | 
+		y: [ :time | 
 			QueryNumberOfDeveloppeurForAmonth new
-				runOn: (Tbl izyDevs) rows
-				for: key ];
+				runOn: Tbl izyDevs rows
+				for: time ];
 		label: 'Nombre developpeurs'.
 	^ ds
 ]
 
 { #category : #'drawing-general' }
 LineChart >> draw [
-	|  ds |
+	| ds |
 	graphic := RTGrapher new.
 	self isperDev
 		ifTrue: [ graphic := RTDoubleGrapher new.
@@ -62,10 +62,10 @@ LineChart >> draw [
 			graphic axisYRight color: (Color fromString: '#4A9CFF') ].
 	ds := RTData new.
 	ds connectColor: self cimColor.
-	ds points: timeSerie keys.
-	ds y: [ :key | (timeSerie at: key) - yTranslation ].
+	ds points: timeSerie.
+	ds y: [ :aNode | aNode value - yTranslation ].
 	ds label: label.
-	ds interaction popup text: [ :elt | self popupTextOn: elt ].
+	"ds interaction popup text: [ :elt | self popupTextOn: elt ]."
 	graphic add: ds.
 	graphic
 		add: (self linearRegressionDataSetOn: timeSerie color: Color lightBrown).
@@ -79,9 +79,9 @@ LineChart >> draw [
 		numberOfLabels: (timeSerie size / 6) asInteger;
 		labelRotation: -45;
 		labelConversion: [ :v | 
-			(v < 1 or: [ v > timeSerie keys size ])
+			(v < 1 or: [ v > timeSerie size ])
 				ifTrue: [ '' ]
-				ifFalse: [ CIMDateFormater map: (timeSerie keys at: v) asString ] ].
+				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
 	"b legend."
 	^ graphic
 ]
@@ -99,15 +99,15 @@ LineChart >> isperDev [
 ]
 
 { #category : #'drawing-general' }
-LineChart >> linearRegressionDataSetOn: aDictionary color: aColor [
+LineChart >> linearRegressionDataSetOn: aCollection color: aColor [
 	| ds linearRegression |
-	linearRegression := QueryLinearRegression runOn: aDictionary.
+	linearRegression := QueryLinearRegression runOn: aCollection.
 	ds := RTData new.
 	ds connectColor: aColor.
-	ds points: aDictionary keys.
+	ds points: aCollection.
 	ds
-		y: [ :key | 
-			key asSeconds * (linearRegression at: 'slope')
+		y: [ :node | 
+			node time asSeconds * (linearRegression at: 'slope')
 				+ (linearRegression at: 'intercept') - yTranslation ];
 		label: 'Droite de regression'.
 	^ ds

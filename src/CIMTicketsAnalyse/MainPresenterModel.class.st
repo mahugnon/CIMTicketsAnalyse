@@ -47,7 +47,9 @@ MainPresenterModel >> datawithCloseDate [
 
 { #category : #initialization }
 MainPresenterModel >> initialize [
-	modelData := Tbl allTickets
+	modelData := CIMTicketGroupNode new
+		tickets: Tbl allTickets;
+		yourself
 ]
 
 { #category : #'data sets' }

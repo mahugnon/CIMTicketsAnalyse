@@ -5,6 +5,7 @@ Class {
 }
 
 { #category : #running }
-QueryEvolutions >> runOn: aCollection [
-	^ aCollection select: [ :ticket | ticket isEvolution ]
+QueryEvolutions >> runOn: aTicketGroupNode [
+	^ aTicketGroupNode
+		tickets: (aTicketGroupNode tickets select: [ :ticket | ticket isEvolution ])
 ]
