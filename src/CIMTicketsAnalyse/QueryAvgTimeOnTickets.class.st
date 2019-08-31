@@ -5,15 +5,15 @@ Class {
 }
 
 { #category : #running }
-QueryAvgTimeOnTickets >> runOn: aCollection [
+QueryAvgTimeOnTickets >> runOn: aTicketGroupNode [
 	^ CIMAverageNode new
 		value:
-			(aCollection isEmptyOrNil
+			(aTicketGroupNode isEmptyOrNil
 				ifTrue: [ 0 asDuration totalSeconds ]
-				ifFalse: [ ((aCollection
+				ifFalse: [ ((aTicketGroupNode tickets
 						inject: 0 asDuration
 						into: [ :sum :ticket | sum + (ticket totalTps ifNil: [ 0 asDuration ]) ])
-						/ aCollection size) totalSeconds asFloat ]);
-		addTickets: aCollection;
+						/ aTicketGroupNode size) totalSeconds asFloat ]);
+		ticketGroup: aTicketGroupNode;
 		yourself
 ]

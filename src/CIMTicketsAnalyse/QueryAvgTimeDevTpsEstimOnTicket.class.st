@@ -5,11 +5,15 @@ Class {
 }
 
 { #category : #running }
-QueryAvgTimeDevTpsEstimOnTicket >> runOn: aCollection [
-	^ aCollection isEmptyOrNil
-		ifTrue: [ ^ 0 asDuration totalSeconds ]
-		ifFalse: [ ^ ((aCollection
-				inject: 0 asDuration
-				into: [ :sum :ticket | sum + (ticket devTpsEstim ifNil: [ 0 asDuration ]) ])
-				/ aCollection size) totalSeconds asFloat ]
+QueryAvgTimeDevTpsEstimOnTicket >> runOn: aTicketGroupNode [
+	^ CIMAverageNode new
+		value:
+			(aTicketGroupNode isEmptyOrNil
+				ifTrue: [ ^ 0 asDuration totalSeconds ]
+				ifFalse: [ ^ ((aTicketGroupNode tickets
+						inject: 0 asDuration
+						into: [ :sum :ticket | sum + (ticket devTpsEstim ifNil: [ 0 asDuration ]) ])
+						/ aTicketGroupNode size) totalSeconds asFloat ]);
+		ticketGroup: aTicketGroupNode;
+		yourself
 ]

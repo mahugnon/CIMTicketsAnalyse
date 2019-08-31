@@ -6,7 +6,11 @@ Class {
 
 { #category : #running }
 QueryAvgTicketsTimeDev >> runOn: aCollection [
-	aCollection ifEmpty: [ ^ 0 ].
-	^ ((QueryTicketsTimeDev runOn: aCollection) / aCollection size)
-		asFloat
+	^ CIMAverageNode new
+		value:
+			(aCollection
+				ifEmpty: [ 0 ]
+				ifNotEmpty: ((QueryTicketsTimeDev runOn: aCollection) / aCollection size) asFloat);
+		addTickets: aCollection;
+		yourself
 ]

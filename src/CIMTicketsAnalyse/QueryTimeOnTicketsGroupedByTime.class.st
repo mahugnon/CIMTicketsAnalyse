@@ -5,8 +5,12 @@ Class {
 }
 
 { #category : #running }
-QueryTimeOnTicketsGroupedByTime >> runOn: aDictionary [
-	^ (aDictionary keys
-		collect: [ :key | key -> (QueryTimeOnTickets runOn: (aDictionary at: key)) ])
-		asOrderedDictionary
+QueryTimeOnTicketsGroupedByTime >> runOn: aCollection [
+	^ (aCollection
+		collect: [ :aTicketGroupNode | 
+			CIMTicketGroupNode new
+				value: (QueryTimeOnTickets runOn: aTicketGroupNode tickets);
+				addTicket: aTicketGroupNode tickets;
+				time: aTicketGroupNode time;
+				yourself ]) asOrderedCollection
 ]

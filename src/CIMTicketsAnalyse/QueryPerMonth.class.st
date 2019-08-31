@@ -48,9 +48,9 @@ QueryPerMonth >> ordered: boolean [
 ]
 
 { #category : #running }
-QueryPerMonth >> runOn: aCollection [
+QueryPerMonth >> runOn: aCIMTicketGroup [
 	| result |
-	result := (aCollection asOrderedCollection
+	result := (aCIMTicketGroup tickets asOrderedCollection
 		groupedBy: [ :ticket | self month: ticket ]) associations
 		reject: [ :assoc | assoc key isNil ].
 	fillGaps

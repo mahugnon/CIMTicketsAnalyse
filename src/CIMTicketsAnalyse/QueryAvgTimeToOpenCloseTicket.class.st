@@ -5,20 +5,21 @@ Class {
 }
 
 { #category : #running }
-QueryAvgTimeToOpenCloseTicket >> runOn: aCollection [
-	| tickets |
-	tickets := (aCollection
-		select: [ :ticket | ticket dateClosing isNotNil ])
-		reject: [ :t | t dev dev_fin = '0201-11-24' ].
+QueryAvgTimeToOpenCloseTicket >> runOn: aTicketGroup [
+	aTicketGroup
+		tickets:
+			((aTicketGroup tickets
+				select: [ :ticket | ticket dateClosing isNotNil ])
+				reject: [ :t | t dev dev_fin = '0201-11-24' ]).
 	^ CIMAverageNode new
 		value:
-			(tickets
-				ifEmpty: [ ^ 0 ]
+			(aTicketGroup tickets
+				ifEmpty: [ 0 ]
 				ifNotEmpty:
-					((tickets
+					((aTicketGroup tickets
 						inject: 0
 						into:
 							[ :sum :aTicket | sum + (QueryDurationBetweenOpenAndCloseTicket new runOn: aTicket) ])
-						/ tickets size) asFloat);
-		addTicket: tickets
+						/ aTicketGroup size) asFloat);
+		ticketGroup: aTicketGroup
 ]

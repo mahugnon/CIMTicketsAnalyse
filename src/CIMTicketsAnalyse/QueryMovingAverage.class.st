@@ -12,7 +12,6 @@ QueryMovingAverage >> runOn1: aDictionary [
 		| k v |
 		k := aDictionary keys at: i + 2.
 		v := (aDictionary values copyFrom: i to: i + 4) average.
-		self halt.
 		result add: k -> v ].
 	^ result asOrderedDictionary
 ]

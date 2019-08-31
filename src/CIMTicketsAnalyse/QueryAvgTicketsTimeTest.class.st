@@ -5,10 +5,14 @@ Class {
 }
 
 { #category : #running }
-QueryAvgTicketsTimeTest >> runOn: aCollection [
-	aCollection ifEmpty: [ ^ 0 ].
-	^ CIMAverageNode new
-		value: (QueryTicketsTimeTest runOn: aCollection / aCollection size) asFloat;
-		addTickets: aCollection;
-		yourself
+QueryAvgTicketsTimeTest >> runOn: aTicketGroupNode [
+	aTicketGroupNode isEmptyOrNil
+		ifTrue: [ 0 ]
+		ifFalse:
+			(CIMAverageNode new
+				value:
+					(QueryTicketsTimeTest
+						runOn: aTicketGroupNode tickets / aTicketGroupNode size) asFloat;
+				ticketGroup: aTicketGroupNode;
+				yourself)
 ]

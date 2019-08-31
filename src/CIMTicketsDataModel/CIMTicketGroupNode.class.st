@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMTicketGroupNode,
-	#superclass : #'Tbl_ft_row',
+	#superclass : #Object,
 	#instVars : [
 		'tickets',
 		'time'
@@ -37,6 +37,16 @@ CIMTicketGroupNode >> addTickets: aCollection [
 CIMTicketGroupNode >> initialize [
 	super initialize.
 	tickets := OrderedCollection new
+]
+
+{ #category : #testing }
+CIMTicketGroupNode >> isEmptyOrNil [
+	^ tickets isEmptyOrNil
+]
+
+{ #category : #accessing }
+CIMTicketGroupNode >> size [
+	^ tickets size
 ]
 
 { #category : #accessing }

@@ -2,7 +2,8 @@ Class {
 	#name : #CIMAverageNode,
 	#superclass : #CIMTicketGroupNode,
 	#instVars : [
-		'value'
+		'value',
+		'ticketGroup'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -16,6 +17,21 @@ CIMAverageNode >> acceptBuider: aGuiBuilder [
 CIMAverageNode >> initialize [
 	super initialize.
 	value := 0 asDuration totalSeconds
+]
+
+{ #category : #accessing }
+CIMAverageNode >> ticketGroup [
+	^ ticketGroup
+]
+
+{ #category : #accessing }
+CIMAverageNode >> ticketGroup: anObject [
+	ticketGroup := anObject
+]
+
+{ #category : #accessing }
+CIMAverageNode >> tickets [
+	^ ticketGroup tickets
 ]
 
 { #category : #evaluating }
