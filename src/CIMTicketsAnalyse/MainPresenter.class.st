@@ -45,9 +45,9 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 	<script:
-		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth open'>
-	^ self
-		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryEvolutions
+		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth open '>
+	^ (self
+		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryEvolutions)  
 ]
 
 { #category : #drawing }

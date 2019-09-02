@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+CIMTicketGroupNode class >> emptyGroup [
+	^ self new tickets: {}
+]
+
+{ #category : #'as yet unclassified' }
 CIMTicketGroupNode class >> groupsFrom: aDictionary [
 	^ (aDictionary keys
 		collect: [ :key | 
@@ -20,12 +25,17 @@ CIMTicketGroupNode class >> groupsFrom: aDictionary [
 
 { #category : #visiting }
 CIMTicketGroupNode >> acceptBuider: aGuiBuilder [
-	aGuiBuilder buildTicketGroupNode
+	^ aGuiBuilder buildTicketGroupNode: self
 ]
 
 { #category : #adding }
 CIMTicketGroupNode >> addTicket: aTicket [
 	tickets add: aTicket
+]
+
+{ #category : #accessing }
+CIMTicketGroupNode >> content [
+	^ self tickets
 ]
 
 { #category : #initialization }

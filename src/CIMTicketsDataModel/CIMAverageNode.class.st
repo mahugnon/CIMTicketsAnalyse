@@ -10,7 +10,12 @@ Class {
 
 { #category : #visiting }
 CIMAverageNode >> acceptBuider: aGuiBuilder [
-	aGuiBuilder buildAverageNode
+	aGuiBuilder buildAverageNode: self
+]
+
+{ #category : #accessing }
+CIMAverageNode >> content [
+	^ self tickets
 ]
 
 { #category : #initialization }

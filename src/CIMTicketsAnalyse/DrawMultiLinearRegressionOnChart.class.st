@@ -41,7 +41,7 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
 	graphic view @ RTZoomableView.
-	^ graphic
+	^ graphic view
 ]
 
 { #category : #'drawing-general' }

@@ -9,7 +9,7 @@ Class {
 
 { #category : #visiting }
 CIMMovingAverageNode >> acceptBuider: aGuiBuilder [
-	aGuiBuilder buildMovingAverageNode
+	aGuiBuilder buildMovingAverageNode: self
 ]
 
 { #category : #accessing }
@@ -20,6 +20,11 @@ CIMMovingAverageNode >> averageNodes [
 { #category : #accessing }
 CIMMovingAverageNode >> averageNodes: anObject [
 	averageNodes := anObject
+]
+
+{ #category : #accessing }
+CIMMovingAverageNode >> content [
+	^ self averageNodes
 ]
 
 { #category : #initialization }

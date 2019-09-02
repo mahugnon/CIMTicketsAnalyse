@@ -86,6 +86,41 @@ LineChart >> draw [
 	^ graphic
 ]
 
+{ #category : #'drawing-general' }
+LineChart >> draw: aView [
+	| ds |
+	graphic := RTGrapher new.
+	graphic view: aView.
+	self isperDev
+		ifTrue: [ graphic := RTDoubleGrapher new.
+			graphic addRight: (self developeurDataSetOn: timeSerie).
+			graphic axisYRight color: (Color fromString: '#4A9CFF') ].
+	ds := RTData new.
+	ds connectColor: self cimColor.
+	ds points: timeSerie.
+	ds y: [ :aNode | aNode value - yTranslation ].
+	ds label: label.
+	"ds interaction popup text: [ :elt | self popupTextOn: elt ]."
+	graphic add: ds.
+	graphic
+		add: (self linearRegressionDataSetOn: timeSerie color: Color lightBrown).
+	minY ifNotNil: [ graphic maxY: minY ].
+	maxY ifNotNil: [ graphic maxY: maxY ].
+	graphic axisY
+		numberOfLabels: (timeSerie size / 30) asInteger;
+		labelConversion: self convertYAxis;
+		title: title.
+	graphic axisX
+		numberOfLabels: (timeSerie size / 6) asInteger;
+		labelRotation: -45;
+		labelConversion: [ :v | 
+			(v < 1 or: [ v > timeSerie size ])
+				ifTrue: [ '' ]
+				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
+	"b legend."
+	^ graphic
+]
+
 { #category : #initialization }
 LineChart >> initialize [
 	super initialize.
