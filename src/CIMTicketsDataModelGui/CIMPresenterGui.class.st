@@ -20,6 +20,12 @@ CIMPresenterGui class >> defaultSpec [
 		yourself
 ]
 
+{ #category : #specs }
+CIMPresenterGui class >> run [
+	<example>
+	self new openWithSpec
+]
+
 { #category : #initialization }
 CIMPresenterGui >> initializeWidgets [
 	model := CIMPresenterGuiModel new.
