@@ -10,9 +10,8 @@ Class {
 { #category : #API }
 TicketsLinkDetector >> connectAllLinkedTickets [
 	^ model
-		do: [ :ticket | 
-			ticket connectedTickets: (self findLinks: ticket).
-			self haltIf: ticket ft_lienft_list isNotNil ]
+		do:
+			[ :ticket | ticket connectedTickets: (self findLinks: ticket) ]
 ]
 
 { #category : #api }
