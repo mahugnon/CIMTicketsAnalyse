@@ -12,14 +12,14 @@ Class {
 TestModel >> setUp [
 	self setUpBibliotheques.
 	tickets := {(Tbl_ft_row new
-		ft_id: '214778';
+		ft_id: '214' , (Character value: 160) asString , '778';
 		ft_lienft_list: '123456,789456';
 		yourself).
 	(Tbl_ft_row new
 		ft_id: '123456';
 		yourself).
 	(Tbl_ft_row new
-		ft_id: '789456';
+		ft_id: '789' , (Character value: 160) asString , '456';
 		yourself)} asOrderedCollection
 ]
 
