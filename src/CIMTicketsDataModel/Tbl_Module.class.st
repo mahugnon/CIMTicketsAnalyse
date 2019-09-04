@@ -43,6 +43,20 @@ Tbl_Module class >> allModules [
 		asOrderedDictionary
 ]
 
+{ #category : #operations }
+Tbl_Module class >> create [
+	^ self new
+		rows:
+			(self modulesAsLowercase associations
+				collect: [ :assoc | 
+					Tbl_Module_row new
+						nom: assoc key;
+						setBibliotheques;
+						setTickets;
+						yourself ]) asOrderedCollection;
+		yourself
+]
+
 { #category : #utility }
 Tbl_Module class >> modulesAsLowercase [
 	^ (self allModules keys

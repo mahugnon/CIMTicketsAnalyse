@@ -2,25 +2,20 @@ Class {
 	#name : #CIMPresenterGuiModel,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'dataWidget'
+		'data'
 	],
 	#category : #CIMTicketsDataModelGui
 }
 
 { #category : #accessing }
-CIMPresenterGuiModel >> dataWidget [
-	^ dataWidget
-]
-
-{ #category : #accessing }
-CIMPresenterGuiModel >> dataWidget: anObject [
-	dataWidget := anObject
+CIMPresenterGuiModel >> data [
+	^ data
 ]
 
 { #category : #initialization }
 CIMPresenterGuiModel >> initialize [
 	super initialize.
-	dataWidget := CIMTicketGroupNode new
+	data := CIMTicketGroupNode new
 		tickets: Tbl allTickets;
-		acceptBuider: GuiBuilder new.
+		yourself
 ]

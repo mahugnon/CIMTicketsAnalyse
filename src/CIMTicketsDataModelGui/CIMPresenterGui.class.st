@@ -29,7 +29,8 @@ CIMPresenterGui class >> run [
 { #category : #initialization }
 CIMPresenterGui >> initializeWidgets [
 	model := CIMPresenterGuiModel new.
-	roassalPresenterList := self instantiate: model dataWidget.
+	roassalPresenterList := self instantiate: CIMGroupPresenter.
+	roassalPresenterList  model: model.
 	roassaPresenter := self instantiate: ExampleRoassal2Spec2.
 	nodePresent := self newList
 ]

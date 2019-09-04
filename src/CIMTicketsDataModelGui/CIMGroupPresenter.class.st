@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'table',
-		'data'
+		'data',
+		'model'
 	],
 	#category : #CIMTicketsDataModelGui
 }
@@ -21,27 +22,26 @@ CIMGroupPresenter class >> run [
 	self new openWithSpec
 ]
 
-{ #category : #accessing }
-CIMGroupPresenter >> data [
-	^ data
-]
-
-{ #category : #accessing }
-CIMGroupPresenter >> data: anObject [
-	data := anObject
-]
-
 { #category : #initialization }
 CIMGroupPresenter >> initializeWidgets [
-	data := CIMTicketGroupNode emptyGroup.
+	model := CIMPresenterGuiModel new.
 	table := self newTreeTable.
 	table
-		roots: {data};
-		children: [ :node | data content ];
+		roots: {model data};
+		children: [ :aClass | aClass content ];
 		beResizable;
-		"contextMenu: self menu;"
-			activateOnDoubleClick;
+		activateOnDoubleClick;
 		whenActivatedDo: [ :selection | selection selectedItem browse ]
+]
+
+{ #category : #accessing }
+CIMGroupPresenter >> model [
+	^ model
+]
+
+{ #category : #accessing }
+CIMGroupPresenter >> model: anObject [
+	model := anObject
 ]
 
 { #category : #accessing }

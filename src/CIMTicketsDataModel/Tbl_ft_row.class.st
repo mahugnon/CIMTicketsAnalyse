@@ -56,7 +56,8 @@ Class {
 		'dependenceModel',
 		'modules',
 		'associatedPhysiqueFiles',
-		'modulesFromAssociatedFile'
+		'modulesFromAssociatedFile',
+		'connectedTickets'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -103,6 +104,21 @@ Tbl_ft_row >> bibliotheques [
 { #category : #accessing }
 Tbl_ft_row >> bibliotheques: anObject [
 	bibliotheques := anObject
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> connectedTickets [
+	^ connectedTickets
+]
+
+{ #category : #accesing }
+Tbl_ft_row >> connectedTickets: aCollection [
+	connectedTickets := aCollection
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> content [
+	^ {}
 ]
 
 { #category : #API }
