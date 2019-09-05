@@ -3,7 +3,8 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'bibliotheques',
-		'tickets'
+		'tickets',
+		'tps'
 	],
 	#category : #'CIMTicketsDataModel-Tests'
 }
@@ -11,16 +12,21 @@ Class {
 { #category : #running }
 TestModel >> setUp [
 	self setUpBibliotheques.
-	tickets := {(Tbl_ft_row new
-		ft_id: '214' , (Character value: 160) asString , '778';
-		ft_lienft_list: '123456,789456';
-		yourself).
-	(Tbl_ft_row new
-		ft_id: '123456';
-		yourself).
-	(Tbl_ft_row new
-		ft_id: '789' , (Character value: 160) asString , '456';
-		yourself)} asOrderedCollection
+	tickets := Tbl_ft new
+		rows:
+			{(Tbl_ft_row new
+				ft_id: '214' , (Character value: 160) asString , '778';
+				ft_lienft_list: '123456,789456';
+				ft_dev_id: '1' yourself).
+			(Tbl_ft_row new
+				ft_id: '123456';
+				ft_dev_id: '2' yourself).
+			(Tbl_ft_row new
+				ft_id: '789' , (Character value: 160) asString , '456';
+				yourself)} asOrderedCollection.
+	tps := {(Tbl_tps_row new tps_dev_id: '1').
+	(Tbl_tps_row new tps_dev_id: '2').
+	(Tbl_tps_row new tps_dev_id: '3')}
 ]
 
 { #category : #running }
@@ -40,21 +46,32 @@ TestModel >> testConnectAllLinkedTickets [
 		connectAllLinkedTickets
 		select: [ :each | each connectedTickets isNotNil ].
 	self assert: ticketsWithLink size equals: 1.
-	self assert: ticketsWithLink anyOne equals: tickets first
+	self assert: ticketsWithLink anyOne equals: tickets rows first
 ]
 
 { #category : #tests }
 TestModel >> testGetLinkedTicket [
 	self
-		assertCollection: ((TicketsLinkDetector new model: tickets) findLinks: tickets first)
+		assertCollection:
+			((TicketsLinkDetector new model: tickets)
+				findLinks: tickets rows first)
 		hasSameElements:
-			{tickets second.
-			tickets third}
+			{tickets rows second.
+			tickets rows third}
 ]
 
 { #category : #'as yet unclassified' }
 TestModel >> testInterestingBibliotheques [
 	self assert: bibliotheques interestingBibliotheques size equals: 3
+]
+
+{ #category : #tests }
+TestModel >> testJoinTpsDevToTicket [
+	self
+		assert:
+			(((tickets joinTpsDevToTicket: tps) rows collect: #devTps)
+				reject: #isEmpty) size
+		equals: 2
 ]
 
 { #category : #'as yet unclassified' }

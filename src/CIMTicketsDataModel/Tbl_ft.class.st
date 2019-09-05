@@ -40,6 +40,15 @@ Tbl_ft >> filFromCSVFile: aCsvFile [
 			(date ifNil: [ Date new ] ifNotNil: [ date ]) year > 2003 ]
 ]
 
+{ #category : #utilities }
+Tbl_ft >> joinTpsDevToTicket: aCollection [
+	rows
+		do: [ :aTicket | 
+			aTicket
+				devTps:
+					(aCollection select: [ :aTps | aTps tps_dev_id = aTicket ft_dev_id ]) ]
+]
+
 { #category : #utility }
 Tbl_ft >> keepInterestingBibliotheques [
 	^ self rows do: [ :row | row keepInterestingBibliotheques ]

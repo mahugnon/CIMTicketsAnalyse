@@ -57,7 +57,8 @@ Class {
 		'modules',
 		'associatedPhysiqueFiles',
 		'modulesFromAssociatedFile',
-		'connectedTickets'
+		'connectedTickets',
+		'devTps'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -149,6 +150,16 @@ Tbl_ft_row >> dev [
 { #category : #accessing }
 Tbl_ft_row >> dev: arg1 [
 	dev := arg1
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> devTps [
+	^ devTps
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> devTps: aTbl_tps_row [ 
+	devTps := aTbl_tps_row
 ]
 
 { #category : #API }

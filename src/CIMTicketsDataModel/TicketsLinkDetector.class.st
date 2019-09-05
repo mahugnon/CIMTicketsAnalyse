@@ -9,7 +9,7 @@ Class {
 
 { #category : #API }
 TicketsLinkDetector >> connectAllLinkedTickets [
-	^ model
+	^ model rows
 		do:
 			[ :ticket | ticket connectedTickets: (self findLinks: ticket) ]
 ]
@@ -18,7 +18,7 @@ TicketsLinkDetector >> connectAllLinkedTickets [
 TicketsLinkDetector >> findLinks: aTbl_ft_row [
 	| result |
 	aTbl_ft_row ft_lienft_list
-		ifNotNil: [ result := model
+		ifNotNil: [ result := model rows
 				select: [ :tkt | 
 					((',' split: aTbl_ft_row ft_lienft_list) collect: #asInteger)
 						includes:
