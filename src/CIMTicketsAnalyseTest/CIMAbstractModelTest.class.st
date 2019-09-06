@@ -43,10 +43,10 @@ CIMAbstractModelTest >> createTestTps [
 				tps_dev_id: '4';
 				tps_type: '3').
 			(Tbl_tps_row new
-				tps_dev_id: '5';
+				tps_dev_id: '2';
 				tps_type: '2').
 			(Tbl_tps_row new
-				tps_dev_id: '6';
+				tps_dev_id: '1';
 				tps_type: '4')}
 ]
 

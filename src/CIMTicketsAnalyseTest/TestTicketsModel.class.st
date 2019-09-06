@@ -29,7 +29,24 @@ TestTicketsModel >> testGetLinkedTicket [
 TestTicketsModel >> testJoinTpsDevToTicket [
 	self
 		assert:
-			(((tickets joinTpsDevToTicket: tps) rows collect: #devTps)
-				reject: #isEmpty) size
-		equals: 2
+			((tickets joinTpsDevToTicket: tps) rows collect: #devTps) flatten size
+		equals: 4
+]
+
+{ #category : #tests }
+TestTicketsModel >> testTicketsDevTpsDev [
+	tps joinTypeSessionToTps: typeSessions.
+	tickets joinTpsDevToTicket: tps.
+	self
+		assertCollection: tickets rows first devTpsDev
+		hasSameElements: {tps rows last}
+]
+
+{ #category : #tests }
+TestTicketsModel >> testTicketsDevTpsTest [
+	tps joinTypeSessionToTps: typeSessions.
+	tickets joinTpsDevToTicket: tps.
+	self
+		assertCollection: tickets rows first devTpsTest
+		hasSameElements: {tps rows first}
 ]

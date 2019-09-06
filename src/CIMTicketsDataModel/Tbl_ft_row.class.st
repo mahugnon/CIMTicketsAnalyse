@@ -162,11 +162,21 @@ Tbl_ft_row >> devTps: aTbl_tps_row [
 	devTps := aTbl_tps_row
 ]
 
+{ #category : #api }
+Tbl_ft_row >> devTpsDev [
+	^ self devTps select: #isDevelopment
+]
+
 { #category : #API }
 Tbl_ft_row >> devTpsEstim [
 	dev dev_tps_estim = String empty
 		ifTrue: [ ^ 0 asDuration ].
 	^ dev dev_tps_estim
+]
+
+{ #category : #api }
+Tbl_ft_row >> devTpsTest [
+	^ self devTps select: #isDevelopmentTest
 ]
 
 { #category : #API }
