@@ -17,6 +17,21 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
+{ #category : #testing }
+Tbl_type_session_row >> isDevelopment [
+	^ typsession_type = '0' and: typsession_code ~= 'TD'
+]
+
+{ #category : #testing }
+Tbl_type_session_row >> isDevelopmentTest [
+	^ typsession_type = '0' and: typsession_code = 'TD'
+]
+
+{ #category : #testing }
+Tbl_type_session_row >> isRCTest [
+	^ typsession_type = '1'
+]
+
 { #category : #accessing }
 Tbl_type_session_row >> typsession_abrege [
 	^ typsession_abrege

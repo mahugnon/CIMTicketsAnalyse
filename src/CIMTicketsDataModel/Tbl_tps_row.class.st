@@ -29,12 +29,12 @@ Tbl_tps_row >> initializeWith: arg1 [
 
 { #category : #testing }
 Tbl_tps_row >> isDevelopment [
-	^ tps_type = '0'
+	^ typeSession isDevelopment
 ]
 
 { #category : #testing }
 Tbl_tps_row >> isDevelopmentTest [
-	^ tps_type = '0' and:[]
+	^ typeSession isDevelopmentTest
 ]
 
 { #category : #testing }

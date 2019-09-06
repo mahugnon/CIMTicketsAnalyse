@@ -41,12 +41,12 @@ Tbl_ft >> filFromCSVFile: aCsvFile [
 ]
 
 { #category : #utilities }
-Tbl_ft >> joinTpsDevToTicket: aCollection [
+Tbl_ft >> joinTpsDevToTicket: aTbl_Tps [
 	rows
 		do: [ :aTicket | 
 			aTicket
 				devTps:
-					(aCollection select: [ :aTps | aTps tps_dev_id = aTicket ft_dev_id ]) ]
+					(aTbl_Tps rows select: [ :aTps | aTps tps_dev_id = aTicket ft_dev_id ]) ]
 ]
 
 { #category : #utility }
