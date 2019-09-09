@@ -121,11 +121,10 @@ Tbl >> convertFieldToCimDate [
 
 { #category : #utility }
 Tbl >> detectTblFrom: aCsvFile [
-	^ (self class subclasses
-		select: [ :aTblSub | 
+	^ self class subclasses
+		detect: [ :aTblSub | 
 			aTblSub name asLowercase
-				= (aCsvFile basename asLowercase copyReplaceAll: '.csv' with: '') ])
-		first
+				= (aCsvFile basename asLowercase copyReplaceAll: '.csv' with: '') ]
 ]
 
 { #category : #utility }
@@ -141,7 +140,8 @@ Tbl >> initialize [
 
 { #category : #utility }
 Tbl >> loadTblFromFolder: csvFolder [
-	^ csvFolder asFileReference visibleFiles
+	^ (csvFolder asFileReference visibleFiles
+		reject: [ :file | file basename = 'modules.csv' ])
 		collect:
 			[ :aCsvFile | (self detectTblFrom: aCsvFile) new filFromCSVFile: aCsvFile ]
 ]
