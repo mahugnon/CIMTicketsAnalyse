@@ -686,6 +686,15 @@ Tbl_ft_row >> joinTpsDevToTicket: aCollection [
 		devTps: (aCollection select: [ :aTps | aTps tps_dev_id = self ft_dev_id ])
 ]
 
+{ #category : #utilities }
+Tbl_ft_row >> joinTypeCorrectionToTicket: aCollection [
+	self
+		typeCorrection:
+			(aCollection
+				detect: [ :aTypeCorrection | aTypeCorrection typcorr_id = self ft_typcorr_id ]
+				ifNone: [ nil ])
+]
+
 { #category : #API }
 Tbl_ft_row >> keepInterestingBibliotheques [
 	^ bibliotheques select: #isInterestingBibliotheque

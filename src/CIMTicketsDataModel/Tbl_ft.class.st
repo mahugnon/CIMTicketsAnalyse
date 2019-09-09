@@ -50,6 +50,12 @@ Tbl_ft >> joinTpsDevToTicket: aTbl_Tps [
 	rows do: [ :aTicket | aTicket joinTpsDevToTicket: aTbl_Tps rows ]
 ]
 
+{ #category : #utilites }
+Tbl_ft >> joinTypeCorrectionToTicket: aType_correction [
+	self rows
+		do: [ :ft | ft joinTypeCorrectionToTicket: aType_correction rows ]
+]
+
 { #category : #utilities }
 Tbl_ft >> keepInterestingBibliotheques [
 	^ self rows do: [ :row | row keepInterestingBibliotheques ]

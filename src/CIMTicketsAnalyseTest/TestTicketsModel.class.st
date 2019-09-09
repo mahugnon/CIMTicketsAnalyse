@@ -1,9 +1,6 @@
 Class {
 	#name : #TestTicketsModel,
 	#superclass : #CIMAbstractModelTest,
-	#instVars : [
-		'devs'
-	],
 	#category : #CIMTicketsAnalyseTest
 }
 
@@ -43,6 +40,15 @@ TestTicketsModel >> testJoinTpsDevToTicket [
 		assert:
 			((tickets joinTpsDevToTicket: tps) rows collect: #devTps) flatten size
 		equals: 4
+]
+
+{ #category : #tests }
+TestTicketsModel >> testJoinTypeCorrectionToTickets [
+	self
+		assert:
+			((tickets joinTypeCorrectionToTicket: typeCorrs) rows
+				select: [ :ft | ft typeCorrection isNotNil ]) size
+		equals: 3
 ]
 
 { #category : #tests }
