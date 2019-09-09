@@ -49,11 +49,13 @@ CIMAbstractModelTest >> createTestTickets [
 				ft_lienft_list: '123456,789456';
 				ft_dev_id: '1';
 				ft_typcorr_id: '4';
+				ft_modif_id: '280 821';
 				yourself).
 			(Tbl_ft_row new
 				ft_id: '123456';
 				ft_dev_id: '2';
 				ft_typcorr_id: '2';
+				ft_modif_id: '281 341';
 				yourself).
 			(Tbl_ft_row new
 				ft_id: '789' , (Character value: 160) asString , '456';

@@ -41,6 +41,11 @@ Tbl_ft >> filFromCSVFile: aCsvFile [
 ]
 
 { #category : #utilities }
+Tbl_ft >> joinBibsToTicket: aTbl_biblio [
+	self rows do: [ :ft | ft joinBibsToTicket: aTbl_biblio rows ]
+]
+
+{ #category : #utilities }
 Tbl_ft >> joinDevToTicket: aTbl_dev [
 	self rows do: [ :ft | ft joinDevToTicket: aTbl_dev rows ]
 ]

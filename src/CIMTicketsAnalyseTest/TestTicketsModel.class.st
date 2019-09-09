@@ -26,6 +26,15 @@ TestTicketsModel >> testGetLinkedTicket [
 ]
 
 { #category : #tests }
+TestTicketsModel >> testJoinBibsToTickets [
+	self
+		assert:
+			((tickets joinBibsToTicket: bibliotheques) rows
+				select: [ :ft | ft bibliotheques isNotNil ]) size
+		equals: 2
+]
+
+{ #category : #tests }
 TestTicketsModel >> testJoinDevToTickets [
 	self
 		assert:

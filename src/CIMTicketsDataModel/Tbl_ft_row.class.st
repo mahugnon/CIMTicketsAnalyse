@@ -672,6 +672,15 @@ Tbl_ft_row >> isMisc [
 ]
 
 { #category : #utilities }
+Tbl_ft_row >> joinBibsToTicket: aCollection [
+	self
+		bibliotheques:
+			(aCollection
+				detect: [ :bib | self ft_modif_id = bib biblio_modif_id ]
+				ifNone: [ nil ])
+]
+
+{ #category : #utilities }
 Tbl_ft_row >> joinDevToTicket: aCollection [
 	self
 		dev:
