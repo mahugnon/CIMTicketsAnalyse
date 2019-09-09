@@ -110,6 +110,11 @@ Tbl class >> tps [
 ]
 
 { #category : #'as yet unclassified' }
+Tbl class >> typeSessions [
+	^ Tbl tables at: 11
+]
+
+{ #category : #'as yet unclassified' }
 Tbl >> convertFieldToCimDate [
 	^ self subclassResponsibility
 ]

@@ -28,10 +28,10 @@ CIMGroupPresenter >> initializeWidgets [
 	table := self newTreeTable.
 	table
 		roots: {model data};
-		children: [ :aClass | aClass content ];
+		children: [ :aNode | aNode content ];
 		beResizable;
-		activateOnDoubleClick;
-		whenActivatedDo: [ :selection | selection selectedItem browse ]
+		"	whenActivatedDo: [ :selection | selection selectedItem  ]"
+			activateOnDoubleClick
 ]
 
 { #category : #accessing }

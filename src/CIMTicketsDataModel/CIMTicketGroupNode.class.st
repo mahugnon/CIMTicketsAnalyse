@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'tickets',
-		'time'
+		'time',
+		'name'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }

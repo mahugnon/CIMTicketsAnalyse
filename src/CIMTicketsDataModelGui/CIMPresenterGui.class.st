@@ -4,19 +4,31 @@ Class {
 	#instVars : [
 		'roassalPresenterList',
 		'roassaPresenter',
-		'nodePresent',
-		'model'
+		'model',
+		'menu',
+		'nodePresenter'
 	],
 	#category : #CIMTicketsDataModelGui
 }
 
 { #category : #specs }
 CIMPresenterGui class >> defaultSpec [
-	^ SpBoxLayout newHorizontal
-		add: #roassalPresenterList;
-		add: #roassaPresenter
-			withConstraints: [ :constaint | constaint width: 600 ];
-		add: #nodePresent;
+	^ SpBoxLayout newVertical
+		add: #menu
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+		add:
+			(SpPanedLayout newHorizontal
+				position: 200;
+				add:
+					(SpBoxLayout newHorizontal
+						add: #roassalPresenterList width: 450;
+						yourself);
+				add:
+					(SpPanedLayout newHorizontal
+						add: #roassaPresenter;
+						add: #nodePresenter;
+						yourself);
+				yourself);
 		yourself
 ]
 
@@ -29,10 +41,68 @@ CIMPresenterGui class >> run [
 { #category : #initialization }
 CIMPresenterGui >> initializeWidgets [
 	model := CIMPresenterGuiModel new.
+	menu := self mainMenu.
 	roassalPresenterList := self instantiate: CIMGroupPresenter.
-	roassalPresenterList  model: model.
+	roassalPresenterList model: model.
 	roassaPresenter := self instantiate: ExampleRoassal2Spec2.
-	nodePresent := self newList
+	nodePresenter := self newList.
+	menu applyTo: self
+]
+
+{ #category : #initialization }
+CIMPresenterGui >> mainMenu [
+	| aMenu |
+	aMenu := self newMenuBar
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: 'File';
+						icon: (self iconNamed: #openIcon) ].
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Open file';
+						icon: (self iconNamed: #openIcon);
+						action: [ self inform: 'Open File' ] ].
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Save File';
+						icon: (self iconNamed: #smallSaveIcon);
+						action: [ self inform: 'Save File' ] ].
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Print file';
+						icon: (self iconNamed: #smallPrintIcon);
+						action: [ self inform: 'Print file' ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Undo';
+						icon: (self iconNamed: #smallUndoIcon);
+						action: [ self inform: 'Undo' ] ].
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Redo';
+						icon: (self iconNamed: #smallRedoIcon);
+						action: [ self inform: 'Redo' ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Add menu item';
+						icon: (self iconNamed: #add) ] ].
+	^ aMenu
 ]
 
 { #category : #accessing }
