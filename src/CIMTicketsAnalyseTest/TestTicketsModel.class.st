@@ -1,6 +1,9 @@
 Class {
 	#name : #TestTicketsModel,
 	#superclass : #CIMAbstractModelTest,
+	#instVars : [
+		'devs'
+	],
 	#category : #CIMTicketsAnalyseTest
 }
 
@@ -23,6 +26,15 @@ TestTicketsModel >> testGetLinkedTicket [
 		hasSameElements:
 			{tickets rows second.
 			tickets rows third}
+]
+
+{ #category : #tests }
+TestTicketsModel >> testJoinDevToTickets [
+	self
+		assert:
+			((tickets joinDevToTicket: devs) rows
+				select: [ :ft | ft dev isNotNil ]) size
+		equals: 2
 ]
 
 { #category : #tests }

@@ -72,7 +72,7 @@ Tbl class >> izyReleases [
 
 { #category : #initialization }
 Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
-	Tbl new loadTblFromFolder: ficheNavettePath.
+	Tbl new loadTblFromFolder: ficheNavettePath
 	"Tbl tables fifth rows
 		do: [ :ticket | 
 			ticket

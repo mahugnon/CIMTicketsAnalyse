@@ -671,6 +671,21 @@ Tbl_ft_row >> isMisc [
 	^ self typeCorrection isMisc
 ]
 
+{ #category : #utilities }
+Tbl_ft_row >> joinDevToTicket: aCollection [
+	self
+		dev:
+			(aCollection
+				detect: [ :aDev | aDev dev_id = self ft_dev_id ]
+				ifNone: [ nil ])
+]
+
+{ #category : #utilites }
+Tbl_ft_row >> joinTpsDevToTicket: aCollection [
+	self
+		devTps: (aCollection select: [ :aTps | aTps tps_dev_id = self ft_dev_id ])
+]
+
 { #category : #API }
 Tbl_ft_row >> keepInterestingBibliotheques [
 	^ bibliotheques select: #isInterestingBibliotheque

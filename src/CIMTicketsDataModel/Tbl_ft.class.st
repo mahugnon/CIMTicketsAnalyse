@@ -17,12 +17,12 @@ Tbl_ft >> addAssociatedFiles: aCollection [
 					founded addAssociatedPhysiqueModule: aCommitComment directory ] ]
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
 Tbl_ft >> analyseContat [
 	self rows do: [ :ft | ft analyseContat ]
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
 Tbl_ft >> associateToTicketFileIn: aFolder [
 	| folderReference |
 	folderReference := aFolder asFileReference.
@@ -30,7 +30,7 @@ Tbl_ft >> associateToTicketFileIn: aFolder [
 		addAssociatedFiles: (QueryAllCommitComment runOn: folderReference)
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
 Tbl_ft >> filFromCSVFile: aCsvFile [
 	super filFromCSVFile: aCsvFile.
 	rows := rows
@@ -41,20 +41,21 @@ Tbl_ft >> filFromCSVFile: aCsvFile [
 ]
 
 { #category : #utilities }
-Tbl_ft >> joinTpsDevToTicket: aTbl_Tps [
-	rows
-		do: [ :aTicket | 
-			aTicket
-				devTps:
-					(aTbl_Tps rows select: [ :aTps | aTps tps_dev_id = aTicket ft_dev_id ]) ]
+Tbl_ft >> joinDevToTicket: aTbl_dev [
+	self rows do: [ :ft | ft joinDevToTicket: aTbl_dev rows ]
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
+Tbl_ft >> joinTpsDevToTicket: aTbl_Tps [
+	rows do: [ :aTicket | aTicket joinTpsDevToTicket: aTbl_Tps rows ]
+]
+
+{ #category : #utilities }
 Tbl_ft >> keepInterestingBibliotheques [
 	^ self rows do: [ :row | row keepInterestingBibliotheques ]
 ]
 
-{ #category : #utility }
+{ #category : #utilities }
 Tbl_ft >> rowClass [
 	^ Tbl_ft_row
 ]
