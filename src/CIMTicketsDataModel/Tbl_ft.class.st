@@ -62,6 +62,11 @@ Tbl_ft >> joinTypeCorrectionToTicket: aType_correction [
 ]
 
 { #category : #utilities }
+Tbl_ft >> joinVersionsToTicket: aTbl_version [
+	self rows do: [ :ft | ft joinVersionsToTicket: aTbl_version rows ]
+]
+
+{ #category : #utilities }
 Tbl_ft >> keepInterestingBibliotheques [
 	^ self rows do: [ :row | row keepInterestingBibliotheques ]
 ]

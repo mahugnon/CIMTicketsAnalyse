@@ -7,7 +7,8 @@ Class {
 		'tps',
 		'typeSessions',
 		'devs',
-		'typeCorrs'
+		'typeCorrs',
+		'versions'
 	],
 	#category : #CIMTicketsAnalyseTest
 }
@@ -50,12 +51,14 @@ CIMAbstractModelTest >> createTestTickets [
 				ft_dev_id: '1';
 				ft_typcorr_id: '4';
 				ft_modif_id: '280 821';
+				ft_version_id: '8';
 				yourself).
 			(Tbl_ft_row new
 				ft_id: '123456';
 				ft_dev_id: '2';
 				ft_typcorr_id: '2';
 				ft_modif_id: '281 341';
+				ft_version_id: '1';
 				yourself).
 			(Tbl_ft_row new
 				ft_id: '789' , (Character value: 160) asString , '456';
@@ -132,11 +135,30 @@ CIMAbstractModelTest >> createTestTypeSessions [
 ]
 
 { #category : #running }
+CIMAbstractModelTest >> createTestVersions [
+	versions := Tbl_version new
+		rows:
+			{(Tbl_version_row new
+				version_id: '1';
+				yourself).
+			(Tbl_version_row new
+				version_id: '2';
+				yourself).
+			(Tbl_version_row new
+				version_id: '3';
+				yourself).
+			(Tbl_version_row new
+				version_id: '4';
+				yourself)} asOrderedCollection
+]
+
+{ #category : #running }
 CIMAbstractModelTest >> setUp [
 	self createBibliotheques.
 	self createTestTickets.
 	self createTestTps.
 	self createTestTypeSessions.
 	self createTestDevs.
-	self createTestTypCorrs
+	self createTestTypCorrs.
+	self createTestVersions
 ]

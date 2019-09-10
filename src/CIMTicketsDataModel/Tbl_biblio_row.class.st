@@ -131,6 +131,12 @@ Tbl_biblio_row >> isInterestingBibliotheque [
 	^ self interestingBibliothequeNames includes: biblio_nom
 ]
 
+{ #category : #utilities }
+Tbl_biblio_row >> joinTicketsToBib: aCollection [
+	self
+		tickets: (aCollection select: [ :ft | ft ft_modif_id = biblio_modif_id ])
+]
+
 { #category : #accessing }
 Tbl_biblio_row >> modules [
 	^ modules

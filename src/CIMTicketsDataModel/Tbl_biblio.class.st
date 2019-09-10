@@ -15,6 +15,11 @@ Tbl_biblio >> interestingBibliotheques [
 	^ rows select: #isInterestingBibliotheque
 ]
 
+{ #category : #utilities }
+Tbl_biblio >> joinTicketsToBib: aTbl_ft [
+	self rows do: [ :bib | bib joinTicketsToBib: aTbl_ft rows ]
+]
+
 { #category : #utility }
 Tbl_biblio >> renameUsing: aCollection [
 	rows do: [ :row | row renameUsing: aCollection ]

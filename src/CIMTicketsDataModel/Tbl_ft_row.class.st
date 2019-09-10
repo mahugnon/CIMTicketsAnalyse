@@ -675,9 +675,7 @@ Tbl_ft_row >> isMisc [
 Tbl_ft_row >> joinBibsToTicket: aCollection [
 	self
 		bibliotheques:
-			(aCollection
-				detect: [ :bib | self ft_modif_id = bib biblio_modif_id ]
-				ifNone: [ nil ])
+			(aCollection select: [ :bib | self ft_modif_id = bib biblio_modif_id ])
 ]
 
 { #category : #utilities }
@@ -702,6 +700,14 @@ Tbl_ft_row >> joinTypeCorrectionToTicket: aCollection [
 			(aCollection
 				detect: [ :aTypeCorrection | aTypeCorrection typcorr_id = self ft_typcorr_id ]
 				ifNone: [ nil ])
+]
+
+{ #category : #utilities }
+Tbl_ft_row >> joinVersionsToTicket: aCollection [
+	self
+		versions:
+			(aCollection
+				select: [ :version | self ft_version_id = version version_id ])
 ]
 
 { #category : #API }

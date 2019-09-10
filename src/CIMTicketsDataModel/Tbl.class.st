@@ -70,44 +70,22 @@ Tbl class >> izyReleases [
 	^ tables at: 10
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl class >> joinTables [
+tbl_ft joinDevToTicket: tbl_dev .
+	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction .
+	tbl_ft joinBibsToTicket: tbl_biblio .
+	tbl_ft joinVersionsToTicket: tbl_version .
+	tbl_ft connectAllLinkedTickets .
+	tbl_tps joinTypeSessionToTps: tbl_type_session .
+]
+
 { #category : #initialization }
 Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
-	Tbl new loadTblFromFolder: ficheNavettePath
-	"Tbl tables fifth rows
-		do: [ :ticket | 
-			ticket
-				dev:
-					(Tbl tables fourth rows
-						detect: [ :dev | dev dev_id = ticket ft_dev_id ]
-						ifNone: [ nil ]) ].
-	Tbl tables fifth rows
-		do: [ :ticket | 
-			ticket
-				typeCorrection:
-					(Tbl tables ninth rows
-						detect: [ :dev | dev typcorr_id = ticket ft_typcorr_id ]
-						ifNone: [ nil ]) ].
-	Tbl tables first rows
-		do: [ :bib | 
-			bib
-				tickets:
-					(Tbl tables fifth rows
-						detect: [ :ticket | ticket ft_modif_id = bib biblio_modif_id ]
-						ifNone: [ nil ]) ].
-	Tbl tables fifth rows
-		do: [ :ticket | 
-				Tbl tables first
+	Tbl new loadTblFromFolder: ficheNavettePath.
+	self joinTables.
+	tbl_biblio
 		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)
-			ticket
-				bibliotheques:
-					(Tbl tables first rows
-						select: [ :bib | ticket ft_modif_id = bib biblio_modif_id ]) ].
-	Tbl tables fifth rows
-		do: [ :ticket | 
-			ticket
-				versions:
-					((Tbl tables at: 10) rows
-						select: [ :version | ticket ft_version_id = version version_id ]) ]"
 ]
 
 { #category : #accessing }
