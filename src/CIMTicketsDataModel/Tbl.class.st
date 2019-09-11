@@ -72,20 +72,23 @@ Tbl class >> izyReleases [
 
 { #category : #'as yet unclassified' }
 Tbl class >> joinTables [
-tbl_ft joinDevToTicket: tbl_dev .
-	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction .
-	tbl_ft joinBibsToTicket: tbl_biblio .
-	tbl_ft joinVersionsToTicket: tbl_version .
-	tbl_ft connectAllLinkedTickets .
-	tbl_tps joinTypeSessionToTps: tbl_type_session .
+	tbl_ft joinDevToTicket: tbl_dev.
+	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
+	tbl_ft joinBibsToTicket: tbl_biblio.
+	tbl_ft joinVersionsToTicket: tbl_version.
+	TicketsLinkDetector new
+		model: tbl_ft;
+		connectAllLinkedTickets.
+	tbl_tps joinTypeSessionToTps: tbl_type_session.
+	tbl_ft joinTpsDevToTicket: tbl_tps 
 ]
 
 { #category : #initialization }
 Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 	Tbl new loadTblFromFolder: ficheNavettePath.
-	self joinTables.
-	tbl_biblio
-		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)
+	self joinTables
+	"tbl_biblio
+		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)"
 ]
 
 { #category : #accessing }

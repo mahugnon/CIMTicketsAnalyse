@@ -5,7 +5,16 @@ Class {
 }
 
 { #category : #tests }
-TestTpsModel >> testDevTestTps [
+TestTpsModel >> testJoinTypeSessionToTps [
+	self
+		assert:
+			(((tps joinTypeSessionToTps: typeSessions) rows
+				collectAsSet: #typeSession) reject: #isNil) size
+		equals: 5
+]
+
+{ #category : #tests }
+TestTpsModel >> testShouldRecogniseDevTestTps [
 	tps joinTypeSessionToTps: typeSessions.
 	self assert: (tps rows select: #isDevelopmentTest) size equals: 2.
 	self
@@ -21,7 +30,7 @@ TestTpsModel >> testDevTestTps [
 ]
 
 { #category : #tests }
-TestTpsModel >> testDevTps [
+TestTpsModel >> testSouldRecogniseDevTps [
 	tps joinTypeSessionToTps: typeSessions.
 	self assert: (tps rows select: #isDevelopment) size equals: 3.
 	self
@@ -35,13 +44,4 @@ TestTpsModel >> testDevTps [
 		hasSameElements:
 			{typeSessions rows third.
 			typeSessions rows fifth}
-]
-
-{ #category : #tests }
-TestTpsModel >> testJoinTypeSessionToTps [
-	self
-		assert:
-			(((tps joinTypeSessionToTps: typeSessions) rows
-				collectAsSet: #typeSession) reject: #isNil) size
-		equals: 5
 ]
