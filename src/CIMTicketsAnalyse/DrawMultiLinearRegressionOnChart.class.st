@@ -4,6 +4,9 @@ I plot data serie with many linear regressions. The second argument should be a 
 Class {
 	#name : #DrawMultiLinearRegressionOnChart,
 	#superclass : #LineChart,
+	#instVars : [
+		'view'
+	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
@@ -12,6 +15,7 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 	| ds regressionLinesColors firstX |
 	firstX := timeSerie first time asSeconds.
 	graphic := RTGrapher new.
+	graphic view: view.
 	ds := RTData new connectColor: Color blue.
 	ds points: timeSerie.
 	ds y: [ :node | node value ].
@@ -41,7 +45,7 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
 	graphic view @ RTZoomableView.
-	^ graphic view
+	^ graphic
 ]
 
 { #category : #'drawing-general' }
@@ -49,4 +53,14 @@ DrawMultiLinearRegressionOnChart >> popupTextOn: anObject [
 	^ 'Month: ' , anObject key asString , String cr , 'value : '
 		, (timeSerie at: anObject key) asString , String cr , 'Median: '
 		, timeSerie median asString
+]
+
+{ #category : #accessing }
+DrawMultiLinearRegressionOnChart >> view [
+	^ view
+]
+
+{ #category : #accessing }
+DrawMultiLinearRegressionOnChart >> view: anObject [
+	view := anObject
 ]

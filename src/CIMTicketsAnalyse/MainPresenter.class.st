@@ -12,10 +12,10 @@ MainPresenter class >> composerScript [
 | plots presenter data composer builder |
 plots := OrderedCollection new.
 presenter := MainPresenter new.
-data := MainPresenterModel new ticketPerFile.
+data := RoassalPresenterModel new ticketPerFile.
 data keys collect:[ :fileName| 
 	composer := RTComposer new.
-	presenter model: (MainPresenterModel new modelData: (data at: fileName)).
+	presenter model: (RoassalPresenterModel new modelData: (data at: fileName)).
 	builder := presenter drawMovingAvgTimeSpentBugsTicketsPerMonth.
 	builder view: composer view.
 	builder build.
@@ -127,7 +127,7 @@ MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonthPerDev [
 MainPresenter >> drawAvgTimeDevTicketsPerMonth: selectQuery [
 	^ (LineChart chartFor: selectQuery)
 		yFormateur: CIMDayFormater new;
-		timeSerie: (MainPresenterModel new avgTimeDevTicketsPerMonth: selectQuery);
+		timeSerie: (RoassalPresenterModel new avgTimeDevTicketsPerMonth: selectQuery);
 		draw
 ]
 
@@ -252,7 +252,7 @@ MainPresenter >> drawAvgTimeSpentTicketsPerMonth: selectQuery [
 	^ (LineChart chartFor: selectQuery)
 		yFormateur: CIMHourFormater new;
 		maxY: 162271.2;
-		timeSerie: (MainPresenterModel new avgTimeSpentTicketsPerMonth: selectQuery);
+		timeSerie: (RoassalPresenterModel new avgTimeSpentTicketsPerMonth: selectQuery);
 		draw
 ]
 
@@ -348,7 +348,7 @@ MainPresenter >> drawFilesTimeSpent [
 	presenter := self class new.
 	^ model ticketPerFile keys
 		collect: [ :fileName | 
-			presenter model: (MainPresenterModel new modelData: (filenameWithTickets at: fileName)).
+			presenter model: (RoassalPresenterModel new modelData: (filenameWithTickets at: fileName)).
 			ChartComposer new
 				compose:
 					{('Bug' -> presenter drawMovingAvgTimeSpentBugsTicketsPerMonth).
@@ -710,7 +710,7 @@ MainPresenter >> drawReleaseRate [
 { #category : #initialization }
 MainPresenter >> initialize [ 
 super initialize .
-model := MainPresenterModel new 
+model := RoassalPresenterModel new 
 ]
 
 { #category : #accessing }

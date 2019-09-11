@@ -1,21 +1,28 @@
 Class {
-	#name : #MainPresenterModel,
+	#name : #RoassalPresenterModel,
 	#superclass : #Object,
 	#instVars : [
-		'modelData'
+		'modelData',
+		'listeners',
+		'parentModel'
 	],
-	#category : #'CIMTicketsAnalyse-RoassalPresenters'
+	#category : #'CIMTicketsDataModelGui-Roassals'
 }
 
 { #category : #'as yet unclassified' }
-MainPresenterModel >> avgDevInterventionPerMonth: selectQuery [
+RoassalPresenterModel >> addListener: aListener [
+	listeners add: aListener
+]
+
+{ #category : #'as yet unclassified' }
+RoassalPresenterModel >> avgDevInterventionPerMonth: selectQuery [
 	^ QueryNumberOfDevInterventionPerMonth new
 		devs: Tbl izyDevs rows;
 		runOn: (self ticketsPerMonth: selectQuery)
 ]
 
 { #category : #'data sets' }
-MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
+RoassalPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
@@ -23,7 +30,7 @@ MainPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 ]
 
 { #category : #'as yet unclassified' }
-MainPresenterModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
+RoassalPresenterModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 	^ QueryMovingAverage
 		runOn:
 			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
@@ -35,41 +42,41 @@ MainPresenterModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 ]
 
 { #category : #'data sets' }
-MainPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
+RoassalPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 	^ QueryAvgTimeOnTicketsGroupedByTime
 		runOn: (self ticketsPerMonth: selecQuery)
 ]
 
 { #category : #'data sets' }
-MainPresenterModel >> datawithCloseDate [
+RoassalPresenterModel >> datawithCloseDate [
 	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
 ]
 
 { #category : #initialization }
-MainPresenterModel >> initialize [
+RoassalPresenterModel >> initialize [
 	modelData := CIMTicketGroupNode new
 		tickets: Tbl allTickets;
 		yourself
 ]
 
 { #category : #'data sets' }
-MainPresenterModel >> modelData [
+RoassalPresenterModel >> modelData [
 	^ modelData
 ]
 
 { #category : #accessing }
-MainPresenterModel >> modelData: anObject [
+RoassalPresenterModel >> modelData: anObject [
 	modelData := anObject
 ]
 
 { #category : #'as yet unclassified' }
-MainPresenterModel >> movingAvgTimeSpentTicketsPerMonth: selectQuery [
+RoassalPresenterModel >> movingAvgTimeSpentTicketsPerMonth: selectQuery [
 	^ QueryMovingAverage
 		runOn: (self avgTimeDevTicketsPerMonth: selectQuery)
 ]
 
 { #category : #'data sets' }
-MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
+RoassalPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
 	^ QueryTimePerDev
 		runOn:
 			(QueryMovingAverage
@@ -79,7 +86,7 @@ MainPresenterModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery
 ]
 
 { #category : #'data sets' }
-MainPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selectQuery [
+RoassalPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selectQuery [
 	| dataSet |
 	dataSet := QueryMovingAverage new
 		runOn:
@@ -99,15 +106,25 @@ MainPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: select
 		after: (Date asMonth: 05 inYear: 2014))} asOrderedCollection
 ]
 
+{ #category : #'as yet unclassified' }
+RoassalPresenterModel >> notifyAll [
+	listeners do: [ :listener | listener update ]
+]
+
+{ #category : #'as yet unclassified' }
+RoassalPresenterModel >> removeListener: aListener [
+	listeners remove: aListener
+]
+
 { #category : #'data sets' }
-MainPresenterModel >> ticketPerFile [
+RoassalPresenterModel >> ticketPerFile [
 	^ QueryTicketsForInterestionFileNames new
 		runOn: modelData
 		nameLime: 200
 ]
 
 { #category : #'as yet unclassified' }
-MainPresenterModel >> ticketsPerMonth: selectQuery [
+RoassalPresenterModel >> ticketsPerMonth: selectQuery [
 	^ QueryTicketPerMonthClosing new
 		fillGaps: true;
 		ordered: true;
