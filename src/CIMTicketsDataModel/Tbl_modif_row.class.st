@@ -8,7 +8,7 @@ Class {
 		'modif_integration',
 		'modif_version_id'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

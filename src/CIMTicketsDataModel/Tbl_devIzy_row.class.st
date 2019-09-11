@@ -7,7 +7,7 @@ Class {
 		'date_entree',
 		'date_sortie'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

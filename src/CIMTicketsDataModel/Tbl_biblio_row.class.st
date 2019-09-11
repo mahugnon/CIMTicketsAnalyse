@@ -18,7 +18,7 @@ Class {
 		'tickets',
 		'modules'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

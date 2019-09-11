@@ -15,7 +15,7 @@ Class {
 		'cim_jour_envoi',
 		'cim_plage_envoi'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

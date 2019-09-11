@@ -18,7 +18,7 @@ Class {
 		'test_tps_estim',
 		'test_valid_estim'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #initialization }

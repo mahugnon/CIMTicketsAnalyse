@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'bibliotheques'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #'instance creation' }

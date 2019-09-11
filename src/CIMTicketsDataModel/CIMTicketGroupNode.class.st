@@ -6,7 +6,7 @@ Class {
 		'time',
 		'name'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #'as yet unclassified' }

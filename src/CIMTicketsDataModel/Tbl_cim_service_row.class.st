@@ -9,7 +9,7 @@ Class {
 		'base_jour',
 		'cim_equipe'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

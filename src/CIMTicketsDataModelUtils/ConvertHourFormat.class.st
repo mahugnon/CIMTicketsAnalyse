@@ -1,7 +1,7 @@
 Class {
 	#name : #ConvertHourFormat,
 	#superclass : #CIMDateFormatConverter,
-	#category : #'CIMTicketsDataModel-converters'
+	#category : #'CIMTicketsDataModelUtils-DateConverter'
 }
 
 { #category : #utility }

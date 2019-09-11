@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #'CIMTicketsDataModel-Utils'
+	#category : #'CIMTicketsDataModelUtils-DataProcessing'
 }
 
 { #category : #API }

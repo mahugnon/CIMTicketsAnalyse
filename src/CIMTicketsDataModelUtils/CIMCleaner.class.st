@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMCleaner,
 	#superclass : #Object,
-	#category : #'CIMTicketsDataModel-Utils'
+	#category : #'CIMTicketsDataModelUtils-DataCleaner'
 }
 
 { #category : #api }

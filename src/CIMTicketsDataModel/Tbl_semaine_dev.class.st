@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_semaine_dev',
 	#superclass : #Tbl,
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #utility }

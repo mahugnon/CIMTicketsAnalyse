@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_row',
 	#superclass : #Object,
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #formatting }

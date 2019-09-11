@@ -5,7 +5,7 @@ Class {
 		'value',
 		'ticketGroup'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #visiting }

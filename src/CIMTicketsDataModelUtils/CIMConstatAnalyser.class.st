@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMConstatAnalyser,
 	#superclass : #Object,
-	#category : #'CIMTicketsDataModel-Utils'
+	#category : #'CIMTicketsDataModelUtils-DataProcessing'
 }
 
 { #category : #'as yet unclassified' }

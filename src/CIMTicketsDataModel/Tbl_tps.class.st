@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_tps',
 	#superclass : #Tbl,
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #utilities }

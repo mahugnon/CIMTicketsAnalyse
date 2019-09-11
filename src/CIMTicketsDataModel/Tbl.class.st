@@ -24,7 +24,7 @@ Class {
 		'tbl_test',
 		'tbl_version_news'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #'as yet unclassified' }
@@ -93,7 +93,7 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 
 { #category : #accessing }
 Tbl class >> tableTickets [
-	^ tables fifth
+	^ Tbl tbl_ft
 ]
 
 { #category : #accessing }

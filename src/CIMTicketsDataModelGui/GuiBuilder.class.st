@@ -1,7 +1,7 @@
 Class {
 	#name : #GuiBuilder,
 	#superclass : #Object,
-	#category : #CIMTicketsDataModelGui
+	#category : #'CIMTicketsDataModelGui-Gui'
 }
 
 { #category : #'as yet unclassified' }

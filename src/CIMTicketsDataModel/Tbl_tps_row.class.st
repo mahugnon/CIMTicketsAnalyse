@@ -13,7 +13,7 @@ Class {
 		'tps_type',
 		'typeSession'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #'private - utility' }

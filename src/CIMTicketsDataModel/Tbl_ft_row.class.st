@@ -59,7 +59,7 @@ Class {
 		'modulesFromAssociatedFile',
 		'connectedTickets'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #visiting }

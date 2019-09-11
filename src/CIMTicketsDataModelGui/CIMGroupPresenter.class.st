@@ -6,7 +6,7 @@ Class {
 		'data',
 		'model'
 	],
-	#category : #CIMTicketsDataModelGui
+	#category : #'CIMTicketsDataModelGui-Gui'
 }
 
 { #category : #specs }

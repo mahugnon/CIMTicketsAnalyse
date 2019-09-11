@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMDateFormatConverter,
 	#superclass : #Object,
-	#category : #'CIMTicketsDataModel-converters'
+	#category : #'CIMTicketsDataModelUtils-DateConverter'
 }
 
 { #category : #'as yet unclassified' }

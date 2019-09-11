@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMHourFormater,
 	#superclass : #CIMDateFormater,
-	#category : #'CIMTicketsDataModel-Utils'
+	#category : #'CIMTicketsDataModelUtils-DateConverter'
 }
 
 { #category : #accessing }

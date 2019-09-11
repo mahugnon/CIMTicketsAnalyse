@@ -1,7 +1,7 @@
 Class {
 	#name : #ConvertDoubleSlashFormat,
 	#superclass : #CIMDateFormatConverter,
-	#category : #'CIMTicketsDataModel-converters'
+	#category : #'CIMTicketsDataModelUtils-DateConverter'
 }
 
 { #category : #utility }

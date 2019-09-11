@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #running }
-QueryBugs >> runOn: aCollection [
+QueryBugs >> runOn: aTicketGroupNode [
 	^ CIMTicketGroupNode new
-		tickets: (aCollection select: [ :ticket | ticket isBug ]);
+		tickets: (aTicketGroupNode tickets select: [ :ticket | ticket isBug ]);
 		yourself
 ]

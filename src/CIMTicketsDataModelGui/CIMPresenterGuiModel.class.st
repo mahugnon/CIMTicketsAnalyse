@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'data'
 	],
-	#category : #CIMTicketsDataModelGui
+	#category : #'CIMTicketsDataModelGui-Gui'
 }
 
 { #category : #accessing }

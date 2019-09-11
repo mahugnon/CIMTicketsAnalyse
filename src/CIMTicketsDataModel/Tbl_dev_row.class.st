@@ -27,7 +27,7 @@ Class {
 		'dev_tps_estim_dev',
 		'dev_tps_rest_dev'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #utility }

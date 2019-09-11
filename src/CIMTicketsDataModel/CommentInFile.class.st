@@ -8,7 +8,7 @@ Class {
 		'date',
 		'directory'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

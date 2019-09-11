@@ -10,7 +10,7 @@ Class {
 		'semaine_debut',
 		'semaine_fin'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }

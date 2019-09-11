@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_Module',
 	#superclass : #Tbl,
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #api }

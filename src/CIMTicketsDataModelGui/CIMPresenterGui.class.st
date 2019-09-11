@@ -8,7 +8,7 @@ Class {
 		'menu',
 		'nodePresenter'
 	],
-	#category : #CIMTicketsDataModelGui
+	#category : #'CIMTicketsDataModelGui-Gui'
 }
 
 { #category : #specs }

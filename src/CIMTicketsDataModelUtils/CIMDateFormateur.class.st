@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMDateFormateur,
 	#superclass : #Object,
-	#category : #'CIMTicketsDataModel-Utils'
+	#category : #'CIMTicketsDataModelUtils-DateConverter'
 }
 
 { #category : #accessing }

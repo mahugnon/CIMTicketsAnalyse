@@ -6,7 +6,7 @@ Class {
 		'versionn_libelle',
 		'versionn_ordre'
 	],
-	#category : #'CIMTicketsDataModel-Model'
+	#category : #CIMTicketsDataModel
 }
 
 { #category : #accessing }
