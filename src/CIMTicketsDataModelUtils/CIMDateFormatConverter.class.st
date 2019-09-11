@@ -17,7 +17,10 @@ CIMDateFormatConverter class >> ignorables [
 
 { #category : #'as yet unclassified' }
 CIMDateFormatConverter class >> selectConverterFor: aTableField [
-"Opened the debugguer is intended"
+	"Opened the debugguer is intended"
+
+	aTableField isString
+		ifFalse: [ ^ CIMDateIdentityConverter new ].
 	^ self subclasses
 		detect: [ :sub | aTableField asLowercase matchesRegex: sub supportedFormat ]
 		ifFound: [ :founded | founded new ]
