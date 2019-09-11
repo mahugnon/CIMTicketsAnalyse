@@ -10,16 +10,30 @@ CIMDateFormatConverter class >> convert: aTableField [
 	^ (self selectConverterFor: aTableField) convert: aTableField
 ]
 
+{ #category : #'private-api' }
+CIMDateFormatConverter class >> ignorables [
+	^ #('5f') asOrderedCollection
+]
+
 { #category : #'as yet unclassified' }
 CIMDateFormatConverter class >> selectConverterFor: aTableField [
-	^ (self subclasses
-		detect: [ :sub | aTableField asLowercase matchesRegex: sub supportedFormat ])
-		new
+"Opened the debugguer is intended"
+	^ self subclasses
+		detect: [ :sub | aTableField asLowercase matchesRegex: sub supportedFormat ]
+		ifFound: [ :founded | founded new ]
+		ifNone: [ (self toIgnore: aTableField)
+				ifTrue: [ CIMDateIdentityConverter new ]
+				ifFalse: [ self halt now ] ]
 ]
 
 { #category : #utility }
 CIMDateFormatConverter class >> supportedFormat [
-	^ self subclassResponsibility
+	^ ''
+]
+
+{ #category : #'private-api' }
+CIMDateFormatConverter class >> toIgnore: aString [
+	^ self ignorables includes: aString
 ]
 
 { #category : #converting }

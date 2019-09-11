@@ -80,3 +80,10 @@ TestConverter >> testconverterFor7heures [
 		assert: (CIMDateFormatConverter convert: '7 Heures')
 		equals: (7 * 3600) asDuration
 ]
+
+{ #category : #tests }
+TestConverter >> testconverterShouldNotConvert5f [
+	self
+		assert: (CIMDateFormatConverter convert: '5f')
+		equals: '5f'
+]
