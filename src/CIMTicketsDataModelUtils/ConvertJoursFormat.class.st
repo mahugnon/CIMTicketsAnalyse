@@ -10,8 +10,7 @@ ConvertJoursFormat class >> supportedFormat [
 ]
 
 { #category : #converting }
-ConvertJoursFormat >> convert: arg1 [
-	| tmp1 |
-	tmp1 := arg1 copyReplaceAll: ',' with: '.'.
-	^ tmp1 := (('jours' split: tmp1) first asNumber * 27000) asDuration
+ConvertJoursFormat >> convert: aString [
+	^ (('jours' split: (aString copyReplaceAll: ',' with: '.')) first
+		asNumber * 27000) asDuration
 ]

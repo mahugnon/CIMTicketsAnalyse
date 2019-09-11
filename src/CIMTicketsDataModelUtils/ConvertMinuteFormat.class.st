@@ -10,10 +10,8 @@ ConvertMinuteFormat class >> supportedFormat [
 ]
 
 { #category : #converting }
-ConvertMinuteFormat >> convert: arg1 [
-	| tmp1 |
-	(arg1 matchesRegex: '([0-9]+)')
-		ifTrue: [ ^ (arg1 asInteger * 60) asDuration ].
-	tmp1 := ' ' split: arg1.
-	^ (tmp1 first asInteger * 60) asDuration
+ConvertMinuteFormat >> convert: aString [
+	(aString matchesRegex: '([0-9]+)')
+		ifTrue: [ ^ (aString asInteger * 60) asDuration ].
+	^ ((' ' split: aString) first asInteger * 60) asDuration
 ]

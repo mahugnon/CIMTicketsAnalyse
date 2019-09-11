@@ -31,8 +31,9 @@ Class {
 }
 
 { #category : #utility }
-Tbl_dev_row >> convertTpsTotalToDuration [
-	dev_tps_total := CIMDateFormatConverter convert: dev_tps_total
+Tbl_dev_row >> convertCIMTpsDuration [
+	dev_tps_total := CIMDateFormatConverter convert: dev_tps_total.
+	dev_tps_total := CIMDateFormatConverter convert: dev_tps_estim
 ]
 
 { #category : #API }
@@ -301,7 +302,7 @@ dev_tps_estim_dev isString ifTrue: [ dev_tps_estim_dev := CIMDateFormatConverter
 { #category : #initialization }
 Tbl_dev_row >> initializeWith: arg1 [
 	super initializeWith: arg1.
-	self convertTpsTotalToDuration
+	self convertCIMTpsDuration
 ]
 
 { #category : #API }
