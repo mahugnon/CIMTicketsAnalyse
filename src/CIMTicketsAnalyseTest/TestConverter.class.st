@@ -61,6 +61,13 @@ TestConverter >> testconverterFor5commas5Jours [
 ]
 
 { #category : #tests }
+TestConverter >> testconverterFor5g [
+	self
+		assert: (CIMDateFormatConverter convert: '5g')
+		equals: (5 * 27000) asDuration
+]
+
+{ #category : #tests }
 TestConverter >> testconverterFor7H [
 	self
 		assert: (CIMDateFormatConverter convert: '7H')

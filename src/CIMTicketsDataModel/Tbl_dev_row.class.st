@@ -33,7 +33,8 @@ Class {
 { #category : #utility }
 Tbl_dev_row >> convertCIMTpsDuration [
 	dev_tps_total := CIMDateFormatConverter convert: dev_tps_total.
-	dev_tps_total := CIMDateFormatConverter convert: dev_tps_estim
+	dev_tps_estim  := CIMDateFormatConverter convert: dev_tps_estim.
+	dev_tps_estim_dev := CIMDateFormatConverter convert: dev_tps_estim_dev
 ]
 
 { #category : #API }
