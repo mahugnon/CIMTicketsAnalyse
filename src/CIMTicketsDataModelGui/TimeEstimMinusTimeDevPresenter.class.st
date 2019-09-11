@@ -3,30 +3,43 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'model',
-		'roassal',
-		'selectQuery'
+		'roassal'
 	],
 	#category : #'CIMTicketsDataModelGui-Roassals'
 }
 
+{ #category : #specs }
+TimeEstimMinusTimeDevPresenter class >> defaultSpec [
+	^ SpBoxLayout newVertical
+		add: #roassal;
+		yourself
+]
+
+{ #category : #specs }
+TimeEstimMinusTimeDevPresenter class >> run [
+	<example>
+	self new openWithSpec
+]
+
 { #category : #initialization }
 TimeEstimMinusTimeDevPresenter >> initializeWidgets [
+	self selectQuery.
 	model := RoassalPresenterModel new.
 	model addListener: self.
 	roassal := self instantiate: RoassalPresenter.
 	roassal
 		script: [ :view | 
-			self
-				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery
-				on: view ]
+			(self
+				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
+				on: view) view ]
 ]
 
 { #category : #initialization }
 TimeEstimMinusTimeDevPresenter >> initializeWindow: w [
-	w
+	"w
 		title: 'Roassal packages';
 		initialExtent: 800 @ 500;
-		centered
+		centered". super initializeWindow: w
 ]
 
 { #category : #'as yet unclassified' }
@@ -47,6 +60,11 @@ TimeEstimMinusTimeDevPresenter >> raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPer
 		drawWithRegressionIntervall:
 			{data1.
 			data2}
+]
+
+{ #category : #initialize }
+TimeEstimMinusTimeDevPresenter >> selectQuery [
+	^ self subclassResponsibility
 ]
 
 { #category : #updating }

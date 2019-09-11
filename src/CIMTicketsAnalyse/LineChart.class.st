@@ -10,7 +10,8 @@ Class {
 		'timeSerie',
 		'label',
 		'title',
-		'graphic'
+		'graphic',
+		'view'
 	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
@@ -125,7 +126,8 @@ LineChart >> draw: aView [
 LineChart >> initialize [
 	super initialize.
 	yTranslation := 0.
-	perDev := false
+	perDev := false.
+	view := RTView new
 ]
 
 { #category : #'as yet unclassified' }

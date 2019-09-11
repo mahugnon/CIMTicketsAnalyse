@@ -4,9 +4,6 @@ I plot data serie with many linear regressions. The second argument should be a 
 Class {
 	#name : #DrawMultiLinearRegressionOnChart,
 	#superclass : #LineChart,
-	#instVars : [
-		'view'
-	],
 	#category : #'CIMTicketsAnalyse-RoassalPresenters'
 }
 
@@ -44,8 +41,8 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 			(v < 1 or: [ v > timeSerie size ])
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
-	graphic view @ RTZoomableView.
-	^ graphic
+	"graphic view @ RTZoomableView."
+	^ graphic 
 ]
 
 { #category : #'drawing-general' }

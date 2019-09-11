@@ -54,6 +54,7 @@ RoassalPresenterModel >> datawithCloseDate [
 
 { #category : #initialization }
 RoassalPresenterModel >> initialize [
+	listeners := OrderedCollection new.
 	modelData := CIMTicketGroupNode new
 		tickets: Tbl allTickets;
 		yourself
