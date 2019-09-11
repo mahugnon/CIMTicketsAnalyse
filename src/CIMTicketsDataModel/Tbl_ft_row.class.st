@@ -57,8 +57,7 @@ Class {
 		'modules',
 		'associatedPhysiqueFiles',
 		'modulesFromAssociatedFile',
-		'connectedTickets',
-		'devTps'
+		'connectedTickets'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -152,19 +151,9 @@ Tbl_ft_row >> dev: arg1 [
 	dev := arg1
 ]
 
-{ #category : #accessing }
-Tbl_ft_row >> devTps [
-	^ devTps
-]
-
-{ #category : #accessing }
-Tbl_ft_row >> devTps: aTbl_tps_row [ 
-	devTps := aTbl_tps_row
-]
-
 { #category : #api }
 Tbl_ft_row >> devTpsDev [
-	^ self devTps select: #isDevelopment
+	^ self timeDev select: #isDevelopment
 ]
 
 { #category : #API }
@@ -176,7 +165,7 @@ Tbl_ft_row >> devTpsEstim [
 
 { #category : #api }
 Tbl_ft_row >> devTpsTest [
-	^ self devTps select: #isDevelopmentTest
+	^ self timeDev select: #isDevelopmentTest
 ]
 
 { #category : #API }
@@ -690,7 +679,7 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 { #category : #utilites }
 Tbl_ft_row >> joinTpsDevToTicket: aCollection [
 	self
-		devTps: (aCollection select: [ :aTps | aTps tps_dev_id = self ft_dev_id ])
+		timeDev: (aCollection select: [ :aTps | aTps tps_dev_id = self ft_dev_id ])
 ]
 
 { #category : #utilities }
