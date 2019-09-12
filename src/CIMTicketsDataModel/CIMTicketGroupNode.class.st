@@ -79,3 +79,8 @@ CIMTicketGroupNode >> time [
 CIMTicketGroupNode >> time: anObject [
 	time := anObject
 ]
+
+{ #category : #api }
+CIMTicketGroupNode >> updateRoassalModel: aRoassalPresenterModel [
+	aRoassalPresenterModel modelData: self
+]

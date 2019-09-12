@@ -786,6 +786,11 @@ Tbl_ft_row >> updateDevWith: aCollection [
 		dev: (aCollection select: [ :aDev | aDev dev_cim_id = ft_dev_id ])
 ]
 
+{ #category : #api }
+Tbl_ft_row >> updateRoassalModel: aRoassalPresenterModel [
+	aRoassalPresenterModel treeSingleFocus: self
+]
+
 { #category : #accessing }
 Tbl_ft_row >> versions [
 	^ versions

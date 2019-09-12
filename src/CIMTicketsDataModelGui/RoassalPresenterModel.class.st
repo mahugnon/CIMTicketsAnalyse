@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'modelData',
 		'listeners',
-		'roassalView'
+		'roassalView',
+		'treeSingleFocus'
 	],
 	#category : #'CIMTicketsDataModelGui-Models'
 }
@@ -70,7 +71,8 @@ RoassalPresenterModel >> modelData [
 
 { #category : #accessing }
 RoassalPresenterModel >> modelData: anObject [
-	modelData := anObject
+	modelData := anObject.
+	roassalView refresh
 ]
 
 { #category : #'as yet unclassified' }
@@ -144,6 +146,11 @@ RoassalPresenterModel >> ticketsPerMonth: selectQuery [
 		fillGaps: true;
 		ordered: true;
 		runOn: (selectQuery runOn: self datawithCloseDate)
+]
+
+{ #category : #accessing }
+RoassalPresenterModel >> treeSingleFocus: aTbl_ft_row [
+	treeSingleFocus := aTbl_ft_row
 ]
 
 { #category : #'as yet unclassified' }

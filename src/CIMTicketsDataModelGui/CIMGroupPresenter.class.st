@@ -30,8 +30,8 @@ CIMGroupPresenter >> initializeWidgets [
 		roots: {model data};
 		children: [ :aNode | aNode content ];
 		beResizable;
-		"	whenActivatedDo: [ :selection | selection selectedItem  ]"
-			activateOnDoubleClick
+		whenSelectionChangedDo: [ :selection | model updateWith: selection selectedItem ];
+		activateOnDoubleClick
 ]
 
 { #category : #accessing }

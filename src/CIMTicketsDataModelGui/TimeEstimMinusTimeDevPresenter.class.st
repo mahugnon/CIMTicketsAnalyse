@@ -22,17 +22,22 @@ TimeEstimMinusTimeDevPresenter class >> run [
 ]
 
 { #category : #initialization }
+TimeEstimMinusTimeDevPresenter >> draw [
+	roassal
+		script: [ :view | 
+			self
+				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
+				on: view ]
+]
+
+{ #category : #initialization }
 TimeEstimMinusTimeDevPresenter >> initializeWidgets [
 	self selectQuery.
 	model := RoassalPresenterModel new.
-	model roassalView: self.
 	roassal := self instantiate: RoassalPresenter.
 	model isEmpty
-		ifFalse: [ roassal
-				script: [ :view | 
-					self
-						raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
-						on: view ] ]
+		ifFalse:
+			[ self draw ]
 ]
 
 { #category : #initialization }
@@ -41,6 +46,12 @@ TimeEstimMinusTimeDevPresenter >> initializeWindow: w [
 		title: 'Roassal packages';
 		initialExtent: 800 @ 500;
 		centered
+]
+
+{ #category : #accessing }
+TimeEstimMinusTimeDevPresenter >> model: aRoassalModel [
+	model := aRoassalModel.
+	model roassalView: self
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,6 +72,12 @@ TimeEstimMinusTimeDevPresenter >> raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPer
 		drawWithRegressionIntervall:
 			{data1.
 			data2}
+]
+
+{ #category : #refreshing }
+TimeEstimMinusTimeDevPresenter >> refresh [
+	self draw.
+	roassal refresh
 ]
 
 { #category : #initialize }
