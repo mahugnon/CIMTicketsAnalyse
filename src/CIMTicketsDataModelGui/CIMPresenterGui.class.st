@@ -44,7 +44,7 @@ CIMPresenterGui >> initializeWidgets [
 	menu := self mainMenu.
 	roassalPresenterList := self instantiate: CIMGroupPresenter.
 	roassalPresenterList model: model.
-	roassaPresenter := self instantiate: ExampleRoassal2Spec2.
+	roassaPresenter := self instantiate: EvolutionTicketsTimeEstimMinusTimeDevPresenter.
 	nodePresenter := self newList.
 	menu applyTo: self
 ]

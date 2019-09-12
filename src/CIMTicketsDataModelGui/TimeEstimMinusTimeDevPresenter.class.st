@@ -29,17 +29,17 @@ TimeEstimMinusTimeDevPresenter >> initializeWidgets [
 	roassal := self instantiate: RoassalPresenter.
 	roassal
 		script: [ :view | 
-			(self
+			self
 				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
-				on: view) view ]
+				on: view ]
 ]
 
 { #category : #initialization }
 TimeEstimMinusTimeDevPresenter >> initializeWindow: w [
-	"w
+	w
 		title: 'Roassal packages';
 		initialExtent: 800 @ 500;
-		centered". super initializeWindow: w
+		centered
 ]
 
 { #category : #'as yet unclassified' }
