@@ -1,6 +1,3 @@
-"
-I plot data serie with many linear regressions. The second argument should be a collection of dictionaries
-"
 Class {
 	#name : #DrawMultiLinearRegressionOnChart,
 	#superclass : #LineChart,
@@ -50,11 +47,6 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
-DrawMultiLinearRegressionOnChart >> interactionOn: elt [ 
-
-]
-
-{ #category : #'drawing-general' }
 DrawMultiLinearRegressionOnChart >> popupTextOn: anObject [
 	^ 'Month: ' , anObject key asString , String cr , 'value : '
 		, (timeSerie at: anObject key) asString , String cr , 'Median: '
