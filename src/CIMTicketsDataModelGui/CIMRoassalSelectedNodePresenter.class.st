@@ -21,3 +21,8 @@ CIMRoassalSelectedNodePresenter >> setUpTable [
 		roots: {model data};
 		children: [ :aNode | aNode ifNotEmpty: [ aNode content ] ]
 ]
+
+{ #category : #updating }
+CIMRoassalSelectedNodePresenter >> update [
+	self setUpTable
+]

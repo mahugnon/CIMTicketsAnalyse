@@ -53,6 +53,17 @@ CIMPresenterGui >> initializeRoassalPresenter [
 ]
 
 { #category : #initialization }
+CIMPresenterGui >> initializeRoassalSelectedNodePresenter [
+	roassalSelectedNodePresenter := self
+		instantiate: CIMRoassalSelectedNodePresenter.
+	"roassalSelectedNodePresenter
+		model:
+			(CIMRoassalSelectedNodePresenterModel new
+				data: #();
+				roassalSelectedNodePresenter: roassalSelectedNodePresenter)"
+]
+
+{ #category : #initialization }
 CIMPresenterGui >> initializeTicketsGroupPresenter [
 	ticketNodesPresenter := self instantiate: CIMGroupPresenter.
 	ticketNodesPresenter model: model
@@ -63,10 +74,7 @@ CIMPresenterGui >> initializeWidgets [
 	model := CIMGroupPresenterModel new.
 	self initializeTicketsGroupPresenter.
 	self initializeRoassalPresenter.
-	roassalSelectedNodePresenter := self
-		instantiate: CIMRoassalSelectedNodePresenter.
-	roassalSelectedNodePresenter
-		model: (CIMRoassalSelectedNodePresenterModel new data: #()).
+	self initializeRoassalSelectedNodePresenter.
 	self initializeMenu
 ]
 
