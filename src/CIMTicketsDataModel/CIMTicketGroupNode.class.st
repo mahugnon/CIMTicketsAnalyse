@@ -46,6 +46,11 @@ CIMTicketGroupNode >> initialize [
 ]
 
 { #category : #testing }
+CIMTicketGroupNode >> isEmptyNode [
+	^ self content isEmpty
+]
+
+{ #category : #testing }
 CIMTicketGroupNode >> isEmptyOrNil [
 	^ tickets isEmptyOrNil
 ]

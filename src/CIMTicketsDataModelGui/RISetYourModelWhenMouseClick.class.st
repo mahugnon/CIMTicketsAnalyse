@@ -23,7 +23,8 @@ RISetYourModelWhenMouseClick >> onElement: anElement [
 	anElement
 		when: TSMouseClick
 		do: [ :event | 
-			model strongFocus shape color: Color blue.
+			model strongFocus
+				ifNotNil: [ model strongFocus shape color: Color blue ].
 			anElement shape color: Color green.
 			self model strongFocus: anElement ]
 ]

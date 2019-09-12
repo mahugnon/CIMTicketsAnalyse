@@ -25,13 +25,14 @@ TimeEstimMinusTimeDevPresenter class >> run [
 TimeEstimMinusTimeDevPresenter >> initializeWidgets [
 	self selectQuery.
 	model := RoassalPresenterModel new.
-	model addListener: self.
+	model roassalView: self.
 	roassal := self instantiate: RoassalPresenter.
-	roassal
-		script: [ :view | 
-			self
-				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
-				on: view ]
+	model isEmpty
+		ifFalse: [ roassal
+				script: [ :view | 
+					self
+						raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
+						on: view ] ]
 ]
 
 { #category : #initialization }

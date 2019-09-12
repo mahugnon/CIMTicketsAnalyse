@@ -1,10 +1,10 @@
 Class {
 	#name : #CIMPresenterGuiModel,
-	#superclass : #SpPresenter,
+	#superclass : #Object,
 	#instVars : [
 		'data'
 	],
-	#category : #'CIMTicketsDataModelGui-Gui'
+	#category : #'CIMTicketsDataModelGui-Models'
 }
 
 { #category : #accessing }

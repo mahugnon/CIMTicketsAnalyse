@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'modelData',
 		'listeners',
-		'parentModel'
+		'roassalView'
 	],
 	#category : #'CIMTicketsDataModelGui-Models'
 }
@@ -56,8 +56,11 @@ RoassalPresenterModel >> datawithCloseDate [
 RoassalPresenterModel >> initialize [
 	listeners := OrderedCollection new.
 	modelData := CIMTicketGroupNode new
-		tickets: Tbl allTickets;
-		yourself
+]
+
+{ #category : #accessing }
+RoassalPresenterModel >> isEmpty [
+	^ modelData isEmptyNode
 ]
 
 { #category : #'data sets' }
@@ -113,8 +116,19 @@ RoassalPresenterModel >> notifyAll [
 ]
 
 { #category : #'as yet unclassified' }
+RoassalPresenterModel >> notifyAllWith: aTicketsNode [
+	listeners
+		do: [ :listener | listener updateWhenRoassalFocusChange: aTicketsNode ]
+]
+
+{ #category : #'as yet unclassified' }
 RoassalPresenterModel >> removeListener: aListener [
 	listeners remove: aListener
+]
+
+{ #category : #accessing }
+RoassalPresenterModel >> roassalView: aCIMRoassalPresenter [
+	roassalView := aCIMRoassalPresenter
 ]
 
 { #category : #'data sets' }
@@ -130,4 +144,9 @@ RoassalPresenterModel >> ticketsPerMonth: selectQuery [
 		fillGaps: true;
 		ordered: true;
 		runOn: (selectQuery runOn: self datawithCloseDate)
+]
+
+{ #category : #'as yet unclassified' }
+RoassalPresenterModel >> updateStrongFocusWith: aTicketsNode [
+	self notifyAllWith: aTicketsNode
 ]
