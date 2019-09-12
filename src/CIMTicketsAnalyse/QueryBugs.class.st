@@ -7,6 +7,6 @@ Class {
 { #category : #running }
 QueryBugs >> runOn: aTicketGroupNode [
 	^ CIMTicketGroupNode new
-		tickets: (aTicketGroupNode tickets select: [ :ticket | ticket isBug ]);
+		tickets: (aTicketGroupNode tickets  select: #isBug);
 		yourself
 ]

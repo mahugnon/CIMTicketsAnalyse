@@ -6,6 +6,7 @@ Class {
 
 { #category : #running }
 QueryEvolutions >> runOn: aTicketGroupNode [
-	^ aTicketGroupNode
-		tickets: (aTicketGroupNode tickets select: [ :ticket | ticket isEvolution ])
+	^ CIMTicketGroupNode new
+		tickets: (aTicketGroupNode tickets select: [ :ticket | ticket isEvolution ]);
+		yourself
 ]

@@ -34,7 +34,7 @@ Tbl class >> allBibliotheques [
 
 { #category : #accessing }
 Tbl class >> allTickets [
-	^ self tableTickets rows
+	^ self tbl_ft rows
 ]
 
 { #category : #accessing }
@@ -89,11 +89,6 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 	self joinTables
 	"tbl_biblio
 		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)"
-]
-
-{ #category : #accessing }
-Tbl class >> tableTickets [
-	^ Tbl tbl_ft
 ]
 
 { #category : #accessing }

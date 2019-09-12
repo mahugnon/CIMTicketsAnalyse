@@ -77,7 +77,7 @@ TimeEstimMinusTimeDevPresenter >> raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPer
 { #category : #refreshing }
 TimeEstimMinusTimeDevPresenter >> refresh [
 	self draw.
-	roassal refresh
+	"roassal refresh"
 ]
 
 { #category : #initialize }

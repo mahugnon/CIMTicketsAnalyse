@@ -9,6 +9,6 @@ QueryBugsEvolutions >> runOn: aTicketGroupNode [
 	^ CIMTicketGroupNode new
 		tickets:
 			(aTicketGroupNode tickets
-				select: [ :ticket | ticket isEvolution or: [ ticket isBug ] ]);
+				select: [ :ticket | ticket isEvolution or: ticket isBug ]);
 		yourself
 ]
