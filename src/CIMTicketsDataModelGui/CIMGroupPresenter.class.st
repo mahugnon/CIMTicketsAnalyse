@@ -24,14 +24,8 @@ CIMGroupPresenter class >> run [
 
 { #category : #initialization }
 CIMGroupPresenter >> initializeWidgets [
-	model := CIMPresenterGuiModel new.
 	table := self newTreeTable.
-	table
-		roots: {model data};
-		children: [ :aNode | aNode content ];
-		beResizable;
-		whenSelectionChangedDo: [ :selection | model updateWith: selection selectedItem ];
-		activateOnDoubleClick
+	
 ]
 
 { #category : #accessing }
@@ -41,7 +35,18 @@ CIMGroupPresenter >> model [
 
 { #category : #accessing }
 CIMGroupPresenter >> model: anObject [
-	model := anObject
+	model := anObject.
+	self setUpTable
+]
+
+{ #category : #initialization }
+CIMGroupPresenter >> setUpTable [
+	table
+		roots: {model data};
+		children: [ :aNode | aNode content ];
+		beResizable;
+		whenSelectionChangedDo: [ :selection | model leftUpdateWith: selection selectedItem ];
+		activateOnDoubleClick
 ]
 
 { #category : #accessing }

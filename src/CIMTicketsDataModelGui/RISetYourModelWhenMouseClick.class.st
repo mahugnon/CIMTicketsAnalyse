@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #'CIMTicketsDataModelGui-Roassals'
+	#category : #'CIMTicketsDataModelGui-Interaction'
 }
 
 { #category : #initialization }

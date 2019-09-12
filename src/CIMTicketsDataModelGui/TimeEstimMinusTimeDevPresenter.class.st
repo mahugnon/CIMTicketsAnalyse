@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'model',
-		'roassal'
+		'roassal',
+		'timeSeries'
 	],
 	#category : #'CIMTicketsDataModelGui-Roassals'
 }
@@ -22,22 +23,13 @@ TimeEstimMinusTimeDevPresenter class >> run [
 ]
 
 { #category : #initialization }
-TimeEstimMinusTimeDevPresenter >> draw [
-	roassal
-		script: [ :view | 
-			self
-				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
-				on: view ]
-]
-
-{ #category : #initialization }
 TimeEstimMinusTimeDevPresenter >> initializeWidgets [
 	self selectQuery.
 	model := RoassalPresenterModel new.
 	roassal := self instantiate: RoassalPresenter.
 	model isEmpty
 		ifFalse:
-			[ self draw ]
+			[ self setScript ]
 ]
 
 { #category : #initialization }
@@ -56,7 +48,7 @@ TimeEstimMinusTimeDevPresenter >> model: aRoassalModel [
 
 { #category : #'as yet unclassified' }
 TimeEstimMinusTimeDevPresenter >> raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery on: aView [
-	| timeSeries data1 data2 |
+	| data1 data2 |
 	timeSeries := (model
 		avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery)
 		reject: [ :serie | serie asString = '-125526.52173913' ].
@@ -76,13 +68,22 @@ TimeEstimMinusTimeDevPresenter >> raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPer
 
 { #category : #refreshing }
 TimeEstimMinusTimeDevPresenter >> refresh [
-	self draw.
+	self setScript.
 	"roassal refresh"
 ]
 
 { #category : #initialize }
 TimeEstimMinusTimeDevPresenter >> selectQuery [
 	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+TimeEstimMinusTimeDevPresenter >> setScript [
+	roassal
+		script: [ :view | 
+			self
+				raw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: self selectQuery
+				on: view ]
 ]
 
 { #category : #updating }

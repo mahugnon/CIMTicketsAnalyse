@@ -150,7 +150,8 @@ RoassalPresenterModel >> ticketsPerMonth: selectQuery [
 
 { #category : #accessing }
 RoassalPresenterModel >> treeSingleFocus: aTbl_ft_row [
-	treeSingleFocus := aTbl_ft_row
+	treeSingleFocus := aTbl_ft_row.
+	roassalView refresh
 ]
 
 { #category : #'as yet unclassified' }

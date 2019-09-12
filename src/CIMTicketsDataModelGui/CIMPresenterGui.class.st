@@ -2,11 +2,11 @@ Class {
 	#name : #CIMPresenterGui,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'roassalPresenterList',
-		'roassaPresenter',
 		'model',
 		'menu',
-		'nodePresenter'
+		'ticketNodesPresenter',
+		'roassalSelectedNodePresenter',
+		'roassalPresenter'
 	],
 	#category : #'CIMTicketsDataModelGui-Gui'
 }
@@ -21,12 +21,12 @@ CIMPresenterGui class >> defaultSpec [
 				position: 200;
 				add:
 					(SpBoxLayout newHorizontal
-						add: #roassalPresenterList width: 450;
+						add: #ticketNodesPresenter width: 450;
 						yourself);
 				add:
 					(SpPanedLayout newHorizontal
-						add: #roassaPresenter;
-						add: #nodePresenter;
+						add: #roassalPresenter;
+						add: #roassalSelectedNodePresenter;
 						yourself);
 				yourself);
 		yourself
@@ -39,15 +39,35 @@ CIMPresenterGui class >> run [
 ]
 
 { #category : #initialization }
-CIMPresenterGui >> initializeWidgets [
-	model := CIMPresenterGuiModel new.
+CIMPresenterGui >> initializeMenu [
 	menu := self mainMenu.
-	roassalPresenterList := self instantiate: CIMGroupPresenter.
-	roassalPresenterList model: model.
-	roassaPresenter := self instantiate: EvolutionTicketsTimeEstimMinusTimeDevPresenter.
-	roassaPresenter model: model roassalModel.
-	nodePresenter := self newList.
 	menu applyTo: self
+]
+
+{ #category : #initialization }
+CIMPresenterGui >> initializeRoassalPresenter [
+	roassalPresenter := self
+		instantiate: EvolutionTicketsTimeEstimMinusTimeDevPresenter.
+	roassalPresenter model: model roassalModel.
+	
+]
+
+{ #category : #initialization }
+CIMPresenterGui >> initializeTicketsGroupPresenter [
+	ticketNodesPresenter := self instantiate: CIMGroupPresenter.
+	ticketNodesPresenter model: model
+]
+
+{ #category : #initialization }
+CIMPresenterGui >> initializeWidgets [
+	model := CIMGroupPresenterModel new.
+	self initializeTicketsGroupPresenter.
+	self initializeRoassalPresenter.
+	roassalSelectedNodePresenter := self
+		instantiate: CIMRoassalSelectedNodePresenter.
+	roassalSelectedNodePresenter
+		model: (CIMRoassalSelectedNodePresenterModel new data: #()).
+	self initializeMenu
 ]
 
 { #category : #initialization }
@@ -108,5 +128,5 @@ CIMPresenterGui >> mainMenu [
 
 { #category : #accessing }
 CIMPresenterGui >> roassaPresenter [
-	^ roassaPresenter
+	^ roassalPresenter
 ]

@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'strongFocus',
-		'parentModel'
+		'detailModel'
 	],
 	#category : #'CIMTicketsDataModelGui-Models'
 }
@@ -11,12 +11,13 @@ Class {
 { #category : #initialization }
 RIModel >> initialize [
 	super initialize.
-	parentModel := RoassalPresenterModel new
+	detailModel := CIMRoassalSelectedNodePresenterModel allInstances
+		first
 ]
 
 { #category : #'private-Api' }
-RIModel >> notifyParentModelWith [
-	parentModel updateWith: strongFocus cimModel
+RIModel >> notifyModels [
+	detailModel  rightUpdateWith: strongFocus cimModel
 ]
 
 { #category : #accessing }
@@ -27,5 +28,5 @@ RIModel >> strongFocus [
 { #category : #accessing }
 RIModel >> strongFocus: anObject [
 	strongFocus := anObject.
-	self notifyParentModelWith
+	self notifyModels
 ]
