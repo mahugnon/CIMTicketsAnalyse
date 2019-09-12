@@ -13,9 +13,13 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 	firstX := timeSerie first time asSeconds.
 	graphic := RTGrapher new.
 	ds := RTData new connectColor: Color blue.
+	ds dotShape
+		color: (Color red alpha: 0.3);
+		size: 50.
 	ds points: timeSerie.
 	ds y: [ :node | node value ].
 	ds x: [ :node | node time asSeconds - firstX ].
+	ds interaction addInteraction: RISetYourModelWhenMouseClick new.
 	"ds interaction popup text: [ :elt | self popupTextOn: elt ]."
 	graphic add: ds.
 	regressionLinesColors := RTCPQualitative new
@@ -43,6 +47,11 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
 	view zoomToFit.
 	^ graphic build
+]
+
+{ #category : #'as yet unclassified' }
+DrawMultiLinearRegressionOnChart >> interactionOn: elt [ 
+
 ]
 
 { #category : #'drawing-general' }

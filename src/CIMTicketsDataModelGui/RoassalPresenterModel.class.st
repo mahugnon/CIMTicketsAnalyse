@@ -6,7 +6,7 @@ Class {
 		'listeners',
 		'parentModel'
 	],
-	#category : #'CIMTicketsDataModelGui-Roassals'
+	#category : #'CIMTicketsDataModelGui-Models'
 }
 
 { #category : #'as yet unclassified' }
