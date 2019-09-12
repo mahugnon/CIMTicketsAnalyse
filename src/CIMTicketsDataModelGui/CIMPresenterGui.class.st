@@ -56,11 +56,11 @@ CIMPresenterGui >> initializeRoassalPresenter [
 CIMPresenterGui >> initializeRoassalSelectedNodePresenter [
 	roassalSelectedNodePresenter := self
 		instantiate: CIMRoassalSelectedNodePresenter.
-	"roassalSelectedNodePresenter
+	roassalSelectedNodePresenter
 		model:
 			(CIMRoassalSelectedNodePresenterModel new
 				data: #();
-				roassalSelectedNodePresenter: roassalSelectedNodePresenter)"
+				roassalSelectedNodePresenter: roassalSelectedNodePresenter)
 ]
 
 { #category : #initialization }

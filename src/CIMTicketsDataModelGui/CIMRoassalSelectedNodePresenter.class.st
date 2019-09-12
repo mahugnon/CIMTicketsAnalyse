@@ -19,7 +19,9 @@ model := anObject.
 CIMRoassalSelectedNodePresenter >> setUpTable [
 	table
 		roots: {model data};
-		children: [ :aNode | aNode ifNotEmpty: [ aNode content ] ]
+		children: [ :aNode | 
+			aNode = OrderedCollection empty
+				ifFalse: [ aNode content ] ]
 ]
 
 { #category : #updating }

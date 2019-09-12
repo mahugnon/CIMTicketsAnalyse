@@ -17,7 +17,7 @@ DrawMultiLinearRegressionOnChart >> drawWithRegressionIntervall: aCollection [
 	ds y: [ :node | node value ].
 	ds x: [ :node | node time asSeconds - firstX ].
 	ds interaction addInteraction: RISetYourModelWhenMouseClick new.
-	ds elements @ (RSPopup text: [ :elt | self popupTextOn: elt ]).
+"	ds elements @ (RTPopup text: [ :elt | self popupTextOn: elt ])."
 	graphic add: ds.
 	regressionLinesColors := RTCPQualitative new
 		colors: aCollection size + 2.

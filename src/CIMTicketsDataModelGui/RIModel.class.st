@@ -11,7 +11,6 @@ Class {
 { #category : #initialization }
 RIModel >> initialize [
 	super initialize.
-	self halt.
 	detailModel := CIMRoassalSelectedNodePresenterModel allInstances
 		first
 ]
