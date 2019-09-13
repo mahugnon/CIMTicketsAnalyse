@@ -55,6 +55,9 @@ CIMPresenterGui >> initializeRoassalPresenter [
 { #category : #initialization }
 CIMPresenterGui >> initializeRoassalSelectedNodePresenter [
 	roassalSelectedNodePresenter := self newTreeTable
+		children: [ :aNode | 
+		
+			aNode content ]
 ]
 
 { #category : #initialization }
@@ -135,9 +138,8 @@ CIMPresenterGui >> roassaPresenter [
 ]
 
 { #category : #api }
-CIMPresenterGui >> updateRoassalFocusNodeWith: aCIMMovingAverageNode [
+CIMPresenterGui >> updateRoassalFocusNodeWith: aCIMNode [
 	roassalSelectedNodePresenter
-		roots: {aCIMMovingAverageNode};
-		children: [ :aNode | aNode content ];
-		beResizable
+		roots: aCIMNode content;
+		activateOnDoubleClick
 ]
