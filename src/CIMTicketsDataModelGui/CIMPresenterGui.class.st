@@ -60,6 +60,7 @@ CIMPresenterGui >> initializeRoassalSelectedNodePresenter [
 { #category : #initialization }
 CIMPresenterGui >> initializeTicketsGroupPresenter [
 	ticketNodesPresenter := self instantiate: CIMGroupPresenter.
+	model subscribe: self.
 	ticketNodesPresenter model: model
 ]
 
@@ -131,4 +132,12 @@ CIMPresenterGui >> mainMenu [
 { #category : #accessing }
 CIMPresenterGui >> roassaPresenter [
 	^ roassalPresenter
+]
+
+{ #category : #api }
+CIMPresenterGui >> updateRoassalFocusNodeWith: aCIMMovingAverageNode [
+	roassalSelectedNodePresenter
+		roots: {aCIMMovingAverageNode};
+		children: [ :aNode | aNode content ];
+		beResizable
 ]

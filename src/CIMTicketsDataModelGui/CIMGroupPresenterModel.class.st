@@ -3,10 +3,16 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'data',
-		'roassalModel'
+		'roassalModel',
+		'listeners'
 	],
 	#category : #'CIMTicketsDataModelGui-Models'
 }
+
+{ #category : #adding }
+CIMGroupPresenterModel >> addListener: aListener [
+	listeners add: aListener
+]
 
 { #category : #accessing }
 CIMGroupPresenterModel >> data [
@@ -34,6 +40,7 @@ CIMGroupPresenterModel >> initialize [
 	roassalModel := RoassalPresenterModel new
 		subcribe: self;
 		yourself.
+	listeners := OrderedCollection new.
 	data := CIMTicketGroupNode new
 		tickets: Tbl allTickets;
 		yourself
@@ -45,13 +52,19 @@ CIMGroupPresenterModel >> leftUpdateWith: aCIMTicketsNode [
 ]
 
 { #category : #'as yet unclassified' }
-CIMGroupPresenterModel >> notifyRoassalFocusChangeWith: aCIMMovingAverageNode [ 
-	self shouldBeImplemented.
+CIMGroupPresenterModel >> notifyRoassalFocusChangeWith: aCIMMovingAverageNode [
+	listeners
+		do: [ :each | each updateRoassalFocusNodeWith: aCIMMovingAverageNode ]
 ]
 
 { #category : #accessor }
 CIMGroupPresenterModel >> roassalModel [
 	^ roassalModel
+]
+
+{ #category : #api }
+CIMGroupPresenterModel >> subscribe: aCIMPresenter [
+	self addListener: aCIMPresenter
 ]
 
 { #category : #api }
