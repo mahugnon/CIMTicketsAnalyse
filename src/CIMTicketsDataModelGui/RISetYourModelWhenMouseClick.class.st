@@ -18,6 +18,11 @@ RISetYourModelWhenMouseClick >> model [
 	^ model
 ]
 
+{ #category : #accessing }
+RISetYourModelWhenMouseClick >> model: aRIModel [ 
+	model := aRIModel
+]
+
 { #category : #hooks }
 RISetYourModelWhenMouseClick >> onElement: anElement [
 	anElement

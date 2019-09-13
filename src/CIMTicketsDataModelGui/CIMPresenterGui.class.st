@@ -54,13 +54,7 @@ CIMPresenterGui >> initializeRoassalPresenter [
 
 { #category : #initialization }
 CIMPresenterGui >> initializeRoassalSelectedNodePresenter [
-	roassalSelectedNodePresenter := self
-		instantiate: CIMRoassalSelectedNodePresenter.
-	roassalSelectedNodePresenter
-		model:
-			(CIMRoassalSelectedNodePresenterModel new
-				data: #();
-				roassalSelectedNodePresenter: roassalSelectedNodePresenter)
+	roassalSelectedNodePresenter := self newTreeTable
 ]
 
 { #category : #initialization }

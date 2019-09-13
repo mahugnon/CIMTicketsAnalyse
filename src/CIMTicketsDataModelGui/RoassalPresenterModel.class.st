@@ -133,6 +133,11 @@ RoassalPresenterModel >> roassalView: aCIMRoassalPresenter [
 	roassalView := aCIMRoassalPresenter
 ]
 
+{ #category : #api }
+RoassalPresenterModel >> subcribe: aCIMModel [
+	self addListener: aCIMModel
+]
+
 { #category : #'data sets' }
 RoassalPresenterModel >> ticketPerFile [
 	^ QueryTicketsForInterestionFileNames new
@@ -152,6 +157,12 @@ RoassalPresenterModel >> ticketsPerMonth: selectQuery [
 RoassalPresenterModel >> treeSingleFocus: aTbl_ft_row [
 	treeSingleFocus := aTbl_ft_row.
 	roassalView refresh
+]
+
+{ #category : #api }
+RoassalPresenterModel >> updateInteractionFocus: aCIMNode [
+	listeners
+		do: [ :each | each updateInteractionFocus: aCIMNode ]
 ]
 
 { #category : #'as yet unclassified' }
