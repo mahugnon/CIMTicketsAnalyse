@@ -6,7 +6,8 @@ Class {
 		'menu',
 		'ticketNodesPresenter',
 		'roassalSelectedNodePresenter',
-		'roassalPresenter'
+		'roassalPresenter',
+		'roassalSelectedNodeInfo'
 	],
 	#category : #'CIMTicketsDataModelGui-Gui'
 }
@@ -26,7 +27,11 @@ CIMPresenterGui class >> defaultSpec [
 				add:
 					(SpPanedLayout newHorizontal
 						add: #roassalPresenter;
-						add: #roassalSelectedNodePresenter;
+						add:
+							(SpPanedLayout newVertical
+								add: #roassalSelectedNodePresenter;
+								add: #roassalSelectedNodeInfo;
+								yourself);
 						yourself);
 				yourself);
 		yourself
@@ -55,9 +60,7 @@ CIMPresenterGui >> initializeRoassalPresenter [
 { #category : #initialization }
 CIMPresenterGui >> initializeRoassalSelectedNodePresenter [
 	roassalSelectedNodePresenter := self newTreeTable
-		children: [ :aNode | 
-		
-			aNode content ]
+		children: [ :aNode | aNode content ]
 ]
 
 { #category : #initialization }
@@ -73,7 +76,8 @@ CIMPresenterGui >> initializeWidgets [
 	self initializeTicketsGroupPresenter.
 	self initializeRoassalPresenter.
 	self initializeRoassalSelectedNodePresenter.
-	self initializeMenu
+	self initializeMenu.
+	roassalSelectedNodeInfo := self newText
 ]
 
 { #category : #initialization }
@@ -139,7 +143,5 @@ CIMPresenterGui >> roassaPresenter [
 
 { #category : #api }
 CIMPresenterGui >> updateRoassalFocusNodeWith: aCIMNode [
-	roassalSelectedNodePresenter
-		roots: aCIMNode content;
-		activateOnDoubleClick
+	roassalSelectedNodePresenter roots: {aCIMNode}
 ]

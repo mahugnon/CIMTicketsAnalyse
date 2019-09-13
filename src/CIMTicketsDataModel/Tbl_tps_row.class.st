@@ -39,7 +39,7 @@ Tbl_tps_row >> isDevelopmentTest [
 
 { #category : #testing }
 Tbl_tps_row >> isTest [
-	^ tps_type = '1'
+	^ typeSession isRCTest
 ]
 
 { #category : #accessing }

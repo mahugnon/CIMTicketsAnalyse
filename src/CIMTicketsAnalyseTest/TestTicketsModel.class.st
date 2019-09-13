@@ -98,6 +98,7 @@ TestTicketsModel >> testJoinVersionsToTickets2 [
 TestTicketsModel >> testTicketsDevTpsDev [
 	tps joinTypeSessionToTps: typeSessions.
 	tickets joinTpsDevToTicket: tps.
+	self halt.
 	self
 		assertCollection: tickets rows first devTpsDev
 		hasSameElements: {tps rows last}

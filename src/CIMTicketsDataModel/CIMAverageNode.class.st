@@ -36,7 +36,7 @@ CIMAverageNode >> ticketGroup: anObject [
 
 { #category : #accessing }
 CIMAverageNode >> tickets [
-	^ ticketGroup tickets
+	^ tickets
 ]
 
 { #category : #evaluating }
