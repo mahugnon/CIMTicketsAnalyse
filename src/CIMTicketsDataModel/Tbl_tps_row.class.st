@@ -38,7 +38,8 @@ Tbl_tps_row >> isDevelopmentTest [
 ]
 
 { #category : #testing }
-Tbl_tps_row >> isTest [
+Tbl_tps_row >> isRCTest [
+	typeSession ifNil: [ ^ false ].
 	^ typeSession isRCTest
 ]
 

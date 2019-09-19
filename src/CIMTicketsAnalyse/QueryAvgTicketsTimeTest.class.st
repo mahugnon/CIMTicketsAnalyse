@@ -11,7 +11,7 @@ QueryAvgTicketsTimeTest >> runOn: aTicketGroupNode [
 		ifFalse:
 			(CIMAverageNode new
 				value:
-					(QueryTicketsTimeTest
+					(QueryTicketsTimeRCTest
 						runOn: aTicketGroupNode tickets / aTicketGroupNode size) asFloat;
 				ticketGroup: aTicketGroupNode;
 				yourself)

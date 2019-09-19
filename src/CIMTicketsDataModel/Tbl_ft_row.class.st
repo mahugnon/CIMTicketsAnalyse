@@ -734,6 +734,11 @@ Tbl_ft_row >> numberOfBibliotheques [
 	^ bibliotheques size
 ]
 
+{ #category : #api }
+Tbl_ft_row >> rcTpsTest [
+	^ self timeDev select: #isRCTest
+]
+
 { #category : #initialization }
 Tbl_ft_row >> setModules [
 	modules := Set new.

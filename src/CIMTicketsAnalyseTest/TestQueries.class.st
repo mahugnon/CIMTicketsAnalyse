@@ -98,6 +98,17 @@ self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Da
 ]
 
 { #category : #tests }
+TestQueries >> testQueyTimeRCTest [
+	tps joinTypeSessionToTps: typeSessions.
+	tickets joinTpsDevToTicket: tps.
+	self
+		assert:
+			(QueryTpsRCTest runOn: (CIMTicketGroupNode new tickets: tickets rows))
+				size
+		equals: 1
+]
+
+{ #category : #tests }
 TestQueries >> testScaledAverge [
 	| col scaledAvg |
 	col := OrderedCollection new.

@@ -49,7 +49,7 @@ TestTicketsModel >> testJoinDevToTickets [
 		assert:
 			((tickets joinDevToTicket: devs) rows
 				select: [ :ft | ft dev isNotNil ]) size
-		equals: 2
+		equals: 3
 ]
 
 { #category : #tests }
@@ -58,7 +58,7 @@ TestTicketsModel >> testJoinTpsDevToTicket [
 		assert:
 			((tickets joinTpsDevToTicket: tps) rows collect: #timeDev) flatten
 				size
-		equals: 4
+		equals: 5
 ]
 
 { #category : #tests }
@@ -98,7 +98,6 @@ TestTicketsModel >> testJoinVersionsToTickets2 [
 TestTicketsModel >> testTicketsDevTpsDev [
 	tps joinTypeSessionToTps: typeSessions.
 	tickets joinTpsDevToTicket: tps.
-	self halt.
 	self
 		assertCollection: tickets rows first devTpsDev
 		hasSameElements: {tps rows last}

@@ -63,6 +63,7 @@ CIMAbstractModelTest >> createTestTickets [
 			(Tbl_ft_row new
 				ft_id: '789' , (Character value: 160) asString , '456';
 				ft_typcorr_id: '3';
+				ft_dev_id: '4';
 				yourself)} asOrderedCollection
 ]
 
