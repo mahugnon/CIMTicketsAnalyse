@@ -57,7 +57,8 @@ Class {
 		'modules',
 		'associatedPhysiqueFiles',
 		'modulesFromAssociatedFile',
-		'connectedTickets'
+		'connectedTickets',
+		'tests'
 	],
 	#category : #CIMTicketsDataModel
 }
@@ -676,10 +677,19 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 				ifNone: [ nil ])
 ]
 
+{ #category : #api }
+Tbl_ft_row >> joinTestToTicket: aCollection [
+	tests := aCollection
+		select: [ :test | test test_id = '21' and: test test_id = ft_test_id ]
+]
+
 { #category : #utilites }
 Tbl_ft_row >> joinTpsDevToTicket: aCollection [
 	self
-		timeDev: (aCollection select: [ :aTps | aTps tps_dev_id = self ft_dev_id ])
+		timeDev:
+			(aCollection
+				select:
+					[ :aTps | aTps tps_dev_id ~= '21' and: aTps tps_dev_id = self ft_dev_id ])
 ]
 
 { #category : #utilities }
@@ -747,6 +757,11 @@ Tbl_ft_row >> setModules [
 			bib setModules.
 			modules addAll: bib modules ].
 	^ modules
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> tests [
+	^ tests
 ]
 
 { #category : #accessing }

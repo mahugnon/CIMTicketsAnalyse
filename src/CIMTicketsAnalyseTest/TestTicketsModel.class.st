@@ -53,6 +53,13 @@ TestTicketsModel >> testJoinDevToTickets [
 ]
 
 { #category : #tests }
+TestTicketsModel >> testJoinTestToTicket [
+	self
+		assert: ((tickets joinTestToTicket: tests) rows flatCollect: #tests) size
+		equals: 3
+]
+
+{ #category : #tests }
 TestTicketsModel >> testJoinTpsDevToTicket [
 	self
 		assert:

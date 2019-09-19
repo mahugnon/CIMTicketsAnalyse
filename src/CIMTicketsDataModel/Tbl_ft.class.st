@@ -50,6 +50,11 @@ Tbl_ft >> joinDevToTicket: aTbl_dev [
 	self rows do: [ :ft | ft joinDevToTicket: aTbl_dev rows ]
 ]
 
+{ #category : #api }
+Tbl_ft >> joinTestToTicket: aTbl_test [
+	rows do: [ :row | row joinTestToTicket: aTbl_test rows ]
+]
+
 { #category : #utilities }
 Tbl_ft >> joinTpsDevToTicket: aTbl_Tps [
 	rows do: [ :aTicket | aTicket joinTpsDevToTicket: aTbl_Tps rows ]

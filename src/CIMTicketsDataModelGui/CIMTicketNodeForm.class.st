@@ -121,3 +121,17 @@ CIMTicketNodeForm >> initializeWidgets [
 		yourself.
 	libraryValue := self newLabel
 ]
+
+{ #category : #accessing }
+CIMTicketNodeForm >> updateValues [
+	creationDateValue
+		label:
+			('Ticket numero ' , model ft_numordre , ' crée le '
+				, model ft_datecrea).
+		 closingDateValue label: model monthClosing asString .
+		 totalTimeSpentValue label: model totalTps asString.
+				timeDevDevValue label: model devTpsDev asString.
+				 timeDevTestValue label: model devTpsTest asString .
+				timeTestValue  label: model 
+				
+]

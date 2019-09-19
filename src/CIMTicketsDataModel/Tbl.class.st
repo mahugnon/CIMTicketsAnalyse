@@ -80,7 +80,9 @@ Tbl class >> joinTables [
 		model: tbl_ft;
 		connectAllLinkedTickets.
 	tbl_tps joinTypeSessionToTps: tbl_type_session.
-	tbl_ft joinTpsDevToTicket: tbl_tps 
+	tbl_ft joinTpsDevToTicket: tbl_tps .
+	tbl_test joinTpsToTest: tbl_tps.
+	tbl_ft joinTestToTicket: tbl_test.
 ]
 
 { #category : #initialization }

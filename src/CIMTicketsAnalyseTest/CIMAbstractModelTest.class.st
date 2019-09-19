@@ -66,6 +66,7 @@ CIMAbstractModelTest >> createTestTickets [
 				ft_typcorr_id: '4';
 				ft_modif_id: '280 821';
 				ft_version_id: '8';
+				ft_test_id: '0';
 				yourself).
 			(Tbl_ft_row new
 				ft_id: '123456';
@@ -73,11 +74,13 @@ CIMAbstractModelTest >> createTestTickets [
 				ft_typcorr_id: '2';
 				ft_modif_id: '281 341';
 				ft_version_id: '1';
+				ft_test_id: '1';
 				yourself).
 			(Tbl_ft_row new
 				ft_id: '789' , (Character value: 160) asString , '456';
 				ft_typcorr_id: '3';
 				ft_dev_id: '4';
+				ft_test_id: '2';
 				yourself)} asOrderedCollection
 ]
 
