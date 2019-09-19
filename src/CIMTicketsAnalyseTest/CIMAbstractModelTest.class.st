@@ -8,7 +8,8 @@ Class {
 		'typeSessions',
 		'devs',
 		'typeCorrs',
-		'versions'
+		'versions',
+		'tests'
 	],
 	#category : #CIMTicketsAnalyseTest
 }
@@ -39,6 +40,19 @@ CIMAbstractModelTest >> createTestDevs [
 			(Tbl_dev_row new
 				dev_id: '4';
 				yourself)} asOrderedCollection
+]
+
+{ #category : #running }
+CIMAbstractModelTest >> createTestTest [
+	tests := Tbl_test  new
+		rows:
+			{(Tbl_test_row  new
+				test_id: '0').
+				(Tbl_test_row  new
+				test_id: '1').
+				(Tbl_test_row  new
+				test_id: '2').
+		}
 ]
 
 { #category : #running }
@@ -73,13 +87,16 @@ CIMAbstractModelTest >> createTestTps [
 		rows:
 			{(Tbl_tps_row new
 				tps_dev_id: '1';
-				tps_type: '1').
+				tps_type: '1';
+				tps_test_id: '1').
 			(Tbl_tps_row new
 				tps_dev_id: '2';
-				tps_type: '0').
+				tps_type: '1';
+				tps_test_id: '2').
 			(Tbl_tps_row new
 				tps_dev_id: '3';
-				tps_type: '2').
+				tps_type: '2';
+				tps_test_id: '0').
 			(Tbl_tps_row new
 				tps_dev_id: '4';
 				tps_type: '3').
@@ -114,10 +131,6 @@ CIMAbstractModelTest >> createTestTypeSessions [
 	typeSessions := Tbl_type_session new
 		rows:
 			{(Tbl_type_session_row new
-				typsession_id: '0';
-				typsession_type: '0';
-				typsession_code: 'TD').
-			(Tbl_type_session_row new
 				typsession_id: '1';
 				typsession_type: '0';
 				typsession_code: 'TD').
@@ -161,5 +174,6 @@ CIMAbstractModelTest >> setUp [
 	self createTestTypeSessions.
 	self createTestDevs.
 	self createTestTypCorrs.
-	self createTestVersions
+	self createTestVersions.
+	self createTestTest
 ]

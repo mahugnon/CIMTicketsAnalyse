@@ -10,7 +10,7 @@ TestTpsModel >> testJoinTypeSessionToTps [
 		assert:
 			(((tps joinTypeSessionToTps: typeSessions) rows
 				collectAsSet: #typeSession) reject: #isNil) size
-		equals: 5
+		equals: 4
 ]
 
 { #category : #tests }
@@ -24,9 +24,7 @@ TestTpsModel >> testShouldRecogniseDevTestTps [
 			tps rows second}.
 	self
 		assertCollection: ((tps rows select: #isDevelopmentTest) collect: #typeSession)
-		hasSameElements:
-			{typeSessions rows first.
-			typeSessions rows second}
+		hasSameElements: {typeSessions rows second}
 ]
 
 { #category : #tests }

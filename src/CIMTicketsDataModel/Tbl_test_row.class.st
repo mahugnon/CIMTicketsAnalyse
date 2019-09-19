@@ -16,7 +16,8 @@ Class {
 		'test_ordre',
 		'test_comm_estim',
 		'test_tps_estim',
-		'test_valid_estim'
+		'test_valid_estim',
+		'tps'
 	],
 	#category : #CIMTicketsDataModel
 }
@@ -28,6 +29,11 @@ Tbl_test_row >> initializeWith: aDictionary [
 			self
 				perform: (key asLowercase , ':') asSymbol
 				with: (aDictionary at: key) ]
+]
+
+{ #category : #api }
+Tbl_test_row >> joinTpsToTest: aCollection [
+	tps := aCollection select: [ :tps | tps tps_test_id = test_id ]
 ]
 
 { #category : #accessing }
@@ -178,4 +184,9 @@ Tbl_test_row >> test_valid_estim [
 { #category : #accessing }
 Tbl_test_row >> test_valid_estim: anObject [
 	test_valid_estim := anObject
+]
+
+{ #category : #accessing }
+Tbl_test_row >> tps [
+	^ tps
 ]
