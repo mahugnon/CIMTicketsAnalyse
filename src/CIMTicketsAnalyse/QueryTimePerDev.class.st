@@ -5,16 +5,18 @@ Class {
 }
 
 { #category : #running }
-QueryTimePerDev >> runOn: aDictionary [
+QueryTimePerDev >> runOn: aCollection [
 	"I receive a time serie dictionary"
 
-	^ (aDictionary keys
-		collect: [ :key | 
-			key
-				->
-					((aDictionary at: key)
+	^ (aCollection
+		collect: [ :node | 
+			CIMMovingAverageNode new
+				averageNodes: node averageNodes;
+				time: node time;
+				value:
+					node value
 						/
 							(QueryNumberOfDeveloppeurForAmonth new
-								runOn: (Tbl izyDevs) rows
-								for: key)) ]) asOrderedDictionary
+								runOn: Tbl tbl_devizy rows
+								for: node time) ]) asOrderedCollection
 ]

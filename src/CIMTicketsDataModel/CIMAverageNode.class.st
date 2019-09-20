@@ -2,8 +2,8 @@ Class {
 	#name : #CIMAverageNode,
 	#superclass : #CIMTicketGroupNode,
 	#instVars : [
-		'value',
-		'ticketGroup'
+		'ticketGroup',
+		'value'
 	],
 	#category : #CIMTicketsDataModel
 }

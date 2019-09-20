@@ -15,11 +15,10 @@ QueryAvgTimeToOpenCloseTicket >> runOn: aTicketGroup [
 		value:
 			(aTicketGroup tickets
 				ifEmpty: [ 0 ]
-				ifNotEmpty:
-					((aTicketGroup tickets
+				ifNotEmpty: [ ((aTicketGroup tickets
 						inject: 0
 						into:
 							[ :sum :aTicket | sum + (QueryDurationBetweenOpenAndCloseTicket new runOn: aTicket) ])
-						/ aTicketGroup size) asFloat);
+						/ aTicketGroup size) asFloat ]);
 		ticketGroup: aTicketGroup
 ]
