@@ -18,7 +18,7 @@ RoassalPresenterModel >> addListener: aListener [
 { #category : #'as yet unclassified' }
 RoassalPresenterModel >> avgDevInterventionPerMonth: selectQuery [
 	^ QueryNumberOfDevInterventionPerMonth new
-		devs: Tbl izyDevs rows;
+		devs: Tbl tbl_devizy rows;
 		runOn: (self ticketsPerMonth: selectQuery)
 ]
 
@@ -56,7 +56,7 @@ RoassalPresenterModel >> datawithCloseDate [
 { #category : #initialization }
 RoassalPresenterModel >> initialize [
 	listeners := OrderedCollection new.
-	modelData := CIMTicketGroupNode new
+	modelData := CIMTicketGroupNode new tickets: Tbl tbl_ft rows
 ]
 
 { #category : #accessing }

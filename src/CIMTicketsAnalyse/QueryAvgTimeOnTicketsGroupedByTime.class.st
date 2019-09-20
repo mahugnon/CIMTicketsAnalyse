@@ -5,9 +5,10 @@ Class {
 }
 
 { #category : #running }
-QueryAvgTimeOnTicketsGroupedByTime >> runOn: aDictionary [
-	^ (aDictionary keys
-		collect:
-			[ :key | key -> (QueryAvgTimeOnTickets  runOn: (aDictionary at: key)) ])
-		asOrderedDictionary
+QueryAvgTimeOnTicketsGroupedByTime >> runOn: aCollection [
+	^ (aCollection
+		collect: [ :groupNode | 
+			CIMAverageNode new
+				value: (QueryAvgTimeOnTickets runOn: groupNode tickets);
+				tickets: groupNode tickets ]) asOrderedDictionary
 ]
