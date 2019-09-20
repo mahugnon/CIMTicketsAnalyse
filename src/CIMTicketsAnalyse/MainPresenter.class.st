@@ -165,7 +165,7 @@ MainPresenter >> drawAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 { #category : #'as yet unclassified' }
 MainPresenter >> drawAvgTimeSpentAndTimeEstim [
 	<script: 'MainPresenter new drawAvgTimeSpentAndTimeEstim open'>
-	^ DoubleChart  new
+	^ DoubleChart new
 		yFormateur: CIMHourFormater new;
 		timeSerie:
 			(QueryMovingAverage
@@ -175,7 +175,11 @@ MainPresenter >> drawAvgTimeSpentAndTimeEstim [
 							(QueryTicketPerMonthClosing new
 								fillGaps: true;
 								ordered: true;
-								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+								runOn:
+									(QueryClosed
+										runOn:
+											(QueryCleanData
+												runOn: (CIMTicketGroupNode new tickets: Tbl allTickets))))));
 		secondTimeSerie:
 			(QueryMovingAverage
 				runOn:
@@ -184,7 +188,11 @@ MainPresenter >> drawAvgTimeSpentAndTimeEstim [
 							(QueryTicketPerMonthClosing new
 								fillGaps: true;
 								ordered: true;
-								runOn: (QueryClosed runOn: (QueryCleanData runOn: Tbl allTickets)))));
+								runOn:
+									(QueryClosed
+										runOn:
+											(QueryCleanData
+												runOn: (CIMTicketGroupNode new tickets: Tbl allTickets))))));
 		draw
 ]
 
