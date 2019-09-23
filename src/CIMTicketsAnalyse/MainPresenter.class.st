@@ -64,17 +64,18 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 	timeSeries := (model
 		avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery)
 		reject: [ :serie | serie asString = '-125526.52173913' ].
-	data1 := QueryCutTimeSerie new
+	"data1 := QueryCutTimeSerie new
 		cut: timeSeries
 		before: (Date asMonth: 05 inYear: 2013).
 	data2 := QueryCutTimeSerie new
 		cut: timeSeries
-		after: (Date asMonth: 05 inYear: 2013).
+		after: (Date asMonth: 05 inYear: 2013)."
 	^ DrawMultiLinearRegressionOnChart new
 		timeSerie: timeSeries;
 		drawWithRegressionIntervall:
-			{data1.
-			data2}
+			(QuerySplitTicketNodeByTime new
+				month: (Date asMonth: 05 inYear: 2013);
+				runOn: timeSeries)
 ]
 
 { #category : #'as yet unclassified' }

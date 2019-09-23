@@ -66,7 +66,6 @@ LineChart >> draw [
 	ds points: timeSerie.
 	ds y: [ :aNode | aNode value - yTranslation ].
 	ds label: label.
-	"ds interaction popup text: [ :elt | self popupTextOn: elt ]."
 	graphic add: ds.
 	graphic
 		add: (self linearRegressionDataSetOn: timeSerie color: Color lightBrown).
@@ -84,7 +83,8 @@ LineChart >> draw [
 				ifTrue: [ '' ]
 				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
 	"b legend."
-	^ graphic
+	graphic build.
+	^ graphic view
 ]
 
 { #category : #'drawing-general' }
