@@ -1,6 +1,6 @@
 Class {
 	#name : #RISetYourModelWhenMouseClick,
-	#superclass : #RTGrapherInteraction,
+	#superclass : #AnObsoleteRTGrapherInteraction,
 	#instVars : [
 		'model'
 	],

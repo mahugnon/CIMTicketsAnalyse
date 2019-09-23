@@ -13,12 +13,14 @@ QueryNumberOfDevInterventionPerMonth >> devs: aTbl_devIzy [
 ]
 
 { #category : #running }
-QueryNumberOfDevInterventionPerMonth >> runOn: aDictionary [
-	^ (aDictionary keys
-		collect: [ :key | 
-			key
-				->
-					((aDictionary at: key) size
-						/ (QueryNumberOfDeveloppeurForAmonth new runOn: devs for: key)) ])
-		asOrderedDictionary
+QueryNumberOfDevInterventionPerMonth >> runOn: aCollection [
+	^ (aCollection
+		collect: [ :each | 
+			CIMAverageNode new
+				time: each time;
+				tickets: each tickets;
+				value:
+					each tickets size
+						/ (QueryNumberOfDeveloppeurForAmonth new runOn: devs for: each time) ])
+		asOrderedCollection
 ]

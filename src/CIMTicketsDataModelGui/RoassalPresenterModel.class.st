@@ -97,7 +97,7 @@ RoassalPresenterModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: sel
 	dataSet := QueryMovingAverage new
 		runOn:
 			(QueryNumberOfDevInterventionPerMonth new
-				devs: Tbl izyDevs rows;
+				devs: Tbl tbl_devizy rows;
 				runOn: (self ticketsPerMonth: selectQuery)).
 	^ {dataSet.
 	(QueryCutTimeSerie new

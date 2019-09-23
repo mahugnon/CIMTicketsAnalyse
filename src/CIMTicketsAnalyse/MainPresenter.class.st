@@ -640,7 +640,11 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 								ordered: true;
 								runOn:
 									(QueryClosed
-										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))));
+										runOn:
+											(QueryBugs
+												runOn:
+													(QueryCleanData
+														runOn: (CIMTicketGroupNode new tickets: Tbl allTickets)))))));
 		draw
 ]
 
@@ -666,7 +670,11 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 								ordered: true;
 								runOn:
 									(QueryClosed
-										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets))))));
+										runOn:
+											(QueryEvolutions
+												runOn:
+													(QueryCleanData
+														runOn: (CIMTicketGroupNode new tickets: Tbl allTickets)))))));
 		draw
 ]
 
