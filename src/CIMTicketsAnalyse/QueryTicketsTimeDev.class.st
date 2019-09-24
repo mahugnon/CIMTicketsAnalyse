@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #running }
-QueryTicketsTimeDev >> runOn: aCollection [
-	^ aCollection
+QueryTicketsTimeDev >> runOn: aTicketGroupNode [
+	^ aTicketGroupNode tickets
 		inject: 0
 		into: [ :sum :ticket | sum + (QueryTicketTimeDev new runOn: ticket) ]
 ]

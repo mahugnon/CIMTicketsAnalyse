@@ -45,6 +45,11 @@ CIMTicketGroupNode >> initialize [
 	tickets := OrderedCollection new
 ]
 
+{ #category : #api }
+CIMTicketGroupNode >> isEmpty [
+	^ tickets isEmpty
+]
+
 { #category : #testing }
 CIMTicketGroupNode >> isEmptyNode [
 	^ self content isEmpty

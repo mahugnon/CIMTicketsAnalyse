@@ -21,6 +21,11 @@ Tbl_tps_row >> convertTpsTempsToDuration [
 	tps_temps := CIMDateFormatConverter convert: tps_temps
 ]
 
+{ #category : #api }
+Tbl_tps_row >> hasTypSession [
+	^ typeSession isNotNil
+]
+
 { #category : #initialization }
 Tbl_tps_row >> initializeWith: arg1 [
 	super initializeWith: arg1.
@@ -29,7 +34,9 @@ Tbl_tps_row >> initializeWith: arg1 [
 
 { #category : #testing }
 Tbl_tps_row >> isDevelopment [
-	^ typeSession isDevelopment
+	^ self hasTypSession
+		ifTrue: [ typeSession isDevelopment ]
+		ifFalse: [ false ]
 ]
 
 { #category : #testing }
