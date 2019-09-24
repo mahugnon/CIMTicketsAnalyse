@@ -14,7 +14,7 @@ Tbl_Module class >> allModules [
 	('Bordereau'
 		->
 			#('cwm_brd_dw_1.pbl.src' 'Cwm_brd.pbl.src' 'cwm_brd_dw_2.pbl.src' 'cwm_brd_uo.pbl.src' 'cwm_xxx_dw.pbl.src' 'cwm_xxx_dw_2.pbl.src' 'cwm_xxx_dw_3.pbl.src')).
-	('CartierPayant'
+	('QuartTierPayant'
 		-> #('cwm_tpy.pbl.src' 'cwm_tpy_dw.pbl.src' 'cwm_tpy_uo.pbl.src')).
 	('Commun'
 		->
@@ -45,15 +45,17 @@ Tbl_Module class >> allModules [
 
 { #category : #operations }
 Tbl_Module class >> create [
+	| module |
 	^ self new
 		rows:
 			(self modulesAsLowercase associations
 				collect: [ :assoc | 
-					Tbl_Module_row new
+					module := Tbl_Module_row new
 						nom: assoc key;
 						setBibliotheques;
-						setTickets;
-						yourself ]) asOrderedCollection;
+						yourself.
+					Tbl tbl_ft setModules.
+					module setTickets ]) asOrderedCollection;
 		yourself
 ]
 
@@ -82,7 +84,13 @@ Tbl_Module >> copyDirectory: sourceLib to: destLib [
 ]
 
 { #category : #api }
-Tbl_Module >> createModulesFrom: sourceFolder to: destinationFolder [
+Tbl_Module >> getModuleLibrary: moduleName from: libraries [
+	^ libraries
+		select: [ :b | (self class allModules at: moduleName) includes: b basename ]
+]
+
+{ #category : #api }
+Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 	| destinationFolderReference |
 	destinationFolderReference := destinationFolder asFileReference
 		ensureCreateDirectory.
@@ -100,15 +108,13 @@ Tbl_Module >> createModulesFrom: sourceFolder to: destinationFolder [
 					self copyDirectory: sourceLib to: destLib ] ]
 ]
 
-{ #category : #api }
-Tbl_Module >> getModuleLibrary: moduleName from: libraries [
-	^ libraries
-		select: [ :b | (self class allModules at: moduleName) includes: b basename ]
+{ #category : #utility }
+Tbl_Module >> rowClass [
+	^ Tbl_Module_row
 ]
 
 { #category : #initialization }
-Tbl_Module >> initialize [
-	super initialize.
+Tbl_Module >> setRows [
 	rows := (self class modulesAsLowercase keys
 		collect: [ :moduleNom | 
 			self rowClass new
@@ -116,9 +122,4 @@ Tbl_Module >> initialize [
 				setTickets;
 				setBibliotheques;
 				yourself ]) asOrderedCollection
-]
-
-{ #category : #utility }
-Tbl_Module >> rowClass [
-	^ Tbl_Module_row
 ]

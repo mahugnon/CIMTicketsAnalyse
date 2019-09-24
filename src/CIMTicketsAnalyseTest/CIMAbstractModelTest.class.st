@@ -9,7 +9,8 @@ Class {
 		'devs',
 		'typeCorrs',
 		'versions',
-		'tests'
+		'tests',
+		'modules'
 	],
 	#category : #CIMTicketsAnalyseTest
 }
@@ -40,6 +41,15 @@ CIMAbstractModelTest >> createTestDevs [
 			(Tbl_dev_row new
 				dev_id: '4';
 				yourself)} asOrderedCollection
+]
+
+{ #category : #running }
+CIMAbstractModelTest >> createTestModule [
+	modules := Tbl_Module new
+		rows:
+			{(Tbl_Module_row new nom: 'Prestation').
+			(Tbl_Module_row new nom: 'Bordereau').
+			(Tbl_Module_row new nom: 'Cotisation')}
 ]
 
 { #category : #running }
@@ -178,5 +188,6 @@ CIMAbstractModelTest >> setUp [
 	self createTestDevs.
 	self createTestTypCorrs.
 	self createTestVersions.
-	self createTestTest
+	self createTestTest.
+	self createTestModule
 ]

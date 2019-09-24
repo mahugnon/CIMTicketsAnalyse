@@ -90,7 +90,7 @@ Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 	Tbl new loadTblFromFolder: ficheNavettePath.
 	self joinTables
 	"tbl_biblio
-		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath)"
+		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: '/Users/honore/Documents/Resources/utility/bibiothequeNames')"
 ]
 
 { #category : #accessing }

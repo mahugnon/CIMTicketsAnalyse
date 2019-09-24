@@ -15,6 +15,11 @@ Tbl_biblio >> interestingBibliotheques [
 	^ rows select: #isInterestingBibliotheque
 ]
 
+{ #category : #api }
+Tbl_biblio >> joinModulesToLibrary [
+	self rows do: [ :bib | bib joinModulesToLibrary ]
+]
+
 { #category : #utilities }
 Tbl_biblio >> joinTicketsToBib: aTbl_ft [
 	self rows do: [ :bib | bib joinTicketsToBib: aTbl_ft rows ]
