@@ -22,14 +22,15 @@ Class {
 		'tbl_type_session',
 		'tbl_version',
 		'tbl_test',
-		'tbl_version_news'
+		'tbl_version_news',
+		'tbl_Module'
 	],
 	#category : #CIMTicketsDataModel
 }
 
 { #category : #'as yet unclassified' }
 Tbl class >> allBibliotheques [
-	^ self tables first rows
+	^ self tbl_biblio rows
 ]
 
 { #category : #accessing }
@@ -80,17 +81,20 @@ Tbl class >> joinTables [
 		model: tbl_ft;
 		connectAllLinkedTickets.
 	tbl_tps joinTypeSessionToTps: tbl_type_session.
-	tbl_ft joinTpsDevToTicket: tbl_tps .
+	tbl_ft joinTpsDevToTicket: tbl_tps.
 	tbl_test joinTpsToTest: tbl_tps.
 	tbl_ft joinTestToTicket: tbl_test.
+	Tbl tbl_biblio joinModulesToLibrary.
+	Tbl tbl_ft joinModulesToTickets
 ]
 
 { #category : #initialization }
 Tbl class >> setUpTablesWith: ficheNavettePath and: biblioNamesPath [
 	Tbl new loadTblFromFolder: ficheNavettePath.
-	self joinTables
-	"tbl_biblio
-		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: '/Users/honore/Documents/Resources/utility/bibiothequeNames')"
+	tbl_biblio
+		renameUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
+	self joinTables.
+	Tbl_Module create
 ]
 
 { #category : #accessing }
@@ -101,6 +105,16 @@ Tbl class >> tables [
 { #category : #accessing }
 Tbl class >> tables: anObject [
 	tables := anObject
+]
+
+{ #category : #accessing }
+Tbl class >> tbl_Module [
+	^ tbl_Module
+]
+
+{ #category : #accessing }
+Tbl class >> tbl_Module: aTbl_Module [
+	tbl_Module := aTbl_Module
 ]
 
 { #category : #accessing }

@@ -677,6 +677,13 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 				ifNone: [ nil ])
 ]
 
+{ #category : #initialization }
+Tbl_ft_row >> joinModulesToTickets [
+	modules := Set new.
+	bibliotheques do: [ :bib | modules addAll: bib modules ].
+	^ modules
+]
+
 { #category : #api }
 Tbl_ft_row >> joinTestToTicket: aCollection [
 	tests := aCollection
@@ -748,16 +755,6 @@ Tbl_ft_row >> numberOfBibliotheques [
 Tbl_ft_row >> rcTpsTest [
 	^ (tests flatCollect: #tps)
 		reject: [ :each | each tps_test_id = '21' ]
-]
-
-{ #category : #initialization }
-Tbl_ft_row >> setModules [
-	modules := Set new.
-	bibliotheques
-		do: [ :bib | 
-			bib setModules.
-			modules addAll: bib modules ].
-	^ modules
 ]
 
 { #category : #accessing }

@@ -133,7 +133,12 @@ Tbl_biblio_row >> isInterestingBibliotheque [
 
 { #category : #api }
 Tbl_biblio_row >> joinModulesToLibrary [
-	self setModules
+	self joinModulesToTickets
+]
+
+{ #category : #initialization }
+Tbl_biblio_row >> joinModulesToTickets [
+	modules := Tbl_Module selectModuleFor: biblio_nom , '.pbl.src'
 ]
 
 { #category : #utilities }
@@ -155,11 +160,6 @@ Tbl_biblio_row >> renameUsing: aCollection [
 				anySatisfy: [ :e | e asLowercase = biblio_nom asLowercase ] ]
 		ifFound: [ :elt | biblio_nom := elt key ]
 		ifNone: [ biblio_nom ]
-]
-
-{ #category : #initialization }
-Tbl_biblio_row >> setModules [
-	modules := Tbl_Module selectModuleFor: biblio_nom , '.pbl.src'
 ]
 
 { #category : #accessing }

@@ -45,18 +45,18 @@ Tbl_Module class >> allModules [
 
 { #category : #operations }
 Tbl_Module class >> create [
-	| module |
-	^ self new
-		rows:
-			(self modulesAsLowercase associations
-				collect: [ :assoc | 
-					module := Tbl_Module_row new
-						nom: assoc key;
-						setBibliotheques;
-						yourself.
-					Tbl tbl_ft setModules.
-					module setTickets ]) asOrderedCollection;
-		yourself
+	Tbl
+		tbl_Module:
+			(self new
+				rows:
+					(self modulesAsLowercase associations
+						collect: [ :assoc | 
+							Tbl_Module_row new
+								nom: assoc key;
+								joinLibrariesToModule;
+								joinTicketsToModules;
+								yourself ]) asOrderedCollection;
+				yourself)
 ]
 
 { #category : #utility }
@@ -119,7 +119,7 @@ Tbl_Module >> setRows [
 		collect: [ :moduleNom | 
 			self rowClass new
 				nom: moduleNom;
-				setTickets;
-				setBibliotheques;
+				joinTicketsToModules;
+				joinLibrariesToModule;
 				yourself ]) asOrderedCollection
 ]

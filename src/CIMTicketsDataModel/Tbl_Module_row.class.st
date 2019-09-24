@@ -9,20 +9,20 @@ Class {
 	#category : #CIMTicketsDataModel
 }
 
-{ #category : #accessing }
-Tbl_Module_row >> nom: aString [
-	nom := aString
-]
-
 { #category : #initialization }
-Tbl_Module_row >> setBibliotheques [
+Tbl_Module_row >> joinLibrariesToModule [
 	bibliotheques := (Tbl allBibliotheques
 		select: [ :bib | bib modules includes: nom ]) asOrderedCollection
 ]
 
 { #category : #initialization }
-Tbl_Module_row >> setTickets [
+Tbl_Module_row >> joinTicketsToModules [
 	tickets := (Tbl allTickets
 		select: [ :ticket | ticket modules includes: nom ])
 		asOrderedCollection
+]
+
+{ #category : #accessing }
+Tbl_Module_row >> nom: aString [
+	nom := aString
 ]

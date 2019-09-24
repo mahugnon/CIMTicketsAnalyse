@@ -20,6 +20,11 @@ Tbl_biblio >> joinModulesToLibrary [
 	self rows do: [ :bib | bib joinModulesToLibrary ]
 ]
 
+{ #category : #initialization }
+Tbl_biblio >> joinModulesToTickets [
+	self rows do: #joinModulesToTickets
+]
+
 { #category : #utilities }
 Tbl_biblio >> joinTicketsToBib: aTbl_ft [
 	self rows do: [ :bib | bib joinTicketsToBib: aTbl_ft rows ]
@@ -33,9 +38,4 @@ Tbl_biblio >> renameUsing: aCollection [
 { #category : #utility }
 Tbl_biblio >> rowClass [
 	^ Tbl_biblio_row
-]
-
-{ #category : #initialization }
-Tbl_biblio >> setModules [
-	self rows do: #setModules
 ]

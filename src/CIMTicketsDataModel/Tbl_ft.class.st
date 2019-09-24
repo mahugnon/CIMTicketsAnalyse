@@ -50,6 +50,11 @@ Tbl_ft >> joinDevToTicket: aTbl_dev [
 	self rows do: [ :ft | ft joinDevToTicket: aTbl_dev rows ]
 ]
 
+{ #category : #initialization }
+Tbl_ft >> joinModulesToTickets [
+	^ rows do: #joinModulesToTickets
+]
+
 { #category : #api }
 Tbl_ft >> joinTestToTicket: aTbl_test [
 	rows do: [ :row | row joinTestToTicket: aTbl_test rows ]
@@ -79,9 +84,4 @@ Tbl_ft >> keepInterestingBibliotheques [
 { #category : #utilities }
 Tbl_ft >> rowClass [
 	^ Tbl_ft_row
-]
-
-{ #category : #initialization }
-Tbl_ft >> setModules [
-	^ rows do: #setModules
 ]

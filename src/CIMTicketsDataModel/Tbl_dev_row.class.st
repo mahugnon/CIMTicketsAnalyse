@@ -116,7 +116,7 @@ Tbl_dev_row >> dev_fin [
 
 { #category : #accessing }
 Tbl_dev_row >> dev_fin: arg1 [
-	dev_fin := arg1
+	dev_fin := arg1 asDate
 ]
 
 { #category : #accessing }
