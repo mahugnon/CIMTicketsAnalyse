@@ -100,12 +100,14 @@ self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Da
 { #category : #tests }
 TestQueries >> testQueyTimeRCTest [
 	tps joinTypeSessionToTps: typeSessions.
-	tickets joinTpsDevToTicket: tps.
+	"tickets joinTpsDevToTicket: tps."
+	tickets joinTestToTicket: tests.
+	tests joinTpsToTest: tps.
 	self
 		assert:
 			(QueryTpsRCTest runOn: (CIMTicketGroupNode new tickets: tickets rows))
 				size
-		equals: 1
+		equals: 3
 ]
 
 { #category : #tests }

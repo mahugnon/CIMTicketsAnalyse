@@ -746,7 +746,8 @@ Tbl_ft_row >> numberOfBibliotheques [
 
 { #category : #api }
 Tbl_ft_row >> rcTpsTest [
-	^ (tests collect: #tps) reject: [ :each | each tps_test_id = '21' ]
+	^ (tests flatCollect: #tps)
+		reject: [ :each | each tps_test_id = '21' ]
 ]
 
 { #category : #initialization }
