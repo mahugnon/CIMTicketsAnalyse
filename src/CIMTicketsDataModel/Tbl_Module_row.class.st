@@ -9,6 +9,16 @@ Class {
 	#category : #CIMTicketsDataModel
 }
 
+{ #category : #accessing }
+Tbl_Module_row >> bibliotheques [
+	^ bibliotheques
+]
+
+{ #category : #accessing }
+Tbl_Module_row >> bibliotheques: anObject [
+	bibliotheques := anObject
+]
+
 { #category : #initialization }
 Tbl_Module_row >> joinLibrariesToModule [
 	bibliotheques := (Tbl allBibliotheques
@@ -23,6 +33,21 @@ Tbl_Module_row >> joinTicketsToModules [
 ]
 
 { #category : #accessing }
+Tbl_Module_row >> nom [
+	^ nom
+]
+
+{ #category : #accessing }
 Tbl_Module_row >> nom: aString [
 	nom := aString
+]
+
+{ #category : #accessing }
+Tbl_Module_row >> tickets [
+	^ tickets
+]
+
+{ #category : #accessing }
+Tbl_Module_row >> tickets: anObject [
+	tickets := anObject
 ]
