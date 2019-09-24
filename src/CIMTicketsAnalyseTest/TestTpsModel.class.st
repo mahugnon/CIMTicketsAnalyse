@@ -24,7 +24,7 @@ TestTpsModel >> testShouldRecogniseDevTestTps [
 			tps rows second}.
 	self
 		assertCollection: ((tps rows select: #isDevelopmentTest) collect: #typeSession)
-		hasSameElements: {typeSessions rows second}
+		hasSameElements: {typeSessions rows first}
 ]
 
 { #category : #tests }
@@ -40,6 +40,6 @@ TestTpsModel >> testSouldRecogniseDevTps [
 	self
 		assertCollection: ((tps rows select: #isDevelopment) collectAsSet: #typeSession)
 		hasSameElements:
-			{typeSessions rows third.
-			typeSessions rows fifth}
+			{typeSessions rows second.
+			typeSessions rows fourth}
 ]

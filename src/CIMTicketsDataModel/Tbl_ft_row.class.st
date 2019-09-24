@@ -680,7 +680,7 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 { #category : #api }
 Tbl_ft_row >> joinTestToTicket: aCollection [
 	tests := aCollection
-		select: [ :test | test test_id = '21' and: test test_id = ft_test_id ]
+		select: [ :test | test test_id ~= '21' and: test test_id = ft_test_id ]
 ]
 
 { #category : #utilites }
