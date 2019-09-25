@@ -5,7 +5,7 @@ Class {
 		'roassalRender',
 		'model'
 	],
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-roassal'
 }
 
 { #category : #'as yet unclassified' }
@@ -16,7 +16,7 @@ CIMWebRoassalChart >> buildRoassalView [
 { #category : #initialization }
 CIMWebRoassalChart >> initialize [
 	super initialize.
-	model := WebComponentModel new
+	model := CIMWebAbstractModel new
 ]
 
 { #category : #'as yet unclassified' }

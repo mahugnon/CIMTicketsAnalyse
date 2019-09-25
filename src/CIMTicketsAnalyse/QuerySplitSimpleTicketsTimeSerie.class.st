@@ -1,6 +1,9 @@
 Class {
 	#name : #QuerySplitSimpleTicketsTimeSerie,
 	#superclass : #Object,
+	#instVars : [
+		'month'
+	],
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
@@ -10,6 +13,11 @@ QuerySplitSimpleTicketsTimeSerie >> lowerToMonth: aDictionary [
 		select: [ :key | key asSeconds <= month asSeconds ])
 		collect: [ :key | key -> (aDictionary at: key) ])
 		asOrderedDictionary
+]
+
+{ #category : #accessing }
+QuerySplitSimpleTicketsTimeSerie >> month: aMonth [
+	month := aMonth
 ]
 
 { #category : #running }

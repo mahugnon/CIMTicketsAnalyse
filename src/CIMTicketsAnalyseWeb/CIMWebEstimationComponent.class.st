@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-WebComponents'
 }
 
 { #category : #initialization }

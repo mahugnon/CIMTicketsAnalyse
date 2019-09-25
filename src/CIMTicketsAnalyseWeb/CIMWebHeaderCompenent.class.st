@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMWebHeaderCompenent,
 	#superclass : #WAComponent,
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-WebComponents'
 }
 
 { #category : #rendering }

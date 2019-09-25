@@ -819,7 +819,12 @@ Tbl_ft_row >> versions: anObject [
 	versions := anObject
 ]
 
+{ #category : #API }
+Tbl_ft_row >> yearClosing [
+	^ self dev yearClosing
+]
+
 { #category : #accessing }
-Tbl_ft_row >> year [
-	^ self ft_datecrea year
+Tbl_ft_row >> yearCreation [
+	^ self ft_datecrea yearCreation
 ]

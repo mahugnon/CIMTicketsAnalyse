@@ -4,14 +4,8 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-WebComponents'
 }
-
-{ #category : #rendering }
-CIMWebModulesComponent >> descriptionOn: html [
-	html div
-		with: [ html mdlTextFieldLabel: 'Time on bugs spent per modules' ]
-]
 
 { #category : #accessing }
 CIMWebModulesComponent >> model [
@@ -27,9 +21,9 @@ CIMWebModulesComponent >> model: anObject [
 CIMWebModulesComponent >> renderContentOn: html [
 	| chartData |
 	chartData := (Chart1dData values: model percentModuleBugsTime)
+		title: 'Time on bugs spent per modules';
 		singleValueTooltip: '<key> has <value>% of total time spent on IzyProtect';
 		chartType: ChartPie;
 		yourself.
-	self descriptionOn: html.
 	html render: (ChartJsComponent data: chartData)
 ]

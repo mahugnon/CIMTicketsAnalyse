@@ -5,7 +5,7 @@ Class {
 		'title',
 		'model'
 	],
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-WebComponents'
 }
 
 { #category : #accessing }
@@ -16,7 +16,7 @@ CIMWebAbstractChartComponent >> description [
 { #category : #initialization }
 CIMWebAbstractChartComponent >> initialize [
 	super initialize.
-	model := WebComponentModel new
+	model := CIMWebAbstractModel new
 ]
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMWebEstimationModel,
 	#superclass : #CIMWebAbstractModel,
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-models'
 }
 
 { #category : #'as yet unclassified' }

@@ -8,7 +8,7 @@ Class {
 		'timeSpentPerTicketChart',
 		'timeSpentCharts'
 	],
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-WebComponents'
 }
 
 { #category : #hooks }

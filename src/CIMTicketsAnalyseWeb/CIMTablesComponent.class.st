@@ -1,5 +1,5 @@
 Class {
 	#name : #CIMTablesComponent,
 	#superclass : #WAComponent,
-	#category : #CIMTicketsAnalyseWeb
+	#category : #'CIMTicketsAnalyseWeb-WebComponents'
 }

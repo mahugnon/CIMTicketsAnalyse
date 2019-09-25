@@ -308,7 +308,10 @@ Tbl_dev_row >> initializeWith: arg1 [
 
 { #category : #API }
 Tbl_dev_row >> monthClosing [
-	^ self dateClosing
-	ifNil: [ nil ]
-	ifNotNil: [ :dt | dt month]
+	^ self dateClosing ifNil: [ nil ] ifNotNil: [ :dt | dt month ]
+]
+
+{ #category : #API }
+Tbl_dev_row >> yearClosing [
+	^ self dateClosing ifNil: [ nil ] ifNotNil: [ :dt | dt year ]
 ]
