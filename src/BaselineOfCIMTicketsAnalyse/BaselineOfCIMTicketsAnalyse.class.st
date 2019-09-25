@@ -24,7 +24,7 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 					with: [ spec
 						requires:
 							#('CIMTicketsDataModel' 'PolyMath' 'CIMTicketsDataModelUtils' 'CIMTicketsAnalyseTest') ];
-				package: 'CIMTicketsAnalyseWeb '
+				package: 'CIMTicketsAnalyseWeb'
 					with: [ spec
 						requires: #('ChartJs' 'CIMTicketsAnalyse' 'MaterialDesignLite' 'Seaside3') ] ]
 ]
