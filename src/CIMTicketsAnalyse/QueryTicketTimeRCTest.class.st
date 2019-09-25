@@ -6,7 +6,7 @@ Class {
 
 { #category : #running }
 QueryTicketTimeRCTest >> runOn: aTicket [
-	^ (aTicket timeDev select: [ :t | t isTest ])
+	^ aTicket rcTpsTest
 		inject: 0
-		into: [ :sum :aTimeDv | sum + aTimeDv tps_temps totalSeconds ]
+		into: [ :sum :tps | sum + tps tps_temps totalSeconds ]
 ]
