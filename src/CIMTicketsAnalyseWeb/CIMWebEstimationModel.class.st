@@ -7,6 +7,12 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 
+{ #category : #initialization }
+CIMWebEstimationModel >> initialize [
+	super initialize.
+	selectedModule := modules first
+]
+
 { #category : #api }
 CIMWebEstimationModel >> percentBugs [
 	^ self totalBugsTime / self totalTime * 100 asFloat

@@ -66,14 +66,22 @@ CIMWebAbstractModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 
 { #category : #'as yet unclassified' }
 CIMWebAbstractModel >> dataSetForModule: aModule [
-	| bugs evolution |
+	| bugs evolutions x yBugs yEvolutions |
 	bugs := self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs.
-	evolution := self
+	evolutions := self
 		avgTimeDevModulePerYear: aModule
 		selectQuery: QueryEvolutions.
-	^ {(evolution collect: [ :each | each time asString ]).
-	('Bugs' -> (bugs collect: #value)).
-	('Evolutions' -> (evolution collect: #value))} asOrderedCollection
+	yBugs := bugs collect: #value.
+	x := evolutions collect: [ :each | each time asString ].
+	yEvolutions := evolutions collect: #value.
+	bugs size > evolutions size
+		ifTrue: [ x := bugs collect: [ :each | each time asString ].
+			evolutions size + 1 to: bugs size do: [ :i | yEvolutions add: 0 ] ].
+	bugs size < evolutions size
+		ifTrue: [ bugs size + 1 to: evolutions size do: [ :i | yBugs add: 0 ] ].
+	^ {x.
+	('Bugs' -> yBugs).
+	('Evolutions' -> yEvolutions)} asOrderedCollection
 ]
 
 { #category : #'data sets' }

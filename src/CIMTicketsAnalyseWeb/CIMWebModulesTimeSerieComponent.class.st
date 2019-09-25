@@ -58,7 +58,6 @@ CIMWebModulesTimeSerieComponent >> renderContentOn: html [
 								description: 'Modules')
 								sortBlock: [ :a :b | a name < b name ];
 								yourself) ].
-			self halt.
 			html mdlCell
 				size: 12;
 				with: [ self renderOn: html plotFor: model selectedModule ] ]
