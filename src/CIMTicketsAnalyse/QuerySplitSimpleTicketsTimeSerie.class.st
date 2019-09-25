@@ -1,6 +1,6 @@
 Class {
 	#name : #QuerySplitSimpleTicketsTimeSerie,
-	#superclass : #QuerySplitTicketNodeByTime,
+	#superclass : #Object,
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 

@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMWebTimeToOpenCloseEvolutionChart,
 	#superclass : #CIMWebRoassalChart,
-	#category : #CIMTicketsAnalyseWebRoassal
+	#category : #CIMTicketsAnalyseWeb
 }
 
 { #category : #'as yet unclassified' }

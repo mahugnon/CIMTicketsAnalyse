@@ -1,9 +1,6 @@
 Class {
 	#name : #CIMWebAbstractModel,
 	#superclass : #Object,
-	#instVars : [
-		'modules'
-	],
 	#category : #CIMTicketsAnalyseWeb
 }
 

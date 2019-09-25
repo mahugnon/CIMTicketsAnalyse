@@ -5,7 +5,7 @@ Class {
 		'roassalRender',
 		'model'
 	],
-	#category : #CIMTicketsAnalyseWebRoassal
+	#category : #CIMTicketsAnalyseWeb
 }
 
 { #category : #'as yet unclassified' }
