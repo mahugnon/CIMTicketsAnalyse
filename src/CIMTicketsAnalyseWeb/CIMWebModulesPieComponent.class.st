@@ -1,24 +1,24 @@
 Class {
-	#name : #CIMWebModulesComponent,
+	#name : #CIMWebModulesPieComponent,
 	#superclass : #WAComponent,
 	#instVars : [
 		'model'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
 { #category : #accessing }
-CIMWebModulesComponent >> model [
+CIMWebModulesPieComponent >> model [
 	^ model
 ]
 
 { #category : #accessing }
-CIMWebModulesComponent >> model: anObject [
+CIMWebModulesPieComponent >> model: anObject [
 	model := anObject
 ]
 
 { #category : #rendering }
-CIMWebModulesComponent >> renderContentOn: html [
+CIMWebModulesPieComponent >> renderContentOn: html [
 	| chartData |
 	chartData := (Chart1dData values: model percentModuleBugsTime)
 		title: 'Time on bugs spent per modules';

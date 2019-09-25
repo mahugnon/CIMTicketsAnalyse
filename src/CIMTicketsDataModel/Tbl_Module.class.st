@@ -108,6 +108,11 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 					self copyDirectory: sourceLib to: destLib ] ]
 ]
 
+{ #category : #generated }
+Tbl_Module >> names [
+	^ self rows collect: #nom
+]
+
 { #category : #utility }
 Tbl_Module >> rowClass [
 	^ Tbl_Module_row

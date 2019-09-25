@@ -5,7 +5,7 @@ Class {
 		'chartDataSet',
 		'regresions'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsGeneralIzyProtect'
 }
 
 { #category : #accessing }

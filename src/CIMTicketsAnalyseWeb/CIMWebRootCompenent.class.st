@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'main'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
 
 { #category : #testing }

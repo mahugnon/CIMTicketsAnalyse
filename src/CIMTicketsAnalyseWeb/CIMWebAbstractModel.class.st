@@ -3,6 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'modelData',
+		'modulesNamesWithTimeSpent',
 		'modules'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
@@ -21,12 +22,27 @@ CIMWebAbstractModel >> avgNodesToDic: aCollection [
 		asOrderedDictionary
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> avgTimeDevModulePerYear: aModule selectQuery: selectQuery [
+	^ self
+		avgTimeDevTicketsPerYear: selectQuery
+		for: (CIMTicketGroupNode new tickets: aModule tickets)
+]
+
 { #category : #'data sets' }
 CIMWebAbstractModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
 				runOn: (selectQuery runOn: self datawithCloseDate))
+]
+
+{ #category : #'data sets' }
+CIMWebAbstractModel >> avgTimeDevTicketsPerYear: selectQuery for: aCIMTicketGroup [
+	^ QueryAvgTimeDevGroupedByTime new
+		runOn:
+			(QueryTicketPerYearClosing new
+				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
 ]
 
 { #category : #'as yet unclassified' }
@@ -37,8 +53,8 @@ CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery 
 				runOn:
 					(QueryTicketPerMonthClosing new
 						runOn:
-							(QueryClosed
-								runOn: (QueryRejectNilEstimation runOn: (selectQuery new runOn: modelData))))))
+							(selectQuery
+								runOn: (QueryRejectNilEstimation runOn: ( QueryClosed new runOn: modelData))))))
 		reject: [ :serie | serie asString = '-125526.52173913' ]
 ]
 
@@ -46,6 +62,23 @@ CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery 
 CIMWebAbstractModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 	^ QueryAvgTimeOnTicketsGroupedByTime
 		runOn: (self ticketsPerMonth: selecQuery)
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> dataSetForModule: aModule [
+	| bugs evolution |
+	bugs := self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs.
+	evolution := self
+		avgTimeDevModulePerYear: aModule
+		selectQuery: QueryEvolutions.
+	^ {(evolution collect: [ :each | each time asString ]).
+	('Bugs' -> (bugs collect: #value)).
+	('Evolutions' -> (evolution collect: #value))} asOrderedCollection
+]
+
+{ #category : #'data sets' }
+CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
+	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
 ]
 
 { #category : #'data sets' }
@@ -56,7 +89,8 @@ CIMWebAbstractModel >> datawithCloseDate [
 { #category : #initialization }
 CIMWebAbstractModel >> initialize [
 	modelData := QueryBugsEvolutions
-		runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows)
+		runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows).
+	modules := Tbl tbl_Module rows
 ]
 
 { #category : #accessing }
@@ -92,7 +126,7 @@ CIMWebAbstractModel >> moduleGroupByBugsTime [
 
 { #category : #'as yet unclassified' }
 CIMWebAbstractModel >> moduleGroupByTime [
-	modules := ((Tbl tbl_Module rows
+	^ ((Tbl tbl_Module rows
 		collect: [ :module | 
 			module nom
 				->
@@ -109,8 +143,10 @@ CIMWebAbstractModel >> modules [
 ]
 
 { #category : #accessing }
-CIMWebAbstractModel >> modules: anObject [
-	modules := anObject
+CIMWebAbstractModel >> modulesNamesWithTimeSpent [
+	modulesNamesWithTimeSpent
+		ifNil: [ modulesNamesWithTimeSpent := self moduleGroupByTime ].
+	^ modulesNamesWithTimeSpent
 ]
 
 { #category : #'as yet unclassified' }
@@ -153,9 +189,8 @@ CIMWebAbstractModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selec
 { #category : #'as yet unclassified' }
 CIMWebAbstractModel >> percentModuleBugsTime [
 	| total |
-	modules ifNil: [ modules := self moduleGroupByTime ].
-	total := (modules collect: #value) sum.
-	^ modules
+	total := (self modulesNamesWithTimeSpent collect: #value) sum.
+	^ self modulesNamesWithTimeSpent
 		collect:
 			[ :ass | ass key -> ((ass value * 100 / total) asFloat truncateTo: 2) ]
 ]

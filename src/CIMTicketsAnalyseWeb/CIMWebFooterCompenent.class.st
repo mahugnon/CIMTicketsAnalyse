@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMWebFooterCompenent,
 	#superclass : #WAComponent,
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
 
 { #category : #rendering }

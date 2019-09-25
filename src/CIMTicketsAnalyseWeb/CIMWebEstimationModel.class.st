@@ -1,19 +1,32 @@
 Class {
 	#name : #CIMWebEstimationModel,
 	#superclass : #CIMWebAbstractModel,
+	#instVars : [
+		'selectedModule'
+	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 CIMWebEstimationModel >> percentBugs [
 	^ self totalBugsTime / self totalTime * 100 asFloat
 		printShowingDecimalPlaces: 0
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 CIMWebEstimationModel >> percentEvolutions [
 	^ self totalEvolutionTime / self totalTime * 100 asFloat
 		printShowingDecimalPlaces: 0
+]
+
+{ #category : #accessing }
+CIMWebEstimationModel >> selectedModule [
+	^ selectedModule
+]
+
+{ #category : #accessing }
+CIMWebEstimationModel >> selectedModule: anObject [
+	selectedModule := anObject
 ]
 
 { #category : #accessing }

@@ -33,7 +33,7 @@ QueryPerMonth >> fillGaps: boolean [
 
 { #category : #initialization }
 QueryPerMonth >> initialize [
-	fillGaps := false.
+	fillGaps := true.
 	ordered := true
 ]
 

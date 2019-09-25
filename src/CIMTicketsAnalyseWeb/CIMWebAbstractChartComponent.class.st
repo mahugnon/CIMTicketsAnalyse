@@ -5,7 +5,7 @@ Class {
 		'title',
 		'model'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsGeneralIzyProtect'
 }
 
 { #category : #accessing }

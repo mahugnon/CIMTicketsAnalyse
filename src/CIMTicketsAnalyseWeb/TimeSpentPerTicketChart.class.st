@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'chartDataSet'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsGeneralIzyProtect'
 }
 
 { #category : #rendering }

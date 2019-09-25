@@ -5,7 +5,7 @@ Class {
 		'header',
 		'footer'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
 
 { #category : #hooks }

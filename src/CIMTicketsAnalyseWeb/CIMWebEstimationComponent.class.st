@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponents'
+	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsGeneralIzyProtect'
 }
 
 { #category : #initialization }
@@ -56,12 +56,11 @@ CIMWebEstimationComponent >> renderContentOn: html [
 				with: [ html div
 						mdlTypographyTitle;
 						with: 'Tickets dependency' ].
-			self renderTop: model modules On: html ]
+			self renderTop: model modulesNamesWithTimeSpent On: html ]
 ]
 
 { #category : #rendering }
 CIMWebEstimationComponent >> renderTop: modules On: html [
-	model moduleGroupByTime.
 	html mdlCell
 		size: 4;
 		class: 'modules';
@@ -71,5 +70,5 @@ CIMWebEstimationComponent >> renderTop: modules On: html [
 			1 to: 5 do: [ :each | 
 				html div
 					mdlTypographyBody2;
-					with: [ html text: (model modules at: each) key ] ] ]
+					with: [ html text: (modules at: each) key ] ] ]
 ]

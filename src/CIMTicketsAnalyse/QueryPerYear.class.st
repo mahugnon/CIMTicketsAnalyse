@@ -12,11 +12,13 @@ Class {
 QueryPerYear >> fillGap: aCollection [
 	"aCollection of associations: month->value
 	 if there is a gap between two monthes, create a new key with empty value for the missing month"
-	| months dict |
-	dict := aCollection asDictionary. 
-	months := dict keys.
-	(months min to: months max) monthsDo: [ :each | dict at: each ifAbsentPut: Set new ].
-	^dict associations
+
+	| years dict |
+	dict := aCollection asDictionary.
+	years := dict keys.
+	(years min to: years max)
+		yearsDo: [ :each | dict at: each ifAbsentPut: Set new ].
+	^ dict associations
 ]
 
 { #category : #accessing }
