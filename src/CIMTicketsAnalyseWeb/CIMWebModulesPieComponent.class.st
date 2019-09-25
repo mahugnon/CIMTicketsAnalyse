@@ -21,9 +21,15 @@ CIMWebModulesPieComponent >> model: anObject [
 CIMWebModulesPieComponent >> renderContentOn: html [
 	| chartData |
 	chartData := (Chart1dData values: model percentModuleBugsTime)
-		title: 'Time on bugs spent per modules';
 		singleValueTooltip: '<key> has <value>% of total time spent on IzyProtect';
 		chartType: ChartPie;
 		yourself.
-	html render: (ChartJsComponent data: chartData)
+	html mdlGrid
+		with: [ html mdlCell
+				size: 8;
+				mdlTypographyTitle;
+				with: 'Time spent on bugs per modules'.
+			html mdlCell
+				size: 12;
+				with: [ html render: (ChartJsComponent data: chartData) ] ]
 ]

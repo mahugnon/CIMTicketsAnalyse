@@ -1,5 +1,5 @@
 Class {
-	#name : #CIMWebModulesTimeSerieComponent,
+	#name : #CIMWebModulesBarLineComponent,
 	#superclass : #WAComponent,
 	#instVars : [
 		'model',
@@ -9,42 +9,46 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CIMWebModulesTimeSerieComponent >> initialize [
+CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
 	self kind: self kinds anyOne
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebModulesTimeSerieComponent >> kind [
+CIMWebModulesBarLineComponent >> kind [
 	^ kind
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebModulesTimeSerieComponent >> kind: aChartType [
+CIMWebModulesBarLineComponent >> kind: aChartType [
 	kind := aChartType
 ]
 
 { #category : #accessing }
-CIMWebModulesTimeSerieComponent >> kinds [
+CIMWebModulesBarLineComponent >> kinds [
 	^ {ChartBar.
 	ChartLine.
 	ChartRadar}
 ]
 
 { #category : #accessing }
-CIMWebModulesTimeSerieComponent >> model [
+CIMWebModulesBarLineComponent >> model [
 	^ model
 ]
 
 { #category : #accessing }
-CIMWebModulesTimeSerieComponent >> model: aModel [
+CIMWebModulesBarLineComponent >> model: aModel [
 	model := aModel
 ]
 
 { #category : #rendering }
-CIMWebModulesTimeSerieComponent >> renderContentOn: html [
+CIMWebModulesBarLineComponent >> renderContentOn: html [
 	html mdlGrid
 		with: [ html mdlCell
+				size: 8;
+				mdlTypographyTitle;
+				with: 'Time spent on bugs per modules'.
+			html mdlCell
 				size: 8;
 				mdlTypographyTextCenter;
 				with: [ html
@@ -64,7 +68,7 @@ CIMWebModulesTimeSerieComponent >> renderContentOn: html [
 ]
 
 { #category : #rendering }
-CIMWebModulesTimeSerieComponent >> renderDemoWithId: id with: renderingChartBlock on: html [
+CIMWebModulesBarLineComponent >> renderDemoWithId: id with: renderingChartBlock on: html [
 	html div
 		id: id;
 		style: 'display: flex; flex-direction: column; align-items: center;';
@@ -72,7 +76,7 @@ CIMWebModulesTimeSerieComponent >> renderDemoWithId: id with: renderingChartBloc
 ]
 
 { #category : #rendering }
-CIMWebModulesTimeSerieComponent >> renderOn: html plotFor: module [
+CIMWebModulesBarLineComponent >> renderOn: html plotFor: module [
 	| renderingChartBlock id dataSet |
 	dataSet := model dataSetForModule: module.
 	renderingChartBlock := [ :canvas | 
@@ -82,7 +86,6 @@ CIMWebModulesTimeSerieComponent >> renderOn: html plotFor: module [
 		multiYObjects:
 		{dataSet second.
 	dataSet third})
-		title: [ :sets | 'Spent time for ' , (sets collect: #name) asCommaStringAnd ];
 		multiValueTooltip: '<label> spent <value> min in <key>';
 		chartType: self kind;
 		yourself.
@@ -100,7 +103,7 @@ CIMWebModulesTimeSerieComponent >> renderOn: html plotFor: module [
 ]
 
 { #category : #rendering }
-CIMWebModulesTimeSerieComponent >> renderPossibleKindsUpdating: id with: renderingChartBlock on: html [
+CIMWebModulesBarLineComponent >> renderPossibleKindsUpdating: id with: renderingChartBlock on: html [
 	html form
 		style: 'display: flex; justify-content: space-around; margin-bottom: 20px;';
 		with: [ html radioGroup
