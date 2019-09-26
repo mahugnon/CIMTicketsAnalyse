@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessing }
+CIMWebAbstractChartComponent >> chartDataSet [
+	
+]
+
+{ #category : #accessing }
 CIMWebAbstractChartComponent >> description [
 	^ self class description
 ]
@@ -19,9 +24,31 @@ CIMWebAbstractChartComponent >> initialize [
 	model := CIMWebAbstractModel new
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebAbstractChartComponent >> linearRegressionCaracteristcs [
+	^ QueryLinearRegression new  runOn1: self chartDataSet
+]
+
+{ #category : #accessing }
+CIMWebAbstractChartComponent >> plotRegLinefunction: x [
+	^ x * self linearRegressionCaracteristcs slope
+		+ self linearRegressionCaracteristcs intercept
+]
+
 { #category : #accessing }
 CIMWebAbstractChartComponent >> renderChartJsComponentOn: html [
-	^ self subclassResponsibility
+	html
+		render:
+			(ChartJsComponent
+				data:
+					((Chart2dData
+						xObjects: self chartDataSet keys
+						yObjects: self chartDataSet values
+						yFunction:
+							[ :x | self plotRegLinefunction: x ])
+						keyDisplayBlock: #printString;
+						"valueDisplayBlock: [ :v | CIMDayFormater new format: v asDuration ];"
+							chartType: ChartLine))
 ]
 
 { #category : #accessing }

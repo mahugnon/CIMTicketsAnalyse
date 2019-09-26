@@ -66,6 +66,19 @@ CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery 
 		reject: [ :serie | serie asString = '-125526.52173913' ]
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
+	^ (QueryMovingAverage
+		runOn:
+			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
+				runOn:
+					(QueryTicketPerYearClosing
+						runOn:
+							(selectQuery
+								runOn: (QueryRejectNilEstimation runOn: (QueryClosed new runOn: modelData))))))
+		reject: [ :serie | serie asString = '-125526.52173913' ]
+]
+
 { #category : #'data sets' }
 CIMWebAbstractModel >> avgTimeRCTestTicketsPerYear: selectQuery [
 	^ QueryAvgTicketsTimeRCTestGroupedByTime new

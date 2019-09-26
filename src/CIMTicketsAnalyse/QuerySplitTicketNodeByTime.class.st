@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #running }
-QuerySplitTicketNodeByTime >> lowerToMonth: aCollection [
+QuerySplitTicketNodeByTime >> lowerToTime: aCollection [
 	^ (aCollection select: [ :node | node time <= month ])
 		asOrderedCollection
 ]
@@ -20,12 +20,12 @@ QuerySplitTicketNodeByTime >> month: anInteger [
 
 { #category : #running }
 QuerySplitTicketNodeByTime >> runOn: aCollection [
-	^ {(self lowerToMonth: aCollection).
-	(self uperToMonth: aCollection)} asOrderedCollection
+	^ {(self lowerToTime: aCollection).
+	(self uperToTime: aCollection)} asOrderedCollection
 ]
 
 { #category : #running }
-QuerySplitTicketNodeByTime >> uperToMonth: aCollection [
+QuerySplitTicketNodeByTime >> uperToTime: aCollection [
 	^ (aCollection select: [ :node | node time > month ])
 		asOrderedCollection
 ]

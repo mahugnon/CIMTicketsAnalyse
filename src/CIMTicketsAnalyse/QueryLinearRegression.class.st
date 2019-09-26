@@ -6,12 +6,15 @@ Class {
 
 { #category : #running }
 QueryLinearRegression >> runOn1: aDictionary [
-	| linReg |
+	| linReg convertKey |
 	linReg := PMLinearRegression new.
 	aDictionary
 		keysDo: [ :key | 
+			convertKey := key isInteger
+				ifFalse: [ key asSeconds ]
+				ifTrue: [ key ].
 			linReg
-				add: key asSeconds @ (aDictionary at: key);
+				add: convertKey @ (aDictionary at: key);
 				yourself ].
 	^ linReg
 ]
