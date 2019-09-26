@@ -5,7 +5,10 @@ Class {
 }
 
 { #category : #running }
-QueryAvgTicketsTimeRCTestGroupedByTime >> runOn: aCIMTicketGroNode [
-	^ (QueryAvgTicketsTimeRCTest runOn: aCIMTicketGroNode)
-		time: aCIMTicketGroNode time
+QueryAvgTicketsTimeRCTestGroupedByTime >> runOn: aCollection [
+	"self halt."
+	^ (aCollection
+		collect:
+			[ :groupNode | (QueryAvgTicketsTimeRCTest runOn: groupNode) time: groupNode time ])
+		asOrderedCollection
 ]

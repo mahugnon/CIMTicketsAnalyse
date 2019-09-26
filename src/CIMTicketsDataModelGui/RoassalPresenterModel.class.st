@@ -27,7 +27,7 @@ RoassalPresenterModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
-				runOn: (selectQuery runOn: self datawithCloseDate))
+				runOn: (selectQuery runOn: self dataWithCloseDate))
 ]
 
 { #category : #'as yet unclassified' }
@@ -49,7 +49,7 @@ RoassalPresenterModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 ]
 
 { #category : #'data sets' }
-RoassalPresenterModel >> datawithCloseDate [
+RoassalPresenterModel >> dataWithCloseDate [
 	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
 ]
 
@@ -150,7 +150,7 @@ RoassalPresenterModel >> ticketsPerMonth: selectQuery [
 	^ QueryTicketPerMonthClosing new
 		fillGaps: true;
 		ordered: true;
-		runOn: (selectQuery runOn: self datawithCloseDate)
+		runOn: (selectQuery runOn: self dataWithCloseDate)
 ]
 
 { #category : #accessing }

@@ -34,7 +34,15 @@ CIMWebAbstractModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
-				runOn: (selectQuery runOn: self datawithCloseDate))
+				runOn: (selectQuery runOn: self dataWithCloseDate))
+]
+
+{ #category : #'data sets' }
+CIMWebAbstractModel >> avgTimeDevTicketsPerYear: selectQuery [
+	^ QueryAvgTimeDevGroupedByTime new
+		runOn:
+			(QueryTicketPerYearClosing new
+				runOn: (selectQuery runOn: self dataWithCloseDate))
 ]
 
 { #category : #'data sets' }
@@ -56,6 +64,14 @@ CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery 
 							(selectQuery
 								runOn: (QueryRejectNilEstimation runOn: ( QueryClosed new runOn: modelData))))))
 		reject: [ :serie | serie asString = '-125526.52173913' ]
+]
+
+{ #category : #'data sets' }
+CIMWebAbstractModel >> avgTimeRCTestTicketsPerYear: selectQuery [
+	^ QueryAvgTicketsTimeRCTestGroupedByTime new
+		runOn:
+			(QueryTicketPerYearClosing new
+				runOn: (selectQuery runOn: self dataWithCloseDate))
 ]
 
 { #category : #'data sets' }
@@ -85,13 +101,13 @@ CIMWebAbstractModel >> dataSetForModule: aModule [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
-	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
+CIMWebAbstractModel >> dataWithCloseDate [
+	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> datawithCloseDate [
-	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
+CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
+	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
 ]
 
 { #category : #initialization }
@@ -215,5 +231,5 @@ CIMWebAbstractModel >> ticketsPerMonth: selectQuery [
 	^ QueryTicketPerMonthClosing new
 		fillGaps: true;
 		ordered: true;
-		runOn: (selectQuery runOn: self datawithCloseDate)
+		runOn: (selectQuery runOn: self dataWithCloseDate)
 ]
