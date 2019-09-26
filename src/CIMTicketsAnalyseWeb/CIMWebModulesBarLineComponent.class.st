@@ -47,21 +47,24 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 		with: [ html mdlCell
 				size: 8;
 				mdlTypographyTitle;
-				with: 'Time spent on bugs per modules'.
+				with: 'Time spent on bugs for ' , model selectedModule nom.
 			html mdlCell
 				size: 8;
 				mdlTypographyTextCenter;
-				with: [ html
-						render:
-							((MDLMenuButtonWidget
-								possibilities: model modules
-								label: #nom
-								action: [ :module | model selectedModule: module ]
-								selectedObject: model selectedModule
-								choosingText: 'Select a module'
-								description: 'Modules')
-								sortBlock: [ :a :b | a name < b name ];
-								yourself) ].
+				with: [ 
+					html text: 'Select a module'.
+					html space.
+					 html
+								render:
+									((MDLMenuButtonWidget
+										possibilities: model modules
+										label: #nom
+										action: [ :module | model selectedModule: module ]
+										selectedObject: model selectedModule
+										choosingText: ''
+										description: 'Modules')
+										sortBlock: [ :a :b | a name < b name ];
+										yourself)  ].
 			html mdlCell
 				size: 12;
 				with: [ self renderOn: html plotFor: model selectedModule ] ]

@@ -1,17 +1,8 @@
 Class {
 	#name : #CIMWebEstimationModel,
 	#superclass : #CIMWebAbstractModel,
-	#instVars : [
-		'selectedModule'
-	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
-
-{ #category : #initialization }
-CIMWebEstimationModel >> initialize [
-	super initialize.
-	selectedModule := modules first
-]
 
 { #category : #api }
 CIMWebEstimationModel >> percentBugs [

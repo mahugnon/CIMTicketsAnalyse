@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'modelData',
 		'modulesNamesWithTimeSpent',
-		'modules'
+		'modules',
+		'selectedModule'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
@@ -127,7 +128,8 @@ CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
 CIMWebAbstractModel >> initialize [
 	modelData := QueryBugsEvolutions
 		runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows).
-	modules := Tbl tbl_Module rows
+	modules := Tbl tbl_Module rows.
+	selectedModule := Tbl tbl_Module moduleNamed: 'IZY Protect'
 ]
 
 { #category : #accessing }

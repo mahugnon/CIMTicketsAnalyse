@@ -287,6 +287,11 @@ Tbl class >> typeSessions [
 	^ Tbl tables at: 11
 ]
 
+{ #category : #adding }
+Tbl >> add: anObject [
+	rows add: anObject
+]
+
 { #category : #'as yet unclassified' }
 Tbl >> convertFieldToCimDate [
 	^ self subclassResponsibility
