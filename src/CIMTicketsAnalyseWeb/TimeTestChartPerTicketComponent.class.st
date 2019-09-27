@@ -2,7 +2,6 @@ Class {
 	#name : #TimeTestChartPerTicketComponent,
 	#superclass : #CIMWebAbstractChartComponent,
 	#instVars : [
-		'chartDataSet',
 		'regresions'
 	],
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsGeneralIzyProtect'
@@ -10,9 +9,7 @@ Class {
 
 { #category : #accessing }
 TimeTestChartPerTicketComponent >> chartDataSet [
-	chartDataSet 	ifNil: [ chartDataSet := model
-				avgNodesToDic: (model avgTimeRCTestTicketsPerYear: QueryBugsEvolutions) ].
-	^ chartDataSet
+	^ model avgTimeRCTestTicketsPerYear
 ]
 
 { #category : #accessing }

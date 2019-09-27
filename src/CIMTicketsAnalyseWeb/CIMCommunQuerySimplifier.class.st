@@ -18,25 +18,11 @@ CIMCommunQuerySimplifier >> avgDevInterventionPerMonth: selectQuery [
 		runOn: (self ticketsPerMonth: selectQuery)
 ]
 
-{ #category : #'as yet unclassified' }
-CIMCommunQuerySimplifier >> avgNodesToDic: aCollection [
-	^ (aCollection collect: [ :node | node time -> node value ])
-		asOrderedDictionary
-]
-
 { #category : #'data sets' }
 CIMCommunQuerySimplifier >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
-				runOn: (selectQuery runOn: self dataWithCloseDate))
-]
-
-{ #category : #'data sets' }
-CIMCommunQuerySimplifier >> avgTimeDevTicketsPerYear: selectQuery [
-	^ QueryAvgTimeDevGroupedByTime new
-		runOn:
-			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: self dataWithCloseDate))
 ]
 
@@ -58,36 +44,10 @@ CIMCommunQuerySimplifier >> avgTimeDevTpsTotalMinusEstimTicketsPerYear [
 	^ avgTimeDevTpsTotalMinusEstimTicketsPerYear
 ]
 
-{ #category : #'as yet unclassified' }
-CIMCommunQuerySimplifier >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
-	^ (QueryMovingAverage
-		runOn:
-			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
-				runOn:
-					(QueryTicketPerYearClosing
-						runOn:
-							(selectQuery
-								runOn: (QueryRejectNilEstimation runOn: (QueryClosed new runOn: modelData))))))
-		reject: [ :serie | serie asString = '-125526.52173913' ]
-]
-
-{ #category : #'data sets' }
-CIMCommunQuerySimplifier >> avgTimeRCTestTicketsPerYear: selectQuery [
-	^ QueryAvgTicketsTimeRCTestGroupedByTime new
-		runOn:
-			(QueryTicketPerYearClosing new
-				runOn: (selectQuery runOn: self dataWithCloseDate))
-]
-
 { #category : #'data sets' }
 CIMCommunQuerySimplifier >> avgTimeSpentTicketsPerMonth: selecQuery [
 	^ QueryAvgTimeOnTicketsGroupedByTime
 		runOn: (self ticketsPerMonth: selecQuery)
-]
-
-{ #category : #'data sets' }
-CIMCommunQuerySimplifier >> dataWithCloseDate [
-	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
 ]
 
 { #category : #initialization }
@@ -97,20 +57,9 @@ CIMCommunQuerySimplifier >> initialize [
 	modules := Tbl tbl_Module rows
 ]
 
-{ #category : #'as yet unclassified' }
-CIMCommunQuerySimplifier >> initializeAvgTimeDevTpsTotalMinusEstimTicketsPerYear [
-	avgTimeDevTpsTotalMinusEstimTicketsPerYear := self
-		avgTimeDevTpsTotalMinusEstimTicketsPerYear: QueryBugsEvolutions
-]
-
 { #category : #accessing }
 CIMCommunQuerySimplifier >> isEmpty [
 	^ modelData isEmptyNode
-]
-
-{ #category : #'as yet unclassified' }
-CIMCommunQuerySimplifier >> linearRegressionCaracteristcs: aCollection [
-	^ QueryLinearRegression new runOn1: aCollection
 ]
 
 { #category : #'data sets' }

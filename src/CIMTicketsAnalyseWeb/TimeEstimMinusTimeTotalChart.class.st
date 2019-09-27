@@ -11,8 +11,8 @@ Class {
 { #category : #accessing }
 TimeEstimMinusTimeTotalChart >> chartDataSet [
 	chartDataSet
-		ifNil: [ chartDataSet := model
-				avgNodesToDic: model avgTimeDevTpsTotalMinusEstimTicketsPerYear ].
+		ifNil:
+			[ chartDataSet := model avgTimeDevTpsTotalMinusEstimTicketsPerYear ].
 	^ chartDataSet
 ]
 

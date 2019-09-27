@@ -7,7 +7,7 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsGeneralIzyProtect'
 }
 
-{ #category : #rendering }
+{ #category : #accessing }
 TimeSpentPerTicketChart >> chartDataSet [
 	chartDataSet
 		ifNil: [ chartDataSet := model
