@@ -1,37 +1,38 @@
 Class {
-	#name : #CIMWebAbstractModel,
+	#name : #CIMQuerySimplifierModel,
 	#superclass : #Object,
 	#instVars : [
 		'modelData',
 		'modulesNamesWithTimeSpent',
 		'modules',
-		'selectedModule'
+		'selectedModule',
+		'avgTimeDevTpsTotalMinusEstimTicketsPerYear'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> avgDevInterventionPerMonth: selectQuery [
+CIMQuerySimplifierModel >> avgDevInterventionPerMonth: selectQuery [
 	^ QueryNumberOfDevInterventionPerMonth new
 		devs: Tbl tbl_devizy rows;
 		runOn: (self ticketsPerMonth: selectQuery)
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> avgNodesToDic: aCollection [
+CIMQuerySimplifierModel >> avgNodesToDic: aCollection [
 	^ (aCollection collect: [ :node | node time -> node value ])
 		asOrderedDictionary
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> avgTimeDevModulePerYear: aModule selectQuery: selectQuery [
+CIMQuerySimplifierModel >> avgTimeDevModulePerYear: aModule selectQuery: selectQuery [
 	^ self
 		avgTimeDevTicketsPerYear: selectQuery
 		for: (CIMTicketGroupNode new tickets: aModule tickets)
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> avgTimeDevTicketsPerMonth: selectQuery [
+CIMQuerySimplifierModel >> avgTimeDevTicketsPerMonth: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerMonthClosing new
@@ -39,7 +40,7 @@ CIMWebAbstractModel >> avgTimeDevTicketsPerMonth: selectQuery [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> avgTimeDevTicketsPerYear: selectQuery [
+CIMQuerySimplifierModel >> avgTimeDevTicketsPerYear: selectQuery [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
@@ -47,7 +48,7 @@ CIMWebAbstractModel >> avgTimeDevTicketsPerYear: selectQuery [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> avgTimeDevTicketsPerYear: selectQuery for: aCIMTicketGroup [
+CIMQuerySimplifierModel >> avgTimeDevTicketsPerYear: selectQuery for: aCIMTicketGroup [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
@@ -55,7 +56,7 @@ CIMWebAbstractModel >> avgTimeDevTicketsPerYear: selectQuery for: aCIMTicketGrou
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
+CIMQuerySimplifierModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
 	^ (QueryMovingAverage
 		runOn:
 			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
@@ -68,7 +69,12 @@ CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery 
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
+CIMQuerySimplifierModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear [
+	^ avgTimeDevTpsTotalMinusEstimTicketsPerYear
+]
+
+{ #category : #'as yet unclassified' }
+CIMQuerySimplifierModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
 	^ (QueryMovingAverage
 		runOn:
 			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
@@ -81,7 +87,7 @@ CIMWebAbstractModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> avgTimeRCTestTicketsPerYear: selectQuery [
+CIMQuerySimplifierModel >> avgTimeRCTestTicketsPerYear: selectQuery [
 	^ QueryAvgTicketsTimeRCTestGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
@@ -89,13 +95,13 @@ CIMWebAbstractModel >> avgTimeRCTestTicketsPerYear: selectQuery [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> avgTimeSpentTicketsPerMonth: selecQuery [
+CIMQuerySimplifierModel >> avgTimeSpentTicketsPerMonth: selecQuery [
 	^ QueryAvgTimeOnTicketsGroupedByTime
 		runOn: (self ticketsPerMonth: selecQuery)
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> dataSetForModule: aModule [
+CIMQuerySimplifierModel >> dataSetForModule: aModule [
 	| bugs evolutions x yBugs yEvolutions |
 	bugs := self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs.
 	evolutions := self
@@ -115,45 +121,50 @@ CIMWebAbstractModel >> dataSetForModule: aModule [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> dataWithCloseDate [
+CIMQuerySimplifierModel >> dataWithCloseDate [
 	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
+CIMQuerySimplifierModel >> dataWithCloseDate: aCIMTicketGroup [
 	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
 ]
 
 { #category : #initialization }
-CIMWebAbstractModel >> initialize [
+CIMQuerySimplifierModel >> initialize [
 	modelData := QueryBugsEvolutions
 		runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows).
-	modules := Tbl tbl_Module rows.
-	selectedModule := Tbl tbl_Module moduleNamed: 'IZY Protect'
+	modules := Tbl tbl_Module rows
+]
+
+{ #category : #'as yet unclassified' }
+CIMQuerySimplifierModel >> initializeAvgTimeDevTpsTotalMinusEstimTicketsPerYear [
+	avgTimeDevTpsTotalMinusEstimTicketsPerYear := self
+		avgTimeDevTpsTotalMinusEstimTicketsPerYear: QueryBugsEvolutions
 ]
 
 { #category : #accessing }
-CIMWebAbstractModel >> isEmpty [
+CIMQuerySimplifierModel >> isEmpty [
 	^ modelData isEmptyNode
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> linearRegressionCaracteristcs: aCollection [
+CIMQuerySimplifierModel >> linearRegressionCaracteristcs: aCollection [
 	^ QueryLinearRegression new runOn1: aCollection
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> modelData [
+CIMQuerySimplifierModel >> modelData [
 	^ modelData
 ]
 
 { #category : #accessing }
-CIMWebAbstractModel >> modelData: anObject [
+CIMQuerySimplifierModel >> modelData: anObject [
 	modelData := anObject
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> moduleGroupByBugsTime [
+CIMQuerySimplifierModel >> moduleGroupByBugsTime [
 	^ (Tbl tbl_Module rows
 		collect: [ :module | 
 			module nom
@@ -163,39 +174,26 @@ CIMWebAbstractModel >> moduleGroupByBugsTime [
 		sorted: [ :a :b | a value > b value ]
 ]
 
-{ #category : #'as yet unclassified' }
-CIMWebAbstractModel >> moduleGroupByTime [
-	^ ((Tbl tbl_Module rows
-		collect: [ :module | 
-			module nom
-				->
-					(QueryTicketsTimeDev
-						runOn:
-							(QueryBugsEvolutions
-								runOn: (CIMTicketGroupNode new tickets: module tickets))) ])
-		sorted: [ :a :b | a value > b value ]) asOrderedCollection
-]
-
 { #category : #accessing }
-CIMWebAbstractModel >> modules [
+CIMQuerySimplifierModel >> modules [
 	^ modules
 ]
 
 { #category : #accessing }
-CIMWebAbstractModel >> modulesNamesWithTimeSpent [
+CIMQuerySimplifierModel >> modulesNamesWithTimeSpent [
 	modulesNamesWithTimeSpent
 		ifNil: [ modulesNamesWithTimeSpent := self moduleGroupByTime ].
 	^ modulesNamesWithTimeSpent
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> movingAvgTimeSpentTicketsPerMonth: selectQuery [
+CIMQuerySimplifierModel >> movingAvgTimeSpentTicketsPerMonth: selectQuery [
 	^ QueryMovingAverage
 		runOn: (self avgTimeDevTicketsPerMonth: selectQuery)
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
+CIMQuerySimplifierModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuery [
 	^ QueryTimePerDev
 		runOn:
 			(QueryMovingAverage
@@ -205,7 +203,7 @@ CIMWebAbstractModel >> movingAvgTimeToOpenCloseTicketsPerMonthPerDev: selectQuer
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selectQuery [
+CIMQuerySimplifierModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selectQuery [
 	| dataSet |
 	dataSet := QueryMovingAverage new
 		runOn:
@@ -226,7 +224,7 @@ CIMWebAbstractModel >> multiRegressionLineForMovingAvgTicketPerDevDataSet: selec
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> percentModuleBugsTime [
+CIMQuerySimplifierModel >> percentModuleBugsTime [
 	| total |
 	total := (self modulesNamesWithTimeSpent collect: #value) sum.
 	^ self modulesNamesWithTimeSpent
@@ -235,14 +233,14 @@ CIMWebAbstractModel >> percentModuleBugsTime [
 ]
 
 { #category : #'data sets' }
-CIMWebAbstractModel >> ticketPerFile [
+CIMQuerySimplifierModel >> ticketPerFile [
 	^ QueryTicketsForInterestionFileNames new
 		runOn: modelData
 		nameLime: 200
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebAbstractModel >> ticketsPerMonth: selectQuery [
+CIMQuerySimplifierModel >> ticketsPerMonth: selectQuery [
 	^ QueryTicketPerMonthClosing new
 		fillGaps: true;
 		ordered: true;

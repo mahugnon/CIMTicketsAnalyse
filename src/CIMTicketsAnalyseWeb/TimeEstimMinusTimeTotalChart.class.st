@@ -12,8 +12,7 @@ Class {
 TimeEstimMinusTimeTotalChart >> chartDataSet [
 	chartDataSet
 		ifNil: [ chartDataSet := model
-				avgNodesToDic:
-					(model avgTimeDevTpsTotalMinusEstimTicketsPerYear: QueryBugsEvolutions) ].
+				avgNodesToDic: model avgTimeDevTpsTotalMinusEstimTicketsPerYear ].
 	^ chartDataSet
 ]
 

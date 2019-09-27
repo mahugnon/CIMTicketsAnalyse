@@ -21,7 +21,7 @@ CIMWebAbstractChartComponent >> description [
 { #category : #initialization }
 CIMWebAbstractChartComponent >> initialize [
 	super initialize.
-	model := CIMWebAbstractModel new
+	model := CIMQuerySimplifierModel new
 ]
 
 { #category : #'as yet unclassified' }

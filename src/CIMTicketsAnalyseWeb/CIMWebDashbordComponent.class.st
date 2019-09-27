@@ -26,7 +26,6 @@ CIMWebDashbordComponent >> createEstimationComponent [
 { #category : #initialization }
 CIMWebDashbordComponent >> createModuesLineBarComponent [
 	modulesLineBarComponent := CIMWebModulesBarLineComponent new
-		model: estimations model
 ]
 
 { #category : #hooks }
@@ -108,8 +107,7 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 CIMWebDashbordComponent >> renderModulesLineBarOn: html [
 	html mdlCell
 		size: 6;
-		with: [ html
-				render: (CIMWebModulesBarLineComponent new model: estimations model) ]
+		with: [ html render: modulesLineBarComponent ]
 ]
 
 { #category : #'parts rendering' }

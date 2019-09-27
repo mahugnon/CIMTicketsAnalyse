@@ -11,7 +11,8 @@ Class {
 { #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
-	self kind: self kinds anyOne
+	self kind: self kinds anyOne.
+	model := CIMWebLineBarModel current
 ]
 
 { #category : #'as yet unclassified' }

@@ -10,7 +10,7 @@ Class {
 { #category : #initialization }
 CIMWebEstimationComponent >> initialize [
 	super initialize.
-	model := CIMWebEstimationModel new
+	model := CIMWebEstimationModel current
 ]
 
 { #category : #accessing }
