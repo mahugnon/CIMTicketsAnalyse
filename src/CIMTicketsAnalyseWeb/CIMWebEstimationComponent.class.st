@@ -55,8 +55,7 @@ CIMWebEstimationComponent >> renderContentOn: html [
 				class: 'ticketDependency';
 				with: [ html div
 						mdlTypographyTitle;
-						with: 'Tickets dependency' ].
-			self renderTop: model modulesNamesWithTimeSpent On: html ]
+						with: 'To fill' ] ]
 ]
 
 { #category : #rendering }

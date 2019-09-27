@@ -31,7 +31,6 @@ CIMWebDashbordComponent >> createModuesLineBarComponent [
 { #category : #hooks }
 CIMWebDashbordComponent >> createModulePie [
 	modulesPieComponent := CIMWebModulesPieComponent new
-		model: estimations model
 ]
 
 { #category : #initialization }

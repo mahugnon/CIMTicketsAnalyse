@@ -5,8 +5,7 @@ Class {
 		'totalTime',
 		'percentBugs',
 		'percentEvolutions',
-		'modelData',
-		'modulesNamesWithTimeSpent'
+		'modelData'
 	],
 	#classInstVars : [
 		'current'
@@ -38,13 +37,7 @@ CIMWebEstimationModel >> initialize [
 	self initializeTotalTime.
 	self initializePercentBugs.
 	self initializePercentEvolutions.
-	self initializeModulesNamesWithTimeSpent.
-	self initializeSelectedModule
-]
-
-{ #category : #accessing }
-CIMWebEstimationModel >> initializeModulesNamesWithTimeSpent [
-	modulesNamesWithTimeSpent := self moduleGroupByTime
+	self initializeModulesNamesWithTimeSpent
 ]
 
 { #category : #api }
@@ -72,24 +65,6 @@ CIMWebEstimationModel >> modelData [
 { #category : #accessing }
 CIMWebEstimationModel >> modelData: anObject [
 	modelData := anObject
-]
-
-{ #category : #'as yet unclassified' }
-CIMWebEstimationModel >> moduleGroupByTime [
-	^ ((Tbl tbl_Module rows
-		collect: [ :module | 
-			module nom
-				->
-					(QueryTicketsTimeDev
-						runOn:
-							(QueryBugsEvolutions
-								runOn: (CIMTicketGroupNode new tickets: module tickets))) ])
-		sorted: [ :a :b | a value > b value ]) asOrderedCollection
-]
-
-{ #category : #accessing }
-CIMWebEstimationModel >> modulesNamesWithTimeSpent [
-	^ modulesNamesWithTimeSpent
 ]
 
 { #category : #api }

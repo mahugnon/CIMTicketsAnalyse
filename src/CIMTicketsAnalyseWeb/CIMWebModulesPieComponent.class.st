@@ -7,6 +7,12 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
+{ #category : #initialization }
+CIMWebModulesPieComponent >> initialize [
+	super initialize.
+	model := CIMWebLineBarModel current
+]
+
 { #category : #accessing }
 CIMWebModulesPieComponent >> model [
 	^ model
@@ -20,7 +26,7 @@ CIMWebModulesPieComponent >> model: anObject [
 { #category : #rendering }
 CIMWebModulesPieComponent >> renderContentOn: html [
 	| chartData |
-	chartData := (Chart1dData values: model percentModuleBugsTime)
+	chartData := (Chart1dData values: model percentModuleTime)
 		singleValueTooltip: '<key> has <value>% of total time spent on IzyProtect';
 		chartType: ChartPie;
 		yourself.
