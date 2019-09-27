@@ -27,9 +27,8 @@ CIMWebModulesBarLineComponent >> kind: aChartType [
 
 { #category : #accessing }
 CIMWebModulesBarLineComponent >> kinds [
-	^ {ChartBar.
-	ChartLine.
-	ChartRadar}
+	^ {ChartLine.
+	ChartBar}
 ]
 
 { #category : #accessing }
