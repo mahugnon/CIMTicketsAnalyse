@@ -34,13 +34,13 @@ CIMWebLineBarModel class >> resetCurrent [
 	self current
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> avgNodesToDic: aCollection [
 	^ (aCollection collect: [ :node | node time -> node value ])
 		asOrderedDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> avgTimeDevModulePerYear: aModule selectQuery: selectQuery [
 	^ self
 		avgTimeDevTicketsPerYear: selectQuery
@@ -63,12 +63,12 @@ CIMWebLineBarModel >> avgTimeDevTicketsPerYear: selectQuery for: aCIMTicketGroup
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear [
 	^ avgTimeDevTpsTotalMinusEstimTicketsPerYear
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
 	^ (QueryMovingAverage
 		runOn:
@@ -94,16 +94,17 @@ CIMWebLineBarModel >> avgTimeRCTestTicketsPerYear: selectQuery [
 				runOn: (selectQuery runOn: self dataWithCloseDate))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> computedatasSetForModule: aModule [
 	| bugs evolutions x yBugs yEvolutions |
 	bugs := self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs.
 	evolutions := self
 		avgTimeDevModulePerYear: aModule
 		selectQuery: QueryEvolutions.
-	yBugs := bugs collect: #value.
+	yBugs := bugs collect: [ :each | each value / 27000 asFloat ].
 	x := evolutions collect: [ :each | each time asString ].
-	yEvolutions := evolutions collect: #value.
+	yEvolutions := evolutions
+		collect: [ :each | each value / 27000 asFloat ].
 	bugs size > evolutions size
 		ifTrue: [ x := bugs collect: [ :each | each time asString ].
 			evolutions size + 1 to: bugs size do: [ :i | yEvolutions add: 0 ] ].
@@ -114,7 +115,7 @@ CIMWebLineBarModel >> computedatasSetForModule: aModule [
 	('Evolutions' -> yEvolutions)} asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CIMWebLineBarModel >> dataSetForModule: aModule [
 	^ dataSetForModules at: aModule nom
 ]
@@ -140,14 +141,14 @@ CIMWebLineBarModel >> initialize [
 	self initializeAvgTimeRCTestTicketsPerYear
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> initializeAvgTimeDevTpsTotalMinusEstimTicketsPerYear [
 	avgTimeDevTpsTotalMinusEstimTicketsPerYear := ((self
 		avgTimeDevTpsTotalMinusEstimTicketsPerYear: QueryBugsEvolutions)
 		collect: [ :node | node time -> node value ]) asOrderedDictionary
 ]
 
-{ #category : #'data sets' }
+{ #category : #initialization }
 CIMWebLineBarModel >> initializeAvgTimeRCTestTicketsPerYear [
 	avgTimeRCTestTicketsPerYear := ((QueryAvgTicketsTimeRCTestGroupedByTime
 		new
@@ -167,14 +168,15 @@ CIMWebLineBarModel >> initializeModules [
 	modules := modules := Tbl tbl_Module rows
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> initializePercentModuleTime [
-	| total modulesNamesWithTimeSpent |
+	| modulesNamesWithTimeSpent totalInDays |
 	modulesNamesWithTimeSpent := self moduleGroupByTime.
-	total := (modulesNamesWithTimeSpent collect: #value) sum.
-	percentModuleTime := modulesNamesWithTimeSpent
+	totalInDays := (modulesNamesWithTimeSpent collect: #value) sum.
+	percentModuleTime := (modulesNamesWithTimeSpent
 		collect:
-			[ :ass | ass key -> ((ass value * 100 / total) asFloat truncateTo: 2) ]
+			[ :ass | ass key -> ((ass value * 100 / totalInDays) asFloat truncateTo: 2) ])
+		select: [ :ass | ass value >= 2 ]
 ]
 
 { #category : #initialization }
@@ -182,7 +184,7 @@ CIMWebLineBarModel >> initializeSelectedModule [
 	selectedModule := Tbl tbl_Module moduleNamed: 'IZY Protect'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> linearRegressionCaracteristcs: aCollection [
 	^ QueryLinearRegression new runOn1: aCollection
 ]
@@ -192,7 +194,7 @@ CIMWebLineBarModel >> modelData: aCIMTicketGroupNode [
 	modelData := aCIMTicketGroupNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> moduleGroupByTime [
 	^ (((modules reject: [ :each | each nom = 'IZY Protect' ])
 		collect: [ :module | 
@@ -210,7 +212,7 @@ CIMWebLineBarModel >> modules [
 	^ modules
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - utility' }
 CIMWebLineBarModel >> percentModuleTime [
 	^ percentModuleTime
 ]

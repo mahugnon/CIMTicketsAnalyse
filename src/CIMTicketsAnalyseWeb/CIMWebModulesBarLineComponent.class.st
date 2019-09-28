@@ -9,6 +9,34 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
+	| styleForPersons |
+	styleForPersons := Dictionary
+		with:
+			'Evolutions'
+				->
+					(Dictionary
+						with: #pointColor -> Color blue
+						with: #strokeColor -> Color blue)
+		with:
+			'Bugs'
+				->
+					(Dictionary
+						with: #pointColor -> Color red
+						with: #strokeColor -> Color red).
+	aChartData dataSets
+		do: [ :set | 
+			set styleSheet
+				pointColor: [ :keys :values :label | (styleForPersons at: label) at: #pointColor ];
+				strokeColor:
+						[ :keys :values :label | (styleForPersons at: label) at: #strokeColor ];
+				pointStrokeColor: Color white;
+				fillColor: (Color white alpha: 0.4);
+				pointHighlightFill: Color white;
+				pointHighlightStroke: Color black ]
+]
+
+{ #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
 	self kind: self kinds anyOne.
@@ -92,6 +120,7 @@ CIMWebModulesBarLineComponent >> renderOn: html plotFor: module [
 		multiValueTooltip: '<label> spent <value> min in <key>';
 		chartType: self kind;
 		yourself.
+	self applyStyleTo: chartData.
 	html
 		render:
 			(ChartJsComponent
@@ -124,5 +153,6 @@ CIMWebModulesBarLineComponent >> renderPossibleKindsUpdating: id with: rendering
 												serializeThis;
 												onComplete:
 													((html jQuery id: id) load html: [ :r | renderingChartBlock value: r ])).
+									html space: 2.
 									html text: each displayName ] ] ] ]
 ]
