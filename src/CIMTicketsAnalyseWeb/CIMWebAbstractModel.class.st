@@ -32,7 +32,9 @@ CIMWebAbstractModel class >> resetCurrent [
 
 { #category : #'private - utility' }
 CIMWebAbstractModel >> avgTimeModulePerYear: aModule selectQuery: selectQuery [
-	^ self subclassResponsibility
+	^ self
+		avgTimeTicketsPerYear: selectQuery
+		for: (CIMTicketGroupNode new tickets: aModule tickets)
 ]
 
 { #category : #'data sets' }

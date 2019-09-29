@@ -19,13 +19,6 @@ CIMWebTimeSpentChartModel class >> resetCurrent [
 	super resetCurrent
 ]
 
-{ #category : #'private - utility' }
-CIMWebTimeSpentChartModel >> avgTimeModulePerYear: aModule selectQuery: selectQuery [
-	^ self
-		avgTimeTicketsPerYear: selectQuery
-		for: (CIMTicketGroupNode new tickets: aModule tickets)
-]
-
 { #category : #'data sets' }
 CIMWebTimeSpentChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
 	^ QueryAvgTimeDevGroupedByTime new
@@ -34,7 +27,7 @@ CIMWebTimeSpentChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketG
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CIMWebTimeSpentChartModel >> initialize [
 	cimWebLineBarModel := CIMWebLineBarModel current.
 	super initialize.

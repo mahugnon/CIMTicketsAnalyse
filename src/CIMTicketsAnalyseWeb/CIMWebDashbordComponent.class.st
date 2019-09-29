@@ -2,7 +2,6 @@ Class {
 	#name : #CIMWebDashbordComponent,
 	#superclass : #CIMWebScreenComponent,
 	#instVars : [
-		'lineChart',
 		'estimations',
 		'timeSpentPerTicketChart',
 		'timeSpentCharts',
@@ -72,11 +71,6 @@ CIMWebDashbordComponent >> initialize [
 	self createModuesLineBarComponent.
 	self createModuesTestRCLineBarComponent.
 	self createModuesTimeOpenCloseLineBarComponent
-]
-
-{ #category : #hooks }
-CIMWebDashbordComponent >> lineChart [
-	^ lineChart
 ]
 
 { #category : #hooks }

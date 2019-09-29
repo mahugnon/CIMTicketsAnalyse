@@ -5,22 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-CIMWebModulesTimeTestRCComponent >> applyStyleTo: aChartData [
-	| styleForPersons |
-	styleForPersons := self defineStyleColors.
-	aChartData dataSets
-		do: [ :set | 
-			set styleSheet
-				pointColor: [ :keys :values :label | (styleForPersons at: label) at: #pointColor ];
-				strokeColor:
-						[ :keys :values :label | (styleForPersons at: label) at: #strokeColor ];
-				pointStrokeColor: Color white;
-				fillColor: (Color white alpha: 0.4);
-				pointHighlightFill: Color white;
-				pointHighlightStroke: Color black ]
-]
-
-{ #category : #'as yet unclassified' }
 CIMWebModulesTimeTestRCComponent >> defineStyleColors [
 	^ Dictionary new
 		add:

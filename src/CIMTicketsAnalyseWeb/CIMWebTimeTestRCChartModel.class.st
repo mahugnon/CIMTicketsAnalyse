@@ -20,13 +20,6 @@ CIMWebTimeTestRCChartModel class >> resetCurrent [
 	super resetCurrent
 ]
 
-{ #category : #'as yet unclassified' }
-CIMWebTimeTestRCChartModel >> avgTimeModulePerYear: aModule selectQuery: selectQuery [
-	^ self
-		avgTimeTicketsPerYear: selectQuery
-		for: (CIMTicketGroupNode new tickets: aModule tickets)
-]
-
 { #category : #'data sets' }
 CIMWebTimeTestRCChartModel >> avgTimeTicketsPerYear: selectQuery for: aTicketGroupNode [
 	^ QueryAvgTicketsTimeRCTestGroupedByTime new
