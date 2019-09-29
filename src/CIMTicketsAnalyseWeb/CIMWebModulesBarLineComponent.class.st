@@ -49,6 +49,16 @@ CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 				pointHighlightStroke: Color black ]
 ]
 
+{ #category : #accessing }
+CIMWebModulesBarLineComponent >> chartDataSet [
+	^ model chartDataSet
+]
+
+{ #category : #rendering }
+CIMWebModulesBarLineComponent >> description [
+	^ self subclassResponsibility
+]
+
 { #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
@@ -108,7 +118,8 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 		with: [ html mdlCell
 				size: 8;
 				mdlTypographyTitle;
-				with: 'Time spent on bugs for ' , model selectedModule nom.
+				with:
+					self description , model selectedModule nom.
 			html mdlCell
 				size: 8;
 				mdlTypographyTextCenter;

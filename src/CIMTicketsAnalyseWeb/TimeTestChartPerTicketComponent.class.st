@@ -9,10 +9,16 @@ Class {
 
 { #category : #accessing }
 TimeTestChartPerTicketComponent >> chartDataSet [
-	^ model avgTimeRCTestTicketsPerYear
+	^ model chartDataSet
 ]
 
 { #category : #accessing }
 TimeTestChartPerTicketComponent >> description [
 	^ 'Test RC on tickets'
+]
+
+{ #category : #initialization }
+TimeTestChartPerTicketComponent >> initialize [
+	super initialize.
+	model := CIMWebTimeTestRCChartModel current
 ]

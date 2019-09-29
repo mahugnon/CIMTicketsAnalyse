@@ -20,6 +20,8 @@ CIMWebTimeTestRCChartModel >> avgTimeRCTestTicketsPerYear: selectQuery for: aTic
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aTicketGroupNode)))
+	"asOrderedDictionary
+	collect: [ :node | node time -> node value ]"
 ]
 
 { #category : #'as yet unclassified' }

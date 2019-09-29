@@ -21,6 +21,12 @@ TimeEstimMinusTimeTotalChart >> description [
 	^ 'Time to close opened tickets '
 ]
 
+{ #category : #initialization }
+TimeEstimMinusTimeTotalChart >> initialize [
+	super initialize.
+
+]
+
 { #category : #'as yet unclassified' }
 TimeEstimMinusTimeTotalChart >> regressions [
 	regresions

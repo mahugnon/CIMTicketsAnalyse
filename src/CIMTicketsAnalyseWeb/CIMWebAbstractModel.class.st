@@ -51,10 +51,12 @@ CIMWebAbstractModel >> computedatasSetForModule: aModule [
 	bugs := self computeBugsDataSetForModule: aModule.
 	evolutions := self computeEvolutionsDataSetForModule: aModule.
 	yBugs := bugs
-		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
+		collect:
+			[ :each | (each value / self timeConvert printShowingDecimalPlaces: 3) asNumber ].
 	x := evolutions collect: [ :each | each time ].
 	yEvolutions := evolutions
-		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
+		collect:
+			[ :each | (each value / self timeConvert printShowingDecimalPlaces: 3) asNumber ].
 	bugs size > evolutions size
 		ifTrue: [ x := bugs collect: [ :each | each time ].
 			evolutions size + 1 to: bugs size do: [ :i | yEvolutions add: 0 ] ].
@@ -128,4 +130,9 @@ CIMWebAbstractModel >> selectedModule [
 { #category : #accessing }
 CIMWebAbstractModel >> selectedModule: anObject [
 	selectedModule := anObject
+]
+
+{ #category : #'private - utility' }
+CIMWebAbstractModel >> timeConvert [
+	^ 3600
 ]

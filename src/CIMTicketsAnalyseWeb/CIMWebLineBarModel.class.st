@@ -29,7 +29,7 @@ CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear [
 
 { #category : #'private - utility' }
 CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
-	^ (QueryMovingAverage
+	^ QueryMovingAverage
 		runOn:
 			(QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
 				runOn:
@@ -38,8 +38,13 @@ CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
 							(selectQuery
 								runOn:
 									(QueryRejectNilEstimation
-										runOn: (QueryClosed new runOn: self modelData))))))
-		reject: [ :serie | serie asString = '-125526.52173913' ]
+										runOn: (QueryClosed new runOn: self modelData)))))
+	"reject: [ :serie | serie asString = '-125526.52173913' ]"
+]
+
+{ #category : #'private - utility' }
+CIMWebLineBarModel >> computedatasSetForModule: aModule [
+	
 ]
 
 { #category : #'data sets' }
@@ -51,8 +56,7 @@ CIMWebLineBarModel >> dataWithCloseDate [
 CIMWebLineBarModel >> initialize [
 	super initialize.
 	self initializePercentModuleTime.
-	self initializeAvgTimeDevTpsTotalMinusEstimTicketsPerYear.
-	self initializeAvgTimeRCTestTicketsPerYear
+	self initializeAvgTimeDevTpsTotalMinusEstimTicketsPerYear
 ]
 
 { #category : #'private - utility' }
@@ -73,8 +77,9 @@ CIMWebLineBarModel >> initializePercentModuleTime [
 	modulesNamesWithTimeSpent := self moduleGroupByTime.
 	totalInDays := (modulesNamesWithTimeSpent collect: #value) sum.
 	percentModuleTime := (modulesNamesWithTimeSpent
-		collect:
-			[ :ass | ass key -> ((ass value * 100 / totalInDays) asFloat truncateTo: 2) ])
+		collect: [ :ass | 
+			ass key
+				-> (ass value * 100 / totalInDays printShowingDecimalPlaces: 2) asNumber ])
 		select: [ :ass | ass value >= 2 ]
 ]
 

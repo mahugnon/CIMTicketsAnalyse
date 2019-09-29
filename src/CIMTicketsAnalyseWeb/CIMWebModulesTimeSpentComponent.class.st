@@ -4,6 +4,11 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
+{ #category : #rendering }
+CIMWebModulesTimeSpentComponent >> description [
+	^ 'Time spent developping by dev team  for: '
+]
+
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeSpentComponent >> initialize [
 	super initialize.

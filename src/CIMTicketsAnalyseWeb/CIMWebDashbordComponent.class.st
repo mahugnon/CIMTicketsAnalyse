@@ -7,7 +7,8 @@ Class {
 		'timeSpentPerTicketChart',
 		'timeSpentCharts',
 		'modulesPieComponent',
-		'modulesLineBarComponent'
+		'modulesLineBarComponent',
+		'modulesTestRCLineBarComponent'
 	],
 	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
@@ -25,6 +26,11 @@ CIMWebDashbordComponent >> createEstimationComponent [
 { #category : #initialization }
 CIMWebDashbordComponent >> createModuesLineBarComponent [
 	modulesLineBarComponent := CIMWebModulesTimeSpentComponent new
+]
+
+{ #category : #initialization }
+CIMWebDashbordComponent >> createModuesTestRCLineBarComponent [
+	modulesTestRCLineBarComponent := CIMWebModulesTimeTestRCComponent new
 ]
 
 { #category : #hooks }
@@ -56,7 +62,8 @@ CIMWebDashbordComponent >> initialize [
 	self createTimeChartComponent.
 	self createEstimationComponent.
 	self createModulePie.
-	self createModuesLineBarComponent
+	self createModuesLineBarComponent.
+	self createModuesTestRCLineBarComponent
 ]
 
 { #category : #hooks }
@@ -68,8 +75,8 @@ CIMWebDashbordComponent >> lineChart [
 CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
 		with: [ self estimationsOn: html.
-			self renderModulesComponentOn: html.
-			self renderChartsOn: html ]
+			self renderModulesComponentOn: html
+			"self renderChartsOn: html" ]
 ]
 
 { #category : #'parts rendering' }
@@ -91,6 +98,7 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 				size: 12;
 				with: 'Izy Protect Modules '.
 			self renderModulesLineBarOn: html.
+			self renderModulesTestRCLineBarOn: html.
 			self renderModulesPieOn: html ]
 ]
 
@@ -108,6 +116,13 @@ CIMWebDashbordComponent >> renderModulesPieOn: html [
 		mdlTypographyTextCenter;
 		with: [ html render: modulesPieComponent.
 			html space ]
+]
+
+{ #category : #'parts rendering' }
+CIMWebDashbordComponent >> renderModulesTestRCLineBarOn: html [
+	html mdlCell
+		size: 6;
+		with: [ html render: modulesTestRCLineBarComponent ]
 ]
 
 { #category : #hooks }
