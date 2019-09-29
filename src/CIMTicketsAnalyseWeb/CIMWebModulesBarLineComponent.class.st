@@ -51,7 +51,7 @@ CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> chartDataSet [
-	^ model dataSetForModule: model selectedModule
+	^ self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }

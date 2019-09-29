@@ -3,7 +3,6 @@ Class {
 	#superclass : #CIMWebScreenComponent,
 	#instVars : [
 		'lineChart',
-		'moduleBilan',
 		'estimations',
 		'timeSpentPerTicketChart',
 		'timeSpentCharts',
@@ -25,17 +24,12 @@ CIMWebDashbordComponent >> createEstimationComponent [
 
 { #category : #initialization }
 CIMWebDashbordComponent >> createModuesLineBarComponent [
-	modulesLineBarComponent := CIMWebModulesBarLineComponent new
+	modulesLineBarComponent := CIMWebModulesTimeSpentComponent new
 ]
 
 { #category : #hooks }
 CIMWebDashbordComponent >> createModulePie [
 	modulesPieComponent := CIMWebModulesPieComponent new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createTableComponent [
-	moduleBilan := CIMWebTableComponent new
 ]
 
 { #category : #initialization }
@@ -60,7 +54,6 @@ CIMWebDashbordComponent >> estimationsOn: html [
 CIMWebDashbordComponent >> initialize [
 	super initialize.
 	self createTimeChartComponent.
-	self createTableComponent.
 	self createEstimationComponent.
 	self createModulePie.
 	self createModuesLineBarComponent
@@ -76,8 +69,7 @@ CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
 		with: [ self estimationsOn: html.
 			self renderModulesComponentOn: html.
-			self renderChartsOn: html.
-			self renderTableOn: html ]
+			self renderChartsOn: html ]
 ]
 
 { #category : #'parts rendering' }
@@ -116,13 +108,6 @@ CIMWebDashbordComponent >> renderModulesPieOn: html [
 		mdlTypographyTextCenter;
 		with: [ html render: modulesPieComponent.
 			html space ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderTableOn: html [
-	html mdlCell
-		size: 12;
-		with: [ html render: moduleBilan ]
 ]
 
 { #category : #hooks }

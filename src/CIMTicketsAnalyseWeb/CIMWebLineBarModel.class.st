@@ -1,38 +1,13 @@
 Class {
 	#name : #CIMWebLineBarModel,
-	#superclass : #Object,
+	#superclass : #CIMWebAbstractModel,
 	#instVars : [
-		'selectedModule',
-		'modelData',
-		'modules',
-		'dataSetForModules',
 		'percentModuleTime',
 		'avgTimeDevTpsTotalMinusEstimTicketsPerYear',
 		'avgTimeRCTestTicketsPerYear'
 	],
-	#classInstVars : [
-		'current'
-	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
-
-{ #category : #accessing }
-CIMWebLineBarModel class >> current [
-	current
-		ifNil: [ current := self basicNew
-				modelData:
-					(QueryBugsEvolutions
-						runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows));
-				initialize ].
-	^ current
-]
-
-{ #category : #initialization }
-CIMWebLineBarModel class >> resetCurrent [
-	<script>
-	current := nil.
-	self current
-]
 
 { #category : #'private - utility' }
 CIMWebLineBarModel >> avgNodesToDic: aCollection [
@@ -77,7 +52,9 @@ CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
 					(QueryTicketPerYearClosing
 						runOn:
 							(selectQuery
-								runOn: (QueryRejectNilEstimation runOn: (QueryClosed new runOn: modelData))))))
+								runOn:
+									(QueryRejectNilEstimation
+										runOn: (QueryClosed new runOn: self modelData))))))
 		reject: [ :serie | serie asString = '-125526.52173913' ]
 ]
 
@@ -94,28 +71,6 @@ CIMWebLineBarModel >> avgTimeRCTestTicketsPerYear: selectQuery [
 				runOn: (selectQuery runOn: self dataWithCloseDate))
 ]
 
-{ #category : #'private - utility' }
-CIMWebLineBarModel >> computedatasSetForModule: aModule [
-	| bugs evolutions x yBugs yEvolutions |
-	bugs := self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs.
-	evolutions := self
-		avgTimeDevModulePerYear: aModule
-		selectQuery: QueryEvolutions.
-	yBugs := bugs
-		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
-	x := evolutions collect: [ :each | each time ].
-	yEvolutions := evolutions
-		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
-	bugs size > evolutions size
-		ifTrue: [ x := bugs collect: [ :each | each time ].
-			evolutions size + 1 to: bugs size do: [ :i | yEvolutions add: 0 ] ].
-	bugs size < evolutions size
-		ifTrue: [ bugs size + 1 to: evolutions size do: [ :i | yBugs add: 0 ] ].
-	^ {x.
-	('Bugs' -> yBugs).
-	('Evolutions' -> yEvolutions)} asOrderedCollection
-]
-
 { #category : #accessing }
 CIMWebLineBarModel >> dataSetForModule: aModule [
 	^ dataSetForModules at: aModule nom
@@ -123,7 +78,7 @@ CIMWebLineBarModel >> dataSetForModule: aModule [
 
 { #category : #'data sets' }
 CIMWebLineBarModel >> dataWithCloseDate [
-	^ QueryClosed runOn: (QueryCleanData runOn: modelData)
+	^ QueryClosed runOn: (QueryCleanData runOn: self modelData)
 ]
 
 { #category : #'data sets' }
@@ -134,9 +89,6 @@ CIMWebLineBarModel >> dataWithCloseDate: aCIMTicketGroup [
 { #category : #initialization }
 CIMWebLineBarModel >> initialize [
 	super initialize.
-	self initializeModules.
-	self initializeSelectedModule.
-	self initializeDataSetForModules.
 	self initializePercentModuleTime.
 	self initializeAvgTimeDevTpsTotalMinusEstimTicketsPerYear.
 	self initializeAvgTimeRCTestTicketsPerYear
@@ -157,18 +109,6 @@ CIMWebLineBarModel >> initializeAvgTimeRCTestTicketsPerYear [
 		collect: [ :node | node time -> node value ]) asOrderedDictionary
 ]
 
-{ #category : #initialization }
-CIMWebLineBarModel >> initializeDataSetForModules [
-	dataSetForModules := (modules
-		collect: [ :module | module nom -> (self computedatasSetForModule: module) ])
-		asOrderedDictionary
-]
-
-{ #category : #initialization }
-CIMWebLineBarModel >> initializeModules [
-	modules := modules := Tbl tbl_Module rows
-]
-
 { #category : #'private - utility' }
 CIMWebLineBarModel >> initializePercentModuleTime [
 	| modulesNamesWithTimeSpent totalInDays |
@@ -178,21 +118,6 @@ CIMWebLineBarModel >> initializePercentModuleTime [
 		collect:
 			[ :ass | ass key -> ((ass value * 100 / totalInDays) asFloat truncateTo: 2) ])
 		select: [ :ass | ass value >= 2 ]
-]
-
-{ #category : #initialization }
-CIMWebLineBarModel >> initializeSelectedModule [
-	selectedModule := Tbl tbl_Module moduleNamed: 'IZY Protect'
-]
-
-{ #category : #'private - utility' }
-CIMWebLineBarModel >> linearRegressionCaracteristcs: aCollection [
-	^ QueryLinearRegression new runOn1: aCollection
-]
-
-{ #category : #accessing }
-CIMWebLineBarModel >> modelData: aCIMTicketGroupNode [
-	modelData := aCIMTicketGroupNode
 ]
 
 { #category : #'private - utility' }
@@ -216,14 +141,4 @@ CIMWebLineBarModel >> modules [
 { #category : #'private - utility' }
 CIMWebLineBarModel >> percentModuleTime [
 	^ percentModuleTime
-]
-
-{ #category : #accessing }
-CIMWebLineBarModel >> selectedModule [
-	^ selectedModule
-]
-
-{ #category : #accessing }
-CIMWebLineBarModel >> selectedModule: anObject [
-	selectedModule := anObject
 ]
