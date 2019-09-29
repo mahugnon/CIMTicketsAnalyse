@@ -1,13 +1,35 @@
 Class {
 	#name : #CIMWebEstimationModel,
-	#superclass : #CIMWebAbstractModel,
+	#superclass : #Object,
 	#instVars : [
 		'totalTime',
 		'percentBugs',
-		'percentEvolutions'
+		'percentEvolutions',
+		'modelData'
+	],
+	#classInstVars : [
+		'current'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
+
+{ #category : #accessing }
+CIMWebEstimationModel class >> current [
+	current
+		ifNil: [ current := self basicNew
+				modelData:
+					(QueryBugsEvolutions
+						runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows));
+				initialize ].
+	^ current
+]
+
+{ #category : #accessing }
+CIMWebEstimationModel class >> resetCurrent [
+	<script>
+	current := nil.
+	self current
+]
 
 { #category : #initialization }
 CIMWebEstimationModel >> initialize [
@@ -32,6 +54,16 @@ CIMWebEstimationModel >> initializePercentEvolutions [
 { #category : #accessing }
 CIMWebEstimationModel >> initializeTotalTime [
 	totalTime := QueryTicketsTimeDev runOn: modelData
+]
+
+{ #category : #accessing }
+CIMWebEstimationModel >> modelData [
+	^ modelData
+]
+
+{ #category : #accessing }
+CIMWebEstimationModel >> modelData: anObject [
+	modelData := anObject
 ]
 
 { #category : #api }

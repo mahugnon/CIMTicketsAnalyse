@@ -26,18 +26,30 @@ CIMWebAbstractModel class >> current [
 
 { #category : #accessing }
 CIMWebAbstractModel class >> resetCurrent [
-	<script>
 	current := nil.
 	self current
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> chartDataSet [
+	^ self dataSetForModule: self selectedModule
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> computeBugsDataSetForModule: aModule [
+	^ self subclassResponsibility
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> computeEvolutionsDataSetForModule: aModule [
+	^ self subclassResponsibility
 ]
 
 { #category : #'private - utility' }
 CIMWebAbstractModel >> computedatasSetForModule: aModule [
 	| bugs evolutions x yBugs yEvolutions |
-	bugs := self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs.
-	evolutions := self
-		avgTimeDevModulePerYear: aModule
-		selectQuery: QueryEvolutions.
+	bugs := self computeBugsDataSetForModule: aModule.
+	evolutions := self computeEvolutionsDataSetForModule: aModule.
 	yBugs := bugs
 		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
 	x := evolutions collect: [ :each | each time ].
@@ -51,6 +63,16 @@ CIMWebAbstractModel >> computedatasSetForModule: aModule [
 	^ {x.
 	('Bugs' -> yBugs).
 	('Evolutions' -> yEvolutions)} asOrderedCollection
+]
+
+{ #category : #accessing }
+CIMWebAbstractModel >> dataSetForModule: aModule [
+	^ dataSetForModules at: aModule nom
+]
+
+{ #category : #'data sets' }
+CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
+	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
 ]
 
 { #category : #initialization }
@@ -70,12 +92,12 @@ CIMWebAbstractModel >> initializeDataSetForModules [
 
 { #category : #initialization }
 CIMWebAbstractModel >> initializeModules [
-	modules := modules := Tbl tbl_Module rows
+	^ self subclassResponsibility
 ]
 
 { #category : #initialization }
 CIMWebAbstractModel >> initializeSelectedModule [
-	selectedModule := Tbl tbl_Module moduleNamed: 'IZY Protect'
+	^ self subclassResponsibility
 ]
 
 { #category : #'private - utility' }
@@ -91,6 +113,11 @@ CIMWebAbstractModel >> modelData [
 { #category : #accessing }
 CIMWebAbstractModel >> modelData: anObject [
 	modelData := anObject
+]
+
+{ #category : #accessing }
+CIMWebAbstractModel >> modules [
+	^ modules
 ]
 
 { #category : #accessing }

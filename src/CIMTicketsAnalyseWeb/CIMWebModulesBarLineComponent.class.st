@@ -50,11 +50,6 @@ CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebModulesBarLineComponent >> chartDataSet [
-	^ self subclassResponsibility
-]
-
-{ #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
 	self kind: self kinds anyOne.
@@ -170,7 +165,7 @@ CIMWebModulesBarLineComponent >> renderPossibleKindsUpdating: id with: rendering
 CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 	| renderingChartBlock id dataSet regression |
 	regression := self linearRegressionCaracteristcs.
-	dataSet := self chartDataSet.
+	dataSet := model chartDataSet.
 	renderingChartBlock := [ :canvas | 
 	| chartData |
 	chartData := (Chart2dData
