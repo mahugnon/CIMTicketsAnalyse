@@ -101,12 +101,13 @@ CIMWebLineBarModel >> computedatasSetForModule: aModule [
 	evolutions := self
 		avgTimeDevModulePerYear: aModule
 		selectQuery: QueryEvolutions.
-	yBugs := bugs collect: [ :each | each value / 27000 asFloat ].
-	x := evolutions collect: [ :each | each time asString ].
+	yBugs := bugs
+		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
+	x := evolutions collect: [ :each | each time ].
 	yEvolutions := evolutions
-		collect: [ :each | each value / 27000 asFloat ].
+		collect: [ :each | each value / 3600 asFloat truncateTo: 3 ].
 	bugs size > evolutions size
-		ifTrue: [ x := bugs collect: [ :each | each time asString ].
+		ifTrue: [ x := bugs collect: [ :each | each time ].
 			evolutions size + 1 to: bugs size do: [ :i | yEvolutions add: 0 ] ].
 	bugs size < evolutions size
 		ifTrue: [ bugs size + 1 to: evolutions size do: [ :i | yBugs add: 0 ] ].
