@@ -8,7 +8,8 @@ Class {
 		'timeSpentCharts',
 		'modulesPieComponent',
 		'modulesLineBarComponent',
-		'modulesTestRCLineBarComponent'
+		'modulesTestRCLineBarComponent',
+		'modulesTimeOpenCloseLineBarComponent'
 	],
 	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
@@ -31,6 +32,12 @@ CIMWebDashbordComponent >> createModuesLineBarComponent [
 { #category : #initialization }
 CIMWebDashbordComponent >> createModuesTestRCLineBarComponent [
 	modulesTestRCLineBarComponent := CIMWebModulesTimeTestRCComponent new
+]
+
+{ #category : #initialization }
+CIMWebDashbordComponent >> createModuesTimeOpenCloseLineBarComponent [
+	modulesTimeOpenCloseLineBarComponent := CIMWebModulesTimeToOpenCloseComponent
+		new
 ]
 
 { #category : #hooks }
@@ -63,7 +70,8 @@ CIMWebDashbordComponent >> initialize [
 	self createEstimationComponent.
 	self createModulePie.
 	self createModuesLineBarComponent.
-	self createModuesTestRCLineBarComponent
+	self createModuesTestRCLineBarComponent.
+	self createModuesTimeOpenCloseLineBarComponent
 ]
 
 { #category : #hooks }
@@ -99,6 +107,7 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 				with: 'Izy Protect Modules '.
 			self renderModulesLineBarOn: html.
 			self renderModulesTestRCLineBarOn: html.
+			self renderModulesTimeOpenCloseLineBarOn: html.
 			self renderModulesPieOn: html ]
 ]
 
@@ -123,6 +132,13 @@ CIMWebDashbordComponent >> renderModulesTestRCLineBarOn: html [
 	html mdlCell
 		size: 6;
 		with: [ html render: modulesTestRCLineBarComponent ]
+]
+
+{ #category : #'parts rendering' }
+CIMWebDashbordComponent >> renderModulesTimeOpenCloseLineBarOn: html [
+	html mdlCell
+		size: 6;
+		with: [ html render: modulesTimeOpenCloseLineBarComponent ]
 ]
 
 { #category : #hooks }

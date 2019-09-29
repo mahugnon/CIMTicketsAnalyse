@@ -20,28 +20,18 @@ CIMWebTimeSpentChartModel class >> resetCurrent [
 ]
 
 { #category : #'private - utility' }
-CIMWebTimeSpentChartModel >> avgTimeDevModulePerYear: aModule selectQuery: selectQuery [
+CIMWebTimeSpentChartModel >> avgTimeModulePerYear: aModule selectQuery: selectQuery [
 	^ self
-		avgTimeDevTicketsPerYear: selectQuery
+		avgTimeTicketsPerYear: selectQuery
 		for: (CIMTicketGroupNode new tickets: aModule tickets)
 ]
 
 { #category : #'data sets' }
-CIMWebTimeSpentChartModel >> avgTimeDevTicketsPerYear: selectQuery for: aCIMTicketGroup [
+CIMWebTimeSpentChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
-]
-
-{ #category : #'as yet unclassified' }
-CIMWebTimeSpentChartModel >> computeBugsDataSetForModule: aModule [
-	^ self avgTimeDevModulePerYear: aModule selectQuery: QueryBugs
-]
-
-{ #category : #'as yet unclassified' }
-CIMWebTimeSpentChartModel >> computeEvolutionsDataSetForModule: aModule [
-	^ self avgTimeDevModulePerYear: aModule selectQuery: QueryEvolutions
 ]
 
 { #category : #'as yet unclassified' }

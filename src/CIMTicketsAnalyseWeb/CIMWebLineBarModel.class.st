@@ -14,14 +14,6 @@ CIMWebLineBarModel class >> resetCurrent [
 	super resetCurrent
 ]
 
-{ #category : #'data sets' }
-CIMWebLineBarModel >> avgTimeDevTicketsPerYear: selectQuery [
-	^ QueryAvgTimeDevGroupedByTime new
-		runOn:
-			(QueryTicketPerYearClosing new
-				runOn: (selectQuery runOn: self dataWithCloseDate))
-]
-
 { #category : #'private - utility' }
 CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear [
 	^ avgTimeDevTpsTotalMinusEstimTicketsPerYear
@@ -45,11 +37,6 @@ CIMWebLineBarModel >> avgTimeDevTpsTotalMinusEstimTicketsPerYear: selectQuery [
 { #category : #'private - utility' }
 CIMWebLineBarModel >> computedatasSetForModule: aModule [
 	
-]
-
-{ #category : #'data sets' }
-CIMWebLineBarModel >> dataWithCloseDate [
-	^ QueryClosed runOn: (QueryCleanData runOn: self modelData)
 ]
 
 { #category : #initialization }

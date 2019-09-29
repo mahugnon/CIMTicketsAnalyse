@@ -9,38 +9,32 @@ Class {
 }
 
 { #category : #accessing }
+CIMWebTimeTestRCChartModel class >> current [
+	current ifNil: [ current := self new ].
+	^ current
+]
+
+{ #category : #accessing }
 CIMWebTimeTestRCChartModel class >> resetCurrent [
 	<script>
 	super resetCurrent
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebTimeTestRCChartModel >> avgTimeModulePerYear: aModule selectQuery: selectQuery [
+	^ self
+		avgTimeTicketsPerYear: selectQuery
+		for: (CIMTicketGroupNode new tickets: aModule tickets)
+]
+
 { #category : #'data sets' }
-CIMWebTimeTestRCChartModel >> avgTimeRCTestTicketsPerYear: selectQuery for: aTicketGroupNode [
+CIMWebTimeTestRCChartModel >> avgTimeTicketsPerYear: selectQuery for: aTicketGroupNode [
 	^ QueryAvgTicketsTimeRCTestGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aTicketGroupNode)))
 	"asOrderedDictionary
 	collect: [ :node | node time -> node value ]"
-]
-
-{ #category : #'as yet unclassified' }
-CIMWebTimeTestRCChartModel >> avgTimeTestRCModulePerYear: aModule selectQuery: selectQuery [
-	^ self
-		avgTimeRCTestTicketsPerYear: selectQuery
-		for: (CIMTicketGroupNode new tickets: aModule tickets)
-]
-
-{ #category : #'as yet unclassified' }
-CIMWebTimeTestRCChartModel >> computeBugsDataSetForModule: aModule [
-	^ self avgTimeTestRCModulePerYear: aModule selectQuery: QueryBugs
-]
-
-{ #category : #'as yet unclassified' }
-CIMWebTimeTestRCChartModel >> computeEvolutionsDataSetForModule: aModule [
-	^ self
-		avgTimeTestRCModulePerYear: aModule
-		selectQuery: QueryEvolutions
 ]
 
 { #category : #initialization }

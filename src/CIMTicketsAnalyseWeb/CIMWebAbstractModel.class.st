@@ -30,6 +30,16 @@ CIMWebAbstractModel class >> resetCurrent [
 	self current
 ]
 
+{ #category : #'private - utility' }
+CIMWebAbstractModel >> avgTimeModulePerYear: aModule selectQuery: selectQuery [
+	^ self subclassResponsibility
+]
+
+{ #category : #'data sets' }
+CIMWebAbstractModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
+	^ self subclassResponsibility
+]
+
 { #category : #'as yet unclassified' }
 CIMWebAbstractModel >> chartDataSet [
 	^ self dataSetForModule: self selectedModule
@@ -37,12 +47,12 @@ CIMWebAbstractModel >> chartDataSet [
 
 { #category : #'as yet unclassified' }
 CIMWebAbstractModel >> computeBugsDataSetForModule: aModule [
-	^ self subclassResponsibility
+	^ self avgTimeModulePerYear: aModule selectQuery: QueryBugs
 ]
 
 { #category : #'as yet unclassified' }
 CIMWebAbstractModel >> computeEvolutionsDataSetForModule: aModule [
-	^ self subclassResponsibility
+	^ self avgTimeModulePerYear: aModule selectQuery: QueryEvolutions
 ]
 
 { #category : #'private - utility' }

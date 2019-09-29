@@ -11,32 +11,7 @@ Class {
 { #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 	| styleForPersons |
-	styleForPersons := Dictionary new
-		add:
-			'Evolutions'
-				->
-					(Dictionary
-						with: #pointColor -> Color blue
-						with: #strokeColor -> Color blue);
-		add:
-			'Bugs'
-				->
-					(Dictionary
-						with: #pointColor -> Color red
-						with: #strokeColor -> Color red);
-		add:
-			'Bugs regression'
-				->
-					(Dictionary
-						with: #pointColor -> Color red
-						with: #strokeColor -> Color red);
-		add:
-			'Evolution regression'
-				->
-					(Dictionary
-						with: #pointColor -> Color blue
-						with: #strokeColor -> Color blue);
-		yourself.
+	styleForPersons := self defineStyleColors.
 	aChartData dataSets
 		do: [ :set | 
 			set styleSheet
@@ -52,6 +27,11 @@ CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 { #category : #accessing }
 CIMWebModulesBarLineComponent >> chartDataSet [
 	^ model chartDataSet
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebModulesBarLineComponent >> defineStyleColors [
+	^ self subclassResponsibility
 ]
 
 { #category : #rendering }
