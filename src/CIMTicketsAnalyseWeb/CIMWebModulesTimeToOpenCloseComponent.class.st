@@ -36,7 +36,7 @@ CIMWebModulesTimeToOpenCloseComponent >> defineStyleColors [
 
 { #category : #rendering }
 CIMWebModulesTimeToOpenCloseComponent >> description [
-	^ 'Time spent to close an opened ticket for:  '
+	^ 'Time spent to close an opened ticket  '
 ]
 
 { #category : #'private-api' }

@@ -36,7 +36,7 @@ CIMWebModulesTimeTestRCComponent >> defineStyleColors [
 
 { #category : #rendering }
 CIMWebModulesTimeTestRCComponent >> description [
-	^ 'Time spent testing by RC team for:  '
+	^ 'Time spent testing by RC team  '
 ]
 
 { #category : #initialization }

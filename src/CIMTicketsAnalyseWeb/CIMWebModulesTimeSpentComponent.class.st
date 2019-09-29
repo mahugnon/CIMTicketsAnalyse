@@ -36,7 +36,7 @@ CIMWebModulesTimeSpentComponent >> defineStyleColors [
 
 { #category : #rendering }
 CIMWebModulesTimeSpentComponent >> description [
-	^ 'Time spent developping by dev team  for: '
+	^ 'Time spent developping by dev team '
 ]
 
 { #category : #initialization }

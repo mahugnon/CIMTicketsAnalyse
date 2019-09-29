@@ -36,7 +36,7 @@ CIMWebModulesTimeTotalMinusEstimComponent >> defineStyleColors [
 
 { #category : #rendering }
 CIMWebModulesTimeTotalMinusEstimComponent >> description [
-	^ 'Time total spent minus estimated time spent'
+	^ 'Time total spent minus estimated time spent  '
 ]
 
 { #category : #initialization }
