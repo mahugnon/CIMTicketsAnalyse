@@ -4,33 +4,33 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CIMWebModulesTimeToOpenCloseComponent >> defineStyleColors [
 	^ Dictionary new
 		add:
 			'Evolutions'
 				->
 					(Dictionary
-						with: #pointColor -> (Color fromHexString: '#58E8D7')
-						with: #strokeColor -> (Color fromHexString: '#58E8D7'));
+						with: #pointColor -> (Color fromHexString: '#1774FF')
+						with: #strokeColor -> (Color fromHexString: '#1774FF'));
 		add:
 			'Bugs'
 				->
 					(Dictionary
-						with: #pointColor -> (Color fromHexString: '#FFC961')
-						with: #strokeColor -> (Color fromHexString: '#FFC961'));
+						with: #pointColor -> (Color fromHexString: '#EB2FA7')
+						with: #strokeColor -> (Color fromHexString: '#EB2FA7'));
 		add:
 			'Bugs regression'
 				->
 					(Dictionary
-						with: #pointColor -> (Color fromHexString: '#FFC961')
-						with: #strokeColor -> (Color fromHexString: '#FFC961'));
+						with: #pointColor -> (Color fromHexString: '#EB2FA7')
+						with: #strokeColor -> (Color fromHexString: '#EB2FA7'));
 		add:
 			'Evolution regression'
 				->
 					(Dictionary
-						with: #pointColor -> (Color fromHexString: '#58E8D7')
-						with: #strokeColor -> (Color fromHexString: '#58E8D7'));
+						with: #pointColor -> (Color fromHexString: '#1774FF')
+						with: #strokeColor -> (Color fromHexString: '#1774FF'));
 		yourself
 ]
 
@@ -39,7 +39,7 @@ CIMWebModulesTimeToOpenCloseComponent >> description [
 	^ 'Time spent to close an opened ticket for:  '
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesTimeToOpenCloseComponent >> initialize [
 	super initialize.
 	model := CIMWebTimeOpenCloseChartModel current

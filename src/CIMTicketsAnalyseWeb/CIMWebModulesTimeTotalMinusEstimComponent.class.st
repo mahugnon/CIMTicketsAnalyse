@@ -1,11 +1,11 @@
 Class {
-	#name : #CIMWebModulesTimeSpentComponent,
+	#name : #CIMWebModulesTimeTotalMinusEstimComponent,
 	#superclass : #CIMWebModulesBarLineComponent,
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
 { #category : #'private-api' }
-CIMWebModulesTimeSpentComponent >> defineStyleColors [
+CIMWebModulesTimeTotalMinusEstimComponent >> defineStyleColors [
 	^ Dictionary new
 		add:
 			'Evolutions'
@@ -35,12 +35,12 @@ CIMWebModulesTimeSpentComponent >> defineStyleColors [
 ]
 
 { #category : #rendering }
-CIMWebModulesTimeSpentComponent >> description [
-	^ 'Time spent developping by dev team  for: '
+CIMWebModulesTimeTotalMinusEstimComponent >> description [
+	^ 'Time total spent minus estimated time spent'
 ]
 
 { #category : #initialization }
-CIMWebModulesTimeSpentComponent >> initialize [
+CIMWebModulesTimeTotalMinusEstimComponent >> initialize [
 	super initialize.
-	model := CIMWebTimeSpentChartModel current
+	model := CIMWebTimeTotalMinusEstimChartModel current
 ]

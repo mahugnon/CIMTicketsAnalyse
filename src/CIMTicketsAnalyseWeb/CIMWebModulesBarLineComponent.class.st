@@ -8,7 +8,7 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 	| styleForPersons |
 	styleForPersons := self defineStyleColors.
@@ -29,7 +29,7 @@ CIMWebModulesBarLineComponent >> chartDataSet [
 	^ model chartDataSet
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> defineStyleColors [
 	^ self subclassResponsibility
 ]
@@ -39,19 +39,19 @@ CIMWebModulesBarLineComponent >> description [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
 	self kind: self kinds anyOne.
 	model := CIMWebLineBarModel current
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> kind [
 	^ kind
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> kind: aChartType [
 	kind := aChartType
 ]
@@ -62,7 +62,7 @@ CIMWebModulesBarLineComponent >> kinds [
 	ChartBar}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> linearRegressionCaracteristcs [
 	| keys |
 	keys := self chartDataSet first.

@@ -4,7 +4,7 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesTimeTestRCComponent >> defineStyleColors [
 	^ Dictionary new
 		add:
@@ -39,7 +39,7 @@ CIMWebModulesTimeTestRCComponent >> description [
 	^ 'Time spent testing by RC team for:  '
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 CIMWebModulesTimeTestRCComponent >> initialize [
 	super initialize.
 	model := CIMWebTimeTestRCChartModel current
