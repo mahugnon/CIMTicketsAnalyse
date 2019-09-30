@@ -1,17 +1,8 @@
 Class {
 	#name : #CIMWebTimeOpenCloseChartModel,
 	#superclass : #CIMWebAbstractModel,
-	#instVars : [
-		'cimWebLineBarModel'
-	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
-
-{ #category : #accessing }
-CIMWebTimeOpenCloseChartModel class >> current [
-	current ifNil: [ current := self new ].
-	^ current
-]
 
 { #category : #accessing }
 CIMWebTimeOpenCloseChartModel class >> resetCurrent [
@@ -25,24 +16,6 @@ CIMWebTimeOpenCloseChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTic
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
-]
-
-{ #category : #initialization }
-CIMWebTimeOpenCloseChartModel >> initialize [
-	cimWebLineBarModel := CIMWebMainFLineBarModel current.
-	super initialize.
-	self modelData: cimWebLineBarModel modelData.
-	self initializeModules
-]
-
-{ #category : #initialization }
-CIMWebTimeOpenCloseChartModel >> initializeModules [
-	modules := cimWebLineBarModel modules
-]
-
-{ #category : #initialization }
-CIMWebTimeOpenCloseChartModel >> initializeSelectedModule [
-	selectedModule := cimWebLineBarModel selectedModule
 ]
 
 { #category : #'private - utility' }

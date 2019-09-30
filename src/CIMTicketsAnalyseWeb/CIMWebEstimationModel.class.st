@@ -15,12 +15,7 @@ Class {
 
 { #category : #accessing }
 CIMWebEstimationModel class >> current [
-	current
-		ifNil: [ current := self basicNew
-				modelData:
-					(QueryBugsEvolutions
-						runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows));
-				initialize ].
+	current ifNil: [ current := self new ].
 	^ current
 ]
 
@@ -34,9 +29,15 @@ CIMWebEstimationModel class >> resetCurrent [
 { #category : #initialization }
 CIMWebEstimationModel >> initialize [
 	super initialize.
+	self initializeModelData.
 	self initializeTotalTime.
 	self initializePercentBugs.
 	self initializePercentEvolutions
+]
+
+{ #category : #initialization }
+CIMWebEstimationModel >> initializeModelData [
+	modelData := CIMWebMainLineBarModel current modelData
 ]
 
 { #category : #api }

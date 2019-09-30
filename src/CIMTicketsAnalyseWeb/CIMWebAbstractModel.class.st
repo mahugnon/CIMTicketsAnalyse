@@ -5,7 +5,8 @@ Class {
 		'modelData',
 		'modules',
 		'selectedModule',
-		'dataSetForModules'
+		'dataSetForModules',
+		'cIMWebMainLineBarModel'
 	],
 	#classInstVars : [
 		'current'
@@ -15,12 +16,7 @@ Class {
 
 { #category : #accessing }
 CIMWebAbstractModel class >> current [
-	current
-		ifNil: [ current := self basicNew
-				modelData:
-					(QueryBugsEvolutions
-						runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows));
-				initialize ].
+	current ifNil: [ current := self new ].
 	^ current
 ]
 
@@ -92,6 +88,8 @@ CIMWebAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
 { #category : #initialization }
 CIMWebAbstractModel >> initialize [
 	super initialize.
+	self initializeMainLineBarModel.
+	self initializeModelData.
 	self initializeModules.
 	self initializeSelectedModule.
 	self initializeDataSetForModules
@@ -105,13 +103,23 @@ CIMWebAbstractModel >> initializeDataSetForModules [
 ]
 
 { #category : #initialization }
+CIMWebAbstractModel >> initializeMainLineBarModel [
+	cIMWebMainLineBarModel := CIMWebMainLineBarModel current
+]
+
+{ #category : #initialization }
+CIMWebAbstractModel >> initializeModelData [
+	self modelData: cIMWebMainLineBarModel modelData
+]
+
+{ #category : #initialization }
 CIMWebAbstractModel >> initializeModules [
-	^ self subclassResponsibility
+	modules := cIMWebMainLineBarModel modules
 ]
 
 { #category : #initialization }
 CIMWebAbstractModel >> initializeSelectedModule [
-	^ self subclassResponsibility
+	selectedModule := cIMWebMainLineBarModel selectedModule
 ]
 
 { #category : #'private - utility' }

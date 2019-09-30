@@ -21,7 +21,7 @@ CIMWebAbstractChartComponent >> description [
 { #category : #initialization }
 CIMWebAbstractChartComponent >> initialize [
 	super initialize.
-	model := CIMWebMainFLineBarModel current
+	model := CIMWebMainLineBarModel current
 ]
 
 { #category : #'as yet unclassified' }

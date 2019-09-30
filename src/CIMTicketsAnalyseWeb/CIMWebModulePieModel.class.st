@@ -34,12 +34,12 @@ CIMWebModulePieModel >> initialize [
 
 { #category : #initialization }
 CIMWebModulePieModel >> initializeModelData [
-	modelData := CIMWebMainFLineBarModel current modelData
+	modelData := CIMWebMainLineBarModel current modelData
 ]
 
 { #category : #initialization }
 CIMWebModulePieModel >> initializeModules [
-	modules := CIMWebMainFLineBarModel current modules
+	modules := CIMWebMainLineBarModel current modules
 ]
 
 { #category : #'private - utility' }
