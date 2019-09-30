@@ -29,7 +29,7 @@ CIMWebTimeOpenCloseChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTic
 
 { #category : #initialization }
 CIMWebTimeOpenCloseChartModel >> initialize [
-	cimWebLineBarModel := CIMWebLineBarModel current.
+	cimWebLineBarModel := CIMWebMainFLineBarModel current.
 	super initialize.
 	self modelData: cimWebLineBarModel modelData.
 	self initializeModules

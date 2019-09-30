@@ -124,7 +124,7 @@ CIMWebDashbordComponent >> renderModulesLineBarOn: html [
 { #category : #'parts rendering' }
 CIMWebDashbordComponent >> renderModulesPieOn: html [
 	html mdlCell
-		size: 6;
+		size: 12;
 		mdlTypographyTextCenter;
 		with: [ html render: modulesPieComponent.
 			html space ]

@@ -43,7 +43,7 @@ CIMWebModulesBarLineComponent >> description [
 CIMWebModulesBarLineComponent >> initialize [
 	super initialize.
 	self kind: self kinds anyOne.
-	model := CIMWebLineBarModel current
+	model := CIMWebMainFLineBarModel current
 ]
 
 { #category : #'private-api' }

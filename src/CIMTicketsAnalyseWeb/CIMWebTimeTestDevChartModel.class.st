@@ -32,7 +32,7 @@ CIMWebTimeTestDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aTicketGr
 
 { #category : #initialization }
 CIMWebTimeTestDevChartModel >> initialize [
-	cimWebLineBarModel := CIMWebLineBarModel current.
+	cimWebLineBarModel := CIMWebMainFLineBarModel current.
 	super initialize.
 	self modelData: cimWebLineBarModel modelData.
 	self initializeModules

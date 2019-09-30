@@ -29,7 +29,7 @@ CIMWebTimeSpentChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketG
 
 { #category : #initialization }
 CIMWebTimeSpentChartModel >> initialize [
-	cimWebLineBarModel := CIMWebLineBarModel current.
+	cimWebLineBarModel := CIMWebMainFLineBarModel current.
 	super initialize.
 	self modelData: cimWebLineBarModel modelData.
 	self initializeModules

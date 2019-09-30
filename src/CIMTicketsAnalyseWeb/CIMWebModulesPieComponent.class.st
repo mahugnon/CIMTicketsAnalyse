@@ -33,7 +33,7 @@ CIMWebModulesPieComponent >> chartDataSet [
 { #category : #initialization }
 CIMWebModulesPieComponent >> initialize [
 	super initialize.
-	model := CIMWebLineBarModel current.
+	model := CIMWebModulePieModel current.
 	chartDataSet := model percentModuleTime
 ]
 
