@@ -3,28 +3,14 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'model',
-		'modulesLineBar',
-		'moduleSelectionDropDown'
+		'modulesLineBar'
 	],
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
 { #category : #hooks }
 CIMWebMainLineBarComponent >> children [
-	^ {moduleSelectionDropDown} , modulesLineBar
-]
-
-{ #category : #hooks }
-CIMWebMainLineBarComponent >> createModuleSelectionDropDown [
-	moduleSelectionDropDown := (MDLMenuButtonWidget
-		possibilities: model modules
-		label: #nom
-		action: [ :module | model selectedModule: module ]
-		selectedObject: model selectedModule
-		choosingText: ''
-		description: 'Modules')
-		sortBlock: [ :a :b | a name < b name ];
-		yourself
+	^ modulesLineBar
 ]
 
 { #category : #rendering }
@@ -60,7 +46,17 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 		mdlTypographyTextCenter;
 		with: [ html text: 'Selected module:'.
 			html space.
-			html render: moduleSelectionDropDown ]
+			html
+				render:
+					((MDLMenuButtonWidget
+						possibilities: model modules
+						label: #nom
+						action: [ :module | model selectedModule: module ]
+						selectedObject: model selectedModule
+						choosingText: ''
+						description: 'Modules')
+						sortBlock: [ :a :b | a name < b name ];
+						yourself) ]
 ]
 
 { #category : #rendering }

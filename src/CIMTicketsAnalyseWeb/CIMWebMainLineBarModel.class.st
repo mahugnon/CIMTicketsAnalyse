@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'modules',
 		'selectedModule',
-		'modelData'
+		'modelData',
+		'listeners'
 	],
 	#classInstVars : [
 		'current'
@@ -34,7 +35,13 @@ CIMWebMainLineBarModel class >> resetCurrent [
 CIMWebMainLineBarModel >> initialize [
 	super initialize.
 	self initializeModules.
-	self initializeSelectedModule
+	self initializeSelectedModule.
+	self initializeListeners
+]
+
+{ #category : #initialization }
+CIMWebMainLineBarModel >> initializeListeners [
+	listeners := OrderedCollection new
 ]
 
 { #category : #initialization }
@@ -68,11 +75,22 @@ CIMWebMainLineBarModel >> modules: anObject [
 ]
 
 { #category : #accessing }
+CIMWebMainLineBarModel >> notifyAll [
+	listeners do: #updateSelectedModule
+]
+
+{ #category : #accessing }
 CIMWebMainLineBarModel >> selectedModule [
 	^ selectedModule
 ]
 
 { #category : #accessing }
 CIMWebMainLineBarModel >> selectedModule: anObject [
-	selectedModule := anObject
+	selectedModule := anObject.
+	self notifyAll
+]
+
+{ #category : #initialization }
+CIMWebMainLineBarModel >> subscribe: aModel [
+	listeners add: aModel
 ]

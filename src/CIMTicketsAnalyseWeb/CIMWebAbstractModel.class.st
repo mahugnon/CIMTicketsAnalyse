@@ -104,7 +104,8 @@ CIMWebAbstractModel >> initializeDataSetForModules [
 
 { #category : #initialization }
 CIMWebAbstractModel >> initializeMainLineBarModel [
-	cIMWebMainLineBarModel := CIMWebMainLineBarModel current
+	cIMWebMainLineBarModel := CIMWebMainLineBarModel current.
+	cIMWebMainLineBarModel subscribe: self
 ]
 
 { #category : #initialization }
@@ -155,4 +156,9 @@ CIMWebAbstractModel >> selectedModule: anObject [
 { #category : #'private - utility' }
 CIMWebAbstractModel >> timeConvert [
 	^ 3600
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebAbstractModel >> updateSelectedModule [
+	self initializeSelectedModule
 ]

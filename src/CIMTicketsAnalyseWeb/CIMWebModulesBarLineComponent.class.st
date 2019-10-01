@@ -98,7 +98,7 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 		with: [ html mdlCell
 				size: 8;
 				mdlTypographyTitle;
-				with: self description , model selectedModule nom.
+				with: self description.
 			html mdlCell
 				size: 12;
 				with: [ self renderSelectedModulePlotOn: html ] ]
