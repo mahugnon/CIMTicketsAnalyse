@@ -100,22 +100,6 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 				mdlTypographyTitle;
 				with: self description , model selectedModule nom.
 			html mdlCell
-				size: 8;
-				mdlTypographyTextCenter;
-				with: [ html text: 'Selected module:'.
-					html space.
-					html
-						render:
-							((MDLMenuButtonWidget
-								possibilities: model modules
-								label: #nom
-								action: [ :module | model selectedModule: module ]
-								selectedObject: model selectedModule
-								choosingText: ''
-								description: 'Modules')
-								sortBlock: [ :a :b | a name < b name ];
-								yourself) ].
-			html mdlCell
 				size: 12;
 				with: [ self renderSelectedModulePlotOn: html ] ]
 ]

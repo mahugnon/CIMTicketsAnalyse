@@ -3,20 +3,17 @@ Class {
 	#superclass : #CIMWebScreenComponent,
 	#instVars : [
 		'estimations',
-		'timeSpentPerTicketChart',
-		'timeSpentCharts',
 		'modulesPieComponent',
-		'modulesLineBarComponent',
-		'modulesTestRCLineBarComponent',
-		'modulesTimeOpenCloseLineBarComponent',
-		'moduesTimeTotalMinusEstimLineBarComponent'
+		'mainLineBarComponent'
 	],
 	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
 
 { #category : #hooks }
 CIMWebDashbordComponent >> children [
-	^ {modulesPieComponent} , timeSpentCharts , super children
+	^ {mainLineBarComponent.
+	modulesPieComponent.
+	estimations} , super children
 ]
 
 { #category : #initialization }
@@ -24,37 +21,14 @@ CIMWebDashbordComponent >> createEstimationComponent [
 	estimations := CIMWebEstimationComponent new
 ]
 
-{ #category : #initialization }
-CIMWebDashbordComponent >> createModuesLineBarComponent [
-	modulesLineBarComponent := CIMWebModulesTimeSpentComponent new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createModuesTestRCLineBarComponent [
-	modulesTestRCLineBarComponent := CIMWebModulesTimeTestRCComponent new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createModuesTimeOpenCloseLineBarComponent [
-	modulesTimeOpenCloseLineBarComponent := CIMWebModulesTimeToOpenCloseComponent
-		new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createModuesTimeTotalMinusEstimLineBarComponent [
-	moduesTimeTotalMinusEstimLineBarComponent := CIMWebModulesTimeTotalMinusEstimComponent
-		new
+{ #category : #hooks }
+CIMWebDashbordComponent >> createMainLineBarComponent [
+	mainLineBarComponent := CIMWebMainLineBarComponent new
 ]
 
 { #category : #hooks }
 CIMWebDashbordComponent >> createModulePie [
 	modulesPieComponent := CIMWebModulesPieComponent new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createTimeChartComponent [
-	timeSpentCharts := CIMWebAbstractChartComponent subclasses
-		collect: [ :each | each new ]
 ]
 
 { #category : #hooks }
@@ -72,13 +46,9 @@ CIMWebDashbordComponent >> estimationsOn: html [
 { #category : #initialization }
 CIMWebDashbordComponent >> initialize [
 	super initialize.
-	self createTimeChartComponent.
+	self createMainLineBarComponent.
 	self createEstimationComponent.
-	self createModulePie.
-	self createModuesLineBarComponent.
-	self createModuesTestRCLineBarComponent.
-	self createModuesTimeOpenCloseLineBarComponent.
-	self createModuesTimeTotalMinusEstimLineBarComponent
+	self createModulePie
 ]
 
 { #category : #hooks }
@@ -90,15 +60,6 @@ CIMWebDashbordComponent >> renderBodyWebOn: html [
 ]
 
 { #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderChartsOn: html [
-	timeSpentCharts
-		do: [ :each | 
-			html mdlCell
-				size: 6;
-				with: [ html render: each ] ]
-]
-
-{ #category : #'parts rendering' }
 CIMWebDashbordComponent >> renderModulesComponentOn: html [
 	html mdlGrid
 		with: [ html mdlCell
@@ -107,18 +68,17 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 				mdlTextColorPrimary;
 				size: 12;
 				with: 'Izy Protect Modules '.
-			self renderModulesLineBarOn: html.
-			self renderModulesTestRCLineBarOn: html.
-			self renderModulesTimeOpenCloseLineBarOn: html.
-			self renderModulesTimeTotalMinusEstimLineBarOn: html.
+			self renderModulesMainLineBarOn: html.
 			self renderModulesPieOn: html ]
 ]
 
 { #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderModulesLineBarOn: html [
+CIMWebDashbordComponent >> renderModulesMainLineBarOn: html [
 	html mdlCell
-		size: 6;
-		with: [ html render: modulesLineBarComponent ]
+		size: 12;
+		mdlTypographyTextCenter;
+		with: [ html render: mainLineBarComponent.
+			html space ]
 ]
 
 { #category : #'parts rendering' }
@@ -128,27 +88,6 @@ CIMWebDashbordComponent >> renderModulesPieOn: html [
 		mdlTypographyTextCenter;
 		with: [ html render: modulesPieComponent.
 			html space ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderModulesTestRCLineBarOn: html [
-	html mdlCell
-		size: 6;
-		with: [ html render: modulesTestRCLineBarComponent ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderModulesTimeOpenCloseLineBarOn: html [
-	html mdlCell
-		size: 6;
-		with: [ html render: modulesTimeOpenCloseLineBarComponent ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderModulesTimeTotalMinusEstimLineBarOn: html [
-	html mdlCell
-		size: 6;
-		with: [ html render: moduesTimeTotalMinusEstimLineBarComponent ]
 ]
 
 { #category : #hooks }
