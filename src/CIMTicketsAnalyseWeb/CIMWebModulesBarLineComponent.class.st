@@ -8,27 +8,78 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
-{ #category : #'as yet unclassified' }
-CIMWebModulesBarLineComponent >> initialize [
-	super initialize.
-	self kind: self kinds anyOne
+{ #category : #'private-api' }
+CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
+	| styleForPersons |
+	styleForPersons := self defineStyleColors.
+	aChartData dataSets
+		do: [ :set | 
+			set styleSheet
+				pointColor: [ :keys :values :label | (styleForPersons at: label) at: #pointColor ];
+				strokeColor:
+						[ :keys :values :label | (styleForPersons at: label) at: #strokeColor ];
+				pointStrokeColor: Color white;
+				fillColor: (Color white alpha: 0.4);
+				pointHighlightFill: Color white;
+				pointHighlightStroke: Color black ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+CIMWebModulesBarLineComponent >> chartDataSet [
+	^ model chartDataSet
+]
+
+{ #category : #'private-api' }
+CIMWebModulesBarLineComponent >> defineStyleColors [
+	^ self subclassResponsibility
+]
+
+{ #category : #rendering }
+CIMWebModulesBarLineComponent >> description [
+	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+CIMWebModulesBarLineComponent >> initialize [
+	super initialize.
+	self kind: self kinds anyOne.
+	model := CIMWebMainLineBarModel current
+]
+
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> kind [
 	^ kind
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-api' }
 CIMWebModulesBarLineComponent >> kind: aChartType [
 	kind := aChartType
 ]
 
 { #category : #accessing }
 CIMWebModulesBarLineComponent >> kinds [
-	^ {ChartBar.
-	ChartLine.
-	ChartRadar}
+	^ {ChartLine.
+	ChartBar}
+]
+
+{ #category : #'private-api' }
+CIMWebModulesBarLineComponent >> linearRegressionCaracteristcs [
+	| keys |
+	keys := self chartDataSet first.
+	^ {('Bugs regression'
+		->
+			(QueryLinearRegression new
+				runOn1:
+					(OrderedDictionary
+						newFromKeys: keys
+						andValues: self chartDataSet second value))).
+	('Evolution regression'
+		->
+			(QueryLinearRegression new
+				runOn1:
+					(OrderedDictionary
+						newFromKeys: keys
+						andValues: self chartDataSet third value)))} asOrderedDictionary
 ]
 
 { #category : #accessing }
@@ -47,24 +98,10 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 		with: [ html mdlCell
 				size: 8;
 				mdlTypographyTitle;
-				with: 'Time spent on bugs per modules'.
-			html mdlCell
-				size: 8;
-				mdlTypographyTextCenter;
-				with: [ html
-						render:
-							((MDLMenuButtonWidget
-								possibilities: model modules
-								label: #nom
-								action: [ :module | model selectedModule: module ]
-								selectedObject: model selectedModule
-								choosingText: 'Select a module'
-								description: 'Modules')
-								sortBlock: [ :a :b | a name < b name ];
-								yourself) ].
+				with: self description.
 			html mdlCell
 				size: 12;
-				with: [ self renderOn: html plotFor: model selectedModule ] ]
+				with: [ self renderSelectedModulePlotOn: html ] ]
 ]
 
 { #category : #rendering }
@@ -73,33 +110,6 @@ CIMWebModulesBarLineComponent >> renderDemoWithId: id with: renderingChartBlock 
 		id: id;
 		style: 'display: flex; flex-direction: column; align-items: center;';
 		with: [ renderingChartBlock value: html ]
-]
-
-{ #category : #rendering }
-CIMWebModulesBarLineComponent >> renderOn: html plotFor: module [
-	| renderingChartBlock id dataSet |
-	dataSet := model dataSetForModule: module.
-	renderingChartBlock := [ :canvas | 
-	| chartData |
-	chartData := (Chart2dData
-		xObjects: dataSet first
-		multiYObjects:
-		{dataSet second.
-	dataSet third})
-		multiValueTooltip: '<label> spent <value> min in <key>';
-		chartType: self kind;
-		yourself.
-	html
-		render:
-			(ChartJsComponent
-				data: chartData
-				callback: [ :value :label | value -> label ]) ].
-	id := html nextId.
-	self
-		renderPossibleKindsUpdating: id
-		with: renderingChartBlock
-		on: html.
-	self renderDemoWithId: id with: renderingChartBlock on: html
 ]
 
 { #category : #rendering }
@@ -121,5 +131,51 @@ CIMWebModulesBarLineComponent >> renderPossibleKindsUpdating: id with: rendering
 												serializeThis;
 												onComplete:
 													((html jQuery id: id) load html: [ :r | renderingChartBlock value: r ])).
+									html space: 2.
 									html text: each displayName ] ] ] ]
+]
+
+{ #category : #rendering }
+CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
+	| renderingChartBlock id dataSet regression |
+	regression := self linearRegressionCaracteristcs.
+	dataSet := model chartDataSet.
+	renderingChartBlock := [ :canvas | 
+	| chartData |
+	chartData := (Chart2dData
+		xObjects: dataSet first
+		multiYObjects:
+		{dataSet second.
+	dataSet third})
+		multiValueTooltip: '<label> spent <value> hours in <key>';
+		chartType: self kind;
+		yourself.
+	chartData dataSets
+		addLast:
+			(ChartDataSetFunction new
+				function: [ :x | 
+					x * (regression at: 'Bugs regression') slope
+						+ (regression at: 'Bugs regression') intercept ];
+				color: (Color red alpha: 0.1);
+				name: 'Bugs regression').
+	chartData dataSets
+		addLast:
+			(ChartDataSetFunction new
+				function: [ :x | 
+					x * (regression at: 'Evolution regression') slope
+						+ (regression at: 'Evolution regression') intercept ];
+				color: (Color blue alpha: 0.1);
+				name: 'Evolution regression').
+	self applyStyleTo: chartData.
+	html
+		render:
+			(ChartJsComponent
+				data: chartData
+				callback: [ :value :label | value -> label ]) ].
+	id := html nextId.
+	self
+		renderPossibleKindsUpdating: id
+		with: renderingChartBlock
+		on: html.
+	self renderDemoWithId: id with: renderingChartBlock on: html
 ]

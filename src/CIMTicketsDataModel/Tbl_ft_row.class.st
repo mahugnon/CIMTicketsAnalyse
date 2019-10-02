@@ -58,7 +58,8 @@ Class {
 		'associatedPhysiqueFiles',
 		'modulesFromAssociatedFile',
 		'connectedTickets',
-		'tests'
+		'tests',
+		'rcTpsTest'
 	],
 	#category : #CIMTicketsDataModel
 }
@@ -753,8 +754,15 @@ Tbl_ft_row >> numberOfBibliotheques [
 
 { #category : #api }
 Tbl_ft_row >> rcTpsTest [
-	^ (tests flatCollect: #tps)
-		reject: [ :each | each tps_test_id = '21' ]
+	rcTpsTest
+		ifNil: [ rcTpsTest := (tests reject: [ :each | each test_id = '21' ])
+				flatCollect: #tps ].
+	^ rcTpsTest
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> rcTpsTest: anObject [
+	rcTpsTest := anObject
 ]
 
 { #category : #accessing }

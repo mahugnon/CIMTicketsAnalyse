@@ -2,20 +2,18 @@ Class {
 	#name : #CIMWebDashbordComponent,
 	#superclass : #CIMWebScreenComponent,
 	#instVars : [
-		'lineChart',
-		'moduleBilan',
 		'estimations',
-		'timeSpentPerTicketChart',
-		'timeSpentCharts',
 		'modulesPieComponent',
-		'modulesLineBarComponent'
+		'mainLineBarComponent'
 	],
 	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
 
 { #category : #hooks }
 CIMWebDashbordComponent >> children [
-	^ {modulesPieComponent} , timeSpentCharts , super children
+	^ {mainLineBarComponent.
+	modulesPieComponent.
+	estimations} , super children
 ]
 
 { #category : #initialization }
@@ -23,27 +21,14 @@ CIMWebDashbordComponent >> createEstimationComponent [
 	estimations := CIMWebEstimationComponent new
 ]
 
-{ #category : #initialization }
-CIMWebDashbordComponent >> createModuesLineBarComponent [
-	modulesLineBarComponent := CIMWebModulesBarLineComponent new
-		model: estimations model
+{ #category : #hooks }
+CIMWebDashbordComponent >> createMainLineBarComponent [
+	mainLineBarComponent := CIMWebMainLineBarComponent new
 ]
 
 { #category : #hooks }
 CIMWebDashbordComponent >> createModulePie [
 	modulesPieComponent := CIMWebModulesPieComponent new
-		model: estimations model
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createTableComponent [
-	moduleBilan := CIMWebTableComponent new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createTimeChartComponent [
-	timeSpentCharts := CIMWebAbstractChartComponent subclasses
-		collect: [ :each | each new ]
 ]
 
 { #category : #hooks }
@@ -61,34 +46,17 @@ CIMWebDashbordComponent >> estimationsOn: html [
 { #category : #initialization }
 CIMWebDashbordComponent >> initialize [
 	super initialize.
-	self createTimeChartComponent.
-	self createTableComponent.
+	self createMainLineBarComponent.
 	self createEstimationComponent.
-	self createModulePie.
-	self createModuesLineBarComponent
-]
-
-{ #category : #hooks }
-CIMWebDashbordComponent >> lineChart [
-	^ lineChart
+	self createModulePie
 ]
 
 { #category : #hooks }
 CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
 		with: [ self estimationsOn: html.
-			self renderModulesComponentOn: html.
-			self renderChartsOn: html.
-			self renderTableOn: html ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderChartsOn: html [
-	timeSpentCharts
-		do: [ :each | 
-			html mdlCell
-				size: 6;
-				with: [ html render: each ] ]
+			self renderModulesComponentOn: html
+			"self renderChartsOn: html" ]
 ]
 
 { #category : #'parts rendering' }
@@ -100,32 +68,26 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 				mdlTextColorPrimary;
 				size: 12;
 				with: 'Izy Protect Modules '.
-			self renderModulesLineBarOn: html.
+			self renderModulesMainLineBarOn: html.
 			self renderModulesPieOn: html ]
 ]
 
 { #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderModulesLineBarOn: html [
+CIMWebDashbordComponent >> renderModulesMainLineBarOn: html [
 	html mdlCell
-		size: 6;
-		with: [ html
-				render: (CIMWebModulesBarLineComponent new model: estimations model) ]
+		size: 12;
+		mdlTypographyTextCenter;
+		with: [ html render: mainLineBarComponent.
+			html space ]
 ]
 
 { #category : #'parts rendering' }
 CIMWebDashbordComponent >> renderModulesPieOn: html [
 	html mdlCell
-		size: 6;
+		size: 12;
 		mdlTypographyTextCenter;
 		with: [ html render: modulesPieComponent.
 			html space ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderTableOn: html [
-	html mdlCell
-		size: 12;
-		with: [ html render: moduleBilan ]
 ]
 
 { #category : #hooks }

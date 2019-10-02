@@ -56,6 +56,13 @@ Tbl_Module class >> create [
 								joinLibrariesToModule;
 								joinTicketsToModules;
 								yourself ]) asOrderedCollection;
+				yourself).
+	Tbl tbl_Module
+		add:
+			(Tbl_Module_row new
+				nom: 'IZY Protect';
+				tickets: Tbl tbl_ft rows;
+				bibliotheques: Tbl tbl_biblio rows;
 				yourself)
 ]
 
@@ -106,6 +113,12 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 					| destLib |
 					destLib := (module / sourceLib basename) ensureCreateDirectory.
 					self copyDirectory: sourceLib to: destLib ] ]
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_Module >> moduleNamed: aString [
+	^ self rows
+		detect: [ :module | module nom asLowercase = aString asLowercase ]
 ]
 
 { #category : #generated }

@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #running }
-QueryTicketsTimeRCTest >> runOn: aCollection [
-	^ aCollection
+QueryTicketsTimeRCTest >> runOn: aCIMTicketGroNode [
+	^ aCIMTicketGroNode tickets
 		inject: 0
 		into: [ :sum :ticket | sum + (QueryTicketTimeRCTest runOn: ticket) ]
 ]
