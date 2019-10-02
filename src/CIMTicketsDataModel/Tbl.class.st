@@ -30,7 +30,7 @@ Tbl >> initialize [
 
 { #category : #actions }
 Tbl >> install [
-	^ self class dataBase
+	^ CIMDatabase database
 		perform: (self className asLowercase , ':') asSymbol
 		with: self
 ]
