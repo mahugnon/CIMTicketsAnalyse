@@ -12,6 +12,8 @@ Tbl_row >> formatFieldsToCIMDate [
 { #category : #initialization }
 Tbl_row >> initializeWith: aDictionary [
 	aDictionary
-		keysDo:
-			[ :key | self perform: (key , ':') asSymbol with: (aDictionary at: key) ]
+		keysDo: [ :key | 
+			self
+				perform: (key asLowercase , ':') asSymbol
+				with: (aDictionary at: key) ]
 ]
