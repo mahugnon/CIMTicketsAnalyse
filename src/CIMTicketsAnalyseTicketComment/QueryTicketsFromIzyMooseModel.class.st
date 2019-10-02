@@ -1,7 +1,7 @@
 Class {
 	#name : #QueryTicketsFromIzyMooseModel,
 	#superclass : #CIMAbstractQuery,
-	#category : #'CIMTicketsAnalyse-MooseQueries'
+	#category : #CIMTicketsAnalyseTicketComment
 }
 
 { #category : #running }
