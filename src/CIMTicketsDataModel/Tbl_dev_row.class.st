@@ -27,7 +27,7 @@ Class {
 		'dev_tps_estim_dev',
 		'dev_tps_rest_dev'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #utility }
@@ -116,7 +116,7 @@ Tbl_dev_row >> dev_fin [
 
 { #category : #accessing }
 Tbl_dev_row >> dev_fin: arg1 [
-	dev_fin := arg1 asDate
+	dev_fin := arg1
 ]
 
 { #category : #accessing }

@@ -1,10 +1,10 @@
 Class {
-	#name : #'Tbl_type_session',
+	#name : #'Tbl_type_retour',
 	#superclass : #Tbl,
 	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #utility }
-Tbl_type_session >> rowClass [
-	^ Tbl_type_session_row
+Tbl_type_retour >> rowClass [
+	^ Tbl_type_retour_row
 ]

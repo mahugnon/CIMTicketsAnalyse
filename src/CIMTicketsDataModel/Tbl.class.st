@@ -2,7 +2,8 @@ Class {
 	#name : #Tbl,
 	#superclass : #Object,
 	#instVars : [
-		'rows'
+		'rows',
+		'cimTicketsDataBase'
 	],
 	#classInstVars : [
 		'tables',
@@ -25,7 +26,7 @@ Class {
 		'tbl_version_news',
 		'tbl_Module'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -299,10 +300,10 @@ Tbl >> convertFieldToCimDate [
 
 { #category : #utility }
 Tbl >> detectTblFrom: aCsvFile [
+	| fileName model |
+	fileName := aCsvFile basenameWithoutExtension asLowercase.
 	^ self class subclasses
-		detect: [ :aTblSub | 
-			aTblSub name asLowercase
-				= (aCsvFile basename asLowercase copyReplaceAll: '.csv' with: '') ]
+		detect: [ :aTblSub | aTblSub name asLowercase = fileName ]
 ]
 
 { #category : #utility }
@@ -313,12 +314,15 @@ Tbl >> filFromCSVFile: arg1 [
 
 { #category : #initialization }
 Tbl >> initialize [
-	rows := OrderedCollection new
+	rows := OrderedCollection new.
+	cimTicketsDataBase := CIMTicketsModelDatabase current
 ]
 
 { #category : #actions }
 Tbl >> install [
-	^ Tbl perform: (self className asLowercase , ':') asSymbol with: self
+	^ cimTicketsDataBase
+		perform: (self className asLowercase , ':') asSymbol
+		with: self
 ]
 
 { #category : #utility }

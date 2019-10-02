@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'averageNodes'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #visiting }

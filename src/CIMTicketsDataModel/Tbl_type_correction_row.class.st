@@ -7,7 +7,7 @@ Class {
 		'typcorr_actif',
 		'typcorr_visibilite'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #testing }

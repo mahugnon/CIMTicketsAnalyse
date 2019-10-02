@@ -14,7 +14,7 @@ Class {
 		'typsession_sai_devis',
 		'typsession_ordre'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #testing }

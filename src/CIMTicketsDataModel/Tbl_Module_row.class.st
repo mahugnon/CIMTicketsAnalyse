@@ -6,7 +6,7 @@ Class {
 		'tickets',
 		'bibliotheques'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }

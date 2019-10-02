@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_version_news',
 	#superclass : #Tbl,
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #utility }

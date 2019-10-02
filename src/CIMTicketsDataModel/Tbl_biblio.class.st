@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_biblio',
 	#superclass : #Tbl,
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }

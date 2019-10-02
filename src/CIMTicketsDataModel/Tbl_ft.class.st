@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_ft',
 	#superclass : #Tbl,
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #adding }

@@ -1,7 +1,7 @@
 Class {
 	#name : #'Tbl_dev',
 	#superclass : #Tbl,
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #'as yet unclassified' }

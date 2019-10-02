@@ -8,7 +8,7 @@ Class {
 		'msg_contenu',
 		'msg_rub_id'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #accessing }

@@ -61,7 +61,7 @@ Class {
 		'tests',
 		'rcTpsTest'
 	],
-	#category : #CIMTicketsDataModel
+	#category : #'CIMTicketsDataModel-Model'
 }
 
 { #category : #visiting }
