@@ -18,7 +18,8 @@ Class {
 		'tbl_biblio',
 		'tbl_type_retour',
 		'tbl_version',
-		'tbl_theme'
+		'tbl_theme',
+		'tbl_retour'
 	],
 	#classInstVars : [
 		'database'
@@ -53,7 +54,7 @@ CIMDatabase >> detectTblFrom: aCsvFile [
 		detect: [ :aTblSub | aTblSub name asLowercase = fileName ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 CIMDatabase >> joinTables [
 	tbl_ft joinDevToTicket: tbl_dev.
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
@@ -80,7 +81,7 @@ CIMDatabase >> loadTblFromFolder: csvFolder [
 				install ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 CIMDatabase >> renameLibrariesUsing: aCollection [
 	self tbl_biblio renameUsing: aCollection
 ]
@@ -172,6 +173,16 @@ CIMDatabase >> tbl_modif [
 { #category : #accessing }
 CIMDatabase >> tbl_modif: aTbl_modif [
 	tbl_modif := aTbl_modif
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_retour [
+	^ tbl_retour
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_retour: anObject [
+	tbl_retour := anObject
 ]
 
 { #category : #accessing }
