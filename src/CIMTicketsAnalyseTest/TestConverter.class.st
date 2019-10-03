@@ -19,6 +19,20 @@ TestConverter >> testConvertHourContainingEtFormat1 [
 ]
 
 { #category : #tests }
+TestConverter >> testConvertHourFor8Hnico3HPasc [
+	self
+		assert: (CIMDateFormatConverter convert: '8H nico 3H Pasc')
+		equals: ((8 + 3) * 3600) asDuration
+]
+
+{ #category : #tests }
+TestConverter >> testConvertHourFor8Hnico3HPasc1 [
+	self
+		assert: (CIMDateFormatConverter selectConverterFor: '8H nico 3H Pasc') class
+		equals: CIMHourOfTwoDevConverter
+]
+
+{ #category : #tests }
 TestConverter >> testFindConverterFor0 [
 	self
 		assert: (CIMDateFormatConverter selectConverterFor: '0') class
