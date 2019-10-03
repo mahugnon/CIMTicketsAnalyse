@@ -40,6 +40,10 @@ CIMDateFormatConverter class >> toIgnore: aString [
 ]
 
 { #category : #converting }
-CIMDateFormatConverter >> convert: arg1 [
-	^ self subclassResponsibility
+CIMDateFormatConverter >> convert: aTbableField [
+	| timeSpent |
+	timeSpent := (('et' split: aTbableField) first
+		copyReplaceAll: 'h'
+		with: '') trim asInteger.
+	^ (timeSpent * 3600) asDuration
 ]

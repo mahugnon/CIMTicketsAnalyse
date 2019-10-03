@@ -5,6 +5,20 @@ Class {
 }
 
 { #category : #tests }
+TestConverter >> testConvertHourContainingEtFormat [
+	self
+		assert: (CIMDateFormatConverter selectConverterFor: '16 h et 6 h test') class
+		equals: ConvertHourContainingEtFormat
+]
+
+{ #category : #tests }
+TestConverter >> testConvertHourContainingEtFormat1 [
+	self
+		assert: (CIMDateFormatConverter convert: '16 h et 6 h test')
+		equals: (16 * 3600) asDuration
+]
+
+{ #category : #tests }
 TestConverter >> testFindConverterFor0 [
 	self
 		assert: (CIMDateFormatConverter selectConverterFor: '0') class
