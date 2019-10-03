@@ -17,7 +17,8 @@ Class {
 		'tbl_modif',
 		'tbl_biblio',
 		'tbl_type_retour',
-		'tbl_version'
+		'tbl_version',
+		'tbl_theme'
 	],
 	#classInstVars : [
 		'database'
@@ -191,6 +192,16 @@ CIMDatabase >> tbl_test [
 { #category : #accessing }
 CIMDatabase >> tbl_test: aTbl_test [
 	tbl_test := aTbl_test
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_theme [
+	^ tbl_theme
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_theme: anObject [
+	tbl_theme := anObject
 ]
 
 { #category : #accessing }
