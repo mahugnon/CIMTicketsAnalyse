@@ -53,6 +53,15 @@ TestTicketsModel >> testJoinDevToTickets [
 ]
 
 { #category : #tests }
+TestTicketsModel >> testJoinRetourToTicket [
+	self
+		assert:
+			((tickets joinRetourToTicket: retours) rows
+				detect: [ :ticket | ticket ft_id = '123456' ]) retours size
+		equals: 2
+]
+
+{ #category : #tests }
 TestTicketsModel >> testJoinTestToTicket [
 	self
 		assert: ((tickets joinTestToTicket: tests) rows flatCollect: #tests) size
