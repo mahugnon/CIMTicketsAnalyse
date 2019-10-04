@@ -7,10 +7,23 @@ Class {
 		'date_retour',
 		'cc_type_retour_id',
 		'dev_type_retour_id',
-		'date_valide'
+		'date_valide',
+		'ccTypeRetour',
+		'devTypeRetours'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
+
+{ #category : #api }
+Tbl_retour_row >> ccTypeRetour [
+	ccTypeRetour ifNil: [ ccTypeRetour := Set new ].
+	^ ccTypeRetour
+]
+
+{ #category : #accessing }
+Tbl_retour_row >> ccTypeRetourToRetour [
+	self shouldBeImplemented.
+]
 
 { #category : #accessing }
 Tbl_retour_row >> cc_type_retour_id [
@@ -43,6 +56,12 @@ Tbl_retour_row >> date_valide: anObject [
 ]
 
 { #category : #accessing }
+Tbl_retour_row >> devTypeRetour [
+	devTypeRetours ifNil: [ devTypeRetours := Set new ].
+	^ devTypeRetours
+]
+
+{ #category : #accessing }
 Tbl_retour_row >> dev_type_retour_id [
 	^ dev_type_retour_id
 ]
@@ -68,6 +87,28 @@ Tbl_retour_row >> ft_id [
 { #category : #accessing }
 Tbl_retour_row >> ft_id: anObject [
 	ft_id := anObject
+]
+
+{ #category : #api }
+Tbl_retour_row >> joinCcTypeRetourToRetour: aCollection [
+	self ccTypeRetour
+		addAll:
+			(aCollection
+				select: [ :typeRetour | typeRetour type_retour_id = self cc_type_retour_id ])
+]
+
+{ #category : #api }
+Tbl_retour_row >> joinDevTypeRetourToRetour: aCollection [
+	self devTypeRetour
+		addAll:
+			(aCollection
+				select: [ :typeRetour | typeRetour type_retour_id = dev_type_retour_id ])
+]
+
+{ #category : #api }
+Tbl_retour_row >> joinTypeRetoursToRetour: aCollection [
+	self joinCcTypeRetourToRetour: aCollection.
+	self joinDevTypeRetourToRetour: aCollection
 ]
 
 { #category : #accessing }

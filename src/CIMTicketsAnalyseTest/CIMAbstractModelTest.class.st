@@ -11,7 +11,8 @@ Class {
 		'versions',
 		'tests',
 		'modules',
-		'retours'
+		'retours',
+		'typeRetours'
 	],
 	#category : #CIMTicketsAnalyseTest
 }
@@ -59,6 +60,8 @@ CIMAbstractModelTest >> createTestRetour [
 		rows:
 			{(Tbl_retour_row new
 				retour_id: '1';
+				cc_type_retour_id: '2';
+				dev_type_retour_id: '1';
 				ft_id: '123456').
 			(Tbl_retour_row new
 				retour_id: '2';
@@ -156,6 +159,21 @@ CIMAbstractModelTest >> createTestTypCorrs [
 ]
 
 { #category : #running }
+CIMAbstractModelTest >> createTestTypeRetour [
+	typeRetours := Tbl_type_retour new
+		rows:
+			{(Tbl_type_retour_row new
+				type_retour_id: '1';
+				libelle: 'Fiche incomplète').
+			(Tbl_type_retour_row new
+				type_retour_id: '2';
+				libelle: 'Anomalie sur le développement').
+			(Tbl_type_retour_row new
+				type_retour_id: '3';
+				libelle: 'Bug sans lien avec la fiche')}
+]
+
+{ #category : #running }
 CIMAbstractModelTest >> createTestTypeSessions [
 	typeSessions := Tbl_type_session new
 		rows:
@@ -206,5 +224,6 @@ CIMAbstractModelTest >> setUp [
 	self createTestVersions.
 	self createTestTest.
 	self createTestModule.
-	self createTestRetour
+	self createTestRetour.
+	self createTestTypeRetour
 ]
