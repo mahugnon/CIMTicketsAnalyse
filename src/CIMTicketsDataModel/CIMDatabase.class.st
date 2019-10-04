@@ -56,19 +56,28 @@ CIMDatabase >> detectTblFrom: aCsvFile [
 
 { #category : #utility }
 CIMDatabase >> joinTables [
-	tbl_ft joinDevToTicket: tbl_dev.
-	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
-	tbl_ft joinBibsToTicket: tbl_biblio.
-	tbl_ft joinVersionsToTicket: tbl_version.
 	"TicketsLinkDetector new
 		model: tbl_ft;
 		connectAllLinkedTickets."
-	tbl_tps joinTypeSessionToTps: tbl_type_session.
-	tbl_ft joinTpsDevToTicket: tbl_tps.
-	tbl_test joinTpsToTest: tbl_tps.
-	tbl_ft joinTestToTicket: tbl_test.
+
+	| joinTableSteps |
+	joinTableSteps := {(tbl_ft joinDevToTicket: tbl_dev).
+	(tbl_ft joinTypeCorrectionToTicket: tbl_type_correction).
+	(tbl_ft joinBibsToTicket: tbl_biblio).
+	(tbl_ft joinVersionsToTicket: tbl_version).
+	(tbl_tps joinTypeSessionToTps: tbl_type_session).
+	(tbl_ft joinTpsDevToTicket: tbl_tps).
+	(tbl_test joinTpsToTest: tbl_tps).
+	(tbl_ft joinTestToTicket: tbl_test).
 	tbl_biblio joinModulesToLibrary.
-	tbl_ft joinModulesToTickets
+	tbl_ft joinModulesToTickets.
+	(tbl_retour joinTypeRetoursToRetour: tbl_type_retour).
+	(tbl_ft joinRetourToTickets: tbl_retour)}.
+	[ :job | 
+	job title: 'Joining tables '.
+	1 to: 12 do: [ :each | 
+		job progress: 0.1 * each.
+		joinTableSteps at: each ] ] asJob run
 ]
 
 { #category : #utility }
