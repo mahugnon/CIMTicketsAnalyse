@@ -89,6 +89,11 @@ Tbl_retour_row >> ft_id: anObject [
 	ft_id := anObject
 ]
 
+{ #category : #testing }
+Tbl_retour_row >> isConstientFeedBack [
+	^ self devTypeRetour isConstientFeedBack
+]
+
 { #category : #api }
 Tbl_retour_row >> joinCcTypeRetourToRetour: aCollection [
 	self ccTypeRetour
