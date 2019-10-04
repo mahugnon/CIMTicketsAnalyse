@@ -59,7 +59,8 @@ Class {
 		'modulesFromAssociatedFile',
 		'connectedTickets',
 		'tests',
-		'rcTpsTest'
+		'rcTpsTest',
+		'retours'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -686,6 +687,12 @@ Tbl_ft_row >> joinModulesToTickets [
 ]
 
 { #category : #api }
+Tbl_ft_row >> joinRetourToTicket: aCollection [
+	self retours
+		addAll: (aCollection select: [ :retour | retour ft_id = self ft_id ])
+]
+
+{ #category : #api }
 Tbl_ft_row >> joinTestToTicket: aCollection [
 	tests := aCollection
 		select: [ :test | test test_id ~= '21' and: test test_id = ft_test_id ]
@@ -763,6 +770,12 @@ Tbl_ft_row >> rcTpsTest [
 { #category : #accessing }
 Tbl_ft_row >> rcTpsTest: anObject [
 	rcTpsTest := anObject
+]
+
+{ #category : #accessing }
+Tbl_ft_row >> retours [
+	retours ifNil: [ retours := Set new ].
+	^ retours
 ]
 
 { #category : #accessing }

@@ -56,6 +56,12 @@ Tbl_ft >> joinModulesToTickets [
 ]
 
 { #category : #api }
+Tbl_ft >> joinRetourToTicket: aTbl_retour [
+	self rows
+		do: [ :ticket | ticket joinRetourToTicket: aTbl_retour rows ]
+]
+
+{ #category : #api }
 Tbl_ft >> joinTestToTicket: aTbl_test [
 	rows do: [ :row | row joinTestToTicket: aTbl_test rows ]
 ]
