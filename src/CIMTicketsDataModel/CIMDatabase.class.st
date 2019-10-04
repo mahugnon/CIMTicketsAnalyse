@@ -60,9 +60,9 @@ CIMDatabase >> joinTables [
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
 	tbl_ft joinBibsToTicket: tbl_biblio.
 	tbl_ft joinVersionsToTicket: tbl_version.
-	TicketsLinkDetector new
+	"TicketsLinkDetector new
 		model: tbl_ft;
-		connectAllLinkedTickets.
+		connectAllLinkedTickets."
 	tbl_tps joinTypeSessionToTps: tbl_type_session.
 	tbl_ft joinTpsDevToTicket: tbl_tps.
 	tbl_test joinTpsToTest: tbl_tps.
