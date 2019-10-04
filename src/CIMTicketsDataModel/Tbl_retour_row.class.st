@@ -90,8 +90,8 @@ Tbl_retour_row >> ft_id: anObject [
 ]
 
 { #category : #testing }
-Tbl_retour_row >> isConstientFeedBack [
-	^ self devTypeRetour isConstientFeedBack
+Tbl_retour_row >> isConsistentFeedBack [
+	^ self devTypeRetour isConsistentFeedBack
 ]
 
 { #category : #api }

@@ -9,15 +9,15 @@ Class {
 }
 
 { #category : #testing }
-Tbl_type_retour_row >> consitentFeedBacks [
+Tbl_type_retour_row >> consistentFeedBacks [
 	^ {'Anomalie sur le développement' . 'Impact sur un autre module'.
 	'Cas non testé en raison de l’absence de cahier de recette'}
 		asOrderedCollection
 ]
 
 { #category : #testing }
-Tbl_type_retour_row >> isConstientFeedBack [
-	^ self consitentFeedBacks includes: self libelle
+Tbl_type_retour_row >> isConsistentFeedBack [
+	^ self consistentFeedBacks includes: self libelle
 ]
 
 { #category : #accessing }

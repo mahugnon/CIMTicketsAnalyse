@@ -119,6 +119,11 @@ Tbl_ft_row >> connectedTickets: aCollection [
 	connectedTickets := aCollection
 ]
 
+{ #category : #testing }
+Tbl_ft_row >> consistentFeedBacks [
+	^ retours collect: #isConsistentFeedBack
+]
+
 { #category : #accessing }
 Tbl_ft_row >> content [
 	^ {}
@@ -752,6 +757,11 @@ Tbl_ft_row >> monthClosing [
 { #category : #API }
 Tbl_ft_row >> monthCreation [
 	^ self ft_datecrea month
+]
+
+{ #category : #testing }
+Tbl_ft_row >> nonConsistentFeedBacks [
+	^ retours reject: #isConsistentFeedBack
 ]
 
 { #category : #API }
