@@ -23,7 +23,6 @@ CIMWebMainLineBarComponent >> createModulesLineBars [
 CIMWebMainLineBarComponent >> initialize [
 	super initialize.
 	self initializeModel.
-	self createModuleSelectionDropDown.
 	self createModulesLineBars
 ]
 
