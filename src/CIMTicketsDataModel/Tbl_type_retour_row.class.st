@@ -3,7 +3,8 @@ Class {
 	#superclass : #'Tbl_row',
 	#instVars : [
 		'type_retour_id',
-		'libelle'
+		'libelle',
+		'retours'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -18,6 +19,14 @@ Tbl_type_retour_row >> consistentFeedBacks [
 { #category : #testing }
 Tbl_type_retour_row >> isConsistentFeedBack [
 	^ self consistentFeedBacks includes: self libelle
+]
+
+{ #category : #api }
+Tbl_type_retour_row >> joinRetoursToTypeRetour: aCollection [
+	self retours
+		addAll:
+			(aCollection
+				select: [ :each | each dev_type_retour_id = self type_retour_id ])
 ]
 
 { #category : #accessing }
@@ -37,6 +46,12 @@ Tbl_type_retour_row >> notConsistentFeedBack [
 	'Problème de compréhension du fonctionnement  du module'.
 	'Fiche suite à créér' . 'Problème non lié à la fiche mais qui bloque les tests'}
 		asOrderedCollection
+]
+
+{ #category : #accessing }
+Tbl_type_retour_row >> retours [
+	retours ifNil: [ retours := Set new ].
+	^ retours
 ]
 
 { #category : #accessing }
