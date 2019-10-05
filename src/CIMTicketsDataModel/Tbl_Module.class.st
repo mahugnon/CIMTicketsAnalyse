@@ -74,15 +74,22 @@ Tbl_Module >> createModuleRows [
 		collect: [ :assoc | 
 			Tbl_Module_row new
 				nom: assoc key;
+				joinLibrariesToModule;
+				joinTicketsToModules;
 				yourself ]) asOrderedCollection.
 	moduleRows
 		add:
 			(Tbl_Module_row new
 				nom: 'IZY Protect';
-				tickets: CIMDatabase database tbl_ft rows;
-				bibliotheques: CIMDatabase database tbl_biblio rows;
+				tickets: self database allTickets;
+				bibliotheques: self database allPBLibraries;
 				yourself).
 	^ moduleRows
+]
+
+{ #category : #initialization }
+Tbl_Module >> database [
+	^ CIMDatabase database
 ]
 
 { #category : #api }
@@ -119,16 +126,6 @@ Tbl_Module >> initialize [
 { #category : #initialization }
 Tbl_Module >> initializeModuleRows [
 	rows := self createModuleRows
-]
-
-{ #category : #initialization }
-Tbl_Module >> joinLibrariesToModule [
-	self rows do: [ :each | each joinLibrariesToModule ]
-]
-
-{ #category : #initialization }
-Tbl_Module >> joinTicketsToModules [
-	self rows do: [ :each | each joinTicketsToModules ]
 ]
 
 { #category : #utility }

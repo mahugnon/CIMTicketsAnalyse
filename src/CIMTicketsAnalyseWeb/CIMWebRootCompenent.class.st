@@ -20,8 +20,7 @@ CIMWebRootCompenent class >> initialize [
 		addLibrary: JQDeploymentLibrary;
 		addLibrary: MDLLibrary;
 		addLibrary: ChartJsLibrary;
-		addLibrary: JQUiDeploymentLibrary;
-		addLibrary: TBSDeploymentLibrary.
+		addLibrary: JQUiDeploymentLibrary.
 	(WAAdmin defaultDispatcher handlerAt: 'TicketsDashboard')
 		exceptionHandler: WADebugErrorHandler
 ]

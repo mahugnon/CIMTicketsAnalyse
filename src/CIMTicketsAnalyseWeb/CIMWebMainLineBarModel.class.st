@@ -53,12 +53,12 @@ CIMWebMainLineBarModel >> initializeModelData [
 
 { #category : #initialization }
 CIMWebMainLineBarModel >> initializeModules [
-	modules := self database tbl_Module rows
+	modules := self database tbl_module rows
 ]
 
 { #category : #initialization }
 CIMWebMainLineBarModel >> initializeSelectedModule [
-	selectedModule := self database tbl_Module moduleNamed: 'IZY Protect'
+	selectedModule := self database tbl_module moduleNamed: 'IZY Protect'
 ]
 
 { #category : #accessing }

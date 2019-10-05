@@ -7,7 +7,7 @@ Class {
 { #category : #initialization }
 CIMWebModuleModelInitialize class >> resetModels [
 	<script>
-	self new resetModels
+	^ self new resetModels
 ]
 
 { #category : #initialization }
