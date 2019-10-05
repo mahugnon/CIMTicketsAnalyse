@@ -20,14 +20,19 @@ Tbl_Module_row >> bibliotheques: anObject [
 ]
 
 { #category : #initialization }
+Tbl_Module_row >> database [
+	^ CIMDatabase database
+]
+
+{ #category : #initialization }
 Tbl_Module_row >> joinLibrariesToModule [
-	bibliotheques := (Tbl allBibliotheques
+	bibliotheques := (self database tbl_biblio rows
 		select: [ :bib | bib modules includes: nom ]) asOrderedCollection
 ]
 
 { #category : #initialization }
 Tbl_Module_row >> joinTicketsToModules [
-	tickets := (Tbl allTickets
+	tickets := (self database allTickets
 		select: [ :ticket | ticket modules includes: nom ])
 		asOrderedCollection
 ]

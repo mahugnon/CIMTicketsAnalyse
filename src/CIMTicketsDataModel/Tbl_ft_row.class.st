@@ -694,7 +694,11 @@ Tbl_ft_row >> joinModulesToTickets [
 { #category : #api }
 Tbl_ft_row >> joinRetourToTicket: aCollection [
 	self retours
-		addAll: (aCollection select: [ :retour | retour ft_id = self ft_id ])
+		addAll:
+			(aCollection
+				select: [ :retour | 
+					retour ft_id
+						= (self ft_id copyReplaceAll: (Character value: 160) asString with: '') ])
 ]
 
 { #category : #api }

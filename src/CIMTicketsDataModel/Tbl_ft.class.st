@@ -58,7 +58,7 @@ Tbl_ft >> joinModulesToTickets [
 { #category : #api }
 Tbl_ft >> joinRetourToTickets: aTbl_retour [
 	self rows
-		do: [ :ticket | ticket joinRetourToTickets: aTbl_retour rows ]
+		do: [ :ticket | ticket joinRetourToTicket: aTbl_retour rows ]
 ]
 
 { #category : #api }

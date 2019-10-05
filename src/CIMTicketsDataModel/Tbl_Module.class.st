@@ -43,29 +43,6 @@ Tbl_Module class >> allModules [
 		asOrderedDictionary
 ]
 
-{ #category : #operations }
-Tbl_Module class >> create [
-	Tbl
-		tbl_Module:
-			(self new
-				rows:
-					(self modulesAsLowercase associations
-						collect: [ :assoc | 
-							Tbl_Module_row new
-								nom: assoc key;
-								joinLibrariesToModule;
-								joinTicketsToModules;
-								yourself ]) asOrderedCollection;
-				yourself).
-	Tbl tbl_Module
-		add:
-			(Tbl_Module_row new
-				nom: 'IZY Protect';
-				tickets: Tbl tbl_ft rows;
-				bibliotheques: Tbl tbl_biblio rows;
-				yourself)
-]
-
 { #category : #utility }
 Tbl_Module class >> modulesAsLowercase [
 	^ (self allModules keys
@@ -88,6 +65,24 @@ Tbl_Module class >> selectModuleFor: aLibraryName [
 Tbl_Module >> copyDirectory: sourceLib to: destLib [
 	^ sourceLib visibleFiles
 		do: [ :file | file copyTo: destLib / file basename ]
+]
+
+{ #category : #initialization }
+Tbl_Module >> createModuleRows [
+	| moduleRows |
+	moduleRows := (self modulesAsLowercase associations
+		collect: [ :assoc | 
+			Tbl_Module_row new
+				nom: assoc key;
+				yourself ]) asOrderedCollection.
+	moduleRows
+		add:
+			(Tbl_Module_row new
+				nom: 'IZY Protect';
+				tickets: CIMDatabase database tbl_ft rows;
+				bibliotheques: CIMDatabase database tbl_biblio rows;
+				yourself).
+	^ moduleRows
 ]
 
 { #category : #api }
@@ -115,10 +110,36 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 					self copyDirectory: sourceLib to: destLib ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
+Tbl_Module >> initialize [
+	super initialize.
+	self initializeModuleRows
+]
+
+{ #category : #initialization }
+Tbl_Module >> initializeModuleRows [
+	rows := self createModuleRows
+]
+
+{ #category : #initialization }
+Tbl_Module >> joinLibrariesToModule [
+	self rows do: [ :each | each joinLibrariesToModule ]
+]
+
+{ #category : #initialization }
+Tbl_Module >> joinTicketsToModules [
+	self rows do: [ :each | each joinTicketsToModules ]
+]
+
+{ #category : #utility }
 Tbl_Module >> moduleNamed: aString [
 	^ self rows
 		detect: [ :module | module nom asLowercase = aString asLowercase ]
+]
+
+{ #category : #initialization }
+Tbl_Module >> modulesAsLowercase [
+	^ self class modulesAsLowercase
 ]
 
 { #category : #generated }
@@ -129,15 +150,4 @@ Tbl_Module >> names [
 { #category : #utility }
 Tbl_Module >> rowClass [
 	^ Tbl_Module_row
-]
-
-{ #category : #initialization }
-Tbl_Module >> setRows [
-	rows := (self class modulesAsLowercase keys
-		collect: [ :moduleNom | 
-			self rowClass new
-				nom: moduleNom;
-				joinTicketsToModules;
-				joinLibrariesToModule;
-				yourself ]) asOrderedCollection
 ]

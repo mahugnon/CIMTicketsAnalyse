@@ -19,7 +19,9 @@ Class {
 		'tbl_type_retour',
 		'tbl_version',
 		'tbl_theme',
-		'tbl_retour'
+		'tbl_retour',
+		'tbl_Module',
+		'tbl_module'
 	],
 	#classInstVars : [
 		'database'
@@ -44,6 +46,16 @@ CIMDatabase class >> resetCurrent [
 CIMDatabase class >> setUpWith: ficheNavettePath and: biblioNamesPath [
 	self resetCurrent.
 	self database setUpWith: ficheNavettePath and: biblioNamesPath
+]
+
+{ #category : #accessing }
+CIMDatabase >> allPBLibraries [
+	^ tbl_biblio rows
+]
+
+{ #category : #accessing }
+CIMDatabase >> allTickets [
+	^ tbl_ft rows
 ]
 
 { #category : #utility }
@@ -72,12 +84,19 @@ CIMDatabase >> joinTables [
 	tbl_biblio joinModulesToLibrary.
 	tbl_ft joinModulesToTickets.
 	(tbl_retour joinTypeRetoursToRetour: tbl_type_retour).
-	(tbl_ft joinRetourToTickets: tbl_retour)}.
+	(tbl_ft joinRetourToTickets: tbl_retour).
+	tbl_Module joinLibrariesToModule.
+	tbl_Module joinTicketsToModules}.
 	[ :job | 
 	job title: 'Joining tables '.
 	1 to: 12 do: [ :each | 
 		job progress: 0.1 * each.
 		joinTableSteps at: each ] ] asJob run
+]
+
+{ #category : #initialization }
+CIMDatabase >> loadModules [
+	Tbl_Module new install
 ]
 
 { #category : #utility }
@@ -101,7 +120,12 @@ CIMDatabase >> setUpWith: ficheNavettePath and: biblioNamesPath [
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	self joinTables.
-	Tbl_Module create
+	self loadModules
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_Module [
+	^ tbl_Module
 ]
 
 { #category : #accessing }
@@ -182,6 +206,11 @@ CIMDatabase >> tbl_modif [
 { #category : #accessing }
 CIMDatabase >> tbl_modif: aTbl_modif [
 	tbl_modif := aTbl_modif
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_module: aTbl_Module [
+	tbl_module := aTbl_Module
 ]
 
 { #category : #accessing }

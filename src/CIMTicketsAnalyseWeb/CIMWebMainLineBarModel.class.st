@@ -15,12 +15,7 @@ Class {
 
 { #category : #accessing }
 CIMWebMainLineBarModel class >> current [
-	current
-		ifNil: [ current := self basicNew
-				modelData:
-					(QueryBugsEvolutions
-						runOn: (CIMTicketGroupNode new tickets: Tbl tbl_ft rows));
-				initialize ].
+	current ifNil: [ current := self new ].
 	^ current
 ]
 
@@ -32,8 +27,14 @@ CIMWebMainLineBarModel class >> resetCurrent [
 ]
 
 { #category : #initialization }
+CIMWebMainLineBarModel >> database [
+	^ CIMDatabase database
+]
+
+{ #category : #initialization }
 CIMWebMainLineBarModel >> initialize [
 	super initialize.
+	self initializeModelData.
 	self initializeModules.
 	self initializeSelectedModule.
 	self initializeListeners
@@ -45,13 +46,19 @@ CIMWebMainLineBarModel >> initializeListeners [
 ]
 
 { #category : #initialization }
+CIMWebMainLineBarModel >> initializeModelData [
+	modelData := QueryBugsEvolutions
+		runOn: (CIMTicketGroupNode new tickets: self database tbl_ft rows)
+]
+
+{ #category : #initialization }
 CIMWebMainLineBarModel >> initializeModules [
-	modules := Tbl tbl_Module rows
+	modules := self database tbl_Module rows
 ]
 
 { #category : #initialization }
 CIMWebMainLineBarModel >> initializeSelectedModule [
-	selectedModule := Tbl tbl_Module moduleNamed: 'IZY Protect'
+	selectedModule := self database tbl_Module moduleNamed: 'IZY Protect'
 ]
 
 { #category : #accessing }
