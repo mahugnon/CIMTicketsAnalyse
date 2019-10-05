@@ -9,7 +9,8 @@ Class {
 		'dev_type_retour_id',
 		'date_valide',
 		'ccTypeRetour',
-		'devTypeRetours'
+		'devTypeRetours',
+		'tickets'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -111,6 +112,17 @@ Tbl_retour_row >> joinDevTypeRetourToRetour: aCollection [
 ]
 
 { #category : #api }
+Tbl_retour_row >> joinTicketsToRetour: aCollection [
+	self tickets
+		addAll:
+			(aCollection
+				select: [ :ticket | 
+					self ft_id
+						=
+							(ticket ft_id copyReplaceAll: (Character value: 160) asString with: '') ])
+]
+
+{ #category : #api }
 Tbl_retour_row >> joinTypeRetoursToRetour: aCollection [
 	self joinCcTypeRetourToRetour: aCollection.
 	self joinDevTypeRetourToRetour: aCollection
@@ -124,4 +136,10 @@ Tbl_retour_row >> retour_id [
 { #category : #accessing }
 Tbl_retour_row >> retour_id: anObject [
 	retour_id := anObject
+]
+
+{ #category : #accessing }
+Tbl_retour_row >> tickets [
+	tickets ifNil: [ tickets := Set new ].
+	^ tickets
 ]
