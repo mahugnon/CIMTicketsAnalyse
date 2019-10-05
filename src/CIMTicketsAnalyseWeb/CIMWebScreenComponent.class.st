@@ -63,8 +63,12 @@ CIMWebScreenComponent >> renderContentOn: html [
 
 { #category : #hooks }
 CIMWebScreenComponent >> style [
+
 	super style.
 	^ '
+	body {
+	background-color:#FAFFFB;
+	}
 .content {
 padding-top:100px;
 padding-left:50px

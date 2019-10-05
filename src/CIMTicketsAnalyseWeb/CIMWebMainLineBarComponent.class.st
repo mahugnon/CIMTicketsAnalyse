@@ -34,7 +34,8 @@ CIMWebMainLineBarComponent >> initializeModel [
 { #category : #rendering }
 CIMWebMainLineBarComponent >> renderContentOn: html [
 	html mdlGrid
-		with: [ self renderModuleSelectionDropDown: html.
+		with: [ "self renderModuleSelectionDropDown: html."
+			self renderTabBarOn: html.
 			self renderModulesLineBarOn: html ]
 ]
 
@@ -64,5 +65,20 @@ CIMWebMainLineBarComponent >> renderModulesLineBarOn: html [
 		do: [ :each | 
 			html mdlCell
 				size: 6;
+				shadow: 8;
+				style: 'background-color:white;';
 				with: [ html render: each ] ]
+]
+
+{ #category : #rendering }
+CIMWebMainLineBarComponent >> renderTabBarOn: html [
+	html
+		render:
+			((MDLNestedList elements: model modules)
+				listStyle: #demo;
+				format: #nom;
+				actionBlock: [ :module | model selectedModule: module ];
+				selectedEntity: model selectedModule;
+				yourself);
+		leftPanelResizer
 ]

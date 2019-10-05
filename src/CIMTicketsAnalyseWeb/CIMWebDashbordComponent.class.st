@@ -85,6 +85,8 @@ CIMWebDashbordComponent >> renderModulesMainLineBarOn: html [
 CIMWebDashbordComponent >> renderModulesPieOn: html [
 	html mdlCell
 		size: 12;
+		shadow: 8;
+		style: 'background-color: white';
 		mdlTypographyTextCenter;
 		with: [ html render: modulesPieComponent.
 			html space ]
@@ -104,7 +106,7 @@ background-color:#BE8DEB;
 
 }
 .modules {
-background-color:#FFFADE;
+background-color:#D9D2C5;
 
 }
  '
