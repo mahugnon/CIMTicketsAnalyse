@@ -59,7 +59,7 @@ CIMWebModulesPieComponent >> renderContentOn: html [
 		with: [ html mdlCell
 				size: 8;
 				mdlTypographyTitle;
-				with: 'Time spent on bugs per modules'.
+				with: 'Time spent  per modules'.
 			html mdlCell
 				size: 12;
 				with: [ html render: (ChartJsComponent data: chartData) ] ]
