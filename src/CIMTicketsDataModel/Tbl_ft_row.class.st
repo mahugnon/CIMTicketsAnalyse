@@ -114,7 +114,7 @@ Tbl_ft_row >> connectedTickets [
 	^ connectedTickets
 ]
 
-{ #category : #accesing }
+{ #category : #accessing }
 Tbl_ft_row >> connectedTickets: aCollection [
 	connectedTickets := aCollection
 ]
@@ -641,6 +641,26 @@ Tbl_ft_row >> ft_version_souhait: arg1 [
 	ft_version_souhait := arg1
 ]
 
+{ #category : #testing }
+Tbl_ft_row >> hasConsistentFeedBacks [
+	| typeRetours |
+	typeRetours := self typeRetours.
+	typeRetours
+		detect: [ :each | each isConsistentFeedBack ]
+		ifFound: [ ^ true ]
+		ifNone: [ ^ false ]
+]
+
+{ #category : #testing }
+Tbl_ft_row >> hasInconsistentFeedBacks [
+	| typeRetours |
+	typeRetours := self typeRetours.
+	typeRetours
+		detect: [ :each | each isInconsistentFeedBack ]
+		ifFound: [ ^ true ]
+		ifNone: [ ^ false ]
+]
+
 { #category : #initialization }
 Tbl_ft_row >> initialize [
 	associatedPhysiqueFiles := Set new
@@ -827,7 +847,7 @@ Tbl_ft_row >> typeCorrection: anObject [
 	typeCorrection := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Tbl_ft_row >> typeRetours [
 	^ retours flatCollect: #devTypeRetour
 ]

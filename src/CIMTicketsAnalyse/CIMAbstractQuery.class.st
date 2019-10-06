@@ -10,6 +10,10 @@ CIMAbstractQuery class >> runOn: aCollection [
 ]
 
 { #category : #running }
-CIMAbstractQuery >> runOn: aCollection [
-	^ self subclassResponsibility
+CIMAbstractQuery >> runOn: aTicketGroupNode [
+	^ {('Consistent'
+		-> (aTicketGroupNode tickets select: #hasConsistentFeedBacks)).
+	('Inconsistent'
+		-> (aTicketGroupNode tickets select: #hasInconsistentFeedBacks))}
+		asOrderedDictionary
 ]

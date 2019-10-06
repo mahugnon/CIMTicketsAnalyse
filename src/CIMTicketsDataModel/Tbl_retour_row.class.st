@@ -95,6 +95,11 @@ Tbl_retour_row >> isConsistentFeedBack [
 	^ self devTypeRetour isConsistentFeedBack
 ]
 
+{ #category : #testing }
+Tbl_retour_row >> isInconsistentFeedBack [
+	^ self devTypeRetour isInconsistentFeedBack
+]
+
 { #category : #api }
 Tbl_retour_row >> joinCcTypeRetourToRetour: aCollection [
 	self ccTypeRetour

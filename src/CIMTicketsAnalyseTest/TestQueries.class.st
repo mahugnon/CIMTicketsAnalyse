@@ -98,6 +98,17 @@ self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Da
 ]
 
 { #category : #tests }
+TestQueries >> testQueryTicketByConsistentOrNotFeedBacks [
+	| ticketGroup |
+	retours joinTypeRetoursToRetours: typeRetours.
+	tickets joinRetourToTickets: retours.
+	ticketGroup := CIMTicketGroupNode new tickets: tickets rows.
+	self
+		assert: (QueryTicketByConsistentOrNotFeedBacks runOn: ticketGroup) keys first
+		equals: 'Consistent'
+]
+
+{ #category : #tests }
 TestQueries >> testQueryTicketsByFeedBacks [
 	| ticketGroup |
 	retours joinTypeRetoursToRetours: typeRetours.

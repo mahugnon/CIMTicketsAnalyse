@@ -16,9 +16,23 @@ Tbl_type_retour_row >> consistentFeedBacks [
 		asOrderedCollection
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl_type_retour_row >> inConsistentFeedBacks [
+	^ {'Evolution de la demande' . 'Fiche incomplète' . 'Problème de paramétrage'.
+	'Erreur sur la version testée' . 'Bug sans lien avec la fiche'.
+	'Problème de compréhension du fonctionnement  du module'.
+	'Fiche suite à créér' . 'Problème non lié à la fiche mais qui bloque les tests'}
+		asOrderedCollection
+]
+
 { #category : #testing }
 Tbl_type_retour_row >> isConsistentFeedBack [
 	^ self consistentFeedBacks includes: self libelle
+]
+
+{ #category : #testing }
+Tbl_type_retour_row >> isInconsistentFeedBack [
+	^ self inConsistentFeedBacks includes: self libelle
 ]
 
 { #category : #api }
@@ -37,15 +51,6 @@ Tbl_type_retour_row >> libelle [
 { #category : #accessing }
 Tbl_type_retour_row >> libelle: anObject [
 	libelle := anObject
-]
-
-{ #category : #'as yet unclassified' }
-Tbl_type_retour_row >> notConsistentFeedBack [
-	^ {'Evolution de la demande' . 'Fiche incomplète' . 'Problème de paramétrage'.
-	'Erreur sur la version testée' . 'Bug sans lien avec la fiche'.
-	'Problème de compréhension du fonctionnement  du module'.
-	'Fiche suite à créér' . 'Problème non lié à la fiche mais qui bloque les tests'}
-		asOrderedCollection
 ]
 
 { #category : #accessing }
