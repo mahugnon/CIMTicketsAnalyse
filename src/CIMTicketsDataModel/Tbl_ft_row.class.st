@@ -652,6 +652,11 @@ Tbl_ft_row >> hasConsistentFeedBacks [
 ]
 
 { #category : #testing }
+Tbl_ft_row >> hasFeedBacks [
+	^ retours isNotEmpty
+]
+
+{ #category : #testing }
 Tbl_ft_row >> hasInconsistentFeedBacks [
 	| typeRetours |
 	typeRetours := self typeRetours.

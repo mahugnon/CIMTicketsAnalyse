@@ -2,7 +2,8 @@ Class {
 	#name : #TestQueries,
 	#superclass : #CIMAbstractModelTest,
 	#instVars : [
-		'devolopeurs'
+		'devolopeurs',
+		'ticketGroup'
 	],
 	#category : #CIMTicketsAnalyseTest
 }
@@ -88,7 +89,10 @@ TestQueries >> setUp [
 	super setUp.
 	self setDevelopers.
 	tps joinTypeSessionToTps: typeSessions.
-	tickets joinTpsDevToTicket: tps
+	tickets joinTpsDevToTicket: tps.
+	retours joinTypeRetoursToRetours: typeRetours.
+	tickets joinRetourToTickets: retours.
+	ticketGroup := CIMTicketGroupNode new tickets: tickets rows
 ]
 
 { #category : #tests }
@@ -99,10 +103,6 @@ self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Da
 
 { #category : #tests }
 TestQueries >> testQueryTicketByConsistentOrNotFeedBacks [
-	| ticketGroup |
-	retours joinTypeRetoursToRetours: typeRetours.
-	tickets joinRetourToTickets: retours.
-	ticketGroup := CIMTicketGroupNode new tickets: tickets rows.
 	self
 		assert: (QueryTicketByConsistentOrNotFeedBacks runOn: ticketGroup) keys first
 		equals: 'Consistent'
@@ -118,6 +118,11 @@ TestQueries >> testQueryTicketsByFeedBacks [
 		assert:
 			((QueryTicketsByFeedBacks runOn: ticketGroup) keys
 				includes: 'Fiche incomplète')
+]
+
+{ #category : #tests }
+TestQueries >> testQueryTicketsHasFeedBack [
+	self deny: (QueryTicketHasFeedBacks runOn: ticketGroup) isEmpty
 ]
 
 { #category : #tests }
