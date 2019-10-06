@@ -84,6 +84,7 @@ CIMDatabase >> joinTables [
 	tbl_ft joinModulesToTickets.
 	(tbl_retour joinTypeRetoursToRetour: tbl_type_retour).
 	(tbl_ft joinRetourToTickets: tbl_retour).
+	(tbl_retour joinTicketsToRetour: tbl_ft).
 	tbl_module joinLibrariesToModule.
 	tbl_module joinTicketsToModules}.
 	[ :job | 
