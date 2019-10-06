@@ -98,6 +98,18 @@ self assert: (QueryNumberOfDeveloppeurForAmonth new runOn: devolopeurs  for: (Da
 ]
 
 { #category : #tests }
+TestQueries >> testQueryTicketsByFeedBacks [
+	| ticketGroup |
+	retours joinTypeRetoursToRetours: typeRetours.
+	tickets joinRetourToTickets: retours.
+	ticketGroup := CIMTicketGroupNode new tickets: tickets rows.
+	self
+		assert:
+			((QueryTicketsByFeedBacks runOn: ticketGroup) keys
+				includes: 'Fiche incomplète')
+]
+
+{ #category : #tests }
 TestQueries >> testQueyTimeRCTest [
 	tps joinTypeSessionToTps: typeSessions.
 	"tickets joinTpsDevToTicket: tps."

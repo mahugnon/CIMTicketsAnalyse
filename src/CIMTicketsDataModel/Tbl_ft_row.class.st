@@ -829,7 +829,7 @@ Tbl_ft_row >> typeCorrection: anObject [
 
 { #category : #'as yet unclassified' }
 Tbl_ft_row >> typeRetours [
-	^ retours collect: #devTypeRetour
+	^ retours flatCollect: #devTypeRetour
 ]
 
 { #category : #API }
