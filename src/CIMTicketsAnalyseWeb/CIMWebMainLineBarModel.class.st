@@ -1,23 +1,14 @@
 Class {
 	#name : #CIMWebMainLineBarModel,
-	#superclass : #Object,
+	#superclass : #CIMWebAbstractModel,
 	#instVars : [
 		'modules',
 		'selectedModule',
 		'modelData',
 		'listeners'
 	],
-	#classInstVars : [
-		'current'
-	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
-
-{ #category : #accessing }
-CIMWebMainLineBarModel class >> current [
-	current ifNil: [ current := self new ].
-	^ current
-]
 
 { #category : #accessing }
 CIMWebMainLineBarModel class >> resetCurrent [

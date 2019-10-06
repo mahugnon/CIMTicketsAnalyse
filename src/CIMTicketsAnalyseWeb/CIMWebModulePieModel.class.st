@@ -1,22 +1,13 @@
 Class {
 	#name : #CIMWebModulePieModel,
-	#superclass : #Object,
+	#superclass : #CIMWebAbstractModel,
 	#instVars : [
 		'percentModuleTime',
 		'modelData',
 		'modules'
 	],
-	#classInstVars : [
-		'current'
-	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
-
-{ #category : #accessing }
-CIMWebModulePieModel class >> current [
-	current ifNil: [ current := self new ].
-	^ current
-]
 
 { #category : #initialization }
 CIMWebModulePieModel class >> resetCurrent [

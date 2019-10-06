@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMWebTimeSpentChartModel,
-	#superclass : #CIMWebAbstractModel,
+	#superclass : #CIMWebModuleAbstractModel,
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 

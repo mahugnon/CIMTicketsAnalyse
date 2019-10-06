@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMWebTimeTestDevChartModel,
-	#superclass : #CIMWebAbstractModel,
+	#superclass : #CIMWebModuleAbstractModel,
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 

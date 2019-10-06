@@ -1,23 +1,14 @@
 Class {
 	#name : #CIMWebEstimationModel,
-	#superclass : #Object,
+	#superclass : #CIMWebAbstractModel,
 	#instVars : [
 		'totalTime',
 		'percentBugs',
 		'percentEvolutions',
 		'modelData'
 	],
-	#classInstVars : [
-		'current'
-	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
-
-{ #category : #accessing }
-CIMWebEstimationModel class >> current [
-	current ifNil: [ current := self new ].
-	^ current
-]
 
 { #category : #accessing }
 CIMWebEstimationModel class >> resetCurrent [

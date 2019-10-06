@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMWebTimeOpenCloseChartModel,
-	#superclass : #CIMWebAbstractModel,
+	#superclass : #CIMWebModuleAbstractModel,
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 

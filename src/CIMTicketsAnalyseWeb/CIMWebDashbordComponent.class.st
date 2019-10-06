@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'estimations',
 		'modulesPieComponent',
-		'mainLineBarComponent'
+		'mainLineBarComponent',
+		'feedBackPieComponent'
 	],
 	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
 }
@@ -13,12 +14,18 @@ Class {
 CIMWebDashbordComponent >> children [
 	^ {mainLineBarComponent.
 	modulesPieComponent.
-	estimations} , super children
+	estimations.
+	feedBackPieComponent} , super children
 ]
 
 { #category : #initialization }
 CIMWebDashbordComponent >> createEstimationComponent [
 	estimations := CIMWebEstimationComponent new
+]
+
+{ #category : #initialization }
+CIMWebDashbordComponent >> createFeedBackPieComponent [
+	feedBackPieComponent := CIMWebFeedBackPieComponent new
 ]
 
 { #category : #hooks }
@@ -48,15 +55,29 @@ CIMWebDashbordComponent >> initialize [
 	super initialize.
 	self createMainLineBarComponent.
 	self createEstimationComponent.
-	self createModulePie
+	self createModulePie.
+	self createFeedBackPieComponent
 ]
 
 { #category : #hooks }
 CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
 		with: [ self estimationsOn: html.
+			self renderModulesPieOn: html.
+			self renderFeedBackPieComponentOn: html.
 			self renderModulesComponentOn: html
 			"self renderChartsOn: html" ]
+]
+
+{ #category : #'parts rendering' }
+CIMWebDashbordComponent >> renderFeedBackPieComponentOn: html [
+	html mdlCell
+		size: 6;
+		shadow: 8;
+		style: 'background-color: white';
+		mdlTypographyTextCenter;
+		with: [ html render: feedBackPieComponent.
+			html space ]
 ]
 
 { #category : #'parts rendering' }
@@ -68,8 +89,7 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 				mdlTextColorPrimary;
 				size: 12;
 				with: 'Izy Protect Modules '.
-			self renderModulesMainLineBarOn: html.
-			self renderModulesPieOn: html ]
+			self renderModulesMainLineBarOn: html ]
 ]
 
 { #category : #'parts rendering' }
@@ -84,7 +104,7 @@ CIMWebDashbordComponent >> renderModulesMainLineBarOn: html [
 { #category : #'parts rendering' }
 CIMWebDashbordComponent >> renderModulesPieOn: html [
 	html mdlCell
-		size: 12;
+		size: 6;
 		shadow: 8;
 		style: 'background-color: white';
 		mdlTypographyTextCenter;
