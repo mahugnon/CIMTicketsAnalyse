@@ -7,6 +7,9 @@ Class {
 { #category : #running }
 QueryTicketHasFeedBacks >> runOn: aCIMTicketGroupNode [
 	^ CIMTicketGroupNode new
-		tickets: (aCIMTicketGroupNode tickets select: #hasFeedBacks);
+		tickets:
+			(aCIMTicketGroupNode tickets
+				select:
+					[ :ticket | ticket ft_datecrea >= CIMDatabase database tbl_retour dateFirstRetour ]);
 		yourself
 ]

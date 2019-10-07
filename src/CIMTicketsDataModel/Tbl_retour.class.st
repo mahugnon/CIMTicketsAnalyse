@@ -1,8 +1,20 @@
 Class {
 	#name : #'Tbl_retour',
 	#superclass : #Tbl,
+	#instVars : [
+		'dateFirstRetour'
+	],
 	#category : #'CIMTicketsDataModel-Model'
 }
+
+{ #category : #accessing }
+Tbl_retour >> dateFirstRetour [
+	dateFirstRetour
+		ifNil: [ dateFirstRetour := (rows
+				sort: [ :a :b | a date_retour < b date_retour ]) first date_retour
+				asDate ].
+	^ dateFirstRetour
+]
 
 { #category : #api }
 Tbl_retour >> joinCcTypeRetourToRetour: aTbl_type_retour [
