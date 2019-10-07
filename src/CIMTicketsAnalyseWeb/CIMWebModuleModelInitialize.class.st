@@ -13,6 +13,6 @@ CIMWebModuleModelInitialize class >> resetModels [
 { #category : #initialization }
 CIMWebModuleModelInitialize >> resetModels [
 	CIMWebMainLineBarModel resetCurrent.
-	CIMWebModuleLineBarAbstractModel subclassesDo: #resetCurrent.
+	CIMWebModuleAbstractModel subclassesDo: #resetCurrent. 
 	CIMWebEstimationModel resetCurrent
 ]
