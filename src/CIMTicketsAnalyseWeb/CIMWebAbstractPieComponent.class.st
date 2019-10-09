@@ -26,7 +26,7 @@ CIMWebAbstractPieComponent >> applyStyleTo: aChartData [
 ]
 
 { #category : #rendering }
-CIMWebAbstractPieComponent >> chartDataSet [
+CIMWebAbstractPieComponent >> dataSet [
 	^ chartDataSet
 ]
 

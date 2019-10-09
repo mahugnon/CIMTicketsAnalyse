@@ -39,11 +39,6 @@ CIMWebModuleAbstractModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketG
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebModuleAbstractModel >> chartDataSet [
-	^ self dataSetForModule: self selectedModule
-]
-
-{ #category : #'as yet unclassified' }
 CIMWebModuleAbstractModel >> computeBugsDataSetForModule: aModule [
 	^ self avgTimeModulePerYear: aModule selectQuery: QueryBugs
 ]
@@ -73,6 +68,11 @@ CIMWebModuleAbstractModel >> computedatasSetForModule: aModule [
 	^ {x.
 	('Bugs' -> yBugs).
 	('Evolutions' -> yEvolutions)} asOrderedCollection
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebModuleAbstractModel >> dataSet [
+	^ self dataSetForModule: self selectedModule
 ]
 
 { #category : #accessing }

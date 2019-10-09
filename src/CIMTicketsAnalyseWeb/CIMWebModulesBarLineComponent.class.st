@@ -25,8 +25,8 @@ CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 ]
 
 { #category : #accessing }
-CIMWebModulesBarLineComponent >> chartDataSet [
-	^ model chartDataSet
+CIMWebModulesBarLineComponent >> dataSet [
+	^ model dataSet
 ]
 
 { #category : #'private-api' }
@@ -65,21 +65,21 @@ CIMWebModulesBarLineComponent >> kinds [
 { #category : #'private-api' }
 CIMWebModulesBarLineComponent >> linearRegressionCaracteristcs [
 	| keys |
-	keys := self chartDataSet first.
+	keys := self dataSet first.
 	^ {('Bugs regression'
 		->
 			(QueryLinearRegression new
 				runOn1:
 					(OrderedDictionary
 						newFromKeys: keys
-						andValues: self chartDataSet second value))).
+						andValues: self dataSet second value))).
 	('Evolution regression'
 		->
 			(QueryLinearRegression new
 				runOn1:
 					(OrderedDictionary
 						newFromKeys: keys
-						andValues: self chartDataSet third value)))} asOrderedDictionary
+						andValues: self dataSet third value)))} asOrderedDictionary
 ]
 
 { #category : #accessing }
@@ -90,6 +90,50 @@ CIMWebModulesBarLineComponent >> model [
 { #category : #accessing }
 CIMWebModulesBarLineComponent >> model: aModel [
 	model := aModel
+]
+
+{ #category : #rendering }
+CIMWebModulesBarLineComponent >> prepareCharDataSetWith: regression and: dataSet [
+	^ {((ChartDataSetSequence
+		name: dataSet second key
+		sequence: dataSet second value)
+		setOption: #fill to: false;
+		setOption: #backgroundColor to: 'red';
+		setOption: #borderColor to: 'red';
+		setOption: #pointHoverBackgroundColor to: 'white';
+		setOption: #pointHoverBorderColor to: 'red';
+		setOption: #pointHoverBorderWidth to: '10';
+		setOption: #borderWidth to: '1').
+	((ChartDataSetSequence
+		name: dataSet third key
+		sequence: dataSet third value)
+		setOption: #fill to: false;
+		setOption: #backgroundColor to: 'blue';
+		setOption: #borderColor to: 'blue';
+		setOption: #pointHoverBackgroundColor to: 'white';
+		setOption: #pointHoverBorderColor to: 'blue';
+		setOption: #pointHoverBorderWidth to: '10';
+		setOption: #borderWidth to: '1').
+	((ChartDataSetFunction new
+		function: [ :x | 
+	x * (regression at: 'Bugs regression') slope
+		+ (regression at: 'Bugs regression') intercept ])
+		name: 'Bugs approximation line';
+		setOption: #fill to: false;
+		setOption: #pointBorderWidth to: '0.5';
+		setOption: #backgroundColor to: 'red';
+		setOption: #borderColor to: 'red';
+		setOption: #pointHoverBorderWidth to: '1').
+	((ChartDataSetFunction new
+		function: [ :x | 
+	x * (regression at: 'Evolution regression') slope
+		+ (regression at: 'Evolution regression') intercept ])
+		setOption: #fill to: false;
+		name: 'Evolution approximation line';
+		setOption: #pointBorderWidth to: '0.5';
+		setOption: #backgroundColor to: 'blue';
+		setOption: #borderColor to: 'blue';
+		setOption: #borderWidth to: '2')}
 ]
 
 { #category : #rendering }
@@ -139,55 +183,14 @@ CIMWebModulesBarLineComponent >> renderPossibleKindsUpdating: id with: rendering
 CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 	| renderingChartBlock id dataSet regression |
 	regression := self linearRegressionCaracteristcs.
-	dataSet := model chartDataSet.
+	dataSet := model dataSet.
 	renderingChartBlock := [ :canvas | 
-	| chartData chartDataSets |
-	chartDataSets := {((ChartDataSetSequence
-		name: dataSet second key
-		sequence: dataSet second value)
-		setOption: #fill to: false;
-		setOption: #backgroundColor to: 'red';
-		setOption: #borderColor to: 'red';
-		setOption: #pointHoverBackgroundColor to: 'white';
-		setOption: #pointHoverBorderColor to: 'red';
-		setOption: #pointHoverBorderWidth to: '10';
-		setOption: #borderWidth to: '1').
-	((ChartDataSetSequence
-		name: dataSet third key
-		sequence: dataSet third value)
-		setOption: #fill to: false;
-		setOption: #backgroundColor to: 'blue';
-		setOption: #borderColor to: 'blue';
-		setOption: #pointHoverBackgroundColor to: 'white';
-		setOption: #pointHoverBorderColor to: 'blue';
-		setOption: #pointHoverBorderWidth to: '10';
-		setOption: #borderWidth to: '1').
-	((ChartDataSetFunction new
-		function: [ :x | 
-	x * (regression at: 'Bugs regression') slope
-		+ (regression at: 'Bugs regression') intercept ])
-		setOption: #fill to: false;
-		setOption: #pointBorderWidth to: '0.5';
-		setOption: #backgroundColor to: 'red';
-		setOption: #borderColor to: 'red';
-		setOption: #pointHoverBorderWidth to: '1'
-		).
-	((ChartDataSetFunction new
-		function: [ :x | 
-	x * (regression at: 'Evolution regression') slope
-		+ (regression at: 'Evolution regression') intercept ])
-		setOption: #fill to: false;
-		setOption: #pointBorderWidth to: '0.5';
-		setOption: #backgroundColor to: 'blue';
-		setOption: #borderColor to: 'blue';
-		setOption: #borderWidth to: '2')}.
+	| chartData |
 	chartData := Chart2dData new
 		xObjects: dataSet first;
-		dataSets: chartDataSets;
-		multiValueTooltip: '<label> spent <value> hours in <key>';
+		dataSets: (self prepareCharDataSetWith: regression and: dataSet);
 		chartType: self kind;
 		yourself.
-	"self applyStyleTo: chartData."
 	html
 		render:
 			(ChartJsComponent
