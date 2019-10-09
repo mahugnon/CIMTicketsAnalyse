@@ -144,26 +144,46 @@ CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 	| chartData chartDataSets |
 	chartDataSets := {((ChartDataSetSequence
 		name: dataSet second key
-		sequence: dataSet second value) setOption: #fill to: false).
+		sequence: dataSet second value)
+		setOption: #fill to: false;
+		setOption: #backgroundColor to: 'red';
+		setOption: #borderColor to: 'red';
+		setOption: #pointHoverBackgroundColor to: 'white';
+		setOption: #pointHoverBorderColor to: 'red';
+		setOption: #pointHoverBorderWidth to: '10';
+		setOption: #borderWidth to: '1').
 	((ChartDataSetSequence
 		name: dataSet third key
-		sequence: dataSet third value) setOption: #fill to: false).
+		sequence: dataSet third value)
+		setOption: #fill to: false;
+		setOption: #backgroundColor to: 'blue';
+		setOption: #borderColor to: 'blue';
+		setOption: #pointHoverBackgroundColor to: 'white';
+		setOption: #pointHoverBorderColor to: 'blue';
+		setOption: #pointHoverBorderWidth to: '10';
+		setOption: #borderWidth to: '1').
 	((ChartDataSetFunction new
 		function: [ :x | 
-			x * (regression at: 'Bugs regression') slope
-				+ (regression at: 'Bugs regression') intercept ])
-		setOption: #fill
-		to: false).
+	x * (regression at: 'Bugs regression') slope
+		+ (regression at: 'Bugs regression') intercept ])
+		setOption: #fill to: false;
+		setOption: #pointBorderWidth to: '0.5';
+		setOption: #backgroundColor to: 'red';
+		setOption: #borderColor to: 'red';
+		setOption: #pointHoverBorderWidth to: '1'
+		).
 	((ChartDataSetFunction new
 		function: [ :x | 
-			x * (regression at: 'Evolution regression') slope
-				+ (regression at: 'Evolution regression') intercept ])
-		setOption: #fill
-		to: false)}.
+	x * (regression at: 'Evolution regression') slope
+		+ (regression at: 'Evolution regression') intercept ])
+		setOption: #fill to: false;
+		setOption: #pointBorderWidth to: '0.5';
+		setOption: #backgroundColor to: 'blue';
+		setOption: #borderColor to: 'blue';
+		setOption: #borderWidth to: '2')}.
 	chartData := Chart2dData new
-	xObjects: dataSet first;
+		xObjects: dataSet first;
 		dataSets: chartDataSets;
-		
 		multiValueTooltip: '<label> spent <value> hours in <key>';
 		chartType: self kind;
 		yourself.
