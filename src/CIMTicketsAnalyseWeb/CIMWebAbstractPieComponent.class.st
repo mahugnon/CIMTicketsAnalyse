@@ -47,7 +47,8 @@ CIMWebAbstractPieComponent >> model: anObject [
 
 { #category : #rendering }
 CIMWebAbstractPieComponent >> renderContentOn: html [
-	| chartData |
+self flag: 'Todo'
+	"| chartData |
 	chartData := (Chart1dData values: self chartDataSet)
 		singleValueTooltip: '<key> has <value>% of ' , String cr , self description;
 		chartType: ChartPie;
@@ -60,7 +61,7 @@ CIMWebAbstractPieComponent >> renderContentOn: html [
 				with: self title.
 			html mdlCell
 				size: 12;
-				with: [ html render: (ChartJsComponent data: chartData) ] ]
+				with: [ html render: (ChartJsComponent data: chartData) ] ]"
 ]
 
 { #category : #accessing }

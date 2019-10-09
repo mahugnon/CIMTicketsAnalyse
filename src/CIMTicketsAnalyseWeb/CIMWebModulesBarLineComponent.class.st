@@ -141,32 +141,33 @@ CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 	regression := self linearRegressionCaracteristcs.
 	dataSet := model chartDataSet.
 	renderingChartBlock := [ :canvas | 
-	| chartData |
-	chartData := (Chart2dData
-		xObjects: dataSet first
-		multiYObjects:
-		{dataSet second.
-	dataSet third})
+	| chartData chartDataSets |
+	chartDataSets := {((ChartDataSetSequence
+		name: dataSet second key
+		sequence: dataSet second value) setOption: #fill to: false).
+	((ChartDataSetSequence
+		name: dataSet third key
+		sequence: dataSet third value) setOption: #fill to: false).
+	((ChartDataSetFunction new
+		function: [ :x | 
+			x * (regression at: 'Bugs regression') slope
+				+ (regression at: 'Bugs regression') intercept ])
+		setOption: #fill
+		to: false).
+	((ChartDataSetFunction new
+		function: [ :x | 
+			x * (regression at: 'Evolution regression') slope
+				+ (regression at: 'Evolution regression') intercept ])
+		setOption: #fill
+		to: false)}.
+	chartData := Chart2dData new
+	xObjects: dataSet first;
+		dataSets: chartDataSets;
+		
 		multiValueTooltip: '<label> spent <value> hours in <key>';
 		chartType: self kind;
 		yourself.
-	chartData dataSets
-		addLast:
-			(ChartDataSetFunction new
-				function: [ :x | 
-					x * (regression at: 'Bugs regression') slope
-						+ (regression at: 'Bugs regression') intercept ];
-				color: (Color red alpha: 0.1);
-				name: 'Bugs regression').
-	chartData dataSets
-		addLast:
-			(ChartDataSetFunction new
-				function: [ :x | 
-					x * (regression at: 'Evolution regression') slope
-						+ (regression at: 'Evolution regression') intercept ];
-				color: (Color blue alpha: 0.1);
-				name: 'Evolution regression').
-	self applyStyleTo: chartData.
+	"self applyStyleTo: chartData."
 	html
 		render:
 			(ChartJsComponent

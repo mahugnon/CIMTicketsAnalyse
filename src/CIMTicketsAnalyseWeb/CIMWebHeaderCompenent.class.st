@@ -59,7 +59,8 @@ CIMWebHeaderCompenent >> renderContentOn: html [
 		with: [ html
 				mdlLayoutHeader: [ html
 						mdlLayoutHeaderRow: [ html mdlLayoutTitle: 'TicketsDashboard'.
-							html mdlLayoutSpacer ] ] ]
+							html mdlLayoutSpacer.
+							"html mdlIcon: (self icon: self rmodLogoUrl) "] ] ]
 ]
 
 { #category : #'CIMTicketsAnalyseWeb-WebComponentsCore' }
