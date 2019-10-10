@@ -22,3 +22,18 @@ CIMWebTimeTotalMinusEstimChartModel >> avgTimeTicketsPerYear: selectQuery for: a
 								runOn: (self dataWithCloseDate: aCIMTicketGroup))))
 	"reject: [ :serie | serie asString = '-125526.52173913' ]"
 ]
+
+{ #category : #'private - utility' }
+CIMWebTimeTotalMinusEstimChartModel >> doubleRegressionCharacteristics: aCollection [
+	^ QueryLinearRegression new runOn1: aCollection
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebTimeTotalMinusEstimChartModel >> needMultiRegressionLine [
+	^ selectedModule releventYear isNotNil
+]
+
+{ #category : #accessing }
+CIMWebTimeTotalMinusEstimChartModel >> releventYear [
+	^ selectedModule releventYear
+]

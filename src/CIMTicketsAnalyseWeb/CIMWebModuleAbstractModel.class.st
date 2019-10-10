@@ -123,11 +123,6 @@ CIMWebModuleAbstractModel >> initializeSelectedModule [
 	selectedModule := cIMWebMainLineBarModel selectedModule
 ]
 
-{ #category : #'private - utility' }
-CIMWebModuleAbstractModel >> linearRegressionCaracteristcs: aCollection [
-	^ QueryLinearRegression new runOn1: aCollection
-]
-
 { #category : #accessing }
 CIMWebModuleAbstractModel >> modelData [
 	^ modelData

@@ -24,6 +24,26 @@ CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 				pointHighlightStroke: Color black ]
 ]
 
+{ #category : #'private-api' }
+CIMWebModulesBarLineComponent >> bugsEvolutionLinearRegression [
+	| keys |
+	keys := self dataSet first.
+	^ {('Bugs regression'
+		->
+			(QueryLinearRegression new
+				runOn1:
+					(OrderedDictionary
+						newFromKeys: keys
+						andValues: self dataSet second value))).
+	('Evolution regression'
+		->
+			(QueryLinearRegression new
+				runOn1:
+					(OrderedDictionary
+						newFromKeys: keys
+						andValues: self dataSet third value)))} asOrderedDictionary
+]
+
 { #category : #accessing }
 CIMWebModulesBarLineComponent >> dataSet [
 	^ model dataSet
@@ -62,26 +82,6 @@ CIMWebModulesBarLineComponent >> kinds [
 	ChartBar}
 ]
 
-{ #category : #'private-api' }
-CIMWebModulesBarLineComponent >> linearRegressionCaracteristcs [
-	| keys |
-	keys := self dataSet first.
-	^ {('Bugs regression'
-		->
-			(QueryLinearRegression new
-				runOn1:
-					(OrderedDictionary
-						newFromKeys: keys
-						andValues: self dataSet second value))).
-	('Evolution regression'
-		->
-			(QueryLinearRegression new
-				runOn1:
-					(OrderedDictionary
-						newFromKeys: keys
-						andValues: self dataSet third value)))} asOrderedDictionary
-]
-
 { #category : #accessing }
 CIMWebModulesBarLineComponent >> model [
 	^ model
@@ -93,20 +93,26 @@ CIMWebModulesBarLineComponent >> model: aModel [
 ]
 
 { #category : #rendering }
-CIMWebModulesBarLineComponent >> prepareCharDataSetWith: regression and: dataSet [
+CIMWebModulesBarLineComponent >> prepareCharDataSet [
 	^ {((ChartDataSetSequence
-		name: dataSet second key
-		sequence: dataSet second value)
+		name: self dataSet second key
+		sequence: self dataSet second value)
 		setOption: #fill to: false;
 		setOption: #backgroundColor to: 'red';
 		setOption: #borderColor to: 'red';
 		setOption: #pointHoverBackgroundColor to: 'white';
 		setOption: #pointHoverBorderColor to: 'red';
 		setOption: #pointHoverBorderWidth to: '10';
-		setOption: #borderWidth to: '1').
-	((ChartDataSetSequence
-		name: dataSet third key
-		sequence: dataSet third value)
+		setOption: #borderWidth to: '1')}, self regressionFunctions
+]
+
+{ #category : #rendering }
+CIMWebModulesBarLineComponent >> regressionFunctions [
+	| regression |
+	regression := self bugsEvolutionLinearRegression.
+	^ {((ChartDataSetSequence
+		name: self dataSet third key
+		sequence: self dataSet third value)
 		setOption: #fill to: false;
 		setOption: #backgroundColor to: 'blue';
 		setOption: #borderColor to: 'blue';
@@ -181,14 +187,12 @@ CIMWebModulesBarLineComponent >> renderPossibleKindsUpdating: id with: rendering
 
 { #category : #rendering }
 CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
-	| renderingChartBlock id dataSet regression |
-	regression := self linearRegressionCaracteristcs.
-	dataSet := model dataSet.
+	| renderingChartBlock id |
 	renderingChartBlock := [ :canvas | 
 	| chartData |
 	chartData := Chart2dData new
-		xObjects: dataSet first;
-		dataSets: (self prepareCharDataSetWith: regression and: dataSet);
+		xObjects: self dataSet first;
+		dataSets: self prepareCharDataSet;
 		chartType: self kind;
 		yourself.
 	html

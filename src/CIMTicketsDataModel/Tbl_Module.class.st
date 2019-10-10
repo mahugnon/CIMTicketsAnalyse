@@ -120,6 +120,7 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 { #category : #initialization }
 Tbl_Module >> initialize [
 	super initialize.
+	self initializeReleventYears.
 	self initializeModuleRows
 ]
 

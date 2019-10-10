@@ -2,20 +2,20 @@ Class {
 	#name : #QuerySplitTicketNodeByTime,
 	#superclass : #TimeSerieQueries,
 	#instVars : [
-		'month'
+		'time'
 	],
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
 { #category : #running }
 QuerySplitTicketNodeByTime >> lowerToTime: aCollection [
-	^ (aCollection select: [ :node | node time <= month ])
+	^ (aCollection select: [ :node | node time <= time ])
 		asOrderedCollection
 ]
 
 { #category : #accessing }
 QuerySplitTicketNodeByTime >> month: anInteger [ 
-	month := anInteger
+	time := anInteger
 ]
 
 { #category : #running }
@@ -26,6 +26,6 @@ QuerySplitTicketNodeByTime >> runOn: aCollection [
 
 { #category : #running }
 QuerySplitTicketNodeByTime >> uperToTime: aCollection [
-	^ (aCollection select: [ :node | node time > month ])
+	^ (aCollection select: [ :node | node time > time ])
 		asOrderedCollection
 ]

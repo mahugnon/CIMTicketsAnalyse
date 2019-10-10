@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'nom',
 		'tickets',
-		'bibliotheques'
+		'bibliotheques',
+		'releventYear'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -45,6 +46,11 @@ Tbl_Module_row >> nom [
 { #category : #accessing }
 Tbl_Module_row >> nom: aString [
 	nom := aString
+]
+
+{ #category : #accessing }
+Tbl_Module_row >> releventYear [
+	^ releventYear
 ]
 
 { #category : #accessing }
