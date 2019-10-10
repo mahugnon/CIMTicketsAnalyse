@@ -54,6 +54,11 @@ Tbl_Module_row >> releventYear [
 ]
 
 { #category : #accessing }
+Tbl_Module_row >> releventYear: anInteger [ 
+	releventYear := anInteger
+]
+
+{ #category : #accessing }
 Tbl_Module_row >> tickets [
 	^ tickets
 ]

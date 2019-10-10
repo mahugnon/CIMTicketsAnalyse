@@ -138,6 +138,11 @@ CIMWebModuleAbstractModel >> modules [
 	^ modules
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebModuleAbstractModel >> needMultiRegressionLine [
+	^ false
+]
+
 { #category : #accessing }
 CIMWebModuleAbstractModel >> selectedModule [
 	^ selectedModule

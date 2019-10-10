@@ -121,9 +121,10 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		setOption: #pointHoverBorderWidth to: '10';
 		setOption: #borderWidth to: '1').
 	((ChartDataSetFunction new
-		function: [ :x | 
-	x * (regression at: 'Bugs regression') slope
-		+ (regression at: 'Bugs regression') intercept ])
+		function:
+		(RegressionLineStrategy
+		regression: (regression at: 'Bugs regression')
+		needMultipleRegression: model needMultiRegressionLine))
 		name: 'Bugs approximation line';
 		setOption: #fill to: false;
 		setOption: #pointBorderWidth to: '0.5';
@@ -131,9 +132,10 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		setOption: #borderColor to: 'red';
 		setOption: #pointHoverBorderWidth to: '1').
 	((ChartDataSetFunction new
-		function: [ :x | 
-	x * (regression at: 'Evolution regression') slope
-		+ (regression at: 'Evolution regression') intercept ])
+		function:
+		(RegressionLineStrategy
+		regression: (regression at: 'Evolution regression')
+		needMultipleRegression: model needMultiRegressionLine))
 		setOption: #fill to: false;
 		name: 'Evolution approximation line';
 		setOption: #pointBorderWidth to: '0.5';

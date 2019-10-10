@@ -78,6 +78,20 @@ CIMWebModulesTimeTotalMinusEstimComponent >> twoRegressionsForBugsAndEvolutions 
 ]
 
 { #category : #'as yet unclassified' }
+CIMWebModulesTimeTotalMinusEstimComponent >> yDouble: regressionFunction functionYear: x [
+	| regression |
+	x < model releventYear
+		ifTrue: [ regression := x * regressionFunction first slope
+				+ regressionFunction first intercept ].
+	x > model releventYear
+		ifTrue: [ regression := x * regressionFunction second slope
+				+ regressionFunction second intercept ].
+	x = model releventYear
+		ifTrue: [ regression := 'NaN' ].
+	^ regression
+]
+
+{ #category : #'as yet unclassified' }
 CIMWebModulesTimeTotalMinusEstimComponent >> yDoubleRegLineFunctionYear: x [
 	| regression |
 	x < model releventYear
