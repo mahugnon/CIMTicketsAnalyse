@@ -1,7 +1,7 @@
 Class {
 	#name : #RegressionSingleLineStrategy,
 	#superclass : #RegressionLineStrategy,
-	#category : #CIMTicketsDataModelUtils
+	#category : #'CIMTicketsDataModelUtils-RegressionLineStrategy'
 }
 
 { #category : #'as yet unclassified' }

@@ -16,6 +16,6 @@ CIMWebHeaderCompenent >> renderContentOn: html [
 							html mdlLayoutTitle: 'TicketsDashboard'.
 							html space: 50.
 							html image
-								style: 'width: 100px; height: 70px;';
+								style: 'width: 75px; height: 70px;';
 								url: (CIMIconLibrary urlOf: 'rmodPng') ] ] ]
 ]

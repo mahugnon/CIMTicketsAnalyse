@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : #CIMTicketsDataModelUtils
+	#category : #'CIMTicketsDataModelUtils-RegressionLineStrategy'
 }
 
 { #category : #api }
