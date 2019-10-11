@@ -555,34 +555,66 @@ MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonth [
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
-					(QueryAvgTimeTestGroupedByTime
+					(QueryAvgTicketsTimeDevTestGroupedByTime
 						runOn:
 							(QueryTicketPerMonthClosing new
 								fillGaps: true;
 								ordered: true;
 								runOn:
 									(QueryClosed
-										runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets))))));
+										runOn:
+											(QueryBugs
+												runOn:
+													(QueryCleanData
+														runOn:
+															(QueryBugsEvolutions
+																runOn:
+																	(CIMTicketGroupNode new tickets: CIMDatabase database allTickets))))))));
 		draw
 ]
 
 { #category : #drawing }
-MainPresenter >> drawMovingAvgTimeTestBugsTicketsPerMonthPerDev [
+MainPresenter >> drawMovingAvgTimeTestDevBugsTicketsPerMonth [
 	^ BugsChart new
 		yFormateur: CIMMinuteFormater new;
 		timeSerie:
-			(QueryTimePerDev
+			(QueryMovingAverage
 				runOn:
-					(QueryMovingAverage
+					(QueryAvgTicketsTimeDevTestGroupedByTime
 						runOn:
-							(QueryAvgTimeTestGroupedByTime
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
 								runOn:
-									(QueryTicketPerMonthClosing new
-										fillGaps: true;
-										ordered: true;
+									(QueryClosed
 										runOn:
-											(QueryClosed
-												runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))))));
+											(QueryBugs
+												runOn:
+													(QueryCleanData
+														runOn:
+															(CIMTicketGroupNode new tickets: CIMDatabase database allTickets)))))));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestDevEvolutionTicketsPerMonth [
+	^ EvolutionChart new
+		yFormateur: CIMMinuteFormater new;
+		timeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTicketsTimeDevTestGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn:
+											(QueryEvolutions
+												runOn:
+													(QueryCleanData
+														runOn: (CIMTicketGroupNode new tickets: CIMDatabase database allTickets)))))));
 		draw
 ]
 
@@ -622,6 +654,50 @@ MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonthPerDev [
 										runOn:
 											(QueryClosed
 												runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestRCBugsTicketsPerMonth [
+	^ BugsChart new
+		yFormateur: CIMHourFormater new;
+		timeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTicketsTimeRCTestGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn:
+											(QueryBugs
+												runOn:
+													(QueryCleanData
+														runOn: (CIMTicketGroupNode new tickets: CIMDatabase database allTickets)))))));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestRCEvolutionsTicketsPerMonth [
+	^ EvolutionChart  new
+		yFormateur: CIMHourFormater new;
+		timeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTicketsTimeRCTestGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn:
+											(QueryEvolutions
+												runOn:
+													(QueryCleanData
+														runOn: (CIMTicketGroupNode new tickets: CIMDatabase database allTickets)))))));
 		draw
 ]
 

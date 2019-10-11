@@ -62,6 +62,8 @@ CIMTicketGroupNode >> isEmptyOrNil [
 
 { #category : #accessing }
 CIMTicketGroupNode >> size [
+	self isEmpty
+		ifTrue: [ ^ 1 ].
 	^ tickets size
 ]
 
