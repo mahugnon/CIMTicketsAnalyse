@@ -2,7 +2,8 @@ Class {
 	#name : #Tbl,
 	#superclass : #Object,
 	#instVars : [
-		'rows'
+		'rows',
+		'hostUrl'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -17,15 +18,42 @@ Tbl >> convertFieldToCimDate [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl >> fetchData [
+	| allRows rowsJsonString retrievedRows rowsInfo |
+	allRows := OrderedCollection new.
+	0 to: self numberOfPages - 1 do: [ :i | 
+		rowsJsonString := (ZnClient new
+			url: hostUrl , '/' , self uri , '?page=' , 1 printString , self pageSize;
+			get;
+			response) contents.
+		rowsInfo := NeoJSONReader fromString: rowsJsonString.
+		retrievedRows := (rowsInfo at: '_embedded') values.
+		allRows addAll: retrievedRows ].
+	^ allRows
+]
+
 { #category : #utility }
 Tbl >> filFromCSVFile: arg1 [
 	(CSVParser parseFileWithHeader: arg1)
 		do: [ :arg2 | rows add: (self rowClass new initializeWith: arg2) ]
 ]
 
+{ #category : #accessing }
+Tbl >> hostUrl: aString [
+	hostUrl := aString
+]
+
 { #category : #initialization }
 Tbl >> initialize [
-	rows := OrderedCollection new
+	rows := OrderedCollection new.
+	hostUrl := 'http://localhost:8080'
+]
+
+{ #category : #initialization }
+Tbl >> initializeFromRestServer [
+	self loadCleanRowsFromRestServer
+		do: [ :arg2 | rows add: (self rowClass new initializeWith: arg2) ]
 ]
 
 { #category : #actions }
@@ -33,6 +61,29 @@ Tbl >> install [
 	^ CIMDatabase database
 		perform: (self className asLowercase , ':') asSymbol
 		with: self
+]
+
+{ #category : #'as yet unclassified' }
+Tbl >> loadCleanRowsFromRestServer [
+	^ self fetchData flatten do: [ :each | each removeKey: '_links' ]
+]
+
+{ #category : #accessing }
+Tbl >> numberOfPages [
+	| rowsJsonString rowsInfo pageInfo totalPages |
+	rowsJsonString := (ZnClient new
+		url: hostUrl , '/' , self uri , '?size=' , self pageSize;
+		get;
+		response) contents.
+	rowsInfo := NeoJSONReader fromString: rowsJsonString.
+	pageInfo := rowsInfo at: 'page'.
+	totalPages := pageInfo at: 'totalPages'.
+	^ totalPages
+]
+
+{ #category : #'as yet unclassified' }
+Tbl >> pageSize [
+	^ '1000'
 ]
 
 { #category : #utility }
@@ -48,4 +99,9 @@ Tbl >> rows [
 { #category : #accessing }
 Tbl >> rows: arg1 [
 	rows := arg1
+]
+
+{ #category : #accessing }
+Tbl >> uri [
+	^ self className asLowercase , 's'
 ]
