@@ -24,12 +24,15 @@ Tbl >> fetchData [
 	allRows := OrderedCollection new.
 	0 to: self numberOfPages - 1 do: [ :i | 
 		rowsJsonString := (ZnClient new
-			url: hostUrl , '/' , self uri , '?page=' , 1 printString , self pageSize;
+			url:
+				hostUrl , '/' , self uri , '?page=' , i printString , '&'
+					, self pageSize;
 			get;
 			response) contents.
 		rowsInfo := NeoJSONReader fromString: rowsJsonString.
 		retrievedRows := (rowsInfo at: '_embedded') values.
 		allRows addAll: retrievedRows ].
+	self halt.
 	^ allRows
 ]
 
@@ -53,7 +56,7 @@ Tbl >> initialize [
 { #category : #initialization }
 Tbl >> initializeFromRestServer [
 	self loadCleanRowsFromRestServer
-		do: [ :arg2 | rows add: (self rowClass new initializeWith: arg2) ]
+		do: [ :dic | rows add: (self rowClass new initializeWith: dic) ]
 ]
 
 { #category : #actions }
