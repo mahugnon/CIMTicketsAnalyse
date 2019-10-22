@@ -18,3 +18,8 @@ Tbl_tps >> joinTypeSessionToTps: aTbl_TypeSession [
 Tbl_tps >> rowClass [
 	^ Tbl_tps_row
 ]
+
+{ #category : #accessing }
+Tbl_tps >> uri [
+	^ 'tbl_tpses'
+]

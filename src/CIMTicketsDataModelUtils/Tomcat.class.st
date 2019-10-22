@@ -9,7 +9,8 @@ Class {
 
 { #category : #accessing }
 Tomcat class >> start [
-	uniqueInstance := self new
+	uniqueInstance := self new.
+	uniqueInstance start
 ]
 
 { #category : #accessing }

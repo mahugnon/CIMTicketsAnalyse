@@ -68,8 +68,6 @@ CIMDatabase >> detectTblFrom: aCsvFile [
 { #category : #'as yet unclassified' }
 CIMDatabase >> dropCreateDb [
 	{Tbl_biblio.
-	Tbl_cim.
-	Tbl_cim_service.
 	Tbl_dev.
 	Tbl_ft.
 	Tbl_modif.
@@ -89,27 +87,25 @@ CIMDatabase >> joinTables [
 		model: tbl_ft;
 		connectAllLinkedTickets."
 
-	| joinTableSteps |
-	joinTableSteps := {(tbl_ft joinDevToTicket: tbl_dev).
-	(tbl_ft joinTypeCorrectionToTicket: tbl_type_correction).
-	(tbl_ft joinBibsToTicket: tbl_biblio).
-	(tbl_ft joinVersionsToTicket: tbl_version).
-	(tbl_tps joinTypeSessionToTps: tbl_type_session).
-	(tbl_ft joinTpsDevToTicket: tbl_tps).
-	(tbl_test joinTpsToTest: tbl_tps).
-	(tbl_ft joinTestToTicket: tbl_test).
+	tbl_ft joinDevToTicket: tbl_dev.
+	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
+	tbl_ft joinBibsToTicket: tbl_biblio.
+	tbl_ft joinVersionsToTicket: tbl_version.
+	tbl_tps joinTypeSessionToTps: tbl_type_session.
+	tbl_ft joinTpsDevToTicket: tbl_tps.
+	tbl_test joinTpsToTest: tbl_tps.
+	tbl_ft joinTestToTicket: tbl_test.
 	tbl_biblio joinModulesToLibrary.
 	tbl_ft joinModulesToTickets.
-	(tbl_retour joinTypeRetoursToRetour: tbl_type_retour).
-	(tbl_ft joinRetourToTickets: tbl_retour).
-	(tbl_retour joinTicketsToRetour: tbl_ft).
-	tbl_module joinLibrariesToModule.
-	tbl_module joinTicketsToModules}.
-	[ :job | 
+	tbl_retour joinTypeRetoursToRetours: tbl_type_retour.
+	tbl_ft joinRetourToTickets: tbl_retour.
+	tbl_retour joinTicketsToRetour: tbl_ft.
+	tbl_module initializeModuleRows
+	"	[ :job | 
 	job title: 'Joining tables '.
 	1 to: 12 do: [ :each | 
 		job progress: 0.1 * each.
-		joinTableSteps at: each ] ] asJob run
+		joinTableSteps at: each ] ] asJob run"
 ]
 
 { #category : #initialization }
