@@ -41,6 +41,23 @@ CIMDatabase class >> resetCurrent [
 	self database
 ]
 
+{ #category : #controlling }
+CIMDatabase class >> scheduleUpdate [
+	<script>
+	| scheduler when |
+	scheduler := TaskScheduler new start.
+	when := DateAndTime now + 10 hours.
+	scheduler do: [ 'task ran' ] at: when every: 4 week
+]
+
+{ #category : #initialization }
+CIMDatabase class >> setUpWith: biblioNamesPath [
+	"This set up doesn't consider the number of developer."
+
+	self resetCurrent.
+	self database updateFromServerWith: biblioNamesPath
+]
+
 { #category : #initialization }
 CIMDatabase class >> setUpWith: ficheNavettePath and: biblioNamesPath [
 	self resetCurrent.

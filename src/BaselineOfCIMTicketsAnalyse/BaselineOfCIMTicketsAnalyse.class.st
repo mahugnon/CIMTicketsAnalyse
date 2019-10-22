@@ -13,7 +13,8 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 				baselineOfPolyMath: spec;
 				baselineOfMaterialDisignLite: spec;
 				baselineOfChartJs: spec;
-				baselineOfSeaside: spec.
+				baselineOfSeaside: spec;
+				baselineOfScheduler: spec.
 
 			"Packages"
 			spec
@@ -23,7 +24,7 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 				package: 'CIMTicketsAnalyse'
 					with: [ spec
 						requires:
-							#('CIMTicketsDataModel' 'PolyMath' 'CIMTicketsDataModelUtils' 'CIMTicketsAnalyseTest') ];
+							#('CIMTicketsDataModel' 'PolyMath' 'CIMTicketsDataModelUtils' 'CIMTicketsAnalyseTest' 'Scheduler') ];
 				package: 'CIMTicketsAnalyseWeb'
 					with: [ spec
 						requires: #('ChartJs' 'CIMTicketsAnalyse' 'MaterialDesignLite' 'Seaside3') ] ]
@@ -48,6 +49,13 @@ BaselineOfCIMTicketsAnalyse >> baselineOfPolyMath: spec [
 	spec
 		baseline: 'PolyMath'
 		with: [ spec repository: 'github://PolyMathOrg/PolyMath:v0.102/src' ]
+]
+
+{ #category : #baselines }
+BaselineOfCIMTicketsAnalyse >> baselineOfScheduler: spec [
+	spec
+		baseline: 'Scheduler'
+		with: [ spec repository: 'github://seandenigris/Scheduler:master/src' ]
 ]
 
 { #category : #baselines }
