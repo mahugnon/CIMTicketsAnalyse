@@ -1,10 +1,10 @@
 Class {
 	#name : #IceBergProjectLocator,
 	#superclass : #Object,
-	#category : #CIMTicketsDataModelUtils
+	#category : #'CIMTicketsDataModelUtils-TicketServerUtils'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'helpers - utilites' }
 IceBergProjectLocator >> locationOfProjectRepo: aProject [
 	"finds the location of the project (e.g., to find R files that are not part of Pharo)"
 

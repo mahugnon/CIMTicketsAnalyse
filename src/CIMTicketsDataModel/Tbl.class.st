@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'rows',
-		'hostUrl'
+		'host',
+		'port'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -49,7 +50,8 @@ Tbl >> hostUrl [
 { #category : #initialization }
 Tbl >> initialize [
 	rows := OrderedCollection new.
-	hostUrl := 'http://localhost:8080'
+	host := 'localhost'.
+	port := '8080'
 ]
 
 { #category : #initialization }
@@ -74,7 +76,7 @@ Tbl >> loadCleanRowsFromRestServer [
 Tbl >> numberOfPages [
 	| rowsJsonString rowsInfo pageInfo totalPages |
 	rowsJsonString := (ZnClient new
-		url: hostUrl , '/' , self uri , '?size=' , self pageSize;
+		url: self hostUrl , '/' , self uri , '?size=' , self pageSize;
 		get;
 		response) contents.
 	rowsInfo := NeoJSONReader fromString: rowsJsonString.

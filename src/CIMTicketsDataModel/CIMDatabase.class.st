@@ -80,7 +80,7 @@ CIMDatabase >> dropCreateDb [
 	Tbl_version.
 	Tbl_version_news.
 	Tbl_type_retour.
-	Tbl_retour} do: #initializeFromRestServer
+	Tbl_retour} do: [ :each | each new initializeFromRestServer install ]
 ]
 
 { #category : #utility }
@@ -329,4 +329,15 @@ CIMDatabase >> tbl_version_news [
 { #category : #accessing }
 CIMDatabase >> tbl_version_news: aTbl_version_news [
 	tbl_version_news := aTbl_version_news
+]
+
+{ #category : #'as yet unclassified' }
+CIMDatabase >> updateFromServerWith: biblioNamesPath [
+	Tomcat start.
+	(Delay forSeconds: 20) wait.
+	self dropCreateDb.
+	Tomcat stop.
+	self
+		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
+	self joinTables
 ]
