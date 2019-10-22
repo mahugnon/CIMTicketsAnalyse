@@ -25,14 +25,13 @@ Tbl >> fetchData [
 	0 to: self numberOfPages - 1 do: [ :i | 
 		rowsJsonString := (ZnClient new
 			url:
-				hostUrl , '/' , self uri , '?page=' , i printString , '&'
+				self hostUrl , '/' , self uri , '?page=' , i printString , '&size='
 					, self pageSize;
 			get;
 			response) contents.
 		rowsInfo := NeoJSONReader fromString: rowsJsonString.
 		retrievedRows := (rowsInfo at: '_embedded') values.
 		allRows addAll: retrievedRows ].
-	self halt.
 	^ allRows
 ]
 
@@ -43,8 +42,8 @@ Tbl >> filFromCSVFile: arg1 [
 ]
 
 { #category : #accessing }
-Tbl >> hostUrl: aString [
-	hostUrl := aString
+Tbl >> hostUrl [
+	^ 'http://' , host , ':' , port
 ]
 
 { #category : #initialization }

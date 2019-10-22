@@ -65,6 +65,24 @@ CIMDatabase >> detectTblFrom: aCsvFile [
 		detect: [ :aTblSub | aTblSub name asLowercase = fileName ]
 ]
 
+{ #category : #'as yet unclassified' }
+CIMDatabase >> dropCreateDb [
+	{Tbl_biblio.
+	Tbl_cim.
+	Tbl_cim_service.
+	Tbl_dev.
+	Tbl_ft.
+	Tbl_modif.
+	Tbl_test.
+	Tbl_tps.
+	Tbl_type_correction.
+	Tbl_type_session.
+	Tbl_version.
+	Tbl_version_news.
+	Tbl_type_retour.
+	Tbl_retour} do: #initializeFromRestServer
+]
+
 { #category : #utility }
 CIMDatabase >> joinTables [
 	"TicketsLinkDetector new

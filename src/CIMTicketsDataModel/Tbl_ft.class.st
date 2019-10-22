@@ -87,6 +87,11 @@ Tbl_ft >> keepInterestingBibliotheques [
 	^ self rows do: [ :row | row keepInterestingBibliotheques ]
 ]
 
+{ #category : #initialization }
+Tbl_ft >> pageSize [ 
+^'1000'
+]
+
 { #category : #utilities }
 Tbl_ft >> rowClass [
 	^ Tbl_ft_row
