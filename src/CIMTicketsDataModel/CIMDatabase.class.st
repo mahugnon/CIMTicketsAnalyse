@@ -47,7 +47,11 @@ CIMDatabase class >> scheduleUpdate [
 	| scheduler when |
 	scheduler := TaskScheduler new start.
 	when := DateAndTime now + 10 hours.
-	scheduler do: [ 'task ran' ] at: when every: 4 week
+	scheduler
+		do: [ self database
+				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
+		at: when
+		every: 4 week
 ]
 
 { #category : #initialization }
