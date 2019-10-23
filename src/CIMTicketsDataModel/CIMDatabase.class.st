@@ -46,7 +46,7 @@ CIMDatabase class >> scheduleUpdate [
 	<script>
 	| scheduler when |
 	scheduler := TaskScheduler new start.
-	when := DateAndTime now + 10 hours.
+	when := DateAndTime now + 2 hour.
 	scheduler
 		do: [ self database
 				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
