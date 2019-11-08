@@ -356,5 +356,6 @@ CIMDatabase >> updateFromServerWith: biblioNamesPath [
 	Tomcat stop.
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
-	self joinTables
+	self joinTables.
+	Smalltalk snapshot: true andQuit: false
 ]
