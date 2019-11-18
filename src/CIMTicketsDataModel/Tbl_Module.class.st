@@ -83,6 +83,7 @@ Tbl_Module >> createModuleRows [
 				nom: 'IZY Protect';
 				tickets: self database allTickets;
 				bibliotheques: self database allPBLibraries;
+				releventYear: 2013;
 				yourself).
 	^ moduleRows
 ]
@@ -120,7 +121,7 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 { #category : #initialization }
 Tbl_Module >> initialize [
 	super initialize.
-	self initializeReleventYears.
+	"self initializeReleventYears."
 	self initializeModuleRows
 ]
 

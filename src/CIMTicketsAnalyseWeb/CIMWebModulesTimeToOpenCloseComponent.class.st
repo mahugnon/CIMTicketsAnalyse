@@ -44,3 +44,8 @@ CIMWebModulesTimeToOpenCloseComponent >> initialize [
 	super initialize.
 	model := CIMWebTimeOpenCloseChartModel current
 ]
+
+{ #category : #'as yet unclassified' }
+CIMWebModulesTimeToOpenCloseComponent >> yAxesLegend [
+	^ 'Time in month'
+]

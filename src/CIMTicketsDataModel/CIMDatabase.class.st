@@ -104,11 +104,7 @@ CIMDatabase >> dropCreateDb [
 
 { #category : #utility }
 CIMDatabase >> joinTables [
-	"TicketsLinkDetector new
-		model: tbl_ft;
-		connectAllLinkedTickets."
-
-	QueryRemoveUselessTickets runOn: tbl_ft.
+	tbl_ft removeUselessRows.
 	tbl_ft joinDevToTicket: tbl_dev.
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
 	tbl_ft joinBibsToTicket: tbl_biblio.
@@ -123,11 +119,6 @@ CIMDatabase >> joinTables [
 	tbl_ft joinRetourToTickets: tbl_retour.
 	tbl_retour joinTicketsToRetour: tbl_ft.
 	tbl_module initializeModuleRows
-	"	[ :job | 
-	job title: 'Joining tables '.
-	1 to: 12 do: [ :each | 
-		job progress: 0.1 * each.
-		joinTableSteps at: each ] ] asJob run"
 ]
 
 { #category : #initialization }
@@ -162,6 +153,11 @@ CIMDatabase >> setUpWith: ficheNavettePath and: biblioNamesPath [
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	self joinTables.
 	self loadModules
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_Module [
+	self shouldBeImplemented.
 ]
 
 { #category : #accessing }

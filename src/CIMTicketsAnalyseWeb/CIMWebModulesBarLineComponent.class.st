@@ -153,7 +153,8 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 				with: self description.
 			html mdlCell
 				size: 12;
-				with: [ self renderSelectedModulePlotOn: html ] ]
+				with: [ html text: self yAxesLegend.
+					self renderSelectedModulePlotOn: html ] ]
 ]
 
 { #category : #rendering }
@@ -208,4 +209,9 @@ CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 		with: renderingChartBlock
 		on: html.
 	self renderDemoWithId: id with: renderingChartBlock on: html
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebModulesBarLineComponent >> yAxesLegend [
+^'Time in hour'
 ]
