@@ -33,7 +33,8 @@ Tbl_test_row >> initializeWith: aDictionary [
 
 { #category : #api }
 Tbl_test_row >> joinTpsToTest: aCollection [
-	tps := aCollection select: [ :tps | tps tps_test_id = test_id ]
+	tps := aCollection
+		select: [ :time | time tps_test_id asString = test_id asString ]
 ]
 
 { #category : #accessing }

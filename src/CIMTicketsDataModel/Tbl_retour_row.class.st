@@ -105,7 +105,8 @@ Tbl_retour_row >> joinCcTypeRetourToRetour: aCollection [
 	self ccTypeRetour
 		addAll:
 			(aCollection
-				select: [ :typeRetour | typeRetour type_retour_id = self cc_type_retour_id ])
+				select:
+					[ :typeRetour | typeRetour type_retour_id asString = self cc_type_retour_id asString ])
 ]
 
 { #category : #api }
@@ -113,7 +114,8 @@ Tbl_retour_row >> joinDevTypeRetourToRetour: aCollection [
 	self devTypeRetour
 		addAll:
 			(aCollection
-				select: [ :typeRetour | typeRetour type_retour_id = dev_type_retour_id ])
+				select:
+					[ :typeRetour | typeRetour type_retour_id asString = dev_type_retour_id asString ])
 ]
 
 { #category : #api }

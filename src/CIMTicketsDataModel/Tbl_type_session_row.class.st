@@ -19,17 +19,18 @@ Class {
 
 { #category : #testing }
 Tbl_type_session_row >> isDevelopment [
-	^ typsession_type = '0' and: typsession_code ~= 'TD'
+	^ (typsession_type printShowingDecimalPlaces: 0) = '0'
+		and: typsession_code ~= 'TD'
 ]
 
 { #category : #testing }
 Tbl_type_session_row >> isDevelopmentTest [
-	^ typsession_type = '0' and: typsession_code = 'TD'
+	^ (typsession_type printShowingDecimalPlaces: 0) = '0' and: typsession_code = 'TD'
 ]
 
 { #category : #testing }
 Tbl_type_session_row >> isRCTest [
-	^ typsession_type = '1'
+	^ (typsession_type printShowingDecimalPlaces: 0) = '1'
 ]
 
 { #category : #accessing }

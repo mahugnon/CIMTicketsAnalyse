@@ -108,6 +108,7 @@ CIMDatabase >> joinTables [
 		model: tbl_ft;
 		connectAllLinkedTickets."
 
+	QueryRemoveUselessTickets runOn: tbl_ft.
 	tbl_ft joinDevToTicket: tbl_dev.
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
 	tbl_ft joinBibsToTicket: tbl_biblio.
@@ -147,6 +148,11 @@ CIMDatabase >> loadTblFromFolder: csvFolder [
 { #category : #utility }
 CIMDatabase >> renameLibrariesUsing: aCollection [
 	self tbl_biblio renameUsing: aCollection
+]
+
+{ #category : #'as yet unclassified' }
+CIMDatabase >> resetWebModels [
+	CIMWebModuleModelInitialize new resetModels
 ]
 
 { #category : #initialization }
@@ -357,5 +363,6 @@ CIMDatabase >> updateFromServerWith: biblioNamesPath [
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	self joinTables.
+	self resetWebModels.
 	Smalltalk snapshot: true andQuit: false
 ]

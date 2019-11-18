@@ -92,6 +92,11 @@ Tbl_ft >> pageSize [
 ^'1000'
 ]
 
+{ #category : #removing }
+Tbl_ft >> removeUselessRows [
+	rows := self rows reject: [ :ft | ft ft_datecrea isNil ]
+]
+
 { #category : #utilities }
 Tbl_ft >> rowClass [
 	^ Tbl_ft_row

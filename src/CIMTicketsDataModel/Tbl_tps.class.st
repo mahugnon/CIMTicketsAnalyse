@@ -9,7 +9,8 @@ Tbl_tps >> joinTypeSessionToTps: aTbl_TypeSession [
 	self rows
 		do: [ :tps | 
 			aTbl_TypeSession rows
-				detect: [ :typeSession | tps tps_type = typeSession typsession_id ]
+				detect:
+					[ :typeSession | tps tps_type asString = typeSession typsession_id asString ]
 				ifFound: [ :founded | tps typeSession: founded ]
 				ifNone: [  ] ]
 ]
