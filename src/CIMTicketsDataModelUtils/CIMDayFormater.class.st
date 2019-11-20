@@ -6,10 +6,11 @@ Class {
 
 { #category : #accessing }
 CIMDayFormater >> format: aDuration [
-	^ aDuration days asString , ' J'
+"3600 * 7.5(working day hours)=27000"
+	^ (aDuration totalSeconds / 27000) asInteger asString
 ]
 
 { #category : #accessing }
 CIMDayFormater >> title [
-	^ 'Temps en jours'
+	^ 'Time Spent in day'
 ]

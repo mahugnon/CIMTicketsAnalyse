@@ -178,20 +178,20 @@ CIMAbstractModelTest >> createTestTypeSessions [
 	typeSessions := Tbl_type_session new
 		rows:
 			{(Tbl_type_session_row new
-				typsession_id: '1';
-				typsession_type: '0';
+				typsession_id: 1;
+				typsession_type: 0;
 				typsession_code: 'TD').
 			(Tbl_type_session_row new
-				typsession_id: '2';
-				typsession_type: '0';
+				typsession_id: 2;
+				typsession_type: 0;
 				typsession_code: 'DV').
 			(Tbl_type_session_row new
-				typsession_id: '3';
-				typsession_type: '1';
+				typsession_id: 3;
+				typsession_type: 1;
 				typsession_code: 'TS').
 			(Tbl_type_session_row new
-				typsession_id: '4';
-				typsession_type: '0';
+				typsession_id: 4;
+				typsession_type: 0;
 				typsession_code: '')} asOrderedCollection
 ]
 

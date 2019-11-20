@@ -45,9 +45,9 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimBugsTicketsPerMonth [
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth [
 	<script:
-		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth open '>
-	^ (self
-		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryEvolutions)  
+		'MainPresenter new draw2LineAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth open'>
+	^ self
+		draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: QueryEvolutions
 ]
 
 { #category : #drawing }
@@ -60,7 +60,7 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery [
-	| timeSeries data1 data2 |
+	| timeSeries  |
 	timeSeries := (model
 		avgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQuery)
 		reject: [ :serie | serie asString = '-125526.52173913' ].
@@ -72,6 +72,7 @@ MainPresenter >> draw2LineAvgTimeDevTpsTotalMinusEstimTicketsPerMonth: selectQue
 		after: (Date asMonth: 05 inYear: 2013)."
 	^ DrawMultiLinearRegressionOnChart new
 		timeSerie: timeSeries;
+		yFormateur: CIMHourFormater new ;
 		drawWithRegressionIntervall:
 			(QuerySplitTicketNodeByTime new
 				month: (Date asMonth: 05 inYear: 2013);
@@ -101,33 +102,21 @@ MainPresenter >> drawAndExportToFilesTimeSpent: aFolder [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevBugsTicketsPerMonth [
+<script: 'MainPresenter new drawAvgTimeDevBugsTicketsPerMonth open'>
+
 	^ self drawAvgTimeDevTicketsPerMonth: QueryBugs
 ]
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonth [
-	^ EvolutionChart new
-		yFormateur: CIMDayFormater new;
-		timeSerie:
-			(QueryAvgTimeDevGroupedByTime new
-				runOn:
-					(QueryTicketPerMonthClosing new
-						runOn:
-							(QueryClosed
-								runOn: (QueryCleanData runOn: (QueryEvolutions new runOn: Tbl allTickets)))));
-		draw
-]
-
-{ #category : #drawing }
-MainPresenter >> drawAvgTimeDevEvolutionsTicketsPerMonthPerDev [
-	<script: 'MainPresenter new drawAvgTimeDevEvolutionsTicketsPerMonthPerDev open'>
+	<script: 'MainPresenter new drawAvgTimeDevEvolutionsTicketsPerMonth open'>
 	^ self drawAvgTimeDevTicketsPerMonth: QueryEvolutions
 ]
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeDevTicketsPerMonth: selectQuery [
 	^ (LineChart chartFor: selectQuery)
-		yFormateur: CIMDayFormater new;
+		yFormateur: CIMHourFormater new;
 		timeSerie: (RoassalPresenterModel new avgTimeDevTicketsPerMonth: selectQuery);
 		draw
 ]
@@ -199,19 +188,8 @@ MainPresenter >> drawAvgTimeSpentAndTimeEstim [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeSpentBugsTicketsPerMonth [
-	^ BugsChart new
-		yFormateur: CIMHourFormater new;
-		maxY: 162271.2;
-		timeSerie:
-			(QueryAvgTimeOnTicketsGroupedByTime
-				runOn:
-					(QueryTicketPerMonthClosing new
-						fillGaps: true;
-						ordered: true;
-						runOn:
-							(QueryClosed
-								runOn: (QueryBugs runOn: (QueryCleanData runOn: Tbl allTickets)))));
-		draw
+	<script: 'MainPresenter new drawAvgTimeSpentBugsTicketsPerMonth open'>
+	^ self drawAvgTimeSpentTicketsPerMonth: QueryBugs
 ]
 
 { #category : #drawing }
@@ -260,7 +238,6 @@ MainPresenter >> drawAvgTimeSpentEvolutionTicketsPerMonthPerDev [
 MainPresenter >> drawAvgTimeSpentTicketsPerMonth: selectQuery [
 	^ (LineChart chartFor: selectQuery)
 		yFormateur: CIMHourFormater new;
-		maxY: 162271.2;
 		timeSerie: (RoassalPresenterModel new avgTimeSpentTicketsPerMonth: selectQuery);
 		draw
 ]
@@ -283,6 +260,12 @@ MainPresenter >> drawAvgTimeSpentTicketsPerMonthPerDev [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawAvgTimeTestBugsDevTicketsPerMonth [
+	<script: 'MainPresenter new drawAvgTimeTestBugsDevTicketsPerMonth open'>
+	^ self drawAvgTimeTestDevTicketsPerMonth: QueryBugs
+]
+
+{ #category : #drawing }
 MainPresenter >> drawAvgTimeTestBugsTicketsPerMonth [
 	^ BugsChart new
 		yFormateur: CIMMinuteFormater new;
@@ -293,6 +276,16 @@ MainPresenter >> drawAvgTimeTestBugsTicketsPerMonth [
 						runOn:
 							(QueryClosed
 								runOn: (QueryBugs runOn: (QueryCleanData new runOn: Tbl allTickets)))));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeTestDevTicketsPerMonth: selectQuery [
+	^ (LineChart chartFor: selectQuery)
+		yFormateur: CIMHourFormater new;
+		timeSerie:
+			(RoassalPresenterModel new
+				movingAvgTimeTestDevTicketsPerMonth: selectQuery);
 		draw
 ]
 
@@ -312,13 +305,18 @@ MainPresenter >> drawAvgTimeTestEvolutionsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawAvgTimeToOpenCloseBugsTicketsPerMonth [
+	<script: 'MainPresenter new drawAvgTimeToOpenCloseBugsTicketsPerMonth open'>
 	^ BugsChart new
-		yFormateur: CIMDayFormater new;
+		yFormateur: CIMMonthFormater new;
 		timeSerie:
-			(QueryAvgTimeToOpenCloseTicketsGroupedByTime new
+			(QueryAvgTimeToOpenCloseTicketsGroupedByTime
 				runOn:
 					(QueryTicketPerMonthClosing new
-						runOn: (QueryBugs new runOn: Tbl allTickets)));
+						fillGaps: true;
+						ordered: true;
+						runOn:
+							(QueryClosed
+								runOn: (QueryBugs runOn: (QueryCleanData runOn: model modelData)))));
 		draw
 ]
 
@@ -331,6 +329,24 @@ MainPresenter >> drawAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 				runOn:
 					(QueryTicketPerMonthClosing new
 						runOn: (QueryEvolutions new runOn: Tbl allTickets)));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawAvgTimeToOpenCloseEvolutionsTicketsPerMonth [
+	<script:
+		'MainPresenter new drawAvgTimeToOpenCloseEvolutionsTicketsPerMonth open'>
+	^ EvolutionChart new
+		yFormateur: CIMMonthFormater new;
+		timeSerie:
+			(QueryAvgTimeToOpenCloseTicketsGroupedByTime
+				runOn:
+					(QueryTicketPerMonthClosing new
+						fillGaps: true;
+						ordered: true;
+						runOn:
+							(QueryClosed
+								runOn: (QueryEvolutions runOn: (QueryCleanData runOn: model modelData)))));
 		draw
 ]
 
@@ -472,6 +488,7 @@ MainPresenter >> drawMovingAvgTimeDevTpsTotalMinusEstimEvolutionsTicketsPerMonth
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonth [
+	<script: 'MainPresenter new drawMovingAvgTimeSpentBugsTicketsPerMonth open'>
 	^ BugsChart new
 		yFormateur: CIMHourFormater new;
 		"maxY: 114964.9740659338;"
@@ -502,6 +519,7 @@ MainPresenter >> drawMovingAvgTimeSpentBugsTicketsPerMonthPerDev [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonth [
+	<script: 'MainPresenter new drawMovingAvgTimeSpentEvolutionTicketsPerMonth open'>
 	^ EvolutionChart new
 		yFormateur: CIMHourFormater new;
 		timeSerie: (model movingAvgTimeSpentTicketsPerMonth: QueryEvolutions);
@@ -528,6 +546,17 @@ MainPresenter >> drawMovingAvgTimeSpentEvolutionTicketsPerMonthPerDev [
 										runOn:
 											(QueryClosed
 												runOn: (QueryEvolutions runOn: (QueryCleanData runOn: Tbl allTickets)))))));
+		draw
+]
+
+{ #category : #drawing }
+MainPresenter >> drawMovingAvgTimeSpentEvolutionsTicketsPerMonth [
+	<script:
+		'MainPresenter new drawMovingAvgTimeSpentEvolutionsTicketsPerMonth open'>
+	^ BugsChart new
+		yFormateur: CIMHourFormater new;
+		"maxY: 114964.9740659338;"
+			timeSerie: (model movingAvgTimeSpentTicketsPerMonth: QueryEvolutions);
 		draw
 ]
 
@@ -619,6 +648,29 @@ MainPresenter >> drawMovingAvgTimeTestDevEvolutionTicketsPerMonth [
 ]
 
 { #category : #drawing }
+MainPresenter >> drawMovingAvgTimeTestDevEvolutionsTicketsPerMonth [
+	^ EvolutionChart  new
+		yFormateur: CIMMinuteFormater new;
+		timeSerie:
+			(QueryMovingAverage
+				runOn:
+					(QueryAvgTicketsTimeDevTestGroupedByTime
+						runOn:
+							(QueryTicketPerMonthClosing new
+								fillGaps: true;
+								ordered: true;
+								runOn:
+									(QueryClosed
+										runOn:
+											(QueryEvolutions 
+												runOn:
+													(QueryCleanData
+														runOn:
+															(CIMTicketGroupNode new tickets: CIMDatabase database allTickets)))))));
+		draw
+]
+
+{ #category : #drawing }
 MainPresenter >> drawMovingAvgTimeTestEvolutionTicketsPerMonth [
 	^ EvolutionChart new
 		yFormateur: CIMMinuteFormater new;
@@ -703,10 +755,10 @@ MainPresenter >> drawMovingAvgTimeTestRCEvolutionsTicketsPerMonth [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
+	<script:
+		'MainPresenter new drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth open'>
 	^ BugsChart new
-		minY: 6e6;
-		maxY: 1.6e7;
-		yFormateur: CIMDayFormater new;
+		yFormateur: CIMMonthFormater new;
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
@@ -717,11 +769,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 								ordered: true;
 								runOn:
 									(QueryClosed
-										runOn:
-											(QueryBugs
-												runOn:
-													(QueryCleanData
-														runOn: (CIMTicketGroupNode new tickets: Tbl allTickets)))))));
+										runOn: (QueryBugs runOn: (QueryCleanData runOn: model modelData))))));
 		draw
 ]
 
@@ -734,9 +782,10 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonthPerDev [
 
 { #category : #drawing }
 MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
+	<script:
+		'MainPresenter new drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth open'>
 	^ EvolutionChart new
-		maxY: 1.6e7;
-		yFormateur: CIMDayFormater new;
+		yFormateur: CIMMonthFormater new;
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
@@ -748,10 +797,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 								runOn:
 									(QueryClosed
 										runOn:
-											(QueryEvolutions
-												runOn:
-													(QueryCleanData
-														runOn: (CIMTicketGroupNode new tickets: Tbl allTickets)))))));
+											(QueryEvolutions runOn: (QueryCleanData runOn: model modelData))))));
 		draw
 ]
 
@@ -801,9 +847,9 @@ MainPresenter >> drawReleaseRate [
 ]
 
 { #category : #initialization }
-MainPresenter >> initialize [ 
-super initialize .
-model := RoassalPresenterModel new 
+MainPresenter >> initialize [
+	super initialize.
+	model := RoassalPresenterModel new
 ]
 
 { #category : #accessing }
