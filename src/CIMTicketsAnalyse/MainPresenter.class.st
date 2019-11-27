@@ -307,7 +307,7 @@ MainPresenter >> drawAvgTimeTestEvolutionsTicketsPerMonth [
 MainPresenter >> drawAvgTimeToOpenCloseBugsTicketsPerMonth [
 	<script: 'MainPresenter new drawAvgTimeToOpenCloseBugsTicketsPerMonth open'>
 	^ BugsChart new
-		yFormateur: CIMMonthFormater new;
+		yFormateur: CIMWeekFormater new;
 		timeSerie:
 			(QueryAvgTimeToOpenCloseTicketsGroupedByTime
 				runOn:
@@ -758,7 +758,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 	<script:
 		'MainPresenter new drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth open'>
 	^ BugsChart new
-		yFormateur: CIMMonthFormater new;
+		yFormateur: CIMWeekFormater new;
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
@@ -785,7 +785,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 	<script:
 		'MainPresenter new drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth open'>
 	^ EvolutionChart new
-		yFormateur: CIMMonthFormater new;
+		yFormateur: CIMWeekFormater new;
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
@@ -796,8 +796,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 								ordered: true;
 								runOn:
 									(QueryClosed
-										runOn:
-											(QueryEvolutions runOn: (QueryCleanData runOn: model modelData))))));
+										runOn: (QueryEvolutions runOn: (QueryCleanData runOn: model modelData))))));
 		draw
 ]
 
