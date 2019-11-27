@@ -20,7 +20,7 @@ CIMWebTimeOpenCloseChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTic
 
 { #category : #'private - utility' }
 CIMWebTimeOpenCloseChartModel >> timeConvert [
-	"We suppose that 1 month contain 20 opened day and 1 day is 7.5 hours of work at CIM  "
 
-	^ 27000 * 20
+
+	^ 3600* 24*7
 ]

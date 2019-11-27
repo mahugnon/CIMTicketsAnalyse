@@ -44,3 +44,8 @@ CIMWebModulesTimeTestDevComponent >> initialize [
 	super initialize.
 	model := CIMWebTimeTestDevChartModel current
 ]
+
+{ #category : #'as yet unclassified' }
+CIMWebModulesTimeTestDevComponent >> yAxesLegend [
+	^ 'Time in hour'
+]

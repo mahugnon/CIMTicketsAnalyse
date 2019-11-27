@@ -47,5 +47,5 @@ CIMWebModulesTimeToOpenCloseComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeToOpenCloseComponent >> yAxesLegend [
-	^ 'Time in month'
+	^ 'Time in CIM weeks'
 ]
