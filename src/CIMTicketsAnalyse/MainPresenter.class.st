@@ -758,7 +758,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth [
 	<script:
 		'MainPresenter new drawMovingAvgTimeToOpenCloseBugsTicketsPerMonth open'>
 	^ BugsChart new
-		yFormateur: CIMWeekFormater new;
+		yFormateur: CIMMonthFormater new;
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
@@ -785,7 +785,7 @@ MainPresenter >> drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth [
 	<script:
 		'MainPresenter new drawMovingAvgTimeToOpenCloseEvolutionTicketsPerMonth open'>
 	^ EvolutionChart new
-		yFormateur: CIMWeekFormater new;
+		yFormateur: CIMMonthFormater new;
 		timeSerie:
 			(QueryMovingAverage
 				runOn:
