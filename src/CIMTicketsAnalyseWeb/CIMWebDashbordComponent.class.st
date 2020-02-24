@@ -63,10 +63,7 @@ CIMWebDashbordComponent >> initialize [
 CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
 		with: [ self estimationsOn: html.
-			"self renderModulesPieOn: html."
-			"self renderFeedBackPieComponentOn: html."
-			self renderModulesComponentOn: html
-			"self renderChartsOn: html" ]
+			self renderModulesComponentOn: html ]
 ]
 
 { #category : #'parts rendering' }

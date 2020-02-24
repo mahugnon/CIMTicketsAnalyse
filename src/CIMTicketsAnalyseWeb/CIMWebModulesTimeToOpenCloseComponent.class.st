@@ -36,7 +36,7 @@ CIMWebModulesTimeToOpenCloseComponent >> defineStyleColors [
 
 { #category : #rendering }
 CIMWebModulesTimeToOpenCloseComponent >> description [
-	^ 'Time spent to close an opened ticket  '
+	^ 'Total ticket closing time for closed tickets'
 ]
 
 { #category : #'private-api' }
@@ -47,5 +47,5 @@ CIMWebModulesTimeToOpenCloseComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeToOpenCloseComponent >> yAxesLegend [
-	^ 'Time in CIM in weeks'
+	^ 'CIM weeks'
 ]

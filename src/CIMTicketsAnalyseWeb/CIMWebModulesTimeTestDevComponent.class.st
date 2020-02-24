@@ -36,7 +36,7 @@ CIMWebModulesTimeTestDevComponent >> defineStyleColors [
 
 { #category : #rendering }
 CIMWebModulesTimeTestDevComponent >> description [
-	^ 'Time spent testing by Dev team  '
+	^ 'Total Dev team testing time on closed tickets'
 ]
 
 { #category : #initialization }
@@ -47,5 +47,5 @@ CIMWebModulesTimeTestDevComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeTestDevComponent >> yAxesLegend [
-	^ 'Time in hour'
+	^ 'hour'
 ]
