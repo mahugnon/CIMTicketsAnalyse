@@ -1,19 +1,24 @@
 Class {
-	#name : #CIMWebTimeSpentChartModel,
+	#name : #CIMWebTimeDevChartModel,
 	#superclass : #CIMWebModuleAbstractModel,
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 
 { #category : #accessing }
-CIMWebTimeSpentChartModel class >> resetCurrent [
+CIMWebTimeDevChartModel class >> resetCurrent [
 	<script>
 	super resetCurrent
 ]
 
 { #category : #'data sets' }
-CIMWebTimeSpentChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
-	^ QueryAvgTimeDevGroupedByTime new
+CIMWebTimeDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
+	^ QuerySumTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
+]
+
+{ #category : #'private - utility' }
+CIMWebTimeDevChartModel >> timeConvert [
+	^ 28*24*3600
 ]

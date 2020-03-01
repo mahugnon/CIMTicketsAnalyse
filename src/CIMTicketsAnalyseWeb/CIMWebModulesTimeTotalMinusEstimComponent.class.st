@@ -11,36 +11,6 @@ CIMWebModulesTimeTotalMinusEstimComponent >> bugsEvolutionLinearRegression [
 		ifFalse: [ ^ super bugsEvolutionLinearRegression ]
 ]
 
-{ #category : #'private-api' }
-CIMWebModulesTimeTotalMinusEstimComponent >> defineStyleColors [
-	^ Dictionary new
-		add:
-			'Evolutions'
-				->
-					(Dictionary
-						with: #pointColor -> Color blue
-						with: #strokeColor -> Color blue);
-		add:
-			'Bugs'
-				->
-					(Dictionary
-						with: #pointColor -> Color red
-						with: #strokeColor -> Color red);
-		add:
-			'Bugs regression'
-				->
-					(Dictionary
-						with: #pointColor -> Color red
-						with: #strokeColor -> Color red);
-		add:
-			'Evolution regression'
-				->
-					(Dictionary
-						with: #pointColor -> Color blue
-						with: #strokeColor -> Color blue);
-		yourself
-]
-
 { #category : #rendering }
 CIMWebModulesTimeTotalMinusEstimComponent >> description [
 	^ 'Total difference bewteen estimated and actual Dev time on tickets '

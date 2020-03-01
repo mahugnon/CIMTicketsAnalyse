@@ -15,7 +15,8 @@ CIMWebMainLineBarComponent >> children [
 
 { #category : #rendering }
 CIMWebMainLineBarComponent >> createModulesLineBars [
-	modulesLineBar := CIMWebModulesBarLineComponent subclasses
+	modulesLineBar := (CIMWebModulesBarLineComponent subclasses
+		sorted: [ :a :b | a name < b name ]) asOrderedCollection
 		collect: #new
 ]
 

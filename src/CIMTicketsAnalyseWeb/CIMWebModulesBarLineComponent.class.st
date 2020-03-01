@@ -51,7 +51,32 @@ CIMWebModulesBarLineComponent >> dataSet [
 
 { #category : #'private-api' }
 CIMWebModulesBarLineComponent >> defineStyleColors [
-	^ self subclassResponsibility
+	^ Dictionary new
+		add:
+			'Evolutions'
+				->
+					(Dictionary
+						with: #pointColor -> Color blue
+						with: #strokeColor -> Color blue);
+		add:
+			'Bugs'
+				->
+					(Dictionary
+						with: #pointColor -> Color red
+						with: #strokeColor -> Color red);
+		add:
+			'Bugs regression'
+				->
+					(Dictionary
+						with: #pointColor -> Color red
+						with: #strokeColor -> Color red);
+		add:
+			'Evolution regression'
+				->
+					(Dictionary
+						with: #pointColor -> Color blue
+						with: #strokeColor -> Color blue);
+		yourself
 ]
 
 { #category : #rendering }

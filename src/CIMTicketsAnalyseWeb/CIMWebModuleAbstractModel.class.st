@@ -6,7 +6,9 @@ Class {
 		'modules',
 		'selectedModule',
 		'dataSetForModules',
-		'cIMWebMainLineBarModel'
+		'cIMWebMainLineBarModel',
+		'bugs',
+		'evolutions'
 	],
 	#classInstVars : [
 		'current'
@@ -38,6 +40,16 @@ CIMWebModuleAbstractModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketG
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CIMWebModuleAbstractModel >> bugs [
+	^ bugs
+]
+
+{ #category : #accessing }
+CIMWebModuleAbstractModel >> bugs: anObject [
+	bugs := anObject
+]
+
 { #category : #'as yet unclassified' }
 CIMWebModuleAbstractModel >> computeBugsDataSetForModule: aModule [
 	^ self avgTimeModulePerYear: aModule selectQuery: QueryBugs
@@ -50,9 +62,12 @@ CIMWebModuleAbstractModel >> computeEvolutionsDataSetForModule: aModule [
 
 { #category : #'private - utility' }
 CIMWebModuleAbstractModel >> computedatasSetForModule: aModule [
-	| bugs evolutions x yBugs yEvolutions |
+	| x yBugs yEvolutions xBugs xEvolution |
+	self flag: #Todo.	"Very shitty the way axis are fill up."
 	bugs := self computeBugsDataSetForModule: aModule.
 	evolutions := self computeEvolutionsDataSetForModule: aModule.
+	x := self synchronizeXEvolWithxBugs.
+	self halt.
 	yBugs := bugs
 		collect:
 			[ :each | (each value / self timeConvert printShowingDecimalPlaces: 3) asNumber ].
@@ -60,11 +75,6 @@ CIMWebModuleAbstractModel >> computedatasSetForModule: aModule [
 	yEvolutions := evolutions
 		collect:
 			[ :each | (each value / self timeConvert printShowingDecimalPlaces: 3) asNumber ].
-	bugs size > evolutions size
-		ifTrue: [ x := bugs collect: [ :each | each time ].
-			evolutions size + 1 to: bugs size do: [ :i | yEvolutions add: 0 ] ].
-	bugs size < evolutions size
-		ifTrue: [ bugs size + 1 to: evolutions size do: [ :i | yBugs add: 0 ] ].
 	^ {x.
 	('Bugs' -> yBugs).
 	('Evolutions' -> yEvolutions)} asOrderedCollection
@@ -85,6 +95,47 @@ CIMWebModuleAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
 	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
 ]
 
+{ #category : #accessing }
+CIMWebModuleAbstractModel >> evolutions [
+	^ evolutions
+]
+
+{ #category : #accessing }
+CIMWebModuleAbstractModel >> evolutions: anObject [
+	evolutions := anObject
+]
+
+{ #category : #'private - utility' }
+CIMWebModuleAbstractModel >> fill: aCollection with: times EmptyUsing: x [
+	x \ times
+		ifNotEmpty: [ :diff | 
+			diff
+				do: [ :each | 
+					aCollection
+						add:
+							(CIMAverageNode new
+								tickets: OrderedCollection new;
+								time: each;
+								value: 0;
+								yourself) ] ]
+]
+
+{ #category : #'private - utility' }
+CIMWebModuleAbstractModel >> fill: xBugs withEmptyUsing: x [
+	self halt.
+	x \ xBugs
+		ifNotEmpty: [ :diff | 
+			diff
+				do: [ :each | 
+					bugs
+						add:
+							(CIMAverageNode new
+								tickets: OrderedCollection new;
+								time: each;
+								value: 0;
+								yourself) ] ]
+]
+
 { #category : #initialization }
 CIMWebModuleAbstractModel >> initialize [
 	super initialize.
@@ -98,7 +149,9 @@ CIMWebModuleAbstractModel >> initialize [
 { #category : #initialization }
 CIMWebModuleAbstractModel >> initializeDataSetForModules [
 	dataSetForModules := (modules
-		collect: [ :module | module nom -> (self computedatasSetForModule: module) ])
+		collect: [ :module | 
+			"self haltIf: module nom = 'Bordereau'."
+			module nom -> (self computedatasSetForModule: module) ])
 		asOrderedDictionary
 ]
 
@@ -151,6 +204,18 @@ CIMWebModuleAbstractModel >> selectedModule [
 { #category : #accessing }
 CIMWebModuleAbstractModel >> selectedModule: anObject [
 	selectedModule := anObject
+]
+
+{ #category : #'private - utility' }
+CIMWebModuleAbstractModel >> synchronizeXEvolWithxBugs [
+	| x xBugs xEvolution |
+	xBugs := bugs collect: [ :each | each time ].
+	xEvolution := evolutions collect: [ :each | each time ].
+	x := (xBugs , xEvolution) asSet asOrderedCollection
+		sorted: [ :a :b | a < b ].
+	self fill: bugs with: xBugs EmptyUsing: x.
+	self fill: evolutions with: xEvolution EmptyUsing: x.
+	^ x
 ]
 
 { #category : #'private - utility' }
