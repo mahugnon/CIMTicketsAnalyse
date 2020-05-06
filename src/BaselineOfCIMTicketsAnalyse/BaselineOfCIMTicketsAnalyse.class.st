@@ -13,7 +13,7 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 				baselineOfPolyMath: spec;
 				baselineOfMaterialDisignLite: spec;
 				baselineOfChartJs: spec;
-				baselineOfSeaside: spec;
+				"baselineOfSeaside: spec;"
 				baselineOfScheduler: spec.
 
 			"Packages"
@@ -27,14 +27,14 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 							#('CIMTicketsDataModel' 'PolyMath' 'CIMTicketsDataModelUtils' 'CIMTicketsAnalyseTest' 'Scheduler') ];
 				package: 'CIMTicketsAnalyseWeb'
 					with: [ spec
-						requires: #('ChartJs' 'CIMTicketsAnalyse' 'MaterialDesignLite' 'Seaside3') ] ]
+						requires: #('ChartJs' 'CIMTicketsAnalyse' 'MaterialDesignLite') ] ]
 ]
 
 { #category : #baselines }
 BaselineOfCIMTicketsAnalyse >> baselineOfChartJs: spec [
 	spec
 		baseline: 'ChartJs'
-		with: [ spec repository: 'github://DuneSt/ChartJs:v1.x.x/src' ]
+		with: [ spec repository: 'github://mahugnon/ChartJs:ChartJS2.8/src' ]
 ]
 
 { #category : #baselines }
