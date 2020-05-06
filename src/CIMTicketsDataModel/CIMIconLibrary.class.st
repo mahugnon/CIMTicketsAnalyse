@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'icons'
 	],
-	#category : #'CIMTicketsAnalyseWeb-WebComponentsCore'
+	#category : #'CIMTicketsDataModel-DataBase'
 }
 
 { #category : #CIMIconLibrary }
