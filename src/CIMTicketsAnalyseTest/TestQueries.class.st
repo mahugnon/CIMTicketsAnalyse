@@ -121,11 +121,6 @@ TestQueries >> testQueryTicketsByFeedBacks [
 ]
 
 { #category : #tests }
-TestQueries >> testQueryTicketsHasFeedBack [
-	self deny: (QueryTicketHasFeedBacks runOn: ticketGroup) isEmpty
-]
-
-{ #category : #tests }
 TestQueries >> testQueyTimeRCTest [
 	tps joinTypeSessionToTps: typeSessions.
 	"tickets joinTpsDevToTicket: tps."
