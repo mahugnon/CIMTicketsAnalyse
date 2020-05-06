@@ -35,6 +35,11 @@ CIMDatabase class >> database [
 ]
 
 { #category : #accessing }
+CIMDatabase class >> database: aCIMDatabase [ 
+	database := aCIMDatabase
+]
+
+{ #category : #accessing }
 CIMDatabase class >> resetCurrent [
 	<script>
 	database := nil.
@@ -131,7 +136,9 @@ CIMDatabase >> joinTables [
 
 { #category : #initialization }
 CIMDatabase >> loadModules [
-	Tbl_Module new install
+	Tbl_Module new
+		initializeModuleRows;
+		install
 ]
 
 { #category : #utility }

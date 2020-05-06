@@ -1,6 +1,9 @@
 Class {
 	#name : #'Tbl_Module',
 	#superclass : #Tbl,
+	#instVars : [
+		'database'
+	],
 	#category : #'CIMTicketsDataModel-Model'
 }
 
@@ -74,6 +77,7 @@ Tbl_Module >> createModuleRows [
 		collect: [ :assoc | 
 			Tbl_Module_row new
 				nom: assoc key;
+				database: self database;
 				joinLibrariesToModule;
 				joinTicketsToModules;
 				yourself ]) asOrderedCollection.
@@ -89,7 +93,12 @@ Tbl_Module >> createModuleRows [
 
 { #category : #initialization }
 Tbl_Module >> database [
-	^ CIMDatabase database
+	^ database
+]
+
+{ #category : #initialization }
+Tbl_Module >> database: aCIMDatabase [
+	database := aCIMDatabase
 ]
 
 { #category : #api }
@@ -120,8 +129,8 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 { #category : #initialization }
 Tbl_Module >> initialize [
 	super initialize.
-	self initializeReleventYears.
-	self initializeModuleRows
+	database := CIMDatabase database
+	"self initializeReleventYears."
 ]
 
 { #category : #initialization }
