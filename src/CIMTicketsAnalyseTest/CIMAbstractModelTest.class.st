@@ -60,7 +60,7 @@ CIMAbstractModelTest >> createTestModule [
 		rows:
 			{(Tbl_Module_row new nom: 'Prestation').
 			(Tbl_Module_row new nom: 'Bordereau').
-			(Tbl_Module_row new nom: 'Cotisation')}.
+			(Tbl_Module_row new nom: 'Cotisation')} asOrderedCollection.
 	testDb tbl_module: modules
 ]
 
@@ -78,22 +78,18 @@ CIMAbstractModelTest >> createTestRetour [
 				ft_id: '123456').
 			(Tbl_retour_row new
 				retour_id: '3';
-				ft_id: '214')}.
-				testDb tbl_retour:retours
+				ft_id: '214')} asOrderedCollection.
+	testDb tbl_retour: retours
 ]
 
 { #category : #running }
 CIMAbstractModelTest >> createTestTest [
-	tests := Tbl_test  new
+	tests := Tbl_test new
 		rows:
-			{(Tbl_test_row  new
-				test_id: '0').
-				(Tbl_test_row  new
-				test_id: '1').
-				(Tbl_test_row  new
-				test_id: '2').
-		}.
-		testDb tbl_test: tests
+			{(Tbl_test_row new test_id: '0').
+			(Tbl_test_row new test_id: '1').
+			(Tbl_test_row new test_id: '2')} asOrderedCollection.
+	testDb tbl_test: tests
 ]
 
 { #category : #running }
@@ -150,7 +146,7 @@ CIMAbstractModelTest >> createTestTps [
 				tps_type: '2').
 			(Tbl_tps_row new
 				tps_dev_id: '1';
-				tps_type: '4')}.
+				tps_type: '4')} asOrderedCollection.
 	testDb tbl_tps: tps
 ]
 
@@ -185,7 +181,7 @@ CIMAbstractModelTest >> createTestTypeRetour [
 				libelle: 'Anomalie sur le développement').
 			(Tbl_type_retour_row new
 				type_retour_id: '3';
-				libelle: 'Bug sans lien avec la fiche')}.
+				libelle: 'Bug sans lien avec la fiche')} asOrderedCollection.
 	testDb tbl_type_retour: typeRetours
 ]
 
