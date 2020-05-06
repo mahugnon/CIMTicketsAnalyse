@@ -8,3 +8,5 @@ To lead the project:
         onUpgrade: [ :e | e useIncoming ];
         
     	load
+```
+[![Build Status](https://travis-ci.com/mahugnon/CIMTicketsAnalyse.svg?branch=master)](https://travis-ci.com/mahugnon/CIMTicketsAnalyse)
