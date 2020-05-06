@@ -72,8 +72,8 @@ TestTicketsModel >> testJoinTestToTicket [
 TestTicketsModel >> testJoinTpsDevToTicket [
 	self
 		assert:
-			((tickets joinTpsDevToTicket: tps) rows collect: #timeDev) flatten
-				size
+			(((tickets joinTpsDevToTicket: tps) rows collect: #timeDev)
+				flatCollect: [ :each | each ]) size
 		equals: 5
 ]
 

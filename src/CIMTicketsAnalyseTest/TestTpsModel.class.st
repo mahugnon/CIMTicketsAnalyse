@@ -9,7 +9,8 @@ TestTpsModel >> testJoinTypeSessionToTps [
 	self
 		assert:
 			(((tps joinTypeSessionToTps: typeSessions) rows
-				collectAsSet: #typeSession) reject: #isNil) size
+				collect: #typeSession
+				as: Set) reject: #isNil) size
 		equals: 4
 ]
 
@@ -38,7 +39,7 @@ TestTpsModel >> testSouldRecogniseDevTps [
 			tps rows fifth.
 			tps rows sixth}.
 	self
-		assertCollection: ((tps rows select: #isDevelopment) collectAsSet: #typeSession)
+		assertCollection: ((tps rows select: #isDevelopment) collect: #typeSession as: Set)
 		hasSameElements:
 			{typeSessions rows second.
 			typeSessions rows fourth}
