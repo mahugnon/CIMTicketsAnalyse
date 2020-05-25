@@ -17,7 +17,7 @@ export path_to_pharo=~/cimdashboard/app
 export pharo_version=70
 
 # Make sure the installation directory is empty
-rm-rf $path_to_pharo
+rm -rf $path_to_pharo
 mkdir -p $path_to_pharo
 cd $path_to_pharo
 
