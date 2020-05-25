@@ -53,7 +53,7 @@ at: 'files'"
 # Set default server port
 ./pharo  TicketsDashboard.image eval --save "(ZnServer defaultOn: 8792)
    logToTranscript;
-   start"
+   start" &
    
 # Run the image in a virtual screen
 # Set up the scheduler to load data from database once per month
