@@ -2,6 +2,7 @@
 set -vx
 export path_to_pharo=~/cimdashboard/app
 export pharo_version=70
+export pharo_headless_server="$path_to_pharo/pharo-vm/pharo -vm-display-null -vm-sound-null --memory 512m"
 
 # Make sure the installation directory is empty
 rm -rf $path_to_pharo
@@ -36,12 +37,10 @@ put: WAHtmlFileHandlerListing.
 WAAdmin defaultDispatcher
 register: WAFileHandler default
 at: 'files'"
-
-# Set default server port
-./pharo  TicketsDashboard.image eval --save "(ZnServer defaultOn: 8792)
-   logToTranscript;
-   start" &
    
 # Run the image in a virtual screen
-# Set up the scheduler to load data from database once per month
-screen -Sdm ticketsDashboard ./pharo  TicketsDashboard.image eval --no-quit "CIMDatabase scheduleUpdate"
+# Set up the scheduler to load data from database once per month.
+# Start the server on the port 8792
+
+screen -Sdm $pharo_headless_server TicketsDashboard.image eval --save --no-quit 'CIMDatabase scheduleUpdate.
+(ZnServer defaultOn: 8792) logToTranscript; start' 
