@@ -1,5 +1,5 @@
 # CIMTicketsAnalyse
-To lead the project:
+To lead the project in a clean pharo image:
 ```Smalltalk
  Metacello new
     	githubUser: 'mahugnon' project: 'CIMTicketsAnalyse' commitish: 'master' path: 'src';
@@ -10,6 +10,8 @@ To lead the project:
     	load
 ```
 # Installation on linux server without gui (headless)
+- Clone the repository in the server
+- Copy and paste the following script or navigate into the project directory and run `chmod 777 runCentOS8.sh && ./runCentOS8.sh`
 ```bash
 #!/usr/bin/env bash
 set -vx
