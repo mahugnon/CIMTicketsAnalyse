@@ -42,5 +42,5 @@ at: 'files'"
 # Set up the scheduler to load data from database once per month.
 # Start the server on the port 8792
 
-screen -Sdm $pharo_headless_server TicketsDashboard.image eval --save --no-quit 'CIMDatabase scheduleUpdate.
-(ZnServer defaultOn: 8792) logToTranscript; start' 
+screen -Sdm ticketsDashboard $pharo_headless_server TicketsDashboard.image eval --save --no-quit '(ZnServer defaultOn: 8792) start.
+CIMDatabase scheduleUpdate'
