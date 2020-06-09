@@ -69,7 +69,8 @@ Tbl >> install [
 
 { #category : #'as yet unclassified' }
 Tbl >> loadCleanRowsFromRestServer [
-	^ self fetchData flatten do: [ :each | each removeKey: '_links' ]
+	^ (self fetchData flatCollect: [ :each | each ])
+		do: [ :each | each removeKey: '_links' ]
 ]
 
 { #category : #accessing }

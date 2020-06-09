@@ -40,7 +40,7 @@ Tomcat >> start [
 	LibC
 		runCommand:
 			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
-				, ' --server.port=8080 &'
+				, ' --server.port=9599 &'
 ]
 
 { #category : #accessing }
