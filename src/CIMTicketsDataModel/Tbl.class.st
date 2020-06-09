@@ -51,7 +51,7 @@ Tbl >> hostUrl [
 Tbl >> initialize [
 	rows := OrderedCollection new.
 	host := 'localhost'.
-	port := '8080'
+	port := CIMDatabase database cimDatabaseServerPort
 ]
 
 { #category : #initialization }

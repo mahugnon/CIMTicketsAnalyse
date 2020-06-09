@@ -20,7 +20,8 @@ Class {
 		'tbl_version',
 		'tbl_theme',
 		'tbl_retour',
-		'tbl_module'
+		'tbl_module',
+		'cimDatabaseServerPort'
 	],
 	#classInstVars : [
 		'database'
@@ -30,7 +31,8 @@ Class {
 
 { #category : #accessing }
 CIMDatabase class >> database [
-	database ifNil: [ database := self new ].
+	database
+		ifNil: [ database := self new cimDatabaseServerPort: '9599' ].
 	^ database
 ]
 
@@ -93,6 +95,16 @@ CIMDatabase >> allPBLibraries [
 { #category : #accessing }
 CIMDatabase >> allTickets [
 	^ tbl_ft rows
+]
+
+{ #category : #accessing }
+CIMDatabase >> cimDatabaseServerPort [
+	^ cimDatabaseServerPort
+]
+
+{ #category : #accessing }
+CIMDatabase >> cimDatabaseServerPort: aString [
+	cimDatabaseServerPort := aString
 ]
 
 { #category : #utility }
@@ -369,7 +381,7 @@ CIMDatabase >> tbl_version_news: aTbl_version_news [
 
 { #category : #'as yet unclassified' }
 CIMDatabase >> updateFromServerWith: biblioNamesPath [
-	Tomcat start.
+	Tomcat startOn: self cimDatabaseServerPort.
 	(Delay forSeconds: 20) wait.
 	self dropCreateDb.
 	Tomcat stop.

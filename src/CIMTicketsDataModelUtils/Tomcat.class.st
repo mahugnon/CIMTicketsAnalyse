@@ -9,8 +9,16 @@ Class {
 
 { #category : #accessing }
 Tomcat class >> start [
+	uniqueInstance ifNotNil: [ uniqueInstance stop ].
 	uniqueInstance := self new.
 	uniqueInstance start
+]
+
+{ #category : #starting }
+Tomcat class >> startOn: aPortString [
+	uniqueInstance ifNotNil: [ uniqueInstance stop ].
+	uniqueInstance := self new.
+	uniqueInstance startOn: aPortString
 ]
 
 { #category : #accessing }
@@ -33,6 +41,17 @@ Tomcat >> start [
 		runCommand:
 			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
 				, ' --server.port=8080 &'
+]
+
+{ #category : #accessing }
+Tomcat >> startOn: aPortString [
+	| serverPath |
+	serverPath := (self locateRoot / 'dba-restfull-server.jar')
+		pathString.
+	LibC
+		runCommand:
+			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
+				, ' --server.port=' , aPortString , ' &'
 ]
 
 { #category : #accessing }
