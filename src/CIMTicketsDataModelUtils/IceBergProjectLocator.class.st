@@ -4,6 +4,11 @@ Class {
 	#category : #'CIMTicketsDataModelUtils-TicketServerUtils'
 }
 
+{ #category : #accessing }
+IceBergProjectLocator class >> locateRoot [
+	^ self new locationOfProjectRepo: 'CIMTicketsAnalyse'
+]
+
 { #category : #'helpers - utilites' }
 IceBergProjectLocator >> locationOfProjectRepo: aProject [
 	"finds the location of the project (e.g., to find R files that are not part of Pharo)"

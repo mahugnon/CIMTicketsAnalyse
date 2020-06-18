@@ -56,7 +56,9 @@ CIMDatabase class >> scheduleUpdate [
 	when := DateAndTime now + 2 hour.
 	scheduler
 		do: [ self database
-				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
+				updateFromServerWith:
+					(IceBergProjectLocator locateRoot / 'resources/bibiothequeNames')
+						pathString ]
 		at: when
 		every: 4 week
 ]

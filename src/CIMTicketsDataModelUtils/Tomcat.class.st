@@ -27,15 +27,9 @@ Tomcat class >> stop [
 ]
 
 { #category : #accessing }
-Tomcat >> locateRoot [
-	^ IceBergProjectLocator new
-		locationOfProjectRepo: 'CIMTicketsAnalyse'
-]
-
-{ #category : #accessing }
 Tomcat >> start [
 	| serverPath |
-	serverPath := (self locateRoot / 'dba-restfull-server.jar')
+	serverPath := (self locateRoot / 'resources/dba-restfull-server.jar')
 		pathString.
 	LibC
 		runCommand:
@@ -46,8 +40,8 @@ Tomcat >> start [
 { #category : #accessing }
 Tomcat >> startOn: aPortString [
 	| serverPath |
-	serverPath := (self locateRoot / 'dba-restfull-server.jar')
-		pathString.
+	serverPath := (IceBergProjectLocator locateRoot
+		/ 'resources/dba-restfull-server.jar') pathString.
 	LibC
 		runCommand:
 			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
