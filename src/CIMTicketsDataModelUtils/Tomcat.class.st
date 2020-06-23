@@ -1,6 +1,9 @@
 Class {
 	#name : #Tomcat,
 	#superclass : #Object,
+	#instVars : [
+		'port'
+	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
@@ -40,15 +43,18 @@ Tomcat >> start [
 { #category : #accessing }
 Tomcat >> startOn: aPortString [
 	| serverPath |
+	port := aPortString.
 	serverPath := (IceBergProjectLocator locateRoot
 		/ 'resources/dba-restfull-server.jar') pathString.
+	self stop.
 	LibC
 		runCommand:
 			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
-				, ' --server.port=' , aPortString , ' &'
+				, ' --server.port=' , port , ' &'
 ]
 
 { #category : #accessing }
 Tomcat >> stop [
-	LibC runCommand: 'curl -X POST localhost:8080/actuator/shutdown'
+	LibC
+		runCommand: 'curl -X POST localhost:' , port , '/actuator/shutdown'
 ]
