@@ -53,8 +53,8 @@ CIMDatabase class >> scheduleUpdate [
 	<script>
 	| scheduler when |
 	scheduler := TaskScheduler new start.
-	when := DateAndTime now + 2 hour.
-	scheduler
+	when := DateAndTime now + 2 seconds.
+	^ scheduler
 		do: [ self database
 				updateFromServerWith:
 					(IceBergProjectLocator locateRoot / 'resources/bibiothequeNames')
