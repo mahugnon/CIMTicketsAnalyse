@@ -122,7 +122,7 @@ Tbl_retour_row >> joinTicketsToRetour: aCollection [
 		addAll:
 			(aCollection
 				select: [ :ticket | 
-					self ft_id
+					self ft_id asString
 						=
 							(ticket ft_id copyReplaceAll: (Character value: 160) asString with: '') ])
 ]

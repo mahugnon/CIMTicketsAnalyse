@@ -56,6 +56,7 @@ Tbl >> initialize [
 
 { #category : #initialization }
 Tbl >> initializeFromRestServer [
+	self traceCr: 'loading ' , self className , ' data from server .....'.
 	self loadCleanRowsFromRestServer
 		do: [ :dic | rows add: (self rowClass new initializeWith: dic) ]
 ]

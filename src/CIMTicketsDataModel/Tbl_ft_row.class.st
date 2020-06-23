@@ -697,7 +697,8 @@ Tbl_ft_row >> isMisc [
 Tbl_ft_row >> joinBibsToTicket: aCollection [
 	self
 		bibliotheques:
-			(aCollection select: [ :bib | self ft_modif_id = bib biblio_modif_id ])
+			(aCollection
+				select: [ :bib | self ft_modif_id asString = bib biblio_modif_id asString ])
 ]
 
 { #category : #utilities }
@@ -705,7 +706,7 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 	self
 		dev:
 			(aCollection
-				detect: [ :aDev | aDev dev_id = self ft_dev_id ]
+				detect: [ :aDev | aDev dev_id asString = self ft_dev_id ]
 				ifNone: [ nil ])
 ]
 
@@ -722,14 +723,15 @@ Tbl_ft_row >> joinRetourToTicket: aCollection [
 		addAll:
 			(aCollection
 				select: [ :retour | 
-					retour ft_id
+					retour ft_id asString
 						= (self ft_id copyReplaceAll: (Character value: 160) asString with: '') ])
 ]
 
 { #category : #api }
 Tbl_ft_row >> joinTestToTicket: aCollection [
 	tests := aCollection
-		select: [ :test | test test_id ~= '21' and: test test_id = ft_test_id ]
+		select:
+			[ :test | test test_id ~= '21' and: test test_id asString = ft_test_id asString ]
 ]
 
 { #category : #utilites }
@@ -737,8 +739,9 @@ Tbl_ft_row >> joinTpsDevToTicket: aCollection [
 	self
 		timeDev:
 			(aCollection
-				select:
-					[ :aTps | aTps tps_dev_id ~= '21' and: aTps tps_dev_id = self ft_dev_id ])
+				select: [ :aTps | 
+					aTps tps_dev_id ~= '21'
+						and: aTps tps_dev_id asString = self ft_dev_id asString ])
 ]
 
 { #category : #utilities }
@@ -746,7 +749,8 @@ Tbl_ft_row >> joinTypeCorrectionToTicket: aCollection [
 	self
 		typeCorrection:
 			(aCollection
-				detect: [ :aTypeCorrection | aTypeCorrection typcorr_id = self ft_typcorr_id ]
+				detect:
+					[ :aTypeCorrection | aTypeCorrection typcorr_id asString = self ft_typcorr_id asString ]
 				ifNone: [ nil ])
 ]
 
@@ -755,7 +759,8 @@ Tbl_ft_row >> joinVersionsToTicket: aCollection [
 	self
 		versions:
 			(aCollection
-				select: [ :version | self ft_version_id = version version_id ])
+				select:
+					[ :version | self ft_version_id asString = version version_id asString ])
 ]
 
 { #category : #API }

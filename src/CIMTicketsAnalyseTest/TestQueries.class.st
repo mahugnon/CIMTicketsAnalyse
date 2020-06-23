@@ -91,7 +91,7 @@ TestQueries >> setUp [
 	tps joinTypeSessionToTps: typeSessions.
 	tickets joinTpsDevToTicket: tps.
 	retours joinTypeRetoursToRetours: typeRetours.
-	tickets joinRetourToTickets: retours.
+	tickets joinRetoursToTickets: retours.
 	ticketGroup := CIMTicketGroupNode new tickets: tickets rows
 ]
 
@@ -112,7 +112,7 @@ TestQueries >> testQueryTicketByConsistentOrNotFeedBacks [
 TestQueries >> testQueryTicketsByFeedBacks [
 	| ticketGroup |
 	retours joinTypeRetoursToRetours: typeRetours.
-	tickets joinRetourToTickets: retours.
+	tickets joinRetoursToTickets: retours.
 	ticketGroup := CIMTicketGroupNode new tickets: tickets rows.
 	self
 		assert:

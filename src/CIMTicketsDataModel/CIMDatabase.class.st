@@ -138,7 +138,7 @@ CIMDatabase >> joinTables [
 	"TicketsLinkDetector new
 		model: tbl_ft;
 		connectAllLinkedTickets."
-
+self traceCr: 'stating jointure ....'.
 	tbl_ft joinDevToTicket: tbl_dev.
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
 	tbl_ft joinBibsToTicket: tbl_biblio.
@@ -150,7 +150,7 @@ CIMDatabase >> joinTables [
 	tbl_biblio joinModulesToLibrary.
 	tbl_ft joinModulesToTickets.
 	tbl_retour joinTypeRetoursToRetours: tbl_type_retour.
-	tbl_ft joinRetourToTickets: tbl_retour.
+	tbl_ft joinRetoursToTickets: tbl_retour.
 	tbl_retour joinTicketsToRetour: tbl_ft.
 	tbl_module initializeModuleRows
 	"	[ :job | 
