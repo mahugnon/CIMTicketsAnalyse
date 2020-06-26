@@ -10,8 +10,7 @@ Class {
 { #category : #'as yet unclassified' }
 QueryCleanData >> rejectNilCreationDate: aTicketGroupNode [
 	^ aTicketGroupNode
-		tickets:
-			(aTicketGroupNode tickets select: [ :ft | ft ft_datecrea isNil ]);
+		tickets: (aTicketGroupNode tickets reject: [ :ft | ft ft_datecrea isNil ]);
 		yourself
 ]
 
