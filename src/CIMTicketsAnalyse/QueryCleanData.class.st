@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+QueryCleanData >> rejectNilCreationDate: aTicketGroupNode [
+	^ aTicketGroupNode
+		tickets:
+			(aTicketGroupNode tickets select: [ :ft | ft ft_datecrea isNil ]);
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 QueryCleanData >> rejectVersionWithNilDateArret: aCollection [
 	^ aCollection reject: [ :version | version version_date_arret isNil ]
 ]
@@ -26,5 +34,6 @@ QueryCleanData >> rejectWrongClosingDate: aTicketGroupNode [
 
 { #category : #running }
 QueryCleanData >> runOn: aCollection [
-	^ self rejectWrongClosingDate: aCollection
+	^ self
+		rejectWrongClosingDate: (self rejectNilCreationDate: aCollection)
 ]
