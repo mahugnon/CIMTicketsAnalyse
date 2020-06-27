@@ -133,12 +133,6 @@ CIMDatabase >> dropCreateDb [
 	Tbl_retour} do: [ :each | each new initializeFromRestServer install ]
 ]
 
-{ #category : #initialization }
-CIMDatabase >> initialize [
-	super initialize.
-	tbl_module := Tbl_Module new
-]
-
 { #category : #utility }
 CIMDatabase >> joinTables [
 	"TicketsLinkDetector new
@@ -395,6 +389,7 @@ CIMDatabase >> updateFromServerWith: biblioNamesPath [
 	Tomcat stop.
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
+	tbl_module := Tbl_Module new.
 	self joinTables.
 	Smalltalk snapshot: true andQuit: false
 ]
