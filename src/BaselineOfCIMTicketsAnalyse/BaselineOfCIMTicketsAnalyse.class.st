@@ -66,6 +66,13 @@ BaselineOfCIMTicketsAnalyse >> baselineOfSeaside: spec [
 ]
 
 { #category : #baselines }
+BaselineOfCIMTicketsAnalyse >> baselineOfVoyage: spec [
+	spec
+		baseline: 'Voyage'
+		with: [ spec repository: 'github://pharo-nosql/voyage/mc:master' ]
+]
+
+{ #category : #baselines }
 BaselineOfCIMTicketsAnalyse >> baselineSmaCC: spec [
 	spec
 		baseline: 'SmaCC'

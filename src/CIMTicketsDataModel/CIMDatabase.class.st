@@ -41,6 +41,11 @@ CIMDatabase class >> database: aCIMDatabase [
 	database := aCIMDatabase
 ]
 
+{ #category : #testing }
+CIMDatabase class >> isVoyageRoot [
+   ^ true
+]
+
 { #category : #accessing }
 CIMDatabase class >> resetCurrent [
 	<script>
@@ -58,7 +63,8 @@ CIMDatabase class >> scheduleUpdate [
 		do: [ self database
 				updateFromServerWith:
 					(IceBergProjectLocator locateRoot / 'resources/bibiothequeNames')
-						pathString ]
+						pathString.
+			self database save ]
 		at: when
 		every: 4 week
 ]
