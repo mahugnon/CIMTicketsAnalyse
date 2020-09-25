@@ -708,7 +708,7 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 			(aCollection
 
 				detect: [ :aDev | aDev dev_id asString = self ft_dev_id asString ]
-
+)
 ]
 
 { #category : #initialization }
