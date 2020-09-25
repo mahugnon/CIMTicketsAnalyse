@@ -1,6 +1,6 @@
 Class {
 	#name : #CIMWebModulesTimeTestRCComponent,
-	#superclass : #CIMWebModulesBarLineComponent,
+	#superclass : #Object,
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 

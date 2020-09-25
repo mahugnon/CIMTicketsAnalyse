@@ -36,9 +36,9 @@ CIMWebScreenComponent >> header: anObject [
 
 { #category : #initialization }
 CIMWebScreenComponent >> initialize [
+	super initialize.
 	footer := CIMWebFooterCompenent new.
-	header := CIMWebHeaderCompenent new.
-	
+	header := CIMWebHeaderCompenent new
 ]
 
 { #category : #hooks }

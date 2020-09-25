@@ -63,12 +63,10 @@ CIMWebModuleAbstractModel >> computeEvolutionsDataSetForModule: aModule [
 { #category : #'private - utility' }
 CIMWebModuleAbstractModel >> computedatasSetForModule: aModule [
 	| x yBugs yEvolutions xBugs xEvolution |
-
 	self flag: #Todo.	"Very shitty the way axis are fill up."
 	bugs := self computeBugsDataSetForModule: aModule.
 	evolutions := self computeEvolutionsDataSetForModule: aModule.
 	x := self synchronizeXEvolWithxBugs.
-	self halt.
 	yBugs := bugs
 		collect:
 			[ :each | (each value / self timeConvert printShowingDecimalPlaces: 3) asNumber ].
@@ -95,7 +93,6 @@ CIMWebModuleAbstractModel >> dataWithCloseDate: aCIMTicketGroup [
 	^ QueryClosed runOn: (QueryCleanData runOn: aCIMTicketGroup)
 ]
 
-
 { #category : #accessing }
 CIMWebModuleAbstractModel >> evolutions [
 	^ evolutions
@@ -107,7 +104,6 @@ CIMWebModuleAbstractModel >> evolutions: anObject [
 ]
 
 { #category : #'private - utility' }
-
 CIMWebModuleAbstractModel >> fill: aCollection with: times EmptyUsing: x [
 	x \ times
 		ifNotEmpty: [ :diff | 
@@ -121,7 +117,6 @@ CIMWebModuleAbstractModel >> fill: aCollection with: times EmptyUsing: x [
 								value: 0;
 								yourself) ] ]
 ]
-
 
 { #category : #'private - utility' }
 CIMWebModuleAbstractModel >> fill: xBugs withEmptyUsing: x [
@@ -138,7 +133,6 @@ CIMWebModuleAbstractModel >> fill: xBugs withEmptyUsing: x [
 								value: 0;
 								yourself) ] ]
 ]
-
 
 { #category : #initialization }
 CIMWebModuleAbstractModel >> initialize [
@@ -211,18 +205,6 @@ CIMWebModuleAbstractModel >> selectedModule: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-CIMWebModuleAbstractModel >> synchronizeXEvolWithxBugs [
-	| x xBugs xEvolution |
-	xBugs := bugs collect: [ :each | each time ].
-	xEvolution := evolutions collect: [ :each | each time ].
-	x := (xBugs , xEvolution) asSet asOrderedCollection
-		sorted: [ :a :b | a < b ].
-	self fill: bugs with: xBugs EmptyUsing: x.
-	self fill: evolutions with: xEvolution EmptyUsing: x.
-	^ x
-]
-
-{ #category : #'private - utility' }
 CIMWebModuleAbstractModel >> synchronizeXEvolWithxBugs [
 	| x xBugs xEvolution |
 	xBugs := bugs collect: [ :each | each time ].

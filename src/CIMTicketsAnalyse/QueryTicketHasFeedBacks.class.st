@@ -8,7 +8,7 @@ Class {
 QueryTicketHasFeedBacks >> runOn: aCIMTicketGroupNode [
 	^ CIMTicketGroupNode new
 		tickets:
-			(aCIMTicketGroupNode tickets
+			((QueryCleanData runOn: aCIMTicketGroupNode) tickets
 				select:
 					[ :ticket | ticket ft_datecrea >= CIMDatabase database tbl_retour dateFirstRetour ]);
 		yourself
