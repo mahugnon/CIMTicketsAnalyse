@@ -8,8 +8,9 @@ Class {
 CIMFileLoader >> loadBiothequesFromNamesFolder: aFolder [
 	^ aFolder asFileReference visibleFiles
 		collect: [ :aFile | 
-		('cwm_',('.'split: 	aFile basename) first) 
+			('cwm_' , ('.' split: aFile basename) first)
 				->
 					((CSVParser parseFileWithHeader: aFile)
-						collectAsSet: [ :each | each at: 'bib' ]) ]
+						collect: [ :each | each at: 'bib' ]
+						as: Set) ]
 ]

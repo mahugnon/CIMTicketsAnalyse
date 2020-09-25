@@ -50,6 +50,14 @@ Tbl_tps_row >> isRCTest [
 	^ typeSession isRCTest
 ]
 
+{ #category : #utilities }
+Tbl_tps_row >> joinTypeSessionToTps: aTbl_TypeSession [
+	aTbl_TypeSession rows
+		detect: [ :aTypeSession | self tps_type = aTypeSession typsession_id ]
+		ifFound: [ :founded | self typeSession: founded ]
+		ifNone: [  ]
+]
+
 { #category : #accessing }
 Tbl_tps_row >> tps_cim_id [
 	^ tps_cim_id

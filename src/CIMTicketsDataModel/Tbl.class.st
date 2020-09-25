@@ -51,11 +51,12 @@ Tbl >> hostUrl [
 Tbl >> initialize [
 	rows := OrderedCollection new.
 	host := 'localhost'.
-	port := '8080'
+	port := CIMDatabase database cimDatabaseServerPort
 ]
 
 { #category : #initialization }
 Tbl >> initializeFromRestServer [
+	self traceCr: 'loading ' , self className , ' data from server .....'.
 	self loadCleanRowsFromRestServer
 		do: [ :dic | rows add: (self rowClass new initializeWith: dic) ]
 ]
@@ -69,7 +70,8 @@ Tbl >> install [
 
 { #category : #'as yet unclassified' }
 Tbl >> loadCleanRowsFromRestServer [
-	^ self fetchData flatten do: [ :each | each removeKey: '_links' ]
+	^ (self fetchData flatCollect: [ :each | each ])
+		do: [ :each | each removeKey: '_links' ]
 ]
 
 { #category : #accessing }

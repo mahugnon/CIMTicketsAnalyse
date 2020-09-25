@@ -91,7 +91,7 @@ TestQueries >> setUp [
 	tps joinTypeSessionToTps: typeSessions.
 	tickets joinTpsDevToTicket: tps.
 	retours joinTypeRetoursToRetours: typeRetours.
-	tickets joinRetourToTickets: retours.
+	tickets joinRetoursToTickets: retours.
 	ticketGroup := CIMTicketGroupNode new tickets: tickets rows
 ]
 
@@ -112,17 +112,12 @@ TestQueries >> testQueryTicketByConsistentOrNotFeedBacks [
 TestQueries >> testQueryTicketsByFeedBacks [
 	| ticketGroup |
 	retours joinTypeRetoursToRetours: typeRetours.
-	tickets joinRetourToTickets: retours.
+	tickets joinRetoursToTickets: retours.
 	ticketGroup := CIMTicketGroupNode new tickets: tickets rows.
 	self
 		assert:
 			((QueryTicketsByFeedBacks runOn: ticketGroup) keys
 				includes: 'Fiche incomplète')
-]
-
-{ #category : #tests }
-TestQueries >> testQueryTicketsHasFeedBack [
-	self deny: (QueryTicketHasFeedBacks runOn: ticketGroup) isEmpty
 ]
 
 { #category : #tests }

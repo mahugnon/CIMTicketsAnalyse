@@ -1,6 +1,9 @@
 Class {
 	#name : #Tomcat,
 	#superclass : #Object,
+	#instVars : [
+		'port'
+	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
@@ -9,8 +12,16 @@ Class {
 
 { #category : #accessing }
 Tomcat class >> start [
+	uniqueInstance ifNotNil: [ uniqueInstance stop ].
 	uniqueInstance := self new.
 	uniqueInstance start
+]
+
+{ #category : #starting }
+Tomcat class >> startOn: aPortString [
+	uniqueInstance ifNotNil: [ uniqueInstance stop ].
+	uniqueInstance := self new.
+	uniqueInstance startOn: aPortString
 ]
 
 { #category : #accessing }
@@ -19,23 +30,33 @@ Tomcat class >> stop [
 ]
 
 { #category : #accessing }
-Tomcat >> locateRoot [
-	^ IceBergProjectLocator new
-		locationOfProjectRepo: 'CIMTicketsAnalyse'
-]
-
-{ #category : #accessing }
 Tomcat >> start [
 	| serverPath |
-	serverPath := (self locateRoot / 'dba-restfull-server.jar')
+	serverPath := (self locateRoot / 'resources/dba-restfull-server.jar')
 		pathString.
 	LibC
 		runCommand:
 			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
-				, ' --server.port=8080 &'
+				, ' --server.port=9599 &'
+]
+
+{ #category : #accessing }
+Tomcat >> startOn: aPortString [
+	| serverPath |
+	self traceCr: 'Stating tomcat server .....'.
+	port := aPortString.
+	serverPath := (IceBergProjectLocator locateRoot
+		/ 'resources/dba-restfull-server.jar') pathString.
+	self stop.
+	LibC
+		runCommand:
+			'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
+				, ' --server.port=' , port , ' &'
 ]
 
 { #category : #accessing }
 Tomcat >> stop [
-	LibC runCommand: 'curl -X POST localhost:8080/actuator/shutdown'
+self traceCr: 'stopping tomcat server ....'.
+	LibC
+		runCommand: 'curl -X POST localhost:' , port , '/actuator/shutdown'
 ]

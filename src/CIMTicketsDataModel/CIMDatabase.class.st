@@ -20,7 +20,8 @@ Class {
 		'tbl_version',
 		'tbl_theme',
 		'tbl_retour',
-		'tbl_module'
+		'tbl_module',
+		'cimDatabaseServerPort'
 	],
 	#classInstVars : [
 		'database'
@@ -30,8 +31,14 @@ Class {
 
 { #category : #accessing }
 CIMDatabase class >> database [
-	database ifNil: [ database := self new ].
+	database
+		ifNil: [ database := self new cimDatabaseServerPort: '9599' ].
 	^ database
+]
+
+{ #category : #accessing }
+CIMDatabase class >> database: aCIMDatabase [ 
+	database := aCIMDatabase
 ]
 
 { #category : #accessing }
@@ -46,10 +53,12 @@ CIMDatabase class >> scheduleUpdate [
 	<script>
 	| scheduler when |
 	scheduler := TaskScheduler new start.
-	when := DateAndTime now + 2 hour.
-	scheduler
+	when := DateAndTime now + 2 seconds.
+	^ scheduler
 		do: [ self database
-				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
+				updateFromServerWith:
+					(IceBergProjectLocator locateRoot / 'resources/bibiothequeNames')
+						pathString ]
 		at: when
 		every: 4 week
 ]
@@ -73,9 +82,11 @@ CIMDatabase class >> updateData: aBuilder [
 	<worldMenu>
 	(aBuilder item: #LoadingLastestTickets)
 		order: 10;
-		help: 'Load lastest tickets from CIM DBA database  ';
+
+		help: 'Load lastest tickets from CIM DBA database';
 		label: 'LoadingLastestTickets';
-		iconName: #dashbordIcon;
+		icon: CIMIconLibrary dashboardIcon;
+
 		action: [ self database
 				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
 ]
@@ -88,6 +99,16 @@ CIMDatabase >> allPBLibraries [
 { #category : #accessing }
 CIMDatabase >> allTickets [
 	^ tbl_ft rows
+]
+
+{ #category : #accessing }
+CIMDatabase >> cimDatabaseServerPort [
+	^ cimDatabaseServerPort
+]
+
+{ #category : #accessing }
+CIMDatabase >> cimDatabaseServerPort: aString [
+	cimDatabaseServerPort := aString
 ]
 
 { #category : #utility }
@@ -116,7 +137,13 @@ CIMDatabase >> dropCreateDb [
 
 { #category : #utility }
 CIMDatabase >> joinTables [
+
 	tbl_ft removeUselessRows.
+
+	"TicketsLinkDetector new
+		model: tbl_ft;
+		connectAllLinkedTickets."
+
 	tbl_ft joinDevToTicket: tbl_dev.
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
 	tbl_ft joinBibsToTicket: tbl_biblio.
@@ -128,14 +155,16 @@ CIMDatabase >> joinTables [
 	tbl_biblio joinModulesToLibrary.
 	tbl_ft joinModulesToTickets.
 	tbl_retour joinTypeRetoursToRetours: tbl_type_retour.
-	tbl_ft joinRetourToTickets: tbl_retour.
+	tbl_ft joinRetoursToTickets: tbl_retour.
 	tbl_retour joinTicketsToRetour: tbl_ft.
 	tbl_module initializeModuleRows
 ]
 
 { #category : #initialization }
 CIMDatabase >> loadModules [
-	Tbl_Module new install
+	Tbl_Module new
+		initializeModuleRows;
+		install
 ]
 
 { #category : #utility }
@@ -364,12 +393,13 @@ CIMDatabase >> tbl_version_news: aTbl_version_news [
 
 { #category : #'as yet unclassified' }
 CIMDatabase >> updateFromServerWith: biblioNamesPath [
-	Tomcat start.
+	Tomcat startOn: self cimDatabaseServerPort.
 	(Delay forSeconds: 20) wait.
 	self dropCreateDb.
 	Tomcat stop.
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
+	tbl_module := Tbl_Module new.
 	self joinTables.
 	self resetWebModels.
 	Smalltalk snapshot: true andQuit: false

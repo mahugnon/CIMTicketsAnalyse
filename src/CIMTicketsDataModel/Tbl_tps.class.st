@@ -6,6 +6,7 @@ Class {
 
 { #category : #utilities }
 Tbl_tps >> joinTypeSessionToTps: aTbl_TypeSession [
+
 	self rows
 		do: [ :tps | 
 			aTbl_TypeSession rows
@@ -16,6 +17,9 @@ Tbl_tps >> joinTypeSessionToTps: aTbl_TypeSession [
 							[ tps tps_type asInteger asString = typeSession typsession_id asString ] ]
 				ifFound: [ :founded | tps typeSession: founded ]
 				ifNone: [  ] ]
+
+	"self rows do: [ :tps | tps joinTypeSessionToTps: aTbl_TypeSession ]"
+
 ]
 
 { #category : #utility }

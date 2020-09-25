@@ -30,11 +30,13 @@ Tbl_retour >> joinDevTypeRetourToRetour: aTbl_type_retour [
 
 { #category : #api }
 Tbl_retour >> joinTicketsToRetour: aTbl_ft [
+self traceCr: 'joinTicketsToRetour'.
 	self rows do: [ :retour | retour joinTicketsToRetour: aTbl_ft rows ]
 ]
 
 { #category : #api }
 Tbl_retour >> joinTypeRetoursToRetours: aTbl_type_retour [
+self traceCr: 'joinTypeRetoursToRetours'.
 	self rows
 		do: [ :retour | retour joinTypeRetoursToRetour: aTbl_type_retour rows ]
 ]

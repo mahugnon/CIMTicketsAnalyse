@@ -13,7 +13,7 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 				baselineOfPolyMath: spec;
 				baselineOfMaterialDisignLite: spec;
 				baselineOfChartJs: spec;
-				baselineOfSeaside: spec;
+				baselineSmaCC: spec;
 				baselineOfScheduler: spec.
 
 			"Packages"
@@ -24,17 +24,17 @@ BaselineOfCIMTicketsAnalyse >> baseline: spec [
 				package: 'CIMTicketsAnalyse'
 					with: [ spec
 						requires:
-							#('CIMTicketsDataModel' 'PolyMath' 'CIMTicketsDataModelUtils' 'CIMTicketsAnalyseTest' 'Scheduler') ];
+							#('CIMTicketsDataModel' 'PolyMath' 'CIMTicketsDataModelUtils' 'CIMTicketsAnalyseTest' 'Scheduler' 'SmaCC') ];
 				package: 'CIMTicketsAnalyseWeb'
 					with: [ spec
-						requires: #('ChartJs' 'CIMTicketsAnalyse' 'MaterialDesignLite' 'Seaside3') ] ]
+						requires: #('ChartJs' 'CIMTicketsAnalyse' 'MaterialDesignLite') ] ]
 ]
 
 { #category : #baselines }
 BaselineOfCIMTicketsAnalyse >> baselineOfChartJs: spec [
 	spec
 		baseline: 'ChartJs'
-		with: [ spec repository: 'github://DuneSt/ChartJs:v1.x.x/src' ]
+		with: [ spec repository: 'github://mahugnon/ChartJs:ChartJS2.8/src' ]
 ]
 
 { #category : #baselines }
@@ -63,4 +63,11 @@ BaselineOfCIMTicketsAnalyse >> baselineOfSeaside: spec [
 	spec
 		baseline: 'Seaside3'
 		with: [ spec repository: 'github://SeasideSt/Seaside:v3.2.1/repository' ]
+]
+
+{ #category : #baselines }
+BaselineOfCIMTicketsAnalyse >> baselineSmaCC: spec [
+	spec
+		baseline: 'SmaCC'
+		with: [ spec repository: 'github://SmaCCRefactoring/SmaCC' ]
 ]

@@ -5,7 +5,8 @@ Class {
 		'nom',
 		'tickets',
 		'bibliotheques',
-		'releventYear'
+		'releventYear',
+		'database'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -22,7 +23,12 @@ Tbl_Module_row >> bibliotheques: anObject [
 
 { #category : #initialization }
 Tbl_Module_row >> database [
-	^ CIMDatabase database
+	^ database
+]
+
+{ #category : #initialization }
+Tbl_Module_row >> database: aDataBase [
+	database := aDataBase
 ]
 
 { #category : #initialization }

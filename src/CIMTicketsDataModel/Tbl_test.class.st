@@ -6,6 +6,7 @@ Class {
 
 { #category : #api }
 Tbl_test >> joinTpsToTest: aTbl_tps [
+	self traceCr: 'joinTpsToTest'.
 	self rows do: [ :row | row joinTpsToTest: aTbl_tps rows ]
 ]
 

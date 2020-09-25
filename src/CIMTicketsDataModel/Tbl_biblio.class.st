@@ -17,6 +17,7 @@ Tbl_biblio >> interestingBibliotheques [
 
 { #category : #api }
 Tbl_biblio >> joinModulesToLibrary [
+self traceCr: 'joinModulesToLibrary'.
 	self rows do: [ :bib | bib joinModulesToLibrary ]
 ]
 
