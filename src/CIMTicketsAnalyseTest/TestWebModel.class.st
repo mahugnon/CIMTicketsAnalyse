@@ -55,12 +55,10 @@ TestWebModel >> testMergeXEvolutionsWithXBugs [
 		assert: (model bugs detect: [ :e | e time = 2005 ]) value
 		equals: 0.
 	self
-		deny: (model bugs detect: [ :e | e time = 2003 ]) value
-		equals: 0.
+		assert: (model bugs detect: [ :e | e time = 2003 ]) value
+		equals: 5.
 	self
-		assert:
-			(model evolutions detect: [ :e | e time = 2003 ] ifNone: [ nil ])
-				value
+		assert: (model evolutions detect: [ :e | e time = 2003 ]) value
 		equals: 0.
 	self
 		assert: (model evolutions detect: [ :e | e time = 2006 ]) value
