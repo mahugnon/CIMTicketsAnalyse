@@ -18,19 +18,6 @@ Tbl_ft >> addAssociatedFiles: aCollection [
 ]
 
 { #category : #utilities }
-Tbl_ft >> analyseContat [
-	self rows do: [ :ft | ft analyseContat ]
-]
-
-{ #category : #utilities }
-Tbl_ft >> associateToTicketFileIn: aFolder [
-	| folderReference |
-	folderReference := aFolder asFileReference.
-	^ self
-		addAssociatedFiles: (QueryAllCommitComment runOn: folderReference)
-]
-
-{ #category : #utilities }
 Tbl_ft >> filFromCSVFile: aCsvFile [
 	super filFromCSVFile: aCsvFile.
 	rows := rows

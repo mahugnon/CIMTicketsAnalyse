@@ -84,11 +84,6 @@ Tbl_ft_row >> addAssociatedPhysiqueModule: aString [
 		addAll: (Tbl_Module selectModuleFor: aString)
 ]
 
-{ #category : #API }
-Tbl_ft_row >> analyseContat [
-	CIMConstatAnalyser new analyse: self
-]
-
 { #category : #accessing }
 Tbl_ft_row >> associatedPhysique [
 	^ associatedPhysiqueFiles

@@ -6,7 +6,7 @@ Class {
 
 { #category : #running }
 QueryAvgTicketsTimeTest >> runOn: aTicketGroupNode [
-	aTicketGroupNode isEmptyOrNil
+	^ aTicketGroupNode isEmptyOrNil
 		ifTrue: [ 0 ]
 		ifFalse:
 			(CIMAverageNode new
