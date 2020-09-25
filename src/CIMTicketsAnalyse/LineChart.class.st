@@ -57,6 +57,7 @@ LineChart >> developeurDataSetOn: aCollection [
 LineChart >> draw [
 	| ds |
 	graphic := RTGrapher new.
+	graphic view @ RTZoomableView.
 	self isperDev
 		ifTrue: [ graphic := RTDoubleGrapher new.
 			graphic addRight: (self developeurDataSetOn: timeSerie).
@@ -81,7 +82,7 @@ LineChart >> draw [
 		labelConversion: [ :v | 
 			(v < 1 or: [ v > timeSerie size ])
 				ifTrue: [ '' ]
-				ifFalse: [ CIMDateFormater map: (timeSerie at: v) time asString ] ].
+				ifFalse: [ "CIMDateFormater map: " (timeSerie at: v) time	"asString" ] ].
 	"b legend."
 	graphic build.
 	^ graphic view

@@ -48,14 +48,7 @@ CIMWebEstimationComponent >> renderCodeModificationOn: html [
 
 { #category : #rendering }
 CIMWebEstimationComponent >> renderContentOn: html [
-	html mdlGrid
-		with: [ self renderCodeModificationOn: html.
-			html mdlCell
-				size: 4;
-				class: 'ticketDependency';
-				with: [ html div
-						mdlTypographyTitle;
-						with: 'To fill' ] ]
+	html mdlGrid with: [ self renderCodeModificationOn: html ]
 ]
 
 { #category : #rendering }

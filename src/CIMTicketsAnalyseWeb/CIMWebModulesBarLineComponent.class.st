@@ -51,7 +51,32 @@ CIMWebModulesBarLineComponent >> dataSet [
 
 { #category : #'private-api' }
 CIMWebModulesBarLineComponent >> defineStyleColors [
-	^ self subclassResponsibility
+	^ Dictionary new
+		add:
+			'Evolutions'
+				->
+					(Dictionary
+						with: #pointColor -> Color blue
+						with: #strokeColor -> Color blue);
+		add:
+			'Bugs'
+				->
+					(Dictionary
+						with: #pointColor -> Color red
+						with: #strokeColor -> Color red);
+		add:
+			'Bugs regression'
+				->
+					(Dictionary
+						with: #pointColor -> Color red
+						with: #strokeColor -> Color red);
+		add:
+			'Evolution regression'
+				->
+					(Dictionary
+						with: #pointColor -> Color blue
+						with: #strokeColor -> Color blue);
+		yourself
 ]
 
 { #category : #rendering }
@@ -98,12 +123,12 @@ CIMWebModulesBarLineComponent >> prepareCharDataSet [
 		name: self dataSet second key
 		sequence: self dataSet second value)
 		setOption: #fill to: false;
-		setOption: #backgroundColor to: 'red';
-		setOption: #borderColor to: 'red';
-		setOption: #pointHoverBackgroundColor to: 'white';
-		setOption: #pointHoverBorderColor to: 'red';
-		setOption: #pointHoverBorderWidth to: '10';
-		setOption: #borderWidth to: '1')}, self regressionFunctions
+		setOption: #backgroundColor to: Color red;
+		setOption: #borderColor to: Color red;
+		setOption: #pointHoverBackgroundColor to: Color white;
+		setOption: #pointHoverBorderColor to: Color red;
+		setOption: #pointHoverBorderWidth to: 10;
+		setOption: #borderWidth to: 1)} , self regressionFunctions
 ]
 
 { #category : #rendering }
@@ -114,12 +139,12 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		name: self dataSet third key
 		sequence: self dataSet third value)
 		setOption: #fill to: false;
-		setOption: #backgroundColor to: 'blue';
-		setOption: #borderColor to: 'blue';
-		setOption: #pointHoverBackgroundColor to: 'white';
-		setOption: #pointHoverBorderColor to: 'blue';
-		setOption: #pointHoverBorderWidth to: '10';
-		setOption: #borderWidth to: '1').
+		setOption: #backgroundColor to: Color blue;
+		setOption: #borderColor to: Color blue;
+		setOption: #pointHoverBackgroundColor to: Color white;
+		setOption: #pointHoverBorderColor to: Color blue;
+		setOption: #pointHoverBorderWidth to: 10;
+		setOption: #borderWidth to: 1).
 	((ChartDataSetFunction new
 		function:
 		(RegressionLineStrategy
@@ -127,10 +152,10 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		needMultipleRegression: model needMultiRegressionLine))
 		name: 'Bugs approximation line';
 		setOption: #fill to: false;
-		setOption: #pointBorderWidth to: '0.5';
-		setOption: #backgroundColor to: 'red';
-		setOption: #borderColor to: 'red';
-		setOption: #pointHoverBorderWidth to: '1').
+		setOption: #pointBorderWidth to: 0.5;
+		setOption: #backgroundColor to: Color red;
+		setOption: #borderColor to: Color red;
+		setOption: #pointHoverBorderWidth to: 1).
 	((ChartDataSetFunction new
 		function:
 		(RegressionLineStrategy
@@ -138,10 +163,10 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		needMultipleRegression: model needMultiRegressionLine))
 		setOption: #fill to: false;
 		name: 'Evolution approximation line';
-		setOption: #pointBorderWidth to: '0.5';
-		setOption: #backgroundColor to: 'blue';
-		setOption: #borderColor to: 'blue';
-		setOption: #borderWidth to: '2')}
+		setOption: #pointBorderWidth to: 0.5;
+		setOption: #backgroundColor to: Color blue;
+		setOption: #borderColor to: Color blue;
+		setOption: #borderWidth to: 2)}
 ]
 
 { #category : #rendering }
@@ -150,7 +175,7 @@ CIMWebModulesBarLineComponent >> renderContentOn: html [
 		with: [ html mdlCell
 				size: 8;
 				mdlTypographyTitle;
-				with: self description.
+				with: self description, ' (' ,self yAxesLegend, ' )'.
 			html mdlCell
 				size: 12;
 				with: [ self renderSelectedModulePlotOn: html ] ]
@@ -192,7 +217,7 @@ CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 	| renderingChartBlock id |
 	renderingChartBlock := [ :canvas | 
 	| chartData |
-	chartData := Chart2dData new
+	chartData := ChartData new
 		xObjects: self dataSet first;
 		dataSets: self prepareCharDataSet;
 		chartType: self kind;
@@ -208,4 +233,9 @@ CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 		with: renderingChartBlock
 		on: html.
 	self renderDemoWithId: id with: renderingChartBlock on: html
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebModulesBarLineComponent >> yAxesLegend [
+^'hour'
 ]

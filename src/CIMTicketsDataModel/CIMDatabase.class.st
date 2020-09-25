@@ -82,9 +82,11 @@ CIMDatabase class >> updateData: aBuilder [
 	<worldMenu>
 	(aBuilder item: #LoadingLastestTickets)
 		order: 10;
+
 		help: 'Load lastest tickets from CIM DBA database';
 		label: 'LoadingLastestTickets';
 		icon: CIMIconLibrary dashboardIcon;
+
 		action: [ self database
 				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
 ]
@@ -135,10 +137,13 @@ CIMDatabase >> dropCreateDb [
 
 { #category : #utility }
 CIMDatabase >> joinTables [
+
+	tbl_ft removeUselessRows.
+
 	"TicketsLinkDetector new
 		model: tbl_ft;
 		connectAllLinkedTickets."
-self traceCr: 'stating jointure ....'.
+
 	tbl_ft joinDevToTicket: tbl_dev.
 	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
 	tbl_ft joinBibsToTicket: tbl_biblio.
@@ -153,11 +158,6 @@ self traceCr: 'stating jointure ....'.
 	tbl_ft joinRetoursToTickets: tbl_retour.
 	tbl_retour joinTicketsToRetour: tbl_ft.
 	tbl_module initializeModuleRows
-	"	[ :job | 
-	job title: 'Joining tables '.
-	1 to: 12 do: [ :each | 
-		job progress: 0.1 * each.
-		joinTableSteps at: each ] ] asJob run"
 ]
 
 { #category : #initialization }
@@ -182,6 +182,11 @@ CIMDatabase >> renameLibrariesUsing: aCollection [
 	self tbl_biblio renameUsing: aCollection
 ]
 
+{ #category : #'as yet unclassified' }
+CIMDatabase >> resetWebModels [
+	CIMWebModuleModelInitialize new resetModels
+]
+
 { #category : #initialization }
 CIMDatabase >> setUpWith: ficheNavettePath and: biblioNamesPath [
 	self loadTblFromFolder: ficheNavettePath.
@@ -189,6 +194,11 @@ CIMDatabase >> setUpWith: ficheNavettePath and: biblioNamesPath [
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	self joinTables.
 	self loadModules
+]
+
+{ #category : #accessing }
+CIMDatabase >> tbl_Module [
+	self shouldBeImplemented.
 ]
 
 { #category : #accessing }
@@ -391,5 +401,6 @@ CIMDatabase >> updateFromServerWith: biblioNamesPath [
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	tbl_module := Tbl_Module new.
 	self joinTables.
+	self resetWebModels.
 	Smalltalk snapshot: true andQuit: false
 ]

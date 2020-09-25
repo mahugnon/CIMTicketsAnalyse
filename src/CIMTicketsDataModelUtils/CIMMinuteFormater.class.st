@@ -6,10 +6,10 @@ Class {
 
 { #category : #accessing }
 CIMMinuteFormater >> format: aDuration [
-	^ (aDuration totalSeconds / 60) asInteger asString , 'Min'
+	^ (aDuration totalSeconds / 60) asInteger asString 
 ]
 
 { #category : #accessing }
 CIMMinuteFormater >> title [
-	^ 'Temps en minute'
+	^ 'Time spent in minute'
 ]

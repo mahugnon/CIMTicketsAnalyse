@@ -19,3 +19,8 @@ CIMWebTimeTestDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aTicketGr
 	"asOrderedDictionary
 	collect: [ :node | node time -> node value ]"
 ]
+
+{ #category : #'private - utility' }
+CIMWebTimeTestDevChartModel >> timeConvert [
+	^ 3600
+]

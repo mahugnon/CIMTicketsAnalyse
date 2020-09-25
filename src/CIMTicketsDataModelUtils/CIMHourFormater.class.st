@@ -6,10 +6,10 @@ Class {
 
 { #category : #accessing }
 CIMHourFormater >> format: aDuration [
-	^ (aDuration totalSeconds / 3600) asInteger asString , 'H'
+	^ (aDuration totalSeconds / 3600) asInteger asString 
 ]
 
 { #category : #accessing }
 CIMHourFormater >> title [ 
-^'Temps en heure'
+^'Time spent in hour'
 ]

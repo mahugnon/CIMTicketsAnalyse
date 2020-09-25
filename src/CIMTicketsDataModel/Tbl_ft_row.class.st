@@ -706,8 +706,9 @@ Tbl_ft_row >> joinDevToTicket: aCollection [
 	self
 		dev:
 			(aCollection
-				detect: [ :aDev | aDev dev_id asString = self ft_dev_id ]
-				ifNone: [ nil ])
+
+				detect: [ :aDev | aDev dev_id asString = self ft_dev_id asString ]
+
 ]
 
 { #category : #initialization }
@@ -730,8 +731,10 @@ Tbl_ft_row >> joinRetourToTicket: aCollection [
 { #category : #api }
 Tbl_ft_row >> joinTestToTicket: aCollection [
 	tests := aCollection
-		select:
-			[ :test | test test_id ~= '21' and: test test_id asString = ft_test_id asString ]
+		select: [ :test | 
+			test test_id asString ~= '21'
+				and: test test_id asString = ft_test_id asString ]
+
 ]
 
 { #category : #utilites }
@@ -740,7 +743,10 @@ Tbl_ft_row >> joinTpsDevToTicket: aCollection [
 		timeDev:
 			(aCollection
 				select: [ :aTps | 
-					aTps tps_dev_id ~= '21'
+
+					aTps tps_dev_id asString ~= '21'
+
+
 						and: aTps tps_dev_id asString = self ft_dev_id asString ])
 ]
 
