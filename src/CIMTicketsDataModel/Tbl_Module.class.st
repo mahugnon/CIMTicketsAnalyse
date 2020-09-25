@@ -130,8 +130,8 @@ Tbl_Module >> groupByModulesFrom: sourceFolder to: destinationFolder [
 { #category : #initialization }
 Tbl_Module >> initialize [
 	super initialize.
-	database := CIMDatabase database.
-	self initializeModuleRows
+	"database := CIMDatabase database.
+	self initializeModuleRows"
 	"self initializeReleventYears."
 ]
 
