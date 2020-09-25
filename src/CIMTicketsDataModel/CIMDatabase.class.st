@@ -137,9 +137,6 @@ CIMDatabase >> dropCreateDb [
 
 { #category : #utility }
 CIMDatabase >> joinTables [
-
-	tbl_ft removeUselessRows.
-
 	"TicketsLinkDetector new
 		model: tbl_ft;
 		connectAllLinkedTickets."
@@ -157,7 +154,8 @@ CIMDatabase >> joinTables [
 	tbl_retour joinTypeRetoursToRetours: tbl_type_retour.
 	tbl_ft joinRetoursToTickets: tbl_retour.
 	tbl_retour joinTicketsToRetour: tbl_ft.
-	tbl_module initializeModuleRows
+	tbl_module initializeModuleRows.
+	tbl_ft removeUselessRows
 ]
 
 { #category : #initialization }

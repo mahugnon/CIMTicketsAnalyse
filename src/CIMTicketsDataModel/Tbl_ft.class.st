@@ -4,19 +4,6 @@ Class {
 	#category : #'CIMTicketsDataModel-Model'
 }
 
-{ #category : #adding }
-Tbl_ft >> addAssociatedFiles: aCollection [
-	self flag: 'To be improved'.
-	aCollection
-		do: [ :aCommitComment | 
-			rows
-				detect:
-					[ :row | row ft_numordre asInteger = aCommitComment ticketNumber asInteger ]
-				ifFound: [ :founded | 
-					founded addAssociatedPhysiqueFile: aCommitComment fileName.
-					founded addAssociatedPhysiqueModule: aCommitComment directory ] ]
-]
-
 { #category : #utilities }
 Tbl_ft >> filFromCSVFile: aCsvFile [
 	super filFromCSVFile: aCsvFile.
@@ -89,7 +76,13 @@ Tbl_ft >> pageSize [
 
 { #category : #removing }
 Tbl_ft >> removeUselessRows [
-	rows := self rows reject: [ :ft | ft ft_datecrea isNil ]
+	self
+		flag:
+			'Can be improve by removing tps as well'.
+	rows := QueryBugsEvolutions
+		runOn:
+			(QueryCleanData
+				runOn: (CIMTicketGroupNode new tickets: rows tbl_ft rows))
 ]
 
 { #category : #utilities }
