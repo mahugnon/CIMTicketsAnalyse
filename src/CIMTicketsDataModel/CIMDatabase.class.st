@@ -82,13 +82,11 @@ CIMDatabase class >> updateData: aBuilder [
 	<worldMenu>
 	(aBuilder item: #LoadingLastestTickets)
 		order: 10;
-
 		help: 'Load lastest tickets from CIM DBA database';
 		label: 'LoadingLastestTickets';
 		icon: CIMIconLibrary dashboardIcon;
-
 		action: [ self database
-				updateFromServerWith: '/Users/honore/Documents/Resources/utility/bibiothequeNames' ]
+				updateFromServerWith: IceBergProjectLocator locateRoot / 'bibliothequeNames' ]
 ]
 
 { #category : #accessing }
