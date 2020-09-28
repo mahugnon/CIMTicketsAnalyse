@@ -1,17 +1,17 @@
 Class {
-	#name : #CIMWebModuleModelInitialize,
+	#name : #CIMWebModuleModelInitializer,
 	#superclass : #Object,
 	#category : #'CIMTicketsAnalyseWeb-SetUp'
 }
 
 { #category : #initialization }
-CIMWebModuleModelInitialize class >> resetModels [
+CIMWebModuleModelInitializer class >> resetModels [
 	<script>
 	^ self new resetModels
 ]
 
 { #category : #initialization }
-CIMWebModuleModelInitialize >> resetModels [
+CIMWebModuleModelInitializer >> resetModels [
 	CIMWebMainLineBarModel resetCurrent.
 	CIMWebModuleAbstractModel subclassesDo: #resetCurrent. 
 	CIMWebEstimationModel resetCurrent

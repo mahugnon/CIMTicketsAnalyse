@@ -4,6 +4,11 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
+{ #category : #accessing }
+CIMWebModulesNumberOfCloseTicketsComponent class >> toRender [ 
+^false
+]
+
 { #category : #initialization }
 CIMWebModulesNumberOfCloseTicketsComponent >> description [
 	^ 'Total number of closed tickets'

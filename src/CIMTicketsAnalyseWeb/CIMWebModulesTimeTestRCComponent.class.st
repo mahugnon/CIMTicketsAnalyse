@@ -1,8 +1,13 @@
 Class {
 	#name : #CIMWebModulesTimeTestRCComponent,
-	#superclass : #Object,
+	#superclass : #CIMWebModulesBarLineComponent,
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
+
+{ #category : #accessing }
+CIMWebModulesTimeTestRCComponent class >> toRender [
+	^ false
+]
 
 { #category : #rendering }
 CIMWebModulesTimeTestRCComponent >> description [

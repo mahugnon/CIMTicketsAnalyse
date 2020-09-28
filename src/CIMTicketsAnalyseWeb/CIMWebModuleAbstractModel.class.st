@@ -118,22 +118,6 @@ CIMWebModuleAbstractModel >> fill: aCollection with: times EmptyUsing: x [
 								yourself) ] ]
 ]
 
-{ #category : #'private - utility' }
-CIMWebModuleAbstractModel >> fill: xBugs withEmptyUsing: x [
-	self halt.
-	x \ xBugs
-		ifNotEmpty: [ :diff | 
-			diff
-				do: [ :each | 
-					bugs
-						add:
-							(CIMAverageNode new
-								tickets: OrderedCollection new;
-								time: each;
-								value: 0;
-								yourself) ] ]
-]
-
 { #category : #initialization }
 CIMWebModuleAbstractModel >> initialize [
 	super initialize.

@@ -8,6 +8,18 @@ Class {
 	#category : #'CIMTicketsAnalyseWeb-CIMWebComponentsModules'
 }
 
+{ #category : #accessing }
+CIMWebModulesBarLineComponent class >> modules [
+	^ ((self subclasses select: #toRender)
+		sorted: [ :a :b | a name < b name ]) asOrderedCollection
+		collect: #new
+]
+
+{ #category : #accessing }
+CIMWebModulesBarLineComponent class >> toRender [
+	^ true
+]
+
 { #category : #'private-api' }
 CIMWebModulesBarLineComponent >> applyStyleTo: aChartData [
 	| styleForPersons |
