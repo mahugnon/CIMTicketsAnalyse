@@ -180,7 +180,7 @@ CIMDatabase >> renameLibrariesUsing: aCollection [
 
 { #category : #'as yet unclassified' }
 CIMDatabase >> resetWebModels [
-	CIMWebModuleModelInitialize new resetModels
+	CIMWebModuleModelInitializer new resetModels
 ]
 
 { #category : #initialization }

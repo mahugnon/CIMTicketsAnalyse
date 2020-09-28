@@ -807,7 +807,8 @@ Tbl_ft_row >> numberOfBibliotheques [
 { #category : #api }
 Tbl_ft_row >> rcTpsTest [
 	rcTpsTest
-		ifNil: [ rcTpsTest := (tests reject: [ :each | each test_id = '21' ])
+		ifNil:
+			[ rcTpsTest := (tests reject: [ :each | each test_id asString = '21' ])
 				flatCollect: #tps ].
 	^ rcTpsTest
 ]
