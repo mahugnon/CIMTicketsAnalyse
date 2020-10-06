@@ -392,7 +392,7 @@ CIMDatabase >> updateFromServerWith: biblioNamesPath [
 	Tomcat startOn: self cimDatabaseServerPort.
 	(Delay forSeconds: 20) wait.
 	self dropCreateDb.
-	Tomcat stop.
+	"Tomcat stop."
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	tbl_module := Tbl_Module new.
