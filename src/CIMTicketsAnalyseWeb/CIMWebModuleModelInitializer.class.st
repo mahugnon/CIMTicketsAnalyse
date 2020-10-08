@@ -12,7 +12,15 @@ CIMWebModuleModelInitializer class >> resetModels [
 
 { #category : #initialization }
 CIMWebModuleModelInitializer >> resetModels [
-	CIMWebMainLineBarModel resetCurrent.
-	CIMWebModuleAbstractModel subclassesDo: #resetCurrent. 
-	CIMWebEstimationModel resetCurrent
+	| models |
+	models := {CIMWebMainLineBarModel.
+	CIMWebModuleAbstractModel subclasses.
+	CIMWebEstimationModel}.
+	[ :job | 
+	models
+		do: [ :each | 
+			job
+				progress: (models indexOf: each) / models size;
+				title: 'resetting ' , each name , '...'.
+			each resetCurrent ] ] asJob run
 ]

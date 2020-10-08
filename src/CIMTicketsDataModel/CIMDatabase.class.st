@@ -119,7 +119,8 @@ CIMDatabase >> detectTblFrom: aCsvFile [
 
 { #category : #'as yet unclassified' }
 CIMDatabase >> dropCreateDb [
-	{Tbl_biblio.
+	| tables |
+	tables := {Tbl_biblio.
 	Tbl_dev.
 	Tbl_ft.
 	Tbl_modif.
@@ -130,30 +131,59 @@ CIMDatabase >> dropCreateDb [
 	Tbl_version.
 	Tbl_version_news.
 	Tbl_type_retour.
-	Tbl_retour} do: [ :each | each new initializeFromRestServer install ]
+	Tbl_retour}.
+	[ :job | 
+	tables
+		do: [ :each | 
+			job
+				progress: (tables indexOf: each) / tables size;
+				title: 'loading  ' , each asString , '...'.
+			each new initializeFromRestServer install ] ] asJob run
 ]
 
 { #category : #utility }
 CIMDatabase >> joinTables [
-	"TicketsLinkDetector new
-		model: tbl_ft;
-		connectAllLinkedTickets."
+	| todo |
+	todo := OrderedDictionary
+		newFromKeys: self joinTablesIntents
+		andValues: self joinTablesJob.
+	[ :job | 
+	todo
+		keysAndValuesDo: [ :key :value | 
+			job
+				progress: (todo indexOfKey: key) / todo size;
+				title: key , '...'.
+			value ] ] asJob run
+]
 
-	tbl_ft joinDevToTicket: tbl_dev.
-	tbl_ft joinTypeCorrectionToTicket: tbl_type_correction.
-	tbl_ft joinBibsToTicket: tbl_biblio.
-	tbl_ft joinVersionsToTicket: tbl_version.
-	tbl_tps joinTypeSessionToTps: tbl_type_session.
-	tbl_ft joinTpsDevToTicket: tbl_tps.
-	tbl_test joinTpsToTest: tbl_tps.
-	tbl_ft joinTestToTicket: tbl_test.
+{ #category : #utility }
+CIMDatabase >> joinTablesIntents [
+	^ {'joinnig TypeCorrection to Tickets'.
+	'removing useless tickes' . 'joinnig Dev  to Tickets'.
+	'joinnig Versions to Tickets' . 'joinnig TypeSession to Tps'.
+	'joinnig TpsDev to Tickets' . 'joinnig Tps to Test'.
+	'joinnig Test to Tickets' . 'joinnig Modules to Library'.
+	'joinnig Modules to Tickets' . 'joinnig TypeRetour to Retour'.
+	'joinnig  Tickets to Retour' . 'initializing Modules rows'}
+]
+
+{ #category : #utility }
+CIMDatabase >> joinTablesJob [
+	^ {(tbl_ft joinTypeCorrectionToTicket: tbl_type_correction).
+	tbl_ft removeUselessRows.
+	(tbl_ft joinDevToTicket: tbl_dev).
+	(tbl_ft joinBibsToTicket: tbl_biblio).
+	(tbl_ft joinVersionsToTicket: tbl_version).
+	(tbl_tps joinTypeSessionToTps: tbl_type_session).
+	(tbl_ft joinTpsDevToTicket: tbl_tps).
+	(tbl_test joinTpsToTest: tbl_tps).
+	(tbl_ft joinTestToTicket: tbl_test).
 	tbl_biblio joinModulesToLibrary.
 	tbl_ft joinModulesToTickets.
-	tbl_retour joinTypeRetoursToRetours: tbl_type_retour.
-	tbl_ft joinRetoursToTickets: tbl_retour.
-	tbl_retour joinTicketsToRetour: tbl_ft.
-	tbl_module initializeModuleRows.
-	tbl_ft removeUselessRows
+	(tbl_retour joinTypeRetoursToRetours: tbl_type_retour).
+	(tbl_ft joinRetoursToTickets: tbl_retour).
+	(tbl_retour joinTicketsToRetour: tbl_ft).
+	tbl_module initializeModuleRows}
 ]
 
 { #category : #initialization }
@@ -175,7 +205,9 @@ CIMDatabase >> loadTblFromFolder: csvFolder [
 
 { #category : #utility }
 CIMDatabase >> renameLibrariesUsing: aCollection [
-	self tbl_biblio renameUsing: aCollection
+	[ self tbl_biblio renameUsing: aCollection ] asJob
+		title: 'renaming libraries ...';
+		run
 ]
 
 { #category : #'as yet unclassified' }
@@ -390,7 +422,6 @@ CIMDatabase >> tbl_version_news: aTbl_version_news [
 { #category : #'as yet unclassified' }
 CIMDatabase >> updateFromServerWith: biblioNamesPath [
 	Tomcat startOn: self cimDatabaseServerPort.
-	(Delay forSeconds: 20) wait.
 	self dropCreateDb.
 	Tomcat stop.
 	self
