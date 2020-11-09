@@ -159,12 +159,20 @@ CIMDatabase >> joinTables [
 { #category : #utility }
 CIMDatabase >> joinTablesIntents [
 	^ {'joinnig TypeCorrection to Tickets'.
-	'removing useless tickes' . 'joinnig Dev  to Tickets'.
-	'joinnig Versions to Tickets' . 'joinnig TypeSession to Tps'.
-	'joinnig TpsDev to Tickets' . 'joinnig Tps to Test'.
-	'joinnig Test to Tickets' . 'joinnig Modules to Library'.
-	'joinnig Modules to Tickets' . 'joinnig TypeRetour to Retour'.
-	'joinnig  Tickets to Retour' . 'initializing Modules rows'}
+'joinnig Dev  to Tickets'.
+	'removing useless tickes' . 
+	'joining Libraries to Tickets'.
+	'joinnig Versions to Tickets' .
+	 'joinnig TypeSession to Tps'.
+	'joinnig TpsDev to Tickets' . 
+	'joinnig Tps to Test'.
+	'joinnig Test to Tickets' . 
+	'joinnig Modules to Library'.
+	'joinnig Modules to Tickets' .
+	 'joinnig TypeRetour to Retour'.
+	'joining retours to tickets'.
+	'joinnig  Tickets to Retour' . 
+	'initializing Modules rows'} 
 ]
 
 { #category : #utility }
