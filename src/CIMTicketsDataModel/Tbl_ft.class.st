@@ -76,13 +76,10 @@ Tbl_ft >> pageSize [
 
 { #category : #removing }
 Tbl_ft >> removeUselessRows [
-	self
-		flag:
-			'Can be improve by removing tps as well'.
-	rows := QueryBugsEvolutions
-		runOn:
-			(QueryCleanData
-				runOn: (CIMTicketGroupNode new tickets: rows tbl_ft rows))
+	self flag: 'Can be improve by removing tps as well'.
+	rows := (QueryBugsEvolutions
+		runOn: (QueryCleanData runOn: (CIMTicketGroupNode new tickets: rows)))
+		tickets
 ]
 
 { #category : #utilities }

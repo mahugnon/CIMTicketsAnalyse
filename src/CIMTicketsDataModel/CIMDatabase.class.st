@@ -170,8 +170,8 @@ CIMDatabase >> joinTablesIntents [
 { #category : #utility }
 CIMDatabase >> joinTablesJob [
 	^ {(tbl_ft joinTypeCorrectionToTicket: tbl_type_correction).
-	tbl_ft removeUselessRows.
 	(tbl_ft joinDevToTicket: tbl_dev).
+	tbl_ft removeUselessRows.
 	(tbl_ft joinBibsToTicket: tbl_biblio).
 	(tbl_ft joinVersionsToTicket: tbl_version).
 	(tbl_tps joinTypeSessionToTps: tbl_type_session).
@@ -189,7 +189,7 @@ CIMDatabase >> joinTablesJob [
 { #category : #initialization }
 CIMDatabase >> loadModules [
 	Tbl_Module new
-		initializeModuleRows;
+		database: self;
 		install
 ]
 
@@ -426,7 +426,7 @@ CIMDatabase >> updateFromServerWith: biblioNamesPath [
 	Tomcat stop.
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
-	tbl_module := Tbl_Module new.
+	self loadModules .
 	self joinTables.
 	self resetWebModels.
 	Smalltalk snapshot: true andQuit: false
