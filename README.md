@@ -3,6 +3,8 @@
 [![Build Status](https://ci.inria.fr/pharo-contribution/job/CIMTicketDashboard/badge/icon)](https://ci.inria.fr/pharo-contribution/job/CIMTicketDashboard/)
 ![Github Actions build](https://github.com/mahugnon/CIMTicketsAnalyse/workflows/Github%20Actions%20build/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/mahugnon/CIMTicketsAnalyse/badge.svg)](https://coveralls.io/github/mahugnon/CIMTicketsAnalyse)
+[![Pharo version](https://img.shields.io/badge/Pharo-7.0-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo version](https://img.shields.io/badge/Pharo-8.0-%23aac9ff.svg)](https://pharo.org/download)
 
 # CIMTicketsAnalyse
 To lead the project in a clean pharo image:
