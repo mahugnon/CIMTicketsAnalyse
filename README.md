@@ -10,7 +10,7 @@
 To lead the project in a clean pharo image:
 ```Smalltalk
  Metacello new
-    	githubUser: 'mahugnon' project: 'CIMTicketsAnalyse' commitish: 'master' path: 'src';
+    	githubUser: 'mahugnon' project: 'CIMTicketsAnalyse' commitish: 'main' path: 'src';
     	baseline: 'CIMTicketsAnalyse';
 	 onConflict: [ :e | e useIncoming ];
         onUpgrade: [ :e | e useIncoming ];
