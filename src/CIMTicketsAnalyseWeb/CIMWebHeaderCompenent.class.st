@@ -10,8 +10,8 @@ CIMWebHeaderCompenent >> renderContentOn: html [
 		with: [ html
 				mdlLayoutHeader: [ html
 						mdlLayoutHeaderRow: [ html image
-								style: 'width: 200px; height: 70px; background-color: white';
-								url: (CIMIconLibrary urlOf: 'logocimSvg').
+								style: 'width: 100px; height: 70px; background-color: white';
+								url: (CIMIconLibrary urlOf: 'logocimJpg').
 							html space: 100.
 							html mdlLayoutTitle: 'TicketsDashboard'.
 							html space: 50.
