@@ -14,8 +14,7 @@ CIMWebModuleModelInitializer class >> resetModels [
 CIMWebModuleModelInitializer >> resetModels [
 	| models |
 	models := {CIMWebMainLineBarModel.
-	CIMWebModuleAbstractModel subclasses.
-	CIMWebEstimationModel}.
+	CIMWebEstimationModel} , CIMWebModuleAbstractModel subclasses.
 	[ :job | 
 	models
 		do: [ :each | 

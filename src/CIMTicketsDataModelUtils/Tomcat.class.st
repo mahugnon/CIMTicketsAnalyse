@@ -46,22 +46,22 @@ Tomcat >> startOn: aPortString [
 	self traceCr: 'Stating tomcat server .....'.
 	port := aPortString.
 	[ serverPath := (IceBergProjectLocator locateRoot
-		/ 'resources/dba-restfull-server.jar') pathString.
-	LibC
+		/ 'resources/CIMRestEndPointForTicketDataset-0.0.1-SNAPSHOT.jar')
+		pathString.
+	[ LibC
 		runCommand:
 		'java -Ddb2.jcc.charsetDecoderEncoder=3 -jar ' , serverPath
-		, ' --server.port=' , port , ' &'.
-	(Delay forSeconds: 120) wait ] asJob
+		, ' --server.port=' , port ] asJob
 		title: 'starting tomcat on port ' , port , '...';
-		run
+		run ] forkNamed: 'Tomcat'
 ]
 
 { #category : #accessing }
 Tomcat >> stop [
 	self traceCr: 'stopping tomcat server ....'.
 	[ LibC
-		runCommand: 'curl -X POST localhost:' , port asString , '/actuator/shutdown'.
-	(Delay forSeconds: 10) wait ] asJob
+		runCommand: 'curl -X POST localhost:' , port asString , '/actuator/shutdown' ]
+		asJob
 		title: 'stopping tomcat server ....';
 		run
 ]
