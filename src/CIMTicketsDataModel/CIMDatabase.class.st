@@ -429,12 +429,11 @@ CIMDatabase >> tbl_version_news: aTbl_version_news [
 
 { #category : #'as yet unclassified' }
 CIMDatabase >> updateFromServerWith: biblioNamesPath [
-	Tomcat startOn: self cimDatabaseServerPort.
+"	Tomcat startOn: self cimDatabaseServerPort."
 	self dropCreateDb.
-	Tomcat stop.
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
-	self loadModules .
+	self loadModules.
 	self joinTables.
 	self resetWebModels.
 	Smalltalk snapshot: true andQuit: false
