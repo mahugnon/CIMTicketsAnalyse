@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-java -Ddb2.jcc.charsetDecoderEncoder=3 -jar  pharo-local/iceberg/mahugnon/CIMTicketsAnalyse/CIMRestEndPointForTicketDataset-0.0.1-SNAPSHOT.jar  --server.port=9599 
+java -Ddb2.jcc.charsetDecoderEncoder=3 -jar  pharo-local/iceberg/mahugnon/CIMTicketsAnalyse/CIMRestEndPointForTicketDataset-0.0.1-SNAPSHOT.jar  --server.port=9599 --spring.datasource.url=jdbc:db2://10.168.100.201:50000/MUTCIM
