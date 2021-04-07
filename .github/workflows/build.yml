@@ -9,6 +9,7 @@ jobs:
         os: [  macos-latest ]
         smalltalk:
           - Pharo64-8.0 
+          - Pharo64-9.0
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
     steps:
