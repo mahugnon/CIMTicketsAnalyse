@@ -17,5 +17,5 @@ CIMWebModulesTimeDevComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeDevComponent >> yAxesLegend [
-	^ 'Month'
+	^ 'Hour'
 ]

@@ -12,7 +12,7 @@ CIMWebTimeDevChartModel class >> resetCurrent [
 
 { #category : #'data sets' }
 CIMWebTimeDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
-	^ QuerySumTimeDevGroupedByTime new
+	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
@@ -20,5 +20,5 @@ CIMWebTimeDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGro
 
 { #category : #'private - utility' }
 CIMWebTimeDevChartModel >> timeConvert [
-	^ 28*24*3600
+	^ 3600
 ]
