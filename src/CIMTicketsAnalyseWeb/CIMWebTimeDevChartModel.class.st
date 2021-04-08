@@ -20,5 +20,6 @@ CIMWebTimeDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGro
 
 { #category : #'private - utility' }
 CIMWebTimeDevChartModel >> timeConvert [
-	^ 3600
+"CIM working day"
+	^ 7.5*3600
 ]
