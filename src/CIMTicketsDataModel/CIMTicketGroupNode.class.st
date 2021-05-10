@@ -60,6 +60,11 @@ CIMTicketGroupNode >> isEmptyOrNil [
 	^ tickets isEmptyOrNil
 ]
 
+{ #category : #'as yet unclassified' }
+CIMTicketGroupNode >> numberOfTicketsWithRetours [
+	^ (self tickets select: [ :e | e retours isNotEmpty ]) size
+]
+
 { #category : #accessing }
 CIMTicketGroupNode >> size [
 	self isEmpty
@@ -85,6 +90,11 @@ CIMTicketGroupNode >> time [
 { #category : #accessing }
 CIMTicketGroupNode >> time: anObject [
 	time := anObject
+]
+
+{ #category : #'as yet unclassified' }
+CIMTicketGroupNode >> totalNumberOfRetours [
+	^ (self tickets flatCollect: [ :e | e retours ] as: Set) size
 ]
 
 { #category : #api }

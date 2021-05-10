@@ -103,6 +103,33 @@ CIMWebModuleAbstractModel >> evolutions: anObject [
 	evolutions := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebModuleAbstractModel >> export: aFolder [
+	| yearsData bugsData evolutionsData |
+	bugsData := self dataSet second value.
+	evolutionsData := self dataSet third value.
+	yearsData := self dataSet first.
+	aFolder asFileReference / (self name , '.csv')
+		writeStreamDo: [ :stream | 
+			stream
+				<< 'years';
+				space;
+				<< 'Bugs';
+				space;
+				<< 'evolution';
+				cr.
+			1 to: yearsData size do: [ :iterator | 
+				stream
+					<< (yearsData at: iterator) asString;
+					space.
+				stream
+					<< (self frenchDecimal: (bugsData at: iterator) asString);
+					space.
+				stream
+					<< (self frenchDecimal: (evolutionsData at: iterator) asString);
+					cr ] ]
+]
+
 { #category : #'private - utility' }
 CIMWebModuleAbstractModel >> fill: aCollection with: times EmptyUsing: x [
 	x \ times
@@ -116,6 +143,11 @@ CIMWebModuleAbstractModel >> fill: aCollection with: times EmptyUsing: x [
 								time: each;
 								value: 0;
 								yourself) ] ]
+]
+
+{ #category : #'as yet unclassified' }
+CIMWebModuleAbstractModel >> frenchDecimal: aString [
+	^ aString copyReplaceAll: '.' with: ','
 ]
 
 { #category : #initialization }
@@ -171,6 +203,11 @@ CIMWebModuleAbstractModel >> modelData: anObject [
 { #category : #accessing }
 CIMWebModuleAbstractModel >> modules [
 	^ modules
+]
+
+{ #category : #initialization }
+CIMWebModuleAbstractModel >> name [
+	^ self className
 ]
 
 { #category : #'as yet unclassified' }

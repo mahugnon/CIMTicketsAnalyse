@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #accessing }
-CIMWebModulesNumberOfCloseTicketsComponent class >> toRender [ 
-^false
+CIMWebModulesNumberOfCloseTicketsComponent class >> toRender [
+	^ true
 ]
 
 { #category : #initialization }
