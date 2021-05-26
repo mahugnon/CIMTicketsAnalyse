@@ -60,7 +60,8 @@ Class {
 		'connectedTickets',
 		'tests',
 		'rcTpsTest',
-		'retours'
+		'retours',
+		'developer'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -694,6 +695,13 @@ Tbl_ft_row >> joinBibsToTicket: aCollection [
 		bibliotheques:
 			(aCollection
 				select: [ :bib | self ft_modif_id asString = bib biblio_modif_id asString ])
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_ft_row >> joinCIMToTicket: aCollection [
+	developer := aCollection
+		detect: [ :cim | cim cim_id asString = self ft_cim_id asString ]
+		ifNone: [ nil ]
 ]
 
 { #category : #utilities }

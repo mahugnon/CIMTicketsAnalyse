@@ -7,7 +7,10 @@ Class {
 		'cim_service',
 		'cim_typ_coll',
 		'base_jour',
-		'cim_equipe'
+		'cim_equipe',
+		'tickets',
+		'beginDate',
+		'endDate'
 	],
 	#category : #'CIMTicketsDataModel-Model'
 }
@@ -20,6 +23,11 @@ Tbl_cim_service_row >> base_jour [
 { #category : #accessing }
 Tbl_cim_service_row >> base_jour: arg1 [
 	base_jour := arg1
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_cim_service_row >> beginDateApproximation [
+	tickets ifNotEmpty: [ beginDate := tickets first dateClosing ]
 ]
 
 { #category : #accessing }
@@ -72,8 +80,29 @@ Tbl_cim_service_row >> cim_typ_coll: arg1 [
 	cim_typ_coll := arg1
 ]
 
+{ #category : #'as yet unclassified' }
+Tbl_cim_service_row >> endDateApproximation [
+	tickets ifNotEmpty: [ endDate := tickets last dateClosing ]
+]
+
+{ #category : #initialization }
+Tbl_cim_service_row >> initialize [
+	super initialize.
+	tickets := OrderedCollection new
+]
+
 { #category : #initialization }
 Tbl_cim_service_row >> initializeWith: arg1 [
 	arg1
 		keysDo: [ :arg2 | self perform: (arg2 asLowercase , ':') asSymbol with: (arg1 at: arg2) ]
+]
+
+{ #category : #'as yet unclassified' }
+Tbl_cim_service_row >> joinTicketsToService: aCollection [
+	tickets
+		addAll:
+			(aCollection
+				select:
+					[ :ft | ft ft_cim_id asString = self cim_id and: [ ft dateClosing isNotNil ] ]).
+	tickets sorted: [ :a :b | a dateClosing < b dateClosing ]
 ]

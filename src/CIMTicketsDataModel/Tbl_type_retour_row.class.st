@@ -40,7 +40,7 @@ Tbl_type_retour_row >> joinRetoursToTypeRetour: aCollection [
 	self retours
 		addAll:
 			(aCollection
-				select: [ :each | each dev_type_retour_id = self type_retour_id ])
+				select: [ :each | each dev_type_retour_id asString = self type_retour_id ])
 ]
 
 { #category : #accessing }

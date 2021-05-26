@@ -23,7 +23,7 @@ Tbl >> convertFieldToCimDate [
 Tbl >> fetchData [
 	| allRows rowsJsonString retrievedRows rowsInfo |
 	allRows := OrderedCollection new.
-	0 to: self numberOfPages - 1 do: [ :i | 
+	0 to: self numberOfPages do: [ :i | 
 		rowsJsonString := (ZnClient new
 			url:
 				self hostUrl , '/' , self uri , '?page=' , i printString , '&size='

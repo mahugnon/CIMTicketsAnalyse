@@ -17,13 +17,7 @@ Class {
 
 { #category : #api }
 Tbl_retour_row >> ccTypeRetour [
-	ccTypeRetour ifNil: [ ccTypeRetour := Set new ].
 	^ ccTypeRetour
-]
-
-{ #category : #accessing }
-Tbl_retour_row >> ccTypeRetourToRetour [
-	self shouldBeImplemented.
 ]
 
 { #category : #accessing }
@@ -102,11 +96,10 @@ Tbl_retour_row >> isInconsistentFeedBack [
 
 { #category : #api }
 Tbl_retour_row >> joinCcTypeRetourToRetour: aCollection [
-	self ccTypeRetour
-		addAll:
-			(aCollection
-				select:
-					[ :typeRetour | typeRetour type_retour_id asString = self cc_type_retour_id asString ])
+	ccTypeRetour := aCollection
+		detect:
+			[ :typeRetour | typeRetour type_retour_id asString = self cc_type_retour_id asString ]
+		ifNone: [  ]
 ]
 
 { #category : #api }
@@ -133,6 +126,11 @@ Tbl_retour_row >> joinTicketsToRetour: aCollection [
 Tbl_retour_row >> joinTypeRetoursToRetour: aCollection [
 	self joinCcTypeRetourToRetour: aCollection.
 	self joinDevTypeRetourToRetour: aCollection
+]
+
+{ #category : #accessing }
+Tbl_retour_row >> libelle [
+	^ ccTypeRetour libelle
 ]
 
 { #category : #accessing }
