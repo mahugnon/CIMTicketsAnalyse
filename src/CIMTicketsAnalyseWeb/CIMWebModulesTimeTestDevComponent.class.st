@@ -6,7 +6,7 @@ Class {
 
 { #category : #rendering }
 CIMWebModulesTimeTestDevComponent >> description [
-	^ 'Total Dev team testing time on closed tickets'
+	^ 'Tickets fermés: temps de tests par le Dev'
 ]
 
 { #category : #initialization }
@@ -17,5 +17,5 @@ CIMWebModulesTimeTestDevComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeTestDevComponent >> yAxesLegend [
-	^ 'hour'
+	^ 'Heure'
 ]

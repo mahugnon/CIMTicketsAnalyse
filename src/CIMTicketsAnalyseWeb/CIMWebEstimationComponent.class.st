@@ -32,7 +32,7 @@ CIMWebEstimationComponent >> renderCodeModificationOn: html [
 		class: 'codeModification';
 		with: [ html div
 				mdlTypographyTitle;
-				with: 'Time code modification'.
+				with: 'Temps de modification de code'.
 			html space.
 			html div
 				mdlTypographyBody2;

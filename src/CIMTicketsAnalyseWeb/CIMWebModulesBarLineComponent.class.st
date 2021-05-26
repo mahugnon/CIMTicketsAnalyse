@@ -162,7 +162,7 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		(RegressionLineStrategy
 		regression: (regression at: 'Bugs regression')
 		needMultipleRegression: model needMultiRegressionLine))
-		name: 'Bugs approximation line';
+		name: 'Bug: droite de régression';
 		setOption: #fill to: false;
 		setOption: #pointBorderWidth to: 0.5;
 		setOption: #backgroundColor to: Color red;
@@ -174,7 +174,7 @@ CIMWebModulesBarLineComponent >> regressionFunctions [
 		regression: (regression at: 'Evolution regression')
 		needMultipleRegression: model needMultiRegressionLine))
 		setOption: #fill to: false;
-		name: 'Evolution approximation line';
+		name: 'Evolution: droite de régression';
 		setOption: #pointBorderWidth to: 0.5;
 		setOption: #backgroundColor to: Color blue;
 		setOption: #borderColor to: Color blue;
@@ -249,5 +249,5 @@ CIMWebModulesBarLineComponent >> renderSelectedModulePlotOn: html [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesBarLineComponent >> yAxesLegend [
-^'hour'
+^'Heure'
 ]

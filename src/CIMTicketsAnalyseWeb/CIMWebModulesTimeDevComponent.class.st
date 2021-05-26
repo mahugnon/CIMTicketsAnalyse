@@ -6,7 +6,7 @@ Class {
 
 { #category : #rendering }
 CIMWebModulesTimeDevComponent >> description [
-	^ 'Total development time on closed tickets'
+	^ 'Tickets fermés: temps de développement'
 ]
 
 { #category : #initialization }
@@ -17,5 +17,5 @@ CIMWebModulesTimeDevComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeDevComponent >> yAxesLegend [
-	^ 'CIM working day'
+	^ 'Jour de travail CIM'
 ]

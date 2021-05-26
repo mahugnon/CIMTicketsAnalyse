@@ -6,7 +6,7 @@ Class {
 
 { #category : #rendering }
 CIMWebModulesTimeToOpenCloseComponent >> description [
-	^ 'Total ticket closing time for closed tickets'
+	^ 'Tickets fermés: durée de cloture'
 ]
 
 { #category : #'private-api' }
@@ -17,5 +17,5 @@ CIMWebModulesTimeToOpenCloseComponent >> initialize [
 
 { #category : #'as yet unclassified' }
 CIMWebModulesTimeToOpenCloseComponent >> yAxesLegend [
-	^ 'CIM weeks'
+	^ 'Semaine CIM'
 ]

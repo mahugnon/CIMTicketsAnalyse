@@ -6,7 +6,7 @@ Class {
 
 { #category : #rendering }
 CIMWebModulesTimeTestRCComponent >> description [
-	^ 'Total RC team testing time on closed tickets'
+	^ 'Tickets fermés: temps de test QA'
 ]
 
 { #category : #initialization }

@@ -13,7 +13,7 @@ CIMWebModulesTimeTotalMinusEstimComponent >> bugsEvolutionLinearRegression [
 
 { #category : #rendering }
 CIMWebModulesTimeTotalMinusEstimComponent >> description [
-	^ 'Total difference bewteen estimated and actual Dev time on tickets '
+	^ 'Tickets fermés: différence entre temps estimé et temps passé'
 ]
 
 { #category : #initialization }

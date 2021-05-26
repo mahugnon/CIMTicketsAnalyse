@@ -11,7 +11,7 @@ CIMWebModulesNumberOfCloseTicketsComponent class >> toRender [
 
 { #category : #initialization }
 CIMWebModulesNumberOfCloseTicketsComponent >> description [
-	^ 'Total number of closed tickets'
+	^ 'Tickets fermés: nombre total de tickets fermés'
 ]
 
 { #category : #initialization }
