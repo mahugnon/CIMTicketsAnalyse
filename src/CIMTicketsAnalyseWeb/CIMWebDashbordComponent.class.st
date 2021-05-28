@@ -85,7 +85,7 @@ CIMWebDashbordComponent >> renderModulesComponentOn: html [
 				mdlTypographyTitle;
 				mdlTextColorPrimary;
 				size: 12;
-				with: 'Izy Protect Modules '.
+				with: 'Modules d''Izy Protect'.
 			self renderModulesMainLineBarOn: html ]
 ]
 

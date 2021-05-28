@@ -42,7 +42,7 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 	html mdlCell
 		size: 8;
 		mdlTypographyTextCenter;
-		with: [ html text: 'Selected module:'.
+		with: [ html text: 'Module sélectionné:'.
 			html space.
 			html
 				render:

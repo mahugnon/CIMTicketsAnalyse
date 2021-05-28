@@ -51,7 +51,7 @@ CIMWebScreenComponent >> renderContentOn: html [
 	html
 		mdlLayout: [ html render: self header.
 			html mdlLayoutContent
-				class: 'mdl-color-text--grey-600 ';
+				class: 'mdl-color-text--white-600 ';
 				with: [ html mdlGrid
 						noSpacing;
 						with: [ html mdlCell
@@ -67,7 +67,7 @@ CIMWebScreenComponent >> style [
 	super style.
 	^ '
 	body {
-	background-color:#FAFFFB;
+	background-color:#FFFFFF;
 	}
 .content {
 padding-top:100px;

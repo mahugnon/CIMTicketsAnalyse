@@ -9,7 +9,7 @@ TestRetourModel >> testJoinCCTypeRetourToRetour [
 	self
 		deny:
 			(retours joinCcTypeRetourToRetour: typeRetours) rows first
-				ccTypeRetour isEmpty
+				ccTypeRetour isNil
 ]
 
 { #category : #tests }
@@ -23,6 +23,6 @@ TestRetourModel >> testJoinDevTypeRetourToRetour [
 { #category : #tests }
 TestRetourModel >> testJoinTypeRetourToRetour [
 	retours joinTypeRetoursToRetours: typeRetours.
-	self deny: retours rows first ccTypeRetour isEmpty.
-	self deny: retours rows first devTypeRetour isEmpty
+	self deny: retours rows first ccTypeRetour isNil.
+	self deny: retours rows first devTypeRetour isNil
 ]

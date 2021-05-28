@@ -8,5 +8,12 @@ Class {
 QueryTicketsTimeDev >> runOn: aTicketGroupNode [
 	^ aTicketGroupNode tickets
 		inject: 0
-		into: [ :sum :ticket | sum + (QueryTicketTimeDev new runOn: ticket) ]
+		into: [ :sum :ticket | sum + (self totalDevelpmentDurationOn: ticket) ]
+]
+
+{ #category : #accessing }
+QueryTicketsTimeDev >> totalDevelpmentDurationOn: aTicket [
+	(aTicket timeDev select: [ :t | t isDevelopment ])
+		inject: 0
+		into: [ :sum :aTimeDv | sum + aTimeDv tps_temps totalSeconds ]
 ]

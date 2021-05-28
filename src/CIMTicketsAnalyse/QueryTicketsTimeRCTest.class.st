@@ -8,5 +8,12 @@ Class {
 QueryTicketsTimeRCTest >> runOn: aCIMTicketGroNode [
 	^ aCIMTicketGroNode tickets
 		inject: 0
-		into: [ :sum :ticket | sum + (QueryTicketTimeRCTest runOn: ticket) ]
+		into: [ :sum :ticket | sum + (self totalTicketQATestDurationOn: ticket) ]
+]
+
+{ #category : #accessing }
+QueryTicketsTimeRCTest >> totalTicketQATestDurationOn: aTicket [
+	^ aTicket rcTpsTest
+		inject: 0
+		into: [ :sum :tps | sum + tps tps_temps totalSeconds ]
 ]
