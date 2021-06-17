@@ -52,24 +52,24 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 						action: [ :module | model selectedModule: module ]
 						selectedObject: model selectedModule
 						choosingText: ''
-						description: 'Modules')
+						description: 'Selectionnez le module de Protect')
 						sortBlock: [ :a :b | a name < b name ];
 						yourself) ].
 	html mdlCell
 		size: 6;
 		mdlTypographyTextCenter;
-		with: [ html text: 'Commencer par:'.
+		with: [ html text: 'Année de début:'.
 			html space.
 			html
 				render:
 					((MDLMenuButtonWidget
-						possibilities: model modules
-						label: #nom
-						action: [ :module | model selectedModule: module ]
-						selectedObject: model selectedModule
+						possibilities: model years
+						label: #asString
+						action: [ :year | model selectedBeginYear: year ]
+						selectedObject: model selectedBeginYear
 						choosingText: ''
-						description: 'years')
-						sortBlock: [ :a :b | a name < b name ];
+						description: 'Selectionnez l''année de début d''analyse')
+						sortBlock: [ :a :b | a < b ];
 						yourself) ]
 ]
 

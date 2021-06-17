@@ -1,7 +1,7 @@
 Class {
 	#name : #QueryNumberOfTicketsGroupedByTime,
 	#superclass : #TimeSerieQueries,
-	#category : #'CIMTicketsAnalyse-SumQueries'
+	#category : #'CIMTicketsAnalyse-Queries'
 }
 
 { #category : #running }

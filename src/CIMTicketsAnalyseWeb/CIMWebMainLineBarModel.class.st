@@ -6,7 +6,9 @@ Class {
 		'selectedModule',
 		'selectedBeginYear',
 		'modelData',
-		'listeners'
+		'listeners',
+		'years',
+		'minYear'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
@@ -27,6 +29,8 @@ CIMWebMainLineBarModel >> database [
 CIMWebMainLineBarModel >> initialize [
 	super initialize.
 	self initializeModelData.
+	self initializeYears.
+	self initializeSelectedYear.
 	self initializeModules.
 	self initializeSelectedModule.
 	self initializeListeners
@@ -51,6 +55,21 @@ CIMWebMainLineBarModel >> initializeModules [
 { #category : #initialization }
 CIMWebMainLineBarModel >> initializeSelectedModule [
 	selectedModule := self database tbl_module moduleNamed: 'IZY Protect'
+]
+
+{ #category : #initialization }
+CIMWebMainLineBarModel >> initializeSelectedYear [
+	selectedBeginYear := minYear
+]
+
+{ #category : #initialization }
+CIMWebMainLineBarModel >> initializeYears [
+	minYear := (modelData tickets
+		collect: #yearClosing
+		thenSelect: [ :e | e isNotNil ]) min.
+	years := (Timespan
+		starting: (Year year: minYear)
+		ending: Year currentYear) years collect: #asInteger
 ]
 
 { #category : #accessing }
@@ -81,6 +100,16 @@ CIMWebMainLineBarModel >> notifyAll [
 ]
 
 { #category : #accessing }
+CIMWebMainLineBarModel >> selectedBeginYear [
+	^ selectedBeginYear
+]
+
+{ #category : #accessing }
+CIMWebMainLineBarModel >> selectedBeginYear: anObject [
+	selectedBeginYear := anObject
+]
+
+{ #category : #accessing }
 CIMWebMainLineBarModel >> selectedModule [
 	^ selectedModule
 ]
@@ -94,4 +123,14 @@ CIMWebMainLineBarModel >> selectedModule: anObject [
 { #category : #initialization }
 CIMWebMainLineBarModel >> subscribe: aModel [
 	listeners add: aModel
+]
+
+{ #category : #accessing }
+CIMWebMainLineBarModel >> years [
+	^ years
+]
+
+{ #category : #accessing }
+CIMWebMainLineBarModel >> years: anObject [
+	years := anObject
 ]
