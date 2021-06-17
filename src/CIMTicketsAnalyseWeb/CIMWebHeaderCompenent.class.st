@@ -18,8 +18,8 @@ CIMWebHeaderCompenent >> renderContentOn: html [
 							html image
 								style: 'width: 75px; height: 70px;';
 								url: (CIMIconLibrary urlOf: 'rmodPng') .
-								html space:30.
-								self renderMenuOn: html] ] ]
+								"html space:30.
+								self renderMenuOn: html"] ] ]
 ]
 
 { #category : #rendering }

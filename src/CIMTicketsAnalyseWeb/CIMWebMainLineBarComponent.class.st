@@ -40,7 +40,7 @@ CIMWebMainLineBarComponent >> renderContentOn: html [
 { #category : #rendering }
 CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 	html mdlCell
-		size: 8;
+		size: 6;
 		mdlTypographyTextCenter;
 		with: [ html text: 'Module sélectionné:'.
 			html space.
@@ -53,6 +53,22 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 						selectedObject: model selectedModule
 						choosingText: ''
 						description: 'Modules')
+						sortBlock: [ :a :b | a name < b name ];
+						yourself) ].
+	html mdlCell
+		size: 6;
+		mdlTypographyTextCenter;
+		with: [ html text: 'Commencer par:'.
+			html space.
+			html
+				render:
+					((MDLMenuButtonWidget
+						possibilities: model modules
+						label: #nom
+						action: [ :module | model selectedModule: module ]
+						selectedObject: model selectedModule
+						choosingText: ''
+						description: 'years')
 						sortBlock: [ :a :b | a name < b name ];
 						yourself) ]
 ]

@@ -62,7 +62,7 @@ CIMWebDashbordComponent >> initialize [
 { #category : #hooks }
 CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
-		with: [ self estimationsOn: html.
+		with: [ "self estimationsOn: html."
 			self renderModulesComponentOn: html ]
 ]
 

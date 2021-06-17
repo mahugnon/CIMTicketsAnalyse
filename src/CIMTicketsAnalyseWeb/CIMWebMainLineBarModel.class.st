@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'modules',
 		'selectedModule',
+		'selectedBeginYear',
 		'modelData',
 		'listeners'
 	],
@@ -74,7 +75,9 @@ CIMWebMainLineBarModel >> modules: anObject [
 
 { #category : #accessing }
 CIMWebMainLineBarModel >> notifyAll [
-	listeners do: #updateSelectedModule
+	listeners do: [:each|each updateSelectedModule.
+		each updateSelectedBeginYear
+		]
 ]
 
 { #category : #accessing }

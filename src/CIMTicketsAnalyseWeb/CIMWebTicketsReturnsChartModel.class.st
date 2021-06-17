@@ -1,12 +1,12 @@
 Class {
-	#name : #CIMWebNumberOfTicketsReturnsChartModel,
+	#name : #CIMWebTicketsReturnsChartModel,
 	#superclass : #CIMWebModuleAbstractModel,
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
 
 { #category : #'data sets' }
-CIMWebNumberOfTicketsReturnsChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
-	^ QueryNumberOfTicketsGroupedByTime new
+CIMWebTicketsReturnsChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
+	^ QueryNumberOfReturnsGroupedByTime new
 		runOn:
 			(QueryTicketPerYearClosing new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))

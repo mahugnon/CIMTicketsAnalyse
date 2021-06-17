@@ -13,7 +13,7 @@ QueryTicketsTimeDev >> runOn: aTicketGroupNode [
 
 { #category : #accessing }
 QueryTicketsTimeDev >> totalDevelpmentDurationOn: aTicket [
-	(aTicket timeDev select: [ :t | t isDevelopment ])
+	^ (aTicket timeDev select: [ :t | t isDevelopment ])
 		inject: 0
 		into: [ :sum :aTimeDv | sum + aTimeDv tps_temps totalSeconds ]
 ]
