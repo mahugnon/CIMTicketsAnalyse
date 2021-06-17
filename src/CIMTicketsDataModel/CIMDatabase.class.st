@@ -1,3 +1,8 @@
+"
+I'm an internal database. I' m mainly a catch memory for the dashboard.
+I have a singleton  which is the only instance that I provide to users.
+
+"
 Class {
 	#name : #CIMDatabase,
 	#superclass : #Object,
@@ -21,7 +26,8 @@ Class {
 		'tbl_theme',
 		'tbl_retour',
 		'tbl_module',
-		'cimDatabaseServerPort'
+		'cimDatabaseServerPort',
+		'lastUpdate'
 	],
 	#classInstVars : [
 		'database'
@@ -192,6 +198,11 @@ CIMDatabase >> joinTablesJob [
 	(tbl_ft joinRetoursToTickets: tbl_retour).
 	(tbl_retour joinTicketsToRetour: tbl_ft).
 	tbl_module initializeModuleRows}
+]
+
+{ #category : #accessing }
+CIMDatabase >> lastUpdate [
+	^ lastUpdate
 ]
 
 { #category : #initialization }
@@ -429,8 +440,10 @@ CIMDatabase >> tbl_version_news: aTbl_version_news [
 
 { #category : #'as yet unclassified' }
 CIMDatabase >> updateFromServerWith: biblioNamesPath [
-"	Tomcat startOn: self cimDatabaseServerPort."
+	"	Tomcat startOn: self cimDatabaseServerPort."
+
 	self dropCreateDb.
+	lastUpdate := Date today.
 	self
 		renameLibrariesUsing: (CIMFileLoader new loadBiothequesFromNamesFolder: biblioNamesPath).
 	self loadModules.

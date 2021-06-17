@@ -154,7 +154,7 @@ CIMWebModuleAbstractModel >> frenchDecimal: aString [
 CIMWebModuleAbstractModel >> initialize [
 	super initialize.
 	self initializeMainLineBarModel.
-	self initializeModelData.
+	"self initializeModelData."
 	self initializeModules.
 	self initializeSelectedModule.
 	self initializeDataSetForModules
@@ -187,6 +187,11 @@ CIMWebModuleAbstractModel >> initializeModules [
 
 { #category : #initialization }
 CIMWebModuleAbstractModel >> initializeSelectedModule [
+	(selectedModule notNil
+		and: [ selectedModule ~= cIMWebMainLineBarModel selectedModule ])
+		ifTrue: [ dataSetForModules
+				at: selectedModule nom
+				put: (self computedatasSetForModule: cIMWebMainLineBarModel selectedModule) ].
 	selectedModule := cIMWebMainLineBarModel selectedModule
 ]
 

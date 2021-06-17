@@ -38,6 +38,26 @@ CIMWebMainLineBarComponent >> renderContentOn: html [
 ]
 
 { #category : #rendering }
+CIMWebMainLineBarComponent >> renderFillSpaceOn: html [
+	html mdlCell
+		size: 6;
+		shadow: 8;
+		style: 'background-color:white;';
+		with: [ html mdlCell
+				size: 12;
+				mdlTypographyTitle;
+				with: [ html text: 'Nombre de tickets:'.
+					html space.
+					html text: model selectedModule tickets size asString ].
+			html mdlCell
+				size: 12;
+				mdlTypographyTitle;
+				with: [ html text: 'Mise à jour le '.
+					html space.
+					html text: model lastUpdate asString ] ]
+]
+
+{ #category : #rendering }
 CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 	html mdlCell
 		size: 6;
@@ -81,5 +101,6 @@ CIMWebMainLineBarComponent >> renderModulesLineBarOn: html [
 				size: 6;
 				shadow: 8;
 				style: 'background-color:white;';
-				with: [ html render: each ] ]
+				with: [ html render: each ] ].
+			self renderFillSpaceOn: html.
 ]

@@ -8,7 +8,8 @@ Class {
 		'modelData',
 		'listeners',
 		'years',
-		'minYear'
+		'minYear',
+		'lastUpdate'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
@@ -43,6 +44,7 @@ CIMWebMainLineBarModel >> initializeListeners [
 
 { #category : #initialization }
 CIMWebMainLineBarModel >> initializeModelData [
+	lastUpdate := self database lastUpdate.
 	modelData := QueryBugsEvolutions
 		runOn: (CIMTicketGroupNode new tickets: self database tbl_ft rows)
 ]
@@ -73,6 +75,11 @@ CIMWebMainLineBarModel >> initializeYears [
 ]
 
 { #category : #accessing }
+CIMWebMainLineBarModel >> lastUpdate [
+	^ lastUpdate
+]
+
+{ #category : #accessing }
 CIMWebMainLineBarModel >> modelData [
 	^ modelData
 ]
@@ -94,9 +101,7 @@ CIMWebMainLineBarModel >> modules: anObject [
 
 { #category : #accessing }
 CIMWebMainLineBarModel >> notifyAll [
-	listeners do: [:each|each updateSelectedModule.
-		each updateSelectedBeginYear
-		]
+	listeners do: [ :each | each updateSelectedModule ]
 ]
 
 { #category : #accessing }
@@ -106,7 +111,8 @@ CIMWebMainLineBarModel >> selectedBeginYear [
 
 { #category : #accessing }
 CIMWebMainLineBarModel >> selectedBeginYear: anObject [
-	selectedBeginYear := anObject
+	selectedBeginYear := anObject.
+	self updateSelectedModuleData
 ]
 
 { #category : #accessing }
@@ -122,7 +128,20 @@ CIMWebMainLineBarModel >> selectedModule: anObject [
 
 { #category : #initialization }
 CIMWebMainLineBarModel >> subscribe: aModel [
+	listeners ifNil: [ listeners := OrderedCollection new ].
 	listeners add: aModel
+]
+
+{ #category : #modelData }
+CIMWebMainLineBarModel >> updateSelectedModuleData [
+	self
+		selectedModule:
+			((Tbl_Module_row newFrom: selectedModule)
+				tickets:
+					(selectedModule tickets
+						select: [ :ticket | 
+							ticket yearClosing isNotNil
+								and: [ ticket yearClosing >= selectedBeginYear ] ]))
 ]
 
 { #category : #accessing }
