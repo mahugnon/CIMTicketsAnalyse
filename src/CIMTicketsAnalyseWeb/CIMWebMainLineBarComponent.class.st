@@ -60,7 +60,25 @@ CIMWebMainLineBarComponent >> renderFillSpaceOn: html [
 { #category : #rendering }
 CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 	html mdlCell
-		size: 6;
+		size: 4;
+		mdlTypographyTextCenter;
+		with: [ html text: 'Affichage de :'.
+			html space.
+			html
+				render:
+					((MDLMenuButtonWidget
+						possibilities: model closingQueries
+						label: #queryName
+						action: [ :query | 
+							self halt.
+							model selectedClosingQuery: query ]
+						selectedObject: model selectedClosingQuery
+						choosingText: ''
+						description: 'Selectionnez l''option d''affichage du resultat')
+						sortBlock: [ :a :b | a < b ];
+						yourself) ].
+	html mdlCell
+		size: 4;
 		mdlTypographyTextCenter;
 		with: [ html text: 'Module sélectionné:'.
 			html space.
@@ -76,7 +94,7 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 						sortBlock: [ :a :b | a name < b name ];
 						yourself) ].
 	html mdlCell
-		size: 6;
+		size: 4;
 		mdlTypographyTextCenter;
 		with: [ html text: 'Année de début:'.
 			html space.
@@ -84,7 +102,7 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 				render:
 					((MDLMenuButtonWidget
 						possibilities: model years
-						label: #asString
+						label: [ :each | each start year asString ]
 						action: [ :year | model selectedBeginYear: year ]
 						selectedObject: model selectedBeginYear
 						choosingText: ''

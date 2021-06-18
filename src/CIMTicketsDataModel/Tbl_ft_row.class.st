@@ -900,7 +900,7 @@ Tbl_ft_row >> versions: anObject [
 
 { #category : #API }
 Tbl_ft_row >> yearClosing [
-	^ self dev yearClosing
+	^ self dev yearClosing asYear
 ]
 
 { #category : #accessing }

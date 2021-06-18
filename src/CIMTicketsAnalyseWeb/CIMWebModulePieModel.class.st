@@ -19,18 +19,18 @@ CIMWebModulePieModel class >> resetCurrent [
 { #category : #initialization }
 CIMWebModulePieModel >> initialize [
 	self initializeModelData.
-	self initializeModules.
+	self initializeAllModules.
 	self initializePercentModuleTime
+]
+
+{ #category : #initialization }
+CIMWebModulePieModel >> initializeAllModules [
+	modules := CIMWebMainLineBarModel current modules
 ]
 
 { #category : #initialization }
 CIMWebModulePieModel >> initializeModelData [
 	modelData := CIMWebMainLineBarModel current modelData
-]
-
-{ #category : #initialization }
-CIMWebModulePieModel >> initializeModules [
-	modules := CIMWebMainLineBarModel current modules
 ]
 
 { #category : #'private - utility' }

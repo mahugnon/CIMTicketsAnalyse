@@ -14,7 +14,7 @@ CIMWebTimeDevChartModel class >> resetCurrent [
 CIMWebTimeDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
 	^ QueryAvgTimeDevGroupedByTime new
 		runOn:
-			(QueryTicketPerYearClosing new
+			(closingQuery new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
 ]
 

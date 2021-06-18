@@ -14,7 +14,7 @@ CIMWebNumberOfCloseTicketsChartModel class >> resetCurrent [
 CIMWebNumberOfCloseTicketsChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
 	^ QueryNumberOfTicketsGroupedByTime new
 		runOn:
-			(QueryTicketPerYearClosing new
+			(closingQuery new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aCIMTicketGroup)))
 ]
 

@@ -14,7 +14,7 @@ CIMWebTimeTestDevChartModel class >> resetCurrent [
 CIMWebTimeTestDevChartModel >> avgTimeTicketsPerYear: selectQuery for: aTicketGroupNode [
 	^ QueryAvgTicketsTimeDevTestGroupedByTime new
 		runOn:
-			(QueryTicketPerYearClosing new
+			(closingQuery new
 				runOn: (selectQuery runOn: (self dataWithCloseDate: aTicketGroupNode)))
 	"asOrderedDictionary
 	collect: [ :node | node time -> node value ]"

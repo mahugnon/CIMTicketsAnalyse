@@ -13,10 +13,10 @@ RegressionMultiLineStrategy class >> isMultiRegressionLine [
 RegressionMultiLineStrategy >> regression: regressionFunction [
 	^ [ :x | 
 	x < model releventYear
-		ifTrue: [ x * regressionFunction first slope
+		ifTrue: [ x start asSeconds * regressionFunction first slope
 				+ regressionFunction first intercept ]
 		ifFalse: [ x > model releventYear
-				ifTrue: [ x * regressionFunction second slope
+				ifTrue: [ x start asSeconds * regressionFunction second slope
 						+ regressionFunction second intercept ]
 				ifFalse: [ 'NaN' ] ] ]
 ]

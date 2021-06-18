@@ -4,11 +4,12 @@ Class {
 	#instVars : [
 		'modelData',
 		'modules',
-		'selectedModule',
 		'dataSetForModules',
 		'cIMWebMainLineBarModel',
 		'bugs',
-		'evolutions'
+		'evolutions',
+		'closingQuery',
+		'module'
 	],
 	#classInstVars : [
 		'current'
@@ -62,7 +63,7 @@ CIMWebModuleAbstractModel >> computeEvolutionsDataSetForModule: aModule [
 
 { #category : #'private - utility' }
 CIMWebModuleAbstractModel >> computedatasSetForModule: aModule [
-	| x yBugs yEvolutions xBugs xEvolution |
+	| x yBugs yEvolutions |
 	self flag: #Todo.	"Very shitty the way axis are fill up."
 	bugs := self computeBugsDataSetForModule: aModule.
 	evolutions := self computeEvolutionsDataSetForModule: aModule.
@@ -154,10 +155,21 @@ CIMWebModuleAbstractModel >> frenchDecimal: aString [
 CIMWebModuleAbstractModel >> initialize [
 	super initialize.
 	self initializeMainLineBarModel.
+	self initializeClosingQuery.
 	"self initializeModelData."
-	self initializeModules.
-	self initializeSelectedModule.
+	self initializeAllModules.
+	self initializeModule.
 	self initializeDataSetForModules
+]
+
+{ #category : #initialization }
+CIMWebModuleAbstractModel >> initializeAllModules [
+	modules := cIMWebMainLineBarModel modules
+]
+
+{ #category : #initialization }
+CIMWebModuleAbstractModel >> initializeClosingQuery [
+	closingQuery := cIMWebMainLineBarModel selectedClosingQuery
 ]
 
 { #category : #initialization }
@@ -181,18 +193,8 @@ CIMWebModuleAbstractModel >> initializeModelData [
 ]
 
 { #category : #initialization }
-CIMWebModuleAbstractModel >> initializeModules [
-	modules := cIMWebMainLineBarModel modules
-]
-
-{ #category : #initialization }
-CIMWebModuleAbstractModel >> initializeSelectedModule [
-	(selectedModule notNil
-		and: [ selectedModule ~= cIMWebMainLineBarModel selectedModule ])
-		ifTrue: [ dataSetForModules
-				at: selectedModule nom
-				put: (self computedatasSetForModule: cIMWebMainLineBarModel selectedModule) ].
-	selectedModule := cIMWebMainLineBarModel selectedModule
+CIMWebModuleAbstractModel >> initializeModule [
+	module := cIMWebMainLineBarModel selectedModule
 ]
 
 { #category : #accessing }
@@ -220,14 +222,21 @@ CIMWebModuleAbstractModel >> needMultiRegressionLine [
 	^ false
 ]
 
+{ #category : #'as yet unclassified' }
+CIMWebModuleAbstractModel >> resetModule [
+	dataSetForModules
+		at: module nom
+		put: (self computedatasSetForModule: cIMWebMainLineBarModel selectedModule)
+]
+
 { #category : #accessing }
 CIMWebModuleAbstractModel >> selectedModule [
-	^ selectedModule
+	^ module
 ]
 
 { #category : #accessing }
 CIMWebModuleAbstractModel >> selectedModule: anObject [
-	selectedModule := anObject
+	module := anObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -247,7 +256,19 @@ CIMWebModuleAbstractModel >> timeConvert [
 	^ 3600
 ]
 
+{ #category : #accessing }
+CIMWebModuleAbstractModel >> updateClosingQuery [
+	closingQuery ~= cIMWebMainLineBarModel selectedClosingQuery
+		ifFalse: [ ^ self ].
+	closingQuery := cIMWebMainLineBarModel selectedClosingQuery.
+	self resetModule
+]
+
 { #category : #'as yet unclassified' }
-CIMWebModuleAbstractModel >> updateSelectedModule [
-	self initializeSelectedModule
+CIMWebModuleAbstractModel >> updateModule [
+	(module notNil
+		and: [ module ~= cIMWebMainLineBarModel selectedModule ])
+		ifTrue:
+			[ self resetModule ].
+	module := cIMWebMainLineBarModel selectedModule
 ]

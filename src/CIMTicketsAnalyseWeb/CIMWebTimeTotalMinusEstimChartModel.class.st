@@ -14,7 +14,7 @@ CIMWebTimeTotalMinusEstimChartModel class >> resetCurrent [
 CIMWebTimeTotalMinusEstimChartModel >> avgTimeTicketsPerYear: selectQuery for: aCIMTicketGroup [
 	^ QueryAvgTimeDevTpsTotalMinusEstimOnTicketsGroupedByTime new
 		runOn:
-			(QueryTicketPerYearClosing
+			(closingQuery
 				runOn:
 					(selectQuery
 						runOn:
@@ -30,10 +30,10 @@ CIMWebTimeTotalMinusEstimChartModel >> doubleRegressionCharacteristics: aCollect
 
 { #category : #'as yet unclassified' }
 CIMWebTimeTotalMinusEstimChartModel >> needMultiRegressionLine [
-	^ selectedModule releventYear isNotNil
+	^ module releventYear isNotNil
 ]
 
 { #category : #accessing }
 CIMWebTimeTotalMinusEstimChartModel >> releventYear [
-	^ selectedModule releventYear
+	^ module releventYear
 ]

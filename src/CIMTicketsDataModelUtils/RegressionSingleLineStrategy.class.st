@@ -11,5 +11,7 @@ RegressionSingleLineStrategy class >> isMultiRegressionLine [
 
 { #category : #api }
 RegressionSingleLineStrategy >> regression: regressionFunction [
-	^ [ :x | x * regressionFunction slope + regressionFunction intercept ]
+	^ [ :x | 
+	x start asSeconds * regressionFunction slope
+		+ regressionFunction intercept ]
 ]

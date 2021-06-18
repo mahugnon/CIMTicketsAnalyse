@@ -2,7 +2,6 @@ Class {
 	#name : #CIMWebDashbordComponent,
 	#superclass : #CIMWebScreenComponent,
 	#instVars : [
-		'estimations',
 		'modulesPieComponent',
 		'mainLineBarComponent',
 		'feedBackPieComponent'
@@ -13,19 +12,7 @@ Class {
 { #category : #hooks }
 CIMWebDashbordComponent >> children [
 	^ {mainLineBarComponent.
-	modulesPieComponent.
-	estimations.
-	feedBackPieComponent} , super children
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createEstimationComponent [
-	estimations := CIMWebEstimationComponent new
-]
-
-{ #category : #initialization }
-CIMWebDashbordComponent >> createFeedBackPieComponent [
-	feedBackPieComponent := CIMWebFeedBackPieComponent new
+	modulesPieComponent} , super children
 ]
 
 { #category : #hooks }
@@ -38,25 +25,11 @@ CIMWebDashbordComponent >> createModulePie [
 	modulesPieComponent := CIMWebModulesPieComponent new
 ]
 
-{ #category : #hooks }
-CIMWebDashbordComponent >> estimations [
-	^ estimations
-]
-
-{ #category : #hooks }
-CIMWebDashbordComponent >> estimationsOn: html [
-	html mdlCell
-		size: 12;
-		with: [ html render: self estimations ]
-]
-
 { #category : #initialization }
 CIMWebDashbordComponent >> initialize [
 	super initialize.
 	self createMainLineBarComponent.
-	self createEstimationComponent.
-	self createModulePie.
-	self createFeedBackPieComponent
+	self createModulePie
 ]
 
 { #category : #hooks }
@@ -64,17 +37,6 @@ CIMWebDashbordComponent >> renderBodyWebOn: html [
 	html mdlGrid
 		with: [ "self estimationsOn: html."
 			self renderModulesComponentOn: html ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderFeedBackPieComponentOn: html [
-	html mdlCell
-		size: 6;
-		shadow: 8;
-		style: 'background-color: white';
-		mdlTypographyTextCenter;
-		with: [ html render: feedBackPieComponent.
-			html space ]
 ]
 
 { #category : #'parts rendering' }
@@ -95,17 +57,6 @@ CIMWebDashbordComponent >> renderModulesMainLineBarOn: html [
 		size: 12;
 		mdlTypographyTextCenter;
 		with: [ html render: mainLineBarComponent.
-			html space ]
-]
-
-{ #category : #'parts rendering' }
-CIMWebDashbordComponent >> renderModulesPieOn: html [
-	html mdlCell
-		size: 6;
-		shadow: 8;
-		style: 'background-color: white';
-		mdlTypographyTextCenter;
-		with: [ html render: modulesPieComponent.
 			html space ]
 ]
 

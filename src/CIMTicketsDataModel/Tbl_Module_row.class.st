@@ -56,7 +56,7 @@ Tbl_Module_row >> nom: aString [
 
 { #category : #accessing }
 Tbl_Module_row >> releventYear [
-	^ releventYear
+	^ releventYear asYear
 ]
 
 { #category : #accessing }

@@ -9,7 +9,9 @@ Class {
 		'listeners',
 		'years',
 		'minYear',
-		'lastUpdate'
+		'lastUpdate',
+		'selectedClosingQuery',
+		'closingQueries'
 	],
 	#category : #'CIMTicketsAnalyseWeb-models'
 }
@@ -21,6 +23,11 @@ CIMWebMainLineBarModel class >> resetCurrent [
 	^ self current
 ]
 
+{ #category : #accessing }
+CIMWebMainLineBarModel >> closingQueries [
+	^ closingQueries
+]
+
 { #category : #initialization }
 CIMWebMainLineBarModel >> database [
 	^ CIMDatabase database
@@ -29,12 +36,25 @@ CIMWebMainLineBarModel >> database [
 { #category : #initialization }
 CIMWebMainLineBarModel >> initialize [
 	super initialize.
+	self initializeClosingQueries.
 	self initializeModelData.
 	self initializeYears.
 	self initializeSelectedYear.
-	self initializeModules.
+	self initializeAllModules.
 	self initializeSelectedModule.
 	self initializeListeners
+]
+
+{ #category : #initialization }
+CIMWebMainLineBarModel >> initializeAllModules [
+	modules := self database tbl_module rows
+]
+
+{ #category : #initialization }
+CIMWebMainLineBarModel >> initializeClosingQueries [
+	closingQueries := {QueryTicketPerYearClosing.
+	QueryTicketPerMonthClosing}.
+	selectedClosingQuery := QueryTicketPerYearClosing.
 ]
 
 { #category : #initialization }
@@ -46,12 +66,9 @@ CIMWebMainLineBarModel >> initializeListeners [
 CIMWebMainLineBarModel >> initializeModelData [
 	lastUpdate := self database lastUpdate.
 	modelData := QueryBugsEvolutions
-		runOn: (CIMTicketGroupNode new tickets: self database tbl_ft rows)
-]
-
-{ #category : #initialization }
-CIMWebMainLineBarModel >> initializeModules [
-	modules := self database tbl_module rows
+		runOn:
+			(CIMTicketGroupNode new
+				tickets: (self database tbl_ft rows select: [ :e | e dateClosing isNotNil ]))
 ]
 
 { #category : #initialization }
@@ -69,9 +86,7 @@ CIMWebMainLineBarModel >> initializeYears [
 	minYear := (modelData tickets
 		collect: #yearClosing
 		thenSelect: [ :e | e isNotNil ]) min.
-	years := (Timespan
-		starting: (Year year: minYear)
-		ending: Year currentYear) years collect: #asInteger
+	years := (Timespan starting: minYear ending: Year currentYear) years
 ]
 
 { #category : #accessing }
@@ -101,7 +116,10 @@ CIMWebMainLineBarModel >> modules: anObject [
 
 { #category : #accessing }
 CIMWebMainLineBarModel >> notifyAll [
-	listeners do: [ :each | each updateSelectedModule ]
+	listeners
+		do: [ :each | 
+			each updateModule.
+			each updateClosingQuery ]
 ]
 
 { #category : #accessing }
@@ -113,6 +131,17 @@ CIMWebMainLineBarModel >> selectedBeginYear [
 CIMWebMainLineBarModel >> selectedBeginYear: anObject [
 	selectedBeginYear := anObject.
 	self updateSelectedModuleData
+]
+
+{ #category : #accessing }
+CIMWebMainLineBarModel >> selectedClosingQuery [
+	^ selectedClosingQuery
+]
+
+{ #category : #accessing }
+CIMWebMainLineBarModel >> selectedClosingQuery: aClosingQuery [
+	selectedClosingQuery := aClosingQuery.
+	self notifyAll
 ]
 
 { #category : #accessing }
@@ -140,7 +169,7 @@ CIMWebMainLineBarModel >> updateSelectedModuleData [
 				tickets:
 					(selectedModule tickets
 						select: [ :ticket | 
-							ticket yearClosing isNotNil
+							ticket dateClosing isNotNil
 								and: [ ticket yearClosing >= selectedBeginYear ] ]))
 ]
 

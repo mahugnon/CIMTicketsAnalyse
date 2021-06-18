@@ -6,14 +6,14 @@ Class {
 
 { #category : #running }
 SplitSimpleTicketsByYear >> lowerToTime: aDictionary [
-	^ ((aDictionary keys select: [ :key | key <= time ])
+	^ ((aDictionary keys select: [ :key | key <= time asYear ])
 		collect: [ :key | key -> (aDictionary at: key) ])
 		asOrderedDictionary
 ]
 
 { #category : #running }
 SplitSimpleTicketsByYear >> uperToTime: aDictionary [
-	^ ((aDictionary keys select: [ :key | key > time ])
+	^ ((aDictionary keys select: [ :key | key > time asYear ])
 		collect: [ :key | key -> (aDictionary at: key) ])
 		asOrderedDictionary
 ]

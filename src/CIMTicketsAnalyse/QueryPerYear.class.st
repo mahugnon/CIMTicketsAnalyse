@@ -8,6 +8,11 @@ Class {
 	#category : #'CIMTicketsAnalyse-Queries'
 }
 
+{ #category : #'as yet unclassified' }
+QueryPerYear class >> queryName [
+^'Tickets par année'
+]
+
 { #category : #running }
 QueryPerYear >> fillGap: aCollection [
 	"aCollection of associations: month->value
