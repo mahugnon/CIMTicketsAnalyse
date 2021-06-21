@@ -69,9 +69,7 @@ CIMWebMainLineBarComponent >> renderModuleSelectionDropDown: html [
 					((MDLMenuButtonWidget
 						possibilities: model closingQueries
 						label: #queryName
-						action: [ :query | 
-							self halt.
-							model selectedClosingQuery: query ]
+						action: [ :query | model selectedClosingQuery: query ]
 						selectedObject: model selectedClosingQuery
 						choosingText: ''
 						description: 'Selectionnez l''option d''affichage du resultat')
