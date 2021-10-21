@@ -1,6 +1,5 @@
 
 [![Build Status](https://travis-ci.com/mahugnon/CIMTicketsAnalyse.svg?branch=master)](https://travis-ci.com/mahugnon/CIMTicketsAnalyse)
-[![Build Status](https://ci.inria.fr/pharo-contribution/job/CIMTicketDashboard/badge/icon)](https://ci.inria.fr/pharo-contribution/job/CIMTicketDashboard/)
 ![Github Actions build](https://github.com/mahugnon/CIMTicketsAnalyse/workflows/Github%20Actions%20build/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/mahugnon/CIMTicketsAnalyse/badge.svg)](https://coveralls.io/github/mahugnon/CIMTicketsAnalyse)
 [![Pharo version](https://img.shields.io/badge/Pharo-7.0-%23aac9ff.svg)](https://pharo.org/download)
